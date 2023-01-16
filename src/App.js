@@ -1,20 +1,27 @@
 import "./App.css";
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Home from './home';
-import Mypage from './mypage';
+import Header from "./Header";
+import Main from "./Main";
+import Product from "./Product";
+import {Routes, Route} from "react-router-dom";
 
 
 export default function App() {
   
   return (
-    <div className="App">
-     
-    <BrowserRouter>
+      <div className={"app"}>
+          <Header/>
           <Routes>
-              <Route path={"/user/home"} element={<Home />}></Route>
-              <Route path={"/user/mypage"} element={<Mypage />}></Route>
+              <Route path="/" element={<Main />}></Route>
+              <Route path="/product/*" element={<Product />}></Route>
+              {/* 상단에 위치하는 라우트들의 규칙을 모두 확인, 일치하는 라우트가 없는경우 처리 */}
+              {/*<Route path="*" element={<NotFound />}></Route>*/}
           </Routes>
-        </BrowserRouter>
+
+
+              {/*<Header />*/}
+              {/*<Main />*/}
+              {/*<Product />*/}
+
       </div>
   );
 }
