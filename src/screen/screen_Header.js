@@ -1,6 +1,7 @@
 import React from 'react';
 //import {Link} from "react-router-dom";
 import {useNavigate} from "react-router-dom";
+
 function Header(props) {
     const navi = useNavigate();
 
@@ -17,25 +18,25 @@ function Header(props) {
                 <h1>Link 방식</h1>
                 <Link to={"/"}>메인 페이지</Link>
                 {" "}
-                <Link to={"/example"}>예시 페이지</Link>
-                {" "}
                 <Link to={"/login"}>로그인 페이지</Link>
                 {" "}
                 <Link to={"/register"}>회원가입 페이지</Link>
                 {" "}
-                <Link to={"/metamask"}>Metamask 페이지</Link>
+                <Link to={"/metamask_token"}>Metamask_Token 페이지</Link>
                 {" "}
-                <Link to={"/chatlist"}>ChatList 페이지</Link>
+                <Link to={"/room_list"}>Room_List 페이지</Link>
                 {" "}
-                <Link to={"/makingroom"}>MakingRoom 페이지</Link>
+                <Link to={"/make_room"}>Make_Room 페이지</Link>
                 {" "}
-                <Link to={"/findingroom"}>FindingRoom 페이지</Link>
+                <Link to={"/find_room"}>Find_Room 페이지</Link>
                 {" "}
-                <Link to={"/chatinfo"}>ChatInfo 페이지</Link>
+                <Link to={"/room_info"}>Room_Info 페이지</Link>
                 {" "}
-                <Link to={"/chatroom"}>ChatRoom 페이지</Link>
+                <Link to={"/chat"}>Chat 페이지</Link>
                 {" "}
                 <Link to={"/profile"}>Profile 페이지</Link>
+                {" "}
+                <Link to={"/example"}>예시 페이지</Link>
             </div>
             <hr/>
             <br/>
@@ -44,25 +45,25 @@ function Header(props) {
                 {/*<h1>useNavigate 방식</h1>*/}
                 <button onClick={() => handleClick("")}>메인 페이지</button>
                 {" "}
-                <button onClick={() => handleClick("/login")}>로그인 페이지</button>
+                <button onClick={() => handleClick("/screen_login")}>screen_login 페이지</button>
                 {" "}
-                <button onClick={() => handleClick("/register")}>회원가입 페이지</button>
+                <button onClick={() => handleClick("/screen_register")}>screen_register 페이지</button>
                 {" "}
-                <button onClick={() => handleClick("/metamask")}>Metamask 페이지</button>
+                <button onClick={() => handleClick("/screen_wallet_token")}>screen_wallet_token 페이지</button>
                 {" "}
-                <button onClick={() => handleClick("/chatlist")}>ChatList 페이지</button>
+                <button onClick={() => handleClick("/screen_room_list")}>screen_room_list 페이지</button>
                 {" "}
-                <button onClick={() => handleClick("/makingroom")}>MakingRoom 페이지</button>
+                <button onClick={() => handleClick("/screen_make_room")}>screen_make_room 페이지</button>
                 {" "}
-                <button onClick={() => handleClick("/findingroom")}>Findingroom 페이지</button>
+                <button onClick={() => handleClick("/screen_find_room")}>screen_find_room 페이지</button>
                 {" "}
-                <button onClick={() => handleClick("/chatinfo")}>ChatInfo 페이지</button>
+                <button onClick={() => handleClick("/screen_room_info")}>screen_room_info 페이지</button>
                 {" "}
-                <button onClick={() => handleClick("/chatroom")}>ChatRoom 페이지</button>
+                <button onClick={() => handleClick("/screen_chat")}>screen_chat 페이지</button>
                 {" "}
-                <button onClick={() => handleClick("/profile")}>Profile 페이지</button>
+                <button onClick={() => handleClick("/screen_profile")}>screen_profile 페이지</button>
                 {" "}
-                <button onClick={() => handleClick("/example")}>예시 페이지</button>
+                <button onClick={() => handleClick("/screen_example")}>screen_example 페이지</button>
             </div>
             <hr/>
         </>

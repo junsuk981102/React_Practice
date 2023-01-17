@@ -7,7 +7,7 @@ import { auth } from "../firebase-config";
 import {useNavigate} from "react-router-dom";
 
 
-const Register = (props) => {
+const ScreenRegister = (props) => {
     const [registerEmail, setRegisterEmail] = useState("");
   const [registerPassword, setRegisterPassword] = useState("");
 
@@ -34,7 +34,7 @@ const Register = (props) => {
     return (
         <>
       <div>
-        <h3> Register User </h3>
+        <h3>ScreenRegister 페이지입니다.</h3>
         아이디 :
         <input
           placeholder="Email..."
@@ -61,4 +61,4 @@ const Register = (props) => {
     );
 }
 
-export default Register;
+export default ScreenRegister;

@@ -7,7 +7,7 @@ import {
 import { auth } from "../firebase-config";
 import {useNavigate} from "react-router-dom";
 
-const Login = (props) => {
+const ScreenLogin = (props) => {
   const [loginEmail, setLoginEmail] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
 
@@ -41,7 +41,7 @@ const Login = (props) => {
     return (
         <>
       <div>
-        <h3> Login </h3>
+        <h3>ScreenLogin 페이지입니다.</h3>
         아이디 :
         <input
           placeholder="Email..."
@@ -67,4 +67,4 @@ const Login = (props) => {
     );
 }
 
-export default Login;
+export default ScreenLogin;

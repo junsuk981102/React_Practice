@@ -8,7 +8,7 @@ import { auth } from "../firebase-config";
 // import {useNavigate} from "react-router-dom";
 
 
-const Profile = (props) => {
+const ScreenProfile = (props) => {
   const [user, setUser] = useState({});
 
 //   const navi = useNavigate();
@@ -27,7 +27,7 @@ const Profile = (props) => {
 
     return (
         <>
-    <h3>Profile 페이지입니다.</h3>
+    <h3>ScreenProfile 페이지입니다.</h3>
 
       <h4> User Logged In: </h4>
       {user?.email}
@@ -37,4 +37,4 @@ const Profile = (props) => {
     );
 }
 
-export default Profile;
+export default ScreenProfile;

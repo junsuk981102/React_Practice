@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import {useNavigate} from "react-router-dom";
 
-const Example = (props) => {
+const ScreenRoomList = (props) => {
     const [showPopup, setShowPopup] = useState(false);
     
     const togglePopup = (event) => {
@@ -15,7 +15,7 @@ const Example = (props) => {
 
     return (
         <>
-            <div className="App">
+      <h3>ScreenRoomList 페이지입니다.</h3>
       <h1>새로운 방 추가하기</h1>
       <button className="open" onClick ={togglePopup} value = 'false'>새로운 방 추가</button>
       {showPopup ? (
@@ -30,11 +30,8 @@ const Example = (props) => {
           </div>
         </div>
       ) : null}
-    </div>
-
-            
         </>
     );
 }
 
-export default Example;
+export default ScreenRoomList;
