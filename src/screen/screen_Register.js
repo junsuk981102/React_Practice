@@ -35,20 +35,26 @@ const Register = (props) => {
         <>
       <div>
         <h3> Register User </h3>
+        아이디 :
         <input
           placeholder="Email..."
           onChange={(event) => {
             setRegisterEmail(event.target.value);
           }}
         />
+        <br/>
+        비밀번호 :
         <input
           placeholder="Password..."
           onChange={(event) => {
             setRegisterPassword(event.target.value);
           }}
         />
-
-        <button onClick={register}> Create User</button>
+        <br/>
+        <button onClick={register}> 회원가입 </button>
+        
+        <br/>
+        <br/>
         <button onClick={() => handleClick("/login")}>로그인 페이지</button>
       </div>
         </>

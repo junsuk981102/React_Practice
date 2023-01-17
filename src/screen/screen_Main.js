@@ -12,6 +12,7 @@ const Main = (props) => {
         <>
             <h3>Landing 페이지입니다.</h3>
             <img src="src\image\stot_logo.jpg" alt="logo"/>
+            <br/>
             <button onClick={() => handleClick("/login")}>로그인 페이지</button>
         </>
     );

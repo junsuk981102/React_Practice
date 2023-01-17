@@ -3,7 +3,6 @@ import { useState } from "react";
 import {
   signInWithEmailAndPassword,
   onAuthStateChanged,
-  signOut,
 } from "firebase/auth";
 import { auth } from "../firebase-config";
 import {useNavigate} from "react-router-dom";
@@ -12,7 +11,7 @@ const Login = (props) => {
   const [loginEmail, setLoginEmail] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
 
-  const [user, setUser] = useState({});
+  const [setUser] = useState({});
 
   const navi = useNavigate();
 
@@ -32,42 +31,38 @@ const Login = (props) => {
         loginPassword
       );
       console.log(user);
-      handleClick("/metamask");
+      handleClick("/metamask")
 
     } catch (error) {
       console.log(error.message);
     }
   };
 
-  const logout = async () => {
-    await signOut(auth);
-  };
-
     return (
         <>
       <div>
         <h3> Login </h3>
+        아이디 :
         <input
           placeholder="Email..."
           onChange={(event) => {
             setLoginEmail(event.target.value);
           }}
         />
+        <br/>
+        비밀번호 :
         <input
           placeholder="Password..."
           onChange={(event) => {
             setLoginPassword(event.target.value);
           }}
         />
-        <button onClick={login}> Login</button>
+        <br/>
+        <button onClick={login}> 로그인 </button>
       </div>
 
+      <br/>
       <button onClick={() => handleClick("/register")}>회원가입 페이지</button>
-
-      <h4> User Logged In: </h4>
-      {user?.email}
-
-      <button onClick={logout}> Sign Out </button>
         </>
     );
 }
