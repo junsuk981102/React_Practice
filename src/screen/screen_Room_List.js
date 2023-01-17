@@ -21,8 +21,8 @@ const ScreenRoomList = (props) => {
       {showPopup ? (
         <div className="popup">
           <div className="popup_inner">
-            <button onClick={() => handleClick("/makingroom")}>MakingRoom 페이지</button>
-            <button onClick={() => handleClick("/findingroom")}>Findingroom 페이지</button>
+            <button onClick={() => handleClick("/screen_room_make")}>screen_room_make 페이지</button>
+            <button onClick={() => handleClick("/screen_room_find")}>screen_room_find 페이지</button>
             <br/>
             <button className="close"  onClick={togglePopup}>
               Close me

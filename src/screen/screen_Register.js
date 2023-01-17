@@ -25,7 +25,7 @@ const ScreenRegister = (props) => {
         registerPassword
       );
       console.log(user);
-      handleClick("/login");
+      handleClick("/screen_login");
 
     } catch (error) {
       console.log(error.message);
@@ -55,7 +55,7 @@ const ScreenRegister = (props) => {
         
         <br/>
         <br/>
-        <button onClick={() => handleClick("/login")}>로그인 페이지</button>
+        <button onClick={() => handleClick("/screen_login")}>screen_login 페이지</button>
       </div>
         </>
     );

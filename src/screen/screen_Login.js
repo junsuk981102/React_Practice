@@ -31,7 +31,7 @@ const ScreenLogin = (props) => {
         loginPassword
       );
       console.log(user);
-      handleClick("/metamask")
+      handleClick("/screen_wallet_token");
 
     } catch (error) {
       console.log(error.message);
@@ -62,7 +62,7 @@ const ScreenLogin = (props) => {
       </div>
 
       <br/>
-      <button onClick={() => handleClick("/register")}>회원가입 페이지</button>
+      <button onClick={() => handleClick("/screen_register")}>screen_register 페이지</button>
         </>
     );
 }

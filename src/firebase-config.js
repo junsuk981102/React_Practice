@@ -13,3 +13,4 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig)
 // firebase에 모든 것을 export 하는 대신 원하는 서비스만 Export 할 수 있음!
 export const auth = getAuth(app)
+

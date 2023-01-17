@@ -13,7 +13,7 @@ const ScreenMain = (props) => {
             <h3>ScreenMain 페이지입니다.</h3>
             <img src="image/stot_logo.jpg" alt="logo"/>
             <br/>
-            <button onClick={() => handleClick("/login")}>로그인 페이지</button>
+            <button onClick={() => handleClick("/screen_login")}>screen_login 페이지</button>
         </>
     );
 };
