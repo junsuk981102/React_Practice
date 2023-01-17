@@ -4,7 +4,7 @@ const Landing = (props) => {
     return (
         <>
             <h3>Landing 페이지입니다.</h3>
-            <img src="stot_logo.jpg" alt="logo"/>
+            <img src="src\image\stot_logo.jpg" alt="logo"/>
         </>
     );
 }

@@ -1,5 +1,4 @@
 import "./App.css";
-<<<<<<< HEAD
 import Header from "./screen/screen_Header";
 import Main from "./screen/screen_Main";
 import Example from "./screen/screen_example";
@@ -12,11 +11,6 @@ import ChatRoom from "./screen/screen_ChatRoom";
 import Profile from "./screen/screen_Profile";
 import MakingRoom from "./screen/screen_MakingRoom";
 import FindingRoom from "./screen/screen_FindingRoom";
-=======
-import Header from "./Header";
-import Main from "./Main";
-import Product from "./Product";
->>>>>>> 2fc19e3d97191da3cab0ba34394a2740dc065c13
 import {Routes, Route} from "react-router-dom";
 
 
@@ -27,7 +21,6 @@ export default function App() {
           <Header/>
           <Routes>
               <Route path="/" element={<Main />}></Route>
-<<<<<<< HEAD
               <Route path="/example/*" element={<Example />}></Route>
               <Route path="/landing/*" element={<Landing />}></Route>
               <Route path="/login/*" element={<Login />}></Route>
@@ -44,18 +37,6 @@ export default function App() {
               {/*<Header />*/}
               {/*<Main />*/}
               {/*<Product />*/}
-=======
-              <Route path="/product/*" element={<Product />}></Route>
-              {/* 상단에 위치하는 라우트들의 규칙을 모두 확인, 일치하는 라우트가 없는경우 처리 */}
-              {/*<Route path="*" element={<NotFound />}></Route>*/}
-          </Routes>
-
-
-              {/*<Header />*/}
-              {/*<Main />*/}
-              {/*<Product />*/}
-
->>>>>>> 2fc19e3d97191da3cab0ba34394a2740dc065c13
       </div>
   );
 }
