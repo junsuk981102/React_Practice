@@ -5,7 +5,6 @@ import Example from "./screen/screen_example";
 import Login from "./screen/screen_Login";
 import Register from "./screen/screen_Register";
 import Metamask from "./screen/screen_Metamask";
-import Landing from "./screen/screen_Landing";
 import ChatList from "./screen/screen_ChatList";
 import ChatRoom from "./screen/screen_ChatRoom";
 import Profile from "./screen/screen_Profile";
@@ -23,7 +22,6 @@ export default function App() {
           <Routes>
               <Route path="/" element={<Main />}></Route>
               <Route path="/example/*" element={<Example />}></Route>
-              <Route path="/landing/*" element={<Landing />}></Route>
               <Route path="/login/*" element={<Login />}></Route>
               <Route path="/register/*" element={<Register />}></Route>
               <Route path="/metamask/*" element={<Metamask />}></Route>

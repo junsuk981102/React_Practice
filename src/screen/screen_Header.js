@@ -1,6 +1,6 @@
 import React from 'react';
-import {Link, useNavigate} from "react-router-dom";
-
+//import {Link} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 function Header(props) {
     const navi = useNavigate();
 
@@ -11,14 +11,13 @@ function Header(props) {
     return (
         <>
             <h1>헤더입니다.</h1>
+            {/*
             <hr/>
             <div>
                 <h1>Link 방식</h1>
                 <Link to={"/"}>메인 페이지</Link>
                 {" "}
                 <Link to={"/example"}>예시 페이지</Link>
-                {" "}
-                <Link to={"/landing"}>Landing 페이지</Link>
                 {" "}
                 <Link to={"/login"}>로그인 페이지</Link>
                 {" "}
@@ -39,14 +38,11 @@ function Header(props) {
                 <Link to={"/profile"}>Profile 페이지</Link>
             </div>
             <hr/>
-            <br />
+            <br/>
+            */}
             <div>
-                <h1>useNavigate 방식</h1>
+                {/*<h1>useNavigate 방식</h1>*/}
                 <button onClick={() => handleClick("")}>메인 페이지</button>
-                {" "}
-                <button onClick={() => handleClick("/example")}>예시 페이지</button>
-                {" "}
-                <button onClick={() => handleClick("/landing")}>Landing 페이지</button>
                 {" "}
                 <button onClick={() => handleClick("/login")}>로그인 페이지</button>
                 {" "}
@@ -65,6 +61,8 @@ function Header(props) {
                 <button onClick={() => handleClick("/chatroom")}>ChatRoom 페이지</button>
                 {" "}
                 <button onClick={() => handleClick("/profile")}>Profile 페이지</button>
+                {" "}
+                <button onClick={() => handleClick("/example")}>예시 페이지</button>
             </div>
             <hr/>
         </>

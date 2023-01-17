@@ -49,6 +49,7 @@ const Register = (props) => {
         />
 
         <button onClick={register}> Create User</button>
+        <button onClick={() => handleClick("/login")}>로그인 페이지</button>
       </div>
         </>
     );
