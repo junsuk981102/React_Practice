@@ -4,11 +4,18 @@ import {
   createUserWithEmailAndPassword,
 } from "firebase/auth";
 import { auth } from "../firebase-config";
+import {useNavigate} from "react-router-dom";
 
 
 const Register = (props) => {
     const [registerEmail, setRegisterEmail] = useState("");
   const [registerPassword, setRegisterPassword] = useState("");
+
+  const navi = useNavigate();
+
+    function handleClick(text) {
+        navi(`${text}`)
+    }
 
   const register = async () => {
     try {
@@ -18,6 +25,8 @@ const Register = (props) => {
         registerPassword
       );
       console.log(user);
+      handleClick("/login");
+
     } catch (error) {
       console.log(error.message);
     }

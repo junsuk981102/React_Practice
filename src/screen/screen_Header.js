@@ -32,6 +32,8 @@ function Header(props) {
                 {" "}
                 <Link to={"/findingroom"}>FindingRoom 페이지</Link>
                 {" "}
+                <Link to={"/chatinfo"}>ChatInfo 페이지</Link>
+                {" "}
                 <Link to={"/chatroom"}>ChatRoom 페이지</Link>
                 {" "}
                 <Link to={"/profile"}>Profile 페이지</Link>
@@ -57,6 +59,8 @@ function Header(props) {
                 <button onClick={() => handleClick("/makingroom")}>MakingRoom 페이지</button>
                 {" "}
                 <button onClick={() => handleClick("/findingroom")}>Findingroom 페이지</button>
+                {" "}
+                <button onClick={() => handleClick("/chatinfo")}>ChatInfo 페이지</button>
                 {" "}
                 <button onClick={() => handleClick("/chatroom")}>ChatRoom 페이지</button>
                 {" "}

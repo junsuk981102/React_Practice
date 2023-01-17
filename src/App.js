@@ -11,6 +11,7 @@ import ChatRoom from "./screen/screen_ChatRoom";
 import Profile from "./screen/screen_Profile";
 import MakingRoom from "./screen/screen_MakingRoom";
 import FindingRoom from "./screen/screen_FindingRoom";
+import ChatInfo from "./screen/screen_ChatInfo";
 import {Routes, Route} from "react-router-dom";
 
 
@@ -31,6 +32,7 @@ export default function App() {
               <Route path="/profile/*" element={<Profile />}></Route>
               <Route path="/makingroom/*" element={<MakingRoom />}></Route>
               <Route path="/findingroom/*" element={<FindingRoom />}></Route>
+              <Route path="/chatinfo/*" element={<ChatInfo />}></Route>
               {/* 상단에 위치하는 라우트들의 규칙을 모두 확인, 일치하는 라우트가 없는경우 처리 */}
               {/*<Route path="*" element={<NotFound />}></Route>*/}
           </Routes>
