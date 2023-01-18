@@ -18,9 +18,8 @@ const ScreenProfile = (props) => {
         <br/><br/><br/>
 
         <button onClick={() => handleClick("/screen_profile_info")}>screen_profile_info 페이지</button>
-        {" "}
+        <br/>
         <button onClick={() => handleClick("/screen_profile_user")}>screen_profile_user 페이지</button>
-        {" "}
         </>
     );
 }
