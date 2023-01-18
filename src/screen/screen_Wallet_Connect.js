@@ -1,11 +1,17 @@
 import React, {useState} from 'react'
 import {ethers} from 'ethers';
+import {useNavigate} from "react-router-dom";
 
 const ScreenWalletConnect = (props) => {
     const [errorMessage, setErrorMessage] = useState(null);
     const [defaultAccount, setDefaultAccount] = useState(null);
     const [userBalance, setUserBalance] = useState(null);
     const [connButtonText] = useState('Connect Wallet');
+    const navi = useNavigate();
+
+    function handleClick(text) {
+        navi(`${text}`)
+    }
 
     const connectWalletHandler = () => {
         if(window.ethereum){
@@ -14,6 +20,7 @@ const ScreenWalletConnect = (props) => {
                 accountChangedHandler(result[0]);
             })
             //walletID.add({ID: defaultAccount});
+            handleClick("/screen_wallet_token");
         } else {
             setErrorMessage('Install MetaMask');
         }

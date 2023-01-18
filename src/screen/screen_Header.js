@@ -51,7 +51,7 @@ function Header(props) {
             */}
             <div>
                 {/*<h1>useNavigate 방식</h1>*/}
-                <button onClick={() => handleClick("")}>메인 페이지</button>
+                <button onClick={() => handleClick("")}>screen_main 페이지</button>
                 {" "}
                 <button onClick={() => handleClick("/screen_login")}>screen_login 페이지</button>
                 {" "}
