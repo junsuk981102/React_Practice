@@ -33,6 +33,11 @@ const ScreenProfile = (props) => {
     <button onClick={() => handleClick("/screen_profile")}>screen_profile 페이지</button>
     <br/><br/><br/>
 
+    <button onClick={() => handleClick("/screen_profile_info")}>screen_profile_info 페이지</button>
+    {" "}
+    <button onClick={() => handleClick("/screen_profile_user")}>screen_profile_user 페이지</button>
+    {" "}
+    
       <h4> User Logged In: </h4>
       {user?.email}
 
