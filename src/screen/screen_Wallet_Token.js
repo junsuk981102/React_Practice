@@ -1,4 +1,3 @@
-            window.ethereum.request({method: 'eth_requestAccounts'})
 import React from 'react';
 
 const ScreenExample = (props) => {
