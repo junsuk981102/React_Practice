@@ -11,6 +11,8 @@ const ScreenRoomMake = (props) => {
     return (
         <>
             <h3>ScreenRoomMake 페이지입니다.</h3>
+            <button onClick={() => handleClick("/screen_room_list")}>뒤로가기</button>
+            <br/><br/>
             <button onClick={() => handleClick("/screen_room_setting")}>screen_room_setting 페이지</button>
         </>
     );

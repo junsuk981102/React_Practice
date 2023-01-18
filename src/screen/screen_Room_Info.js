@@ -11,6 +11,8 @@ const ScreenRoomInfo = (props) => {
     return (
         <>
             <h3>ScreenRoomInfo 페이지입니다.</h3>
+            <button onClick={() => handleClick("/screen_room_find")}>뒤로가기</button>
+            <br/><br/>
             <button onClick={() => handleClick("/screen_chat")}>screen_chat 페이지</button>
         </>
     );
