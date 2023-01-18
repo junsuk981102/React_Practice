@@ -31,7 +31,7 @@ const ScreenLogin = (props) => {
         loginPassword
       );
       console.log(user);
-      handleClick("/screen_wallet_token");
+      handleClick("/screen_wallet_connect");
 
     } catch (error) {
       console.log(error.message);

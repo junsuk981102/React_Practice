@@ -22,11 +22,15 @@ function Header(props) {
                 {" "}
                 <Link to={"/screen_register"}>screen_register 페이지</Link>
                 {" "}
+                <Link to={"/screen_wallet_connect"}>screen_wallet_connect 페이지</Link>
+                {" "}
                 <Link to={"/screen_wallet_token"}>screen_wallet_token 페이지</Link>
                 {" "}
                 <Link to={"/screen_room_list"}>screen_room_list 페이지</Link>
                 {" "}
                 <Link to={"/screen_room_make"}>screen_room_make 페이지</Link>
+                {" "}
+                <Link to={"/screen_room_setting"}>screen_room_setting 페이지</Link>
                 {" "}
                 <Link to={"/screen_room_find"}>screen_room_find 페이지</Link>
                 {" "}
@@ -35,6 +39,10 @@ function Header(props) {
                 <Link to={"/screen_chat"}>screen_chat 페이지</Link>
                 {" "}
                 <Link to={"/screen_profile"}>screen_profile 페이지</Link>
+                {" "}
+                <Link to={"/screen_profile_info"}>screen_profile_info 페이지</Link>
+                {" "}
+                <Link to={"/screen_profile_user"}>screen_profile_user 페이지</Link>
                 {" "}
                 <Link to={"/screen_example"}>screen_example 페이지</Link>
             </div>
@@ -49,11 +57,15 @@ function Header(props) {
                 {" "}
                 <button onClick={() => handleClick("/screen_register")}>screen_register 페이지</button>
                 {" "}
+                <button onClick={() => handleClick("/screen_wallet_connect")}>screen_wallet_connect 페이지</button>
+                {" "}
                 <button onClick={() => handleClick("/screen_wallet_token")}>screen_wallet_token 페이지</button>
                 {" "}
                 <button onClick={() => handleClick("/screen_room_list")}>screen_room_list 페이지</button>
                 {" "}
                 <button onClick={() => handleClick("/screen_room_make")}>screen_room_make 페이지</button>
+                {" "}
+                <button onClick={() => handleClick("/screen_room_setting")}>screen_room_setting 페이지</button>
                 {" "}
                 <button onClick={() => handleClick("/screen_room_find")}>screen_room_find 페이지</button>
                 {" "}
@@ -62,6 +74,10 @@ function Header(props) {
                 <button onClick={() => handleClick("/screen_chat")}>screen_chat 페이지</button>
                 {" "}
                 <button onClick={() => handleClick("/screen_profile")}>screen_profile 페이지</button>
+                {" "}
+                <button onClick={() => handleClick("/screen_profile_info")}>screen_profile_info 페이지</button>
+                {" "}
+                <button onClick={() => handleClick("/screen_profile_user")}>screen_profile_user 페이지</button>
                 {" "}
                 <button onClick={() => handleClick("/screen_example")}>screen_example 페이지</button>
             </div>
