@@ -5,17 +5,17 @@ import {
   signOut,
 } from "firebase/auth";
 import { auth } from "../firebase-config";
-// import {useNavigate} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 
 
 const ScreenProfile = (props) => {
   const [user, setUser] = useState({});
 
-//   const navi = useNavigate();
+  const navi = useNavigate();
 
-//     function handleClick(text) {
-//         navi(`${text}`)
-//     }
+    function handleClick(text) {
+        navi(`${text}`)
+    }
 
   onAuthStateChanged(auth, (currentUser) => {
     setUser(currentUser);
@@ -28,6 +28,10 @@ const ScreenProfile = (props) => {
     return (
         <>
     <h3>ScreenProfile 페이지입니다.</h3>
+    <button onClick={() => handleClick("/screen_wallet_token")}>screen_wallet_token 페이지</button>
+    <button onClick={() => handleClick("/screen_room_list")}>screen_room_list 페이지</button>
+    <button onClick={() => handleClick("/screen_profile")}>screen_profile 페이지</button>
+    <br/><br/><br/>
 
       <h4> User Logged In: </h4>
       {user?.email}

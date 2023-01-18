@@ -51,6 +51,10 @@ const ScreenWalletToken = (props) => {
     return(
         <div className='walletCard'>
             <h3>ScreenWalletToken 페이지입니다.</h3>
+            <button onClick={() => handleClick("/screen_wallet_token")}>screen_wallet_token 페이지</button>
+            <button onClick={() => handleClick("/screen_room_list")}>screen_room_list 페이지</button>
+            <button onClick={() => handleClick("/screen_profile")}>screen_profile 페이지</button>
+            <br/><br/><br/>
             <h4> {"Connection to MetaMask using window.ethereum methods"}</h4>
             <button onClick={connectWalletHandler}>{connButtonText}</button>
             <div className='accountDisplay'>

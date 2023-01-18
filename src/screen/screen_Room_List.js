@@ -16,6 +16,10 @@ const ScreenRoomList = (props) => {
     return (
         <>
       <h3>ScreenRoomList 페이지입니다.</h3>
+      <button onClick={() => handleClick("/screen_wallet_token")}>screen_wallet_token 페이지</button>
+      <button onClick={() => handleClick("/screen_room_list")}>screen_room_list 페이지</button>
+      <button onClick={() => handleClick("/screen_profile")}>screen_profile 페이지</button>
+      <br/><br/><br/>
       <h1>새로운 방 추가하기</h1>
       <button className="open" onClick ={togglePopup} value = 'false'>새로운 방 추가</button>
       {showPopup ? (
