@@ -13,7 +13,7 @@ const ScreenProfileInfo = (props) => {
             <h3>ScreenProfileInfo 페이지입니다.</h3>
             <button onClick={() => handleClick("/screen_profile")}>뒤로가기</button>
             <br/><br/>
-            <button onClick={() => window.open('https://www.stotinvest.com/', '_blank')}>[url 링크]</button>
+            <button onClick={() => window.open('https://www.stotinvest.com/', '_blank')}>STOT Homepage로 가기</button>
         </>
     );
 }
