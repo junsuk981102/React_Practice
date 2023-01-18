@@ -2,7 +2,7 @@ import React from 'react';
 import { useState } from "react";
 import {
   signInWithEmailAndPassword,
-  onAuthStateChanged,
+  // onAuthStateChanged,
 } from "firebase/auth";
 import { auth } from "../firebase-config";
 import {useNavigate} from "react-router-dom";
@@ -11,7 +11,7 @@ const ScreenLogin = (props) => {
   const [loginEmail, setLoginEmail] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
 
-  const [setUser] = useState({});
+  // const [setUser] = useState({});
 
   const navi = useNavigate();
 
@@ -19,9 +19,9 @@ const ScreenLogin = (props) => {
         navi(`${text}`)
     }
 
-  onAuthStateChanged(auth, (currentUser) => {
-    setUser(currentUser);
-  });
+  // onAuthStateChanged(auth, (currentUser) => {
+  //   setUser(currentUser)
+  // });
 
   const login = async () => {
     try {

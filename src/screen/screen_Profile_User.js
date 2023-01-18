@@ -1,14 +1,15 @@
 import React from 'react';
 import { useState } from "react";
 import {
-  onAuthStateChanged,
+  // onAuthStateChanged,
   signOut,
 } from "firebase/auth";
 import { auth } from "../firebase-config";
 import {useNavigate} from "react-router-dom";
 
 const ScreenProfileUser = (props) => {
-    const [user, setUser] = useState({});
+    // const [user, setUser] = useState({});
+    const [user] = useState({});
 
   const navi = useNavigate();
 
@@ -16,9 +17,9 @@ const ScreenProfileUser = (props) => {
         navi(`${text}`)
     }
 
-  onAuthStateChanged(auth, (currentUser) => {
-    setUser(currentUser);
-  });
+  // onAuthStateChanged(auth, (currentUser) => {
+  //   setUser(currentUser);
+  // });
 
   const logout = async () => {
     await signOut(auth);
