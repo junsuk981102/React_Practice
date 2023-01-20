@@ -30,6 +30,11 @@ const ScreenProfileUser = (props) => {
             <h3>ScreenProfileUser 페이지입니다.</h3>
             <button onClick={() => handleClick("/screen_profile")}>뒤로가기</button>
             <br/><br/>
+            아이디 : <br/>
+            Email : <br/>
+            비밀번호 : <br/>
+            생년월일 : <br/>
+            주소 : <br/>
             <h4> User Logged In: </h4>
             {user?.email}
 
