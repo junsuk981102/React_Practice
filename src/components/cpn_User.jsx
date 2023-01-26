@@ -10,7 +10,7 @@ const User = () => {
     const name = user ? user.displayName : "Name User";
     return ( 
         <div className='right-side'>
-            <h1><i className="fa-solid fa-cat"></i>ScreenLog 페이지입니다.</h1>
+            <h1><i className="fa-solid fa-cat"></i></h1>
             <article className='card-user'>
                 <img src={photo} alt="user default" />
                 <p>{name}</p>

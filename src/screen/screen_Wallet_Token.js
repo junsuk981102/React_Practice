@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import {ethers} from 'ethers';
+// import {ethers} from 'ethers';
 import {useNavigate} from "react-router-dom";
 
 import {useEffect } from 'react';
@@ -8,8 +8,9 @@ import Web3 from 'web3';
 
 const ScreenWalletToken = (props) => {
     const [errorMessage, setErrorMessage] = useState(null);
-    const [defaultAccount, setDefaultAccount] = useState(null);
-    const [userBalance, setUserBalance] = useState(null);
+    // const [defaultAccount, setDefaultAccount] = useState(null);
+    const [setDefaultAccount] = useState(null);
+    // const [userBalance, setUserBalance] = useState(null);
     const [connButtonText] = useState('Connect Wallet');
     const navi = useNavigate();
 
@@ -58,7 +59,7 @@ const ScreenWalletToken = (props) => {
         setDefaultAccount(newAccount);
         //walletID.doc("myWallet").update({ID: defaultAccount});
         //walletID.add({ID: defaultAccount});
-        getUserBalance(newAccount.toString());
+        // getUserBalance(newAccount.toString());
     }
 
     const chainChangedHandler = () =>{
@@ -69,12 +70,12 @@ const ScreenWalletToken = (props) => {
 
     window.ethereum.on('chainChanged', chainChangedHandler )
 
-    const getUserBalance = (address) => {
-        window.ethereum.request({method: 'eth_getBalance', params: [address, 'latest']})
-        .then(balance => {
-            setUserBalance(ethers.utils.formatEther(balance));
-        })
-    }
+    // const getUserBalance = (address) => {
+    //     window.ethereum.request({method: 'eth_getBalance', params: [address, 'latest']})
+    //     .then(balance => {
+    //         setUserBalance(ethers.utils.formatEther(balance));
+    //     })
+    // }
 
     return(
         <div className='walletCard'>
@@ -88,9 +89,9 @@ const ScreenWalletToken = (props) => {
             <div className='accountDisplay'>
                 <h3>Address: {address}</h3>
             </div>
-            <div className='balanceDisplay'>
+            {/* <div className='balanceDisplay'>
                 <h3>Balance: {userBalance}</h3>
-            </div>
+            </div> */}
             {errorMessage}
         </div>
     )
