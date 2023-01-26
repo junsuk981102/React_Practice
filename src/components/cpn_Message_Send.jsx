@@ -31,9 +31,6 @@ const MessageSend = ({ scroll }) => {
     const closeEmoji = () => {
         setOpen('close');
     }
-    const onEmojiClick = (event, emojiObject) => {
-        setInput(`${input}${emojiObject.emoji}`)
-    };
 
     return ( 
         <form onSubmit={sendMessage}>

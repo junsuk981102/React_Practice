@@ -30,7 +30,7 @@ const MessageFormat = ({ message }) => {
                 </div>
                 <p className="user">{`${newDate} - ${time}`}</p>
             </div>
-            <img src={message.photo} alt="user photo" />
+            <img src={message.photo} alt="user profile" />
         </article>
      );
 }
