@@ -2,6 +2,10 @@ import React, {useState} from 'react'
 import {ethers} from 'ethers';
 import {useNavigate} from "react-router-dom";
 
+import {useEffect } from 'react';
+import Web3 from 'web3';
+
+
 const ScreenWalletToken = (props) => {
     const [errorMessage, setErrorMessage] = useState(null);
     const [defaultAccount, setDefaultAccount] = useState(null);
@@ -26,6 +30,30 @@ const ScreenWalletToken = (props) => {
         }
     }
 
+    const [address, setAddress] = useState('');
+
+    useEffect(() => {
+      async function getAddress() {
+        // Check if MetaMask is installed and enabled
+        if (window.ethereum) {
+          const web3 = new Web3(window.ethereum);
+          try {
+            // Request account access if needed
+            await window.ethereum.enable();
+            // Get the current address
+            const currentAddress = await web3.eth.getAccounts();
+            setAddress(currentAddress[0]);
+          } catch (error) {
+            console.log(error);
+          }
+        } else {
+          console.log('MetaMask is not installed or enabled');
+        }
+      }
+      getAddress();
+    }, []);
+
+    
     const accountChangedHandler = (newAccount) => {
         setDefaultAccount(newAccount);
         //walletID.doc("myWallet").update({ID: defaultAccount});
@@ -58,7 +86,7 @@ const ScreenWalletToken = (props) => {
             <h4> {"Connection to MetaMask using window.ethereum methods"}</h4>
             <button onClick={connectWalletHandler}>{connButtonText}</button>
             <div className='accountDisplay'>
-                <h3>Address: {defaultAccount}</h3>
+                <h3>Address: {address}</h3>
             </div>
             <div className='balanceDisplay'>
                 <h3>Balance: {userBalance}</h3>
@@ -69,3 +97,4 @@ const ScreenWalletToken = (props) => {
 }
 
 export default ScreenWalletToken;
+
