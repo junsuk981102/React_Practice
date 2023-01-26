@@ -1,7 +1,7 @@
 import { auth } from '../firebase-config';
 import { GoogleAuthProvider, signInWithRedirect } from 'firebase/auth';
 
-const SignIn = () => {
+const Login = () => {
   const googleSignIn = () => {
     const provider = new GoogleAuthProvider();
     signInWithRedirect(auth, provider);
@@ -20,4 +20,4 @@ const SignIn = () => {
   );
 }
  
-export default SignIn;
+export default Login;

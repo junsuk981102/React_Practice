@@ -1,5 +1,5 @@
-import SignIn from '../components/SignIn'
-import LogOut from '../components/LogOut';
+import Login from './cpn_Login'
+import Logout from './cpn_Logout';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth } from '../firebase-config';
 
@@ -10,11 +10,11 @@ const User = () => {
     const name = user ? user.displayName : "Name User";
     return ( 
         <div className='right-side'>
-            <h1><i className="fa-solid fa-cat"></i>QuickChat</h1>
+            <h1><i className="fa-solid fa-cat"></i>ScreenLog 페이지입니다.</h1>
             <article className='card-user'>
                 <img src={photo} alt="user default" />
                 <p>{name}</p>
-                { user ? <LogOut/> : <SignIn/> }
+                { user ? <Logout/> : <Login/> }
             </article>
         </div>
     );

@@ -1,13 +1,13 @@
-import Chat from '../components/Chat'
+import Chat from '../components/cpn_Chat'
 import '../chat.css'
 
-function chat() {
+function ScreenChat() {
 
   return (
-    <div className="chat">
+    <div className="ScreenChat">
       <Chat/>
     </div>
   )
 }
 
-export default chat
+export default ScreenChat;

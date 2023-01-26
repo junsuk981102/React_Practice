@@ -1,13 +1,13 @@
-import User from '../components/User'
+import User from '../components/cpn_User'
 import '../chat.css'
 
-function login() {
+function ScreenLogin() {
 
   return (
-    <div className="login">
+    <div className="ScreenLogin">
       <User/>
     </div>
   )
 }
 
-export default login
+export default ScreenLogin;

@@ -3,7 +3,7 @@ import { useState } from "react";
 import {auth, db} from '../firebase-config';
 //import Picker from 'emoji-picker-react';
 
-const SendMessage = ({ scroll }) => {
+const MessageSend = ({ scroll }) => {
     const [input, setInput] = useState('');
     const [open, setOpen] = useState('close');
 
@@ -62,4 +62,4 @@ const SendMessage = ({ scroll }) => {
     );
 }
  
-export default SendMessage;
+export default MessageSend;

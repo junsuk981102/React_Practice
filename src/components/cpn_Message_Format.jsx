@@ -1,6 +1,6 @@
 import {auth} from '../firebase-config';
 
-const Message = ({ message }) => {
+const MessageFormat = ({ message }) => {
     let newStyles = '';
     if (auth.currentUser) {
         if (message.uid === auth.currentUser.uid ) {
@@ -35,4 +35,4 @@ const Message = ({ message }) => {
      );
 }
  
-export default Message;
+export default MessageFormat;
