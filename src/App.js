@@ -21,7 +21,6 @@ import {Routes, Route} from "react-router-dom";
 
 // import WalletCard from './WalletCard';
 
-
 export default function App() {
   
   return (
