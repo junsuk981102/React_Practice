@@ -6,7 +6,7 @@ interface PlantCardProps{
  
 const PlantCard: FC<PlantCardProps> = ({plantType}) => {
     return  (
-        <img src={"/images/plant/" + plantType + ".jpg"} alt="PlantCard" width={150} height={150}/>
+        <img src={"/image/plant/" + plantType + ".jpg"} alt="PlantCard" width={150} height={150}/>
     );
 };
 

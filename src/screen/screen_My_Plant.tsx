@@ -87,7 +87,7 @@ const ScreenMyPlant : FC<MyPlantProps> = ({account}) => {
             }
             
             console.log("You can enter the room because you have NFTs for this room.");
-            navigate("/tokengating-plant");
+            navigate("/screen_token_gating");
         } catch (error) {
             console.error(error);
         }

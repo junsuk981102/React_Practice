@@ -88,7 +88,7 @@ const ScreenMyAnimal: FC<MyAnimalProps> = ({account}) => {
             }
 
             console.log("You can enter the room because you have NFTs for this room.");
-            navigate("/tokengating-animal");
+            navigate("/screen_token_gating");
         } catch (error) {
             console.error(error);
         }
