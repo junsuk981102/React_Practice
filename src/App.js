@@ -5,6 +5,9 @@ import ScreenExample from "./screen/screen_Example";
 import Header from "./screen/screen_Header";
 import ScreenLogin from "./screen/screen_Login";
 import ScreenMain from "./screen/screen_Main";
+import ScreenMinting from "./screen/screen_Minting";
+import ScreenMyAnimal from "./screen/screen_My_Animal";
+import ScreenMyPlant from "./screen/screen_My_Plant";
 import ScreenProfileInfo from "./screen/screen_Profile_Info";
 import ScreenProfileUser from "./screen/screen_Profile_User";
 import ScreenProfile from "./screen/screen_Profile";
@@ -32,6 +35,9 @@ export default function App() {
               <Route path="/screen_chat/*" element={<ScreenChat />}></Route>
               <Route path="/screen_example/*" element={<ScreenExample />}></Route>
               <Route path="/screen_login/*" element={<ScreenLogin />}></Route>
+              <Route path="/screen_minting/*" element={<ScreenMinting />}></Route>
+              <Route path="/screen_my_animal/*" element={<ScreenMyAnimal />}></Route>
+              <Route path="/screen_my_plant/*" element={<ScreenMyPlant />}></Route>
               <Route path="/screen_profile_info/*" element={<ScreenProfileInfo />}></Route>
               <Route path="/screen_profile_user/*" element={<ScreenProfileUser />}></Route>
               <Route path="/screen_profile/*" element={<ScreenProfile />}></Route>
