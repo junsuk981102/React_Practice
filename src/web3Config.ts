@@ -1292,11 +1292,11 @@ const salePlantTokenAbi : AbiItem[] = [
 	}
 ]
 
-export const mintAnimalTokenAddress = "0xdaD2A5DCca935783c8AAaB4975c9Dfa814BC525d";
-export const saleAnimalTokenAddress = "0x720EA3c7CD836b588410ab2c6806290766D1eF85";
+export const mintAnimalTokenAddress = "0x4e49c7f0459B78C57d43782e142bb8cDdFCbB8Bb";
+export const saleAnimalTokenAddress = "0x94895058a62D14792FCD913029d125b58C372a19";
 
-export const mintPlantTokenAddress = "0x08c7dbdA44a343762c419F50f3f1a2a5CF09E213";
-export const salePlantTokenAddress = "0x562195A503916A84524A89aCdD7c391db87A1c90";
+export const mintPlantTokenAddress = "0x90Cf509924641FC125c75590c735FbC3feFE89Fc";
+export const salePlantTokenAddress = "0xFe3442317Ed84CEAe3596FF5301B1251421C9919";
 
 export const web3 = new Web3(window.ethereum);
 
