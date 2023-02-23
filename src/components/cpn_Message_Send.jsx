@@ -1,11 +1,17 @@
 import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import { useState } from "react";
 import {auth, db} from '../firebase-config';
+import { useLocation } from "react-router-dom";
 //import Picker from 'emoji-picker-react';
 
 const MessageSend = ({ scroll }) => {
     const [input, setInput] = useState('');
     const [open, setOpen] = useState('close');
+
+    const { state } = useLocation();
+
+    const chatroomname = state.id;
+    const realname = "community_list/"+chatroomname+"/message";
 
     const sendMessage = async (e) => {
         e.preventDefault();
@@ -14,7 +20,7 @@ const MessageSend = ({ scroll }) => {
             return;
         }
         const {uid, displayName, photoURL} = auth.currentUser;
-        await addDoc(collection(db, 'messages'), {
+        await addDoc(collection(db, realname), {
             text: input,
             name: displayName,
             uid,

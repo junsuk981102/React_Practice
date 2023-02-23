@@ -24,7 +24,7 @@ const ScreenMinting: FC<MainProps> = ({ account }) => {
                 const balanceLength = await mintAnimalTokenContract.methods.balanceOf(account).call();
                 const animalTokenId = await mintAnimalTokenContract.methods.tokenOfOwnerByIndex(account, parseInt(balanceLength,10) - 1).call();
                 const animalType = await mintAnimalTokenContract.methods.animalTypes(animalTokenId).call();
-                const animalTokenAddress = await mintAnimalTokenContract.methods.animalTokenAddr(animalTokenId).call();
+                //const animalTokenAddress = await mintAnimalTokenContract.methods.animalTokenAddr(animalTokenId).call();
                 setNewAnimalType(animalType);
             }
         } catch(error) {
@@ -42,7 +42,7 @@ const ScreenMinting: FC<MainProps> = ({ account }) => {
                 const balanceLength = await mintPlantTokenContract.methods.balanceOf(account).call();
                 const plantTokenId = await mintPlantTokenContract.methods.tokenOfOwnerByIndex(account, parseInt(balanceLength,10) - 1).call();
                 const plantType = await mintPlantTokenContract.methods.plantTypes(plantTokenId).call();
-                const plantTokenAddress = await mintPlantTokenContract.methods.plantTokenAddr(plantTokenId).call();
+                //const plantTokenAddress = await mintPlantTokenContract.methods.plantTokenAddr(plantTokenId).call();
                 setNewPlantType(plantType);
             }
         } catch(error) {

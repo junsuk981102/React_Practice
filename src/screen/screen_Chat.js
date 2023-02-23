@@ -4,8 +4,10 @@ import { useNavigate, useLocation } from "react-router-dom";
 
 function ScreenChat() {
   const { state } = useLocation();
-  const navi = useNavigate();
   console.log(state.name);
+  
+  const navi = useNavigate();
+  
 
   function handleClick(text) {
     navi(`${text}`);

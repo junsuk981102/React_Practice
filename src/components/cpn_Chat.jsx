@@ -6,14 +6,20 @@ import MessageSend from "./cpn_Message_Send";
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth } from '../firebase-config';
 import React from 'react';
+import { useLocation } from "react-router-dom";
 
 const Chat = () => {
     const [message, setMessage] = useState([]);
     const scroll = useRef();
     const [user] = useAuthState(auth);
 
+    const { state } = useLocation();
+
+    const chatroomname = state.id;
+    const realname = "community_list/"+chatroomname+"/message";
+
     useEffect(() => {
-        const q = query(collection(db, 'messages'), orderBy('timestamp'));
+        const q = query(collection(db, realname), orderBy('timestamp'));
         const unsubscribe = onSnapshot(q, (querySnapshot) => {
             let messages = []
             querySnapshot.forEach(doc => {
