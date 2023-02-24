@@ -15,11 +15,11 @@ const Chat = () => {
 
     const { state } = useLocation();
 
-    const chatroomname = state.id;
-    const realname = "community_list/"+chatroomname+"/message";
+    const communityid = state.id;
+    const communityaddress = "community_list/"+communityid+"/message";
 
     useEffect(() => {
-        const q = query(collection(db, realname), orderBy('timestamp'));
+        const q = query(collection(db, communityaddress), orderBy('timestamp'));
         const unsubscribe = onSnapshot(q, (querySnapshot) => {
             let messages = []
             querySnapshot.forEach(doc => {

@@ -10,8 +10,8 @@ const MessageSend = ({ scroll }) => {
 
     const { state } = useLocation();
 
-    const chatroomname = state.id;
-    const realname = "community_list/"+chatroomname+"/message";
+    const communityid = state.id;
+    const communityaddress = "community_list/"+communityid+"/message";
 
     const sendMessage = async (e) => {
         e.preventDefault();
@@ -20,7 +20,7 @@ const MessageSend = ({ scroll }) => {
             return;
         }
         const {uid, displayName, photoURL} = auth.currentUser;
-        await addDoc(collection(db, realname), {
+        await addDoc(collection(db, communityaddress), {
             text: input,
             name: displayName,
             uid,
