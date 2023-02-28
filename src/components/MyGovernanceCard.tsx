@@ -5,10 +5,11 @@ import {saleGovernanceTokenContract, web3 } from "../web3Config";
 import GovernanceCard from "./GovernanceCard";
 
 export interface IMyGovernanceCard{
-    governanceTokenId: string;
-    governanceType: string;
-    governancePrice: string;
-    governanceTokenAddress: string;
+    GNT_Id : string;
+    GNT_name : string;
+    GNT_Initial_Price : string;
+    GNT_Sale_Price : string;
+    GNT_Address : string;
 }
 
 interface MyGovernanceCardProps extends IMyGovernanceCard{
@@ -17,15 +18,16 @@ interface MyGovernanceCardProps extends IMyGovernanceCard{
 }
 
 const MyGovernanceCard : FC<MyGovernanceCardProps> = ({
-    governanceTokenId,
-    governanceType,
-    governancePrice,
-    governanceTokenAddress,
+    GNT_Id,
+    GNT_name,
+    GNT_Initial_Price,
+    GNT_Sale_Price,
+    GNT_Address,
     saleStatus,
     account,
 }) =>{
     const [sellPrice, setSellPrice] =useState<string>("");
-    const [myGovernancePrice, setMyGovernancePrice] = useState<string>(governancePrice);
+    const [myGovernanceSalePrice, setMyGovernanceSalePrice] = useState<string>(GNT_Sale_Price);
 
     const onChangeSellPrice = (e: ChangeEvent<HTMLInputElement>) =>{
         setSellPrice(e.target.value);
@@ -37,13 +39,13 @@ const MyGovernanceCard : FC<MyGovernanceCardProps> = ({
 
             const response = await saleGovernanceTokenContract.methods
                 .setForSaleGovernanceToken(
-                    governanceTokenId,
+                    GNT_Id,
                     web3.utils.toWei(sellPrice,"ether")
                 )
                 .send({from:account});
 
             if(response.status){
-                setMyGovernancePrice(web3.utils.toWei(sellPrice,"ether"));
+                setMyGovernanceSalePrice(web3.utils.toWei(sellPrice,"ether"));
             }
         } catch (error) {
             console.error(error);
@@ -52,9 +54,9 @@ const MyGovernanceCard : FC<MyGovernanceCardProps> = ({
 
     return (
         <Box textAlign="center" w={150}>
-            <GovernanceCard governanceType={governanceType}/>;
+            <GovernanceCard GNT_name={GNT_name}/>;
             <Box mt={2}>
-                {myGovernancePrice === "0" ? (
+                {myGovernanceSalePrice === "0" ? (
                     <>
                         <InputGroup> 
                             <Input type="number" value={sellPrice} onChange={onChangeSellPrice}/>
@@ -63,9 +65,17 @@ const MyGovernanceCard : FC<MyGovernanceCardProps> = ({
                         <Button size="sm" colorScheme="green" mt={2} onClick={onClickSell}>
                             Sell
                         </Button>
+                        <Text>ID : {GNT_Id} </Text>
+                        <Text>{web3.utils.fromWei(GNT_Initial_Price)} ETH</Text>
+                        
                     </>
                 ) : (
-                    <Text>{web3.utils.fromWei(myGovernancePrice)} ETH</Text>
+                    <>
+                        <Text>ID : {GNT_Id} </Text>
+                        <Text>{web3.utils.fromWei(GNT_Initial_Price)} ETH</Text>
+                        <Text>{web3.utils.fromWei(myGovernanceSalePrice)} ETH</Text>
+                    </>
+                    
                 )}
             </Box>
         </Box>

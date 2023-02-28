@@ -29,10 +29,11 @@ const ScreenMyGovernance: FC<MyGovernanceProps> = ({account}) => {
 
             response.map((v: IMyGovernanceCard) => {
                 tempGovernanceCardArray.push({
-                    governanceTokenId: v.governanceTokenId,
-                    governanceType: v.governanceType,
-                    governancePrice: v.governancePrice,
-                    governanceTokenAddress: v.governanceTokenAddress,
+                    GNT_Id : v.GNT_Id,
+                    GNT_name : v.GNT_name,
+                    GNT_Initial_Price : v.GNT_Initial_Price,
+                    GNT_Sale_Price : v.GNT_Sale_Price,
+                    GNT_Address : v.GNT_Address,
                 });
             });
 
@@ -121,10 +122,11 @@ const ScreenMyGovernance: FC<MyGovernanceProps> = ({account}) => {
                 governanceCardArray.map((v,i)=> {
                     return <MyGovernanceCard
                         key={i} 
-                        governanceTokenId={v.governanceTokenId}
-                        governanceType={v.governanceType}
-                        governancePrice={v.governancePrice}
-                        governanceTokenAddress={v.governanceTokenAddress}
+                        GNT_Id={v.GNT_Id}
+                        GNT_name={v.GNT_name}
+                        GNT_Initial_Price={v.GNT_Initial_Price}
+                        GNT_Sale_Price={v.GNT_Sale_Price}
+                        GNT_Address={v.GNT_Address}
                         saleStatus={saleStatus}
                         account={account}
                     />

@@ -1,12 +1,12 @@
 import React, {FC} from "react";
 
 interface GovernanceCardProps{
-    governanceType: string;
+    GNT_name : string;
 }
 
-const GovernanceCard: FC<GovernanceCardProps> = ({governanceType}) => {
+const GovernanceCard: FC<GovernanceCardProps> = ({GNT_name}) => {
     return  (
-        <img src={"/image/animal/" + governanceType + ".png"} alt="GovernanceCard" width={150} height={150}/>
+        <text> {GNT_name} </text>
     );
 };
 
