@@ -1375,6 +1375,82 @@ const mintGovernanceTokenAbi : AbiItem[] = [
 	{
 		"inputs": [
 			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"name": "GNTaddr",
+		"outputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"name": "GNTinitprices",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"name": "GNTnames",
+		"outputs": [
+			{
+				"internalType": "string",
+				"name": "",
+				"type": "string"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"name": "GNTsaleprices",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
 				"internalType": "address",
 				"name": "to",
 				"type": "address"
@@ -1445,36 +1521,41 @@ const mintGovernanceTokenAbi : AbiItem[] = [
 		"inputs": [
 			{
 				"internalType": "address",
-				"name": "_plantTokenOwner",
+				"name": "_governanceTokenOwner",
 				"type": "address"
 			}
 		],
-		"name": "getPlantTokens",
+		"name": "getGovernanceTokens",
 		"outputs": [
 			{
 				"components": [
 					{
 						"internalType": "uint256",
-						"name": "plantTokenId",
+						"name": "GNT_Id",
+						"type": "uint256"
+					},
+					{
+						"internalType": "string",
+						"name": "GNT_name",
+						"type": "string"
+					},
+					{
+						"internalType": "uint256",
+						"name": "GNT_Initial_Price",
 						"type": "uint256"
 					},
 					{
 						"internalType": "uint256",
-						"name": "plantType",
-						"type": "uint256"
-					},
-					{
-						"internalType": "uint256",
-						"name": "plantPrice",
+						"name": "GNT_Sale_Price",
 						"type": "uint256"
 					},
 					{
 						"internalType": "address",
-						"name": "plantTokenAddress",
+						"name": "GNT_Address",
 						"type": "address"
 					}
 				],
-				"internalType": "struct MintPlantToken.PlantTokenData[]",
+				"internalType": "struct MintGovernanceToken.GNT_Data[]",
 				"name": "",
 				"type": "tuple[]"
 			}
@@ -1507,8 +1588,42 @@ const mintGovernanceTokenAbi : AbiItem[] = [
 		"type": "function"
 	},
 	{
-		"inputs": [],
-		"name": "mintPlantToken",
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_initial_price",
+				"type": "uint256"
+			},
+			{
+				"internalType": "string",
+				"name": "_name",
+				"type": "string"
+			}
+		],
+		"name": "mintGovernanceToken",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "count",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_initial_price",
+				"type": "uint256"
+			},
+			{
+				"internalType": "string",
+				"name": "_name",
+				"type": "string"
+			}
+		],
+		"name": "multi_mintGovernanceToken",
 		"outputs": [],
 		"stateMutability": "nonpayable",
 		"type": "function"
@@ -1540,44 +1655,6 @@ const mintGovernanceTokenAbi : AbiItem[] = [
 				"internalType": "address",
 				"name": "",
 				"type": "address"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"name": "plantTokenAddr",
-		"outputs": [
-			{
-				"internalType": "address",
-				"name": "",
-				"type": "address"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"name": "plantTypes",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
 			}
 		],
 		"stateMutability": "view",
@@ -1636,10 +1713,10 @@ const mintGovernanceTokenAbi : AbiItem[] = [
 	},
 	{
 		"inputs": [],
-		"name": "salePlantToken",
+		"name": "saleGovernanceToken",
 		"outputs": [
 			{
-				"internalType": "contract SalePlantToken",
+				"internalType": "contract SaleGovernanceToken",
 				"name": "",
 				"type": "address"
 			}
@@ -1669,11 +1746,11 @@ const mintGovernanceTokenAbi : AbiItem[] = [
 		"inputs": [
 			{
 				"internalType": "address",
-				"name": "_salePlantToken",
+				"name": "_saleGovernanceToken",
 				"type": "address"
 			}
 		],
-		"name": "setSalePlantToken",
+		"name": "setSaleGovernanceToken",
 		"outputs": [],
 		"stateMutability": "nonpayable",
 		"type": "function"
@@ -1814,7 +1891,7 @@ const saleGovernanceTokenAbi : AbiItem[] = [
 		"inputs": [
 			{
 				"internalType": "address",
-				"name": "_mintPlantTokenAddress",
+				"name": "_mintGovernanceTokenAddress",
 				"type": "address"
 			}
 		],
@@ -1822,8 +1899,27 @@ const saleGovernanceTokenAbi : AbiItem[] = [
 		"type": "constructor"
 	},
 	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_governanceTokenId",
+				"type": "uint256"
+			}
+		],
+		"name": "getGovernanceTokenSalePrice",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
 		"inputs": [],
-		"name": "getOnSalePlantTokenArrayLength",
+		"name": "getOnSaleGovernanceTokenArrayLength",
 		"outputs": [
 			{
 				"internalType": "uint256",
@@ -1838,11 +1934,11 @@ const saleGovernanceTokenAbi : AbiItem[] = [
 		"inputs": [
 			{
 				"internalType": "uint256",
-				"name": "_plantTokenId",
+				"name": "",
 				"type": "uint256"
 			}
 		],
-		"name": "getPlantTokenPrice",
+		"name": "governanceTokenSalePrices",
 		"outputs": [
 			{
 				"internalType": "uint256",
@@ -1855,10 +1951,10 @@ const saleGovernanceTokenAbi : AbiItem[] = [
 	},
 	{
 		"inputs": [],
-		"name": "mintPlantTokenAddress",
+		"name": "mintGovernanceTokenAddress",
 		"outputs": [
 			{
-				"internalType": "contract MintPlantToken",
+				"internalType": "contract MintGovernanceToken",
 				"name": "",
 				"type": "address"
 			}
@@ -1874,7 +1970,7 @@ const saleGovernanceTokenAbi : AbiItem[] = [
 				"type": "uint256"
 			}
 		],
-		"name": "onSalePlantTokenArray",
+		"name": "onSaleGovernanceTokenArray",
 		"outputs": [
 			{
 				"internalType": "uint256",
@@ -1889,30 +1985,11 @@ const saleGovernanceTokenAbi : AbiItem[] = [
 		"inputs": [
 			{
 				"internalType": "uint256",
-				"name": "",
+				"name": "_governanceTokenId",
 				"type": "uint256"
 			}
 		],
-		"name": "plantTokenPrices",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "_plantTokenId",
-				"type": "uint256"
-			}
-		],
-		"name": "purchasePlantToken",
+		"name": "purchaseGovernanceToken",
 		"outputs": [],
 		"stateMutability": "payable",
 		"type": "function"
@@ -1921,7 +1998,7 @@ const saleGovernanceTokenAbi : AbiItem[] = [
 		"inputs": [
 			{
 				"internalType": "uint256",
-				"name": "_plantTokenId",
+				"name": "_governanceTokenId",
 				"type": "uint256"
 			},
 			{
@@ -1930,7 +2007,7 @@ const saleGovernanceTokenAbi : AbiItem[] = [
 				"type": "uint256"
 			}
 		],
-		"name": "setForSalePlantToken",
+		"name": "setForSaleGovernanceToken",
 		"outputs": [],
 		"stateMutability": "nonpayable",
 		"type": "function"
@@ -1943,8 +2020,8 @@ export const saleAnimalTokenAddress = "0x94895058a62D14792FCD913029d125b58C372a1
 export const mintPlantTokenAddress = "0x90Cf509924641FC125c75590c735FbC3feFE89Fc";
 export const salePlantTokenAddress = "0xFe3442317Ed84CEAe3596FF5301B1251421C9919";
 
-export const mintGovernanceTokenAddress = "0x90Cf509924641FC125c75590c735FbC3feFE89Fc";
-export const saleGovernanceTokenAddress = "0xFe3442317Ed84CEAe3596FF5301B1251421C9919";
+export const mintGovernanceTokenAddress = "0x9033bcD42A6f456BA3784aE2eBaC7adF8f64DC6D";
+export const saleGovernanceTokenAddress = "0xbc0b1ECF617359C0dD5e5879DA483335cb5B5F52";
 
 export const web3 = new Web3(window.ethereum);
 

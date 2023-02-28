@@ -66,14 +66,14 @@ const MyGovernanceCard : FC<MyGovernanceCardProps> = ({
                             Sell
                         </Button>
                         <Text>ID : {GNT_Id} </Text>
-                        <Text>{web3.utils.fromWei(GNT_Initial_Price)} ETH</Text>
+                        <Text>Initial Price : {GNT_Initial_Price} ETH</Text>
                         
                     </>
                 ) : (
                     <>
                         <Text>ID : {GNT_Id} </Text>
-                        <Text>{web3.utils.fromWei(GNT_Initial_Price)} ETH</Text>
-                        <Text>{web3.utils.fromWei(myGovernanceSalePrice)} ETH</Text>
+                        <Text>Initial Price : {web3.utils.fromWei(GNT_Initial_Price)} ETH</Text>
+                        <Text>Sale Price : {web3.utils.fromWei(myGovernanceSalePrice)} ETH</Text>
                     </>
                     
                 )}
