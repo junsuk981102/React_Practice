@@ -67,7 +67,6 @@ const MyGovernanceCard : FC<MyGovernanceCardProps> = ({
                         </Button>
                         <Text>ID : {GNT_Id} </Text>
                         <Text>Initial Price : {GNT_Initial_Price} ETH</Text>
-                        
                     </>
                 ) : (
                     <>

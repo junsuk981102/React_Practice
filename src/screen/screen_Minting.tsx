@@ -1,8 +1,11 @@
-import React, { FC, useState } from "react";
+import React, { FC, useState, ChangeEvent } from "react";
 import { firestore } from "../firebase-config";
-import { Box, Text, Flex, Button } from "@chakra-ui/react";
+import { Box, Text, Flex, Button, Input, InputGroup, InputRightAddon } from "@chakra-ui/react";
 
-import { mintAnimalTokenContract, mintAnimalTokenAddress, mintPlantTokenContract , mintPlantTokenAddress} from "../web3Config";
+import { mintAnimalTokenContract, mintAnimalTokenAddress} from "../web3Config";
+import { mintPlantTokenContract, mintPlantTokenAddress} from "../web3Config";
+import { mintGovernanceTokenContract, mintGovernanceTokenAddress} from "../web3Config";
+
 import  AnimalCard  from "../components/AnimalCard"
 import  PlantCard  from "../components/PlantCard"
 
@@ -13,6 +16,11 @@ interface MainProps {
 const ScreenMinting: FC<MainProps> = ({ account }) => {
     const [newAnimalType, setNewAnimalType] = useState<string>();
     const [newPlantType, setNewPlantType] = useState<string>();
+    const [count, setCount] =useState<string>("");
+    const [name, setName] =useState<string>("");
+    const [initialprice, setInitialPrice] =useState<string>("");
+    const [namemulti, setNameMulti] =useState<string>("");
+    const [initialpricemulti, setInitialPriceMulti] =useState<string>("");
 
     const onClickMint_A = async () => {
         try{
@@ -62,6 +70,59 @@ const ScreenMinting: FC<MainProps> = ({ account }) => {
         });
     };
 
+    const onClickSave_G = async () => {
+        await firestore.collection("governance").add({
+            address: mintGovernanceTokenAddress,
+        });
+    };
+
+    const onChangeInitialPrice = (e: ChangeEvent<HTMLInputElement>) =>{
+        setInitialPrice(e.target.value);
+    };
+
+    const onChangeName = (e: ChangeEvent<HTMLInputElement>) =>{
+        setName(e.target.value);
+    };
+
+    const onChangeCount = (e: ChangeEvent<HTMLInputElement>) =>{
+        setCount(e.target.value);
+    };
+
+    const onChangeInitialPriceMulti = (e: ChangeEvent<HTMLInputElement>) =>{
+        setInitialPriceMulti(e.target.value);
+    };
+
+    const onChangeNameMulti = (e: ChangeEvent<HTMLInputElement>) =>{
+        setNameMulti(e.target.value);
+    };
+    
+    const onClickMint_G = async () => {
+        try{
+            const response = await mintGovernanceTokenContract.methods
+                .mintGovernanceToken(
+                    initialprice,
+                    name
+                )
+                .send({from:account});
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
+    const onClickMultiMint_G = async () => {
+        try{
+            const response = await mintGovernanceTokenContract.methods
+                .multi_mintGovernanceToken(
+                    count,
+                    initialpricemulti,
+                    namemulti
+                )
+                .send({from:account});
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
     return (
         <Flex w="full" h="100vh" justifyContent="center" alignItems="center" direction="column">
             <Box>
@@ -82,6 +143,34 @@ const ScreenMinting: FC<MainProps> = ({ account }) => {
             </Box>
             <Button mt={4} size="sm" onClick={onClickMint_P}>Mint Plant</Button>
             <Button mt={4} size="sm" onClick={onClickSave_P}>Save Plant</Button>
+            
+            <Box>
+                <Text>Let's mint Governance Card!!!</Text>
+            </Box>
+
+            <InputGroup>
+                <InputRightAddon children="Initial Price"/>
+                <Input type="number" value={initialprice} onChange={onChangeInitialPrice}/>
+                <InputRightAddon children="Name"/>
+                <Input type="string" value={name} onChange={onChangeName}/>
+            </InputGroup>
+            <Button mt={4} size="sm" onClick={onClickMint_G}>
+                Mint Governance
+            </Button>
+
+            <InputGroup>
+                <InputRightAddon children="Count"/>
+                <Input type="number" value={count} onChange={onChangeCount}/>
+                <InputRightAddon children="Initial Price"/>
+                <Input type="number" value={initialpricemulti} onChange={onChangeInitialPriceMulti}/>
+                <InputRightAddon children="Name"/>
+                <Input type="string" value={namemulti} onChange={onChangeNameMulti}/>
+            </InputGroup>
+            <Button mt={4} size="sm" onClick={onClickMultiMint_G}>
+                Multi Mint Governance
+            </Button>
+
+            <Button mt={4} size="sm" onClick={onClickSave_G}>Save Governance</Button>
         </Flex>
     );
 }
