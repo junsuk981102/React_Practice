@@ -2020,8 +2020,8 @@ export const saleAnimalTokenAddress = "0x94895058a62D14792FCD913029d125b58C372a1
 export const mintPlantTokenAddress = "0x90Cf509924641FC125c75590c735FbC3feFE89Fc";
 export const salePlantTokenAddress = "0xFe3442317Ed84CEAe3596FF5301B1251421C9919";
 
-export const mintGovernanceTokenAddress = "0x93CCc9a00d7098EdA2f234D8ab80795E7C90145d";
-export const saleGovernanceTokenAddress = "0x446EEc5F8D75bE5A94ed28210B255a9e34e26A4a";
+export const mintGovernanceTokenAddress = "0x1ecC561263160227bb8199a145a6aF345fdA28Df";
+export const saleGovernanceTokenAddress = "0x2C7F111B35c88808D507BdfE62133E44f46419Fb";
 
 export const web3 = new Web3(window.ethereum);
 

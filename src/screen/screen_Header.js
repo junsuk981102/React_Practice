@@ -80,16 +80,14 @@ function Header(props) {
                 <button onClick={() => handleClick("/screen_profile_user")}>screen_profile_user 페이지</button>
                 {" "}
                 <button onClick={() => handleClick("/screen_minting")}>screen_minting 페이지</button>
-                {" "}
+                {/* {" "}
                 <button onClick={() => handleClick("/screen_my_animal")}>screen_my_animal 페이지</button>
                 {" "}
-                <button onClick={() => handleClick("/screen_my_plant")}>screen_my_plant 페이지</button>
+                <button onClick={() => handleClick("/screen_my_plant")}>screen_my_plant 페이지</button> */}
                 {" "}
                 <button onClick={() => handleClick("/screen_my_governance")}>screen_my_governance 페이지</button>
                 {" "}
                 <button onClick={() => handleClick("/screen_example")}>screen_example 페이지</button>
-                {" "}
-                <button onClick={() => handleClick("/screen_test")}>screen_test 페이지</button>
             </div>
             <hr/>
         </>

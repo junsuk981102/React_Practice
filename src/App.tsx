@@ -9,8 +9,8 @@ import Header from "./screen/screen_Header";
 import ScreenLogin from "./screen/screen_Login";
 import ScreenMain from "./screen/screen_Main";
 import ScreenMinting from "./screen/screen_Minting";
-import ScreenMyAnimal from "./screen/screen_My_Animal";
-import ScreenMyPlant from "./screen/screen_My_Plant";
+// import ScreenMyAnimal from "./screen/screen_My_Animal";
+// import ScreenMyPlant from "./screen/screen_My_Plant";
 import ScreenMyGovernance from "./screen/screen_My_Governance";
 import ScreenProfileInfo from "./screen/screen_Profile_Info";
 import ScreenProfileUser from "./screen/screen_Profile_User";
@@ -24,8 +24,6 @@ import ScreenRoomSetting from "./screen/screen_Room_Setting";
 import ScreenTokenGating from "./screen/screen_Token_Gating";
 import ScreenWalletConnect from "./screen/screen_Wallet_Connect";
 import ScreenWalletToken from "./screen/screen_Wallet_Token";
-
-import ScreenTest from "./screen/screen_Test";
 
 // import WalletCard from './WalletCard';
 
@@ -63,8 +61,8 @@ export default function App() {
               <Route path="/screen_example/*" element={<ScreenExample />}></Route>
               <Route path="/screen_login/*" element={<ScreenLogin />}></Route>
               <Route path="/screen_minting/*" element={<ScreenMinting account={account}/>}></Route>
-              <Route path="/screen_my_animal/*" element={<ScreenMyAnimal account={account}/>}></Route>
-              <Route path="/screen_my_plant/*" element={<ScreenMyPlant account={account}/>}></Route>
+              {/* <Route path="/screen_my_animal/*" element={<ScreenMyAnimal account={account}/>}></Route>
+              <Route path="/screen_my_plant/*" element={<ScreenMyPlant account={account}/>}></Route> */}
               <Route path="/screen_my_governance/*" element={<ScreenMyGovernance account={account}/>}></Route>
               <Route path="/screen_profile_info/*" element={<ScreenProfileInfo />}></Route>
               <Route path="/screen_profile_user/*" element={<ScreenProfileUser />}></Route>
@@ -79,8 +77,6 @@ export default function App() {
               <Route path="/screen_wallet_connect/*" element={<ScreenWalletConnect />}></Route>
               <Route path="/screen_wallet_token/*" element={<ScreenWalletToken />}></Route>
 
-
-              <Route path="/screen_minting/*" element={<ScreenTest account={account}/>}></Route>
               {/* 상단에 위치하는 라우트들의 규칙을 모두 확인, 일치하는 라우트가 없는경우 처리 */}
               {/*<Route path="*" element={<NotFound />}></Route>*/}
           </Routes>
