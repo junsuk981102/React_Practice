@@ -84,11 +84,11 @@ const ScreenMyGovernance: FC<MyGovernanceProps> = ({account}) => {
                 .call();
 
             if(balanceLength==="0"){
-                console.log("You cannot enter the room because you don't have NFTs for this room.");
+                alert("You cannot enter the room because you don't have NFTs for this room.");
                 return;
             }
 
-            console.log("You can enter the room because you have NFTs for this room.");
+            alert("You can enter the room because you have NFTs for this room.");
             navigate("/screen_token_gating");
         } catch (error) {
             console.error(error);
