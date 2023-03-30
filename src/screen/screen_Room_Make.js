@@ -84,9 +84,9 @@ const ScreenRoomMake = (props) => {
                     <input value={name} onChange={onChangeName} type="text" placeholder="커뮤니티 이름" maxLength={120} />
                     <input value={category} onChange={onChangeCategory} type="text" placeholder="커뮤니티 범주" maxLength={120} />
                     <input value={information} onChange={onChangeInformation} type="text" placeholder="커뮤니티 설명" maxLength={120} />
-                    <input value={investment} onChange={onChangeInvesetment} type="text" placeholder="커뮤니티 목표 투자금액" maxLength={120} />
-                    <input value={price} onChange={onChangePrice} type="text" placeholder="커뮤니티 티켓 가격" maxLength={120} />
-                    <input value={maxticket} onChange={onChangeMaxticket} type="text" placeholder="커뮤니티 티켓 최대 구매 개수" maxLength={120} />
+                    <input value={investment} onChange={onChangeInvesetment} type="number" placeholder="커뮤니티 목표 투자금액" maxLength={120} />
+                    <input value={price} onChange={onChangePrice} type="number" placeholder="커뮤니티 티켓 가격" maxLength={120} />
+                    <input value={maxticket} onChange={onChangeMaxticket} type="number" placeholder="커뮤니티 티켓 최대 구매 개수" maxLength={120} />
                     <input type="submit" value="커뮤니티 만들기" />
                 </form>
             </div>
