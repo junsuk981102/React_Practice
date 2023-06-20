@@ -99,6 +99,7 @@ const ScreenMinting: FC<MainProps> = ({ account }) => {
 
     return (
         <Flex w="full" h="100vh" justifyContent="center" alignItems="center" direction="column">
+
             {/* <Box>
                 {newAnimalType ? (
                     <AnimalCard animalType={newAnimalType} />
@@ -107,8 +108,8 @@ const ScreenMinting: FC<MainProps> = ({ account }) => {
                 )}
             </Box>
             <Button mt={4} size="sm" onClick={onClickMint_A}>Mint Animal</Button>
-            <Button mt={4} size="sm" onClick={onClickSave_A}>Save Animal</Button> */}
-            </Box>
+            <Button mt={4} size="sm" onClick={onClickSave_A}>Save Animal</Button>
+            </Box> */}
 
             <InputGroup>
                 <InputRightAddon children="Initial Price"/>
@@ -116,9 +117,7 @@ const ScreenMinting: FC<MainProps> = ({ account }) => {
                 <InputRightAddon children="Name"/>
                 <Input type="string" value={name} onChange={onChangeName}/>
             </InputGroup>
-            <Button mt={4} size="sm" onClick={onClickMint_G}>
-                Mint Governance
-            </Button>
+            <Button mt={4} size="sm" onClick={onClickMint_G}> Mint Governance </Button>
 
             <InputGroup>
                 <InputRightAddon children="Count"/>
@@ -128,11 +127,10 @@ const ScreenMinting: FC<MainProps> = ({ account }) => {
                 <InputRightAddon children="Name"/>
                 <Input type="string" value={namemulti} onChange={onChangeNameMulti}/>
             </InputGroup>
-            <Button mt={4} size="sm" onClick={onClickMultiMint_G}>
-                Multi Mint Governance
-            </Button>
+            <Button mt={4} size="sm" onClick={onClickMultiMint_G}> Multi Mint Governance </Button>
 
-            <Button mt={4} size="sm" onClick={onClickSave_G}>Save Governance</Button>
+            <Button mt={4} size="sm" onClick={onClickSave_G}> Save Governance </Button>
+            
         </Flex>
     );
 }

@@ -1369,12 +1369,12 @@ const saleGovernanceTokenAbi : AbiItem[] = [
 	}
 ]
 
-export const mintAnimalTokenAddress = "0x4e49c7f0459B78C57d43782e142bb8cDdFCbB8Bb";
-export const saleAnimalTokenAddress = "0x94895058a62D14792FCD913029d125b58C372a19";
+export const mintAnimalTokenAddress = "0x4027635FF12ffB8C9874d832c8353e1518Ea535D";
+export const saleAnimalTokenAddress = "0xFf671a137b547a40b606012839117E77E7556360";
 
 
-export const mintGovernanceTokenAddress = "0x1ecC561263160227bb8199a145a6aF345fdA28Df";
-export const saleGovernanceTokenAddress = "0x2C7F111B35c88808D507BdfE62133E44f46419Fb";
+export const mintGovernanceTokenAddress = "0x05F663629cE69897007281B3d4cec9856EC4991a";
+export const saleGovernanceTokenAddress = "0xCF754e0bc0e7309594108e6648E16dbF600A8756";
 
 export const web3 = new Web3(window.ethereum);
 
