@@ -8,7 +8,6 @@ function ScreenChat() {
   
   const navi = useNavigate();
   
-
   function handleClick(text) {
     navi(`${text}`);
   }

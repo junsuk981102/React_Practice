@@ -5,7 +5,6 @@ import {useNavigate} from "react-router-dom";
 import {useEffect } from 'react';
 import Web3 from 'web3';
 
-
 const ScreenWalletToken = (props) => {
     const [errorMessage, setErrorMessage] = useState(null);
     // const [defaultAccount, setDefaultAccount] = useState(null);
@@ -54,7 +53,7 @@ const ScreenWalletToken = (props) => {
       getAddress();
     }, []);
 
-    
+  
     const accountChangedHandler = (newAccount) => {
         setDefaultAccount(newAccount);
         //walletID.doc("myWallet").update({ID: defaultAccount});

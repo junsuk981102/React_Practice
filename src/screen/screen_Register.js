@@ -1,37 +1,33 @@
 import React from 'react';
 import { useState } from "react";
-import {
-  createUserWithEmailAndPassword,
-} from "firebase/auth";
+import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase-config";
 import {useNavigate} from "react-router-dom";
 
-
 const ScreenRegister = (props) => {
     const [registerEmail, setRegisterEmail] = useState("");
-  const [registerPassword, setRegisterPassword] = useState("");
+    const [registerPassword, setRegisterPassword] = useState("");
 
-  const navi = useNavigate();
+    const navi = useNavigate();
 
-    function handleClick(text) {
-        navi(`${text}`)
-    }
+      function handleClick(text) {
+          navi(`${text}`)
+      }
 
-  const register = async () => {
-    try {
-      const user = await createUserWithEmailAndPassword(
-        auth,
-        registerEmail,
-        registerPassword
-      );
-      console.log(user);
-      handleClick("/screen_login");
+    const register = async () => {
+      try {
+        const user = await createUserWithEmailAndPassword(
+          auth,
+          registerEmail,
+          registerPassword
+        );
+        console.log(user);
+        handleClick("/screen_login");
 
-    } catch (error) {
-      console.log(error.message);
-    }
-  };
-
+      } catch (error) {
+        console.log(error.message);
+      }
+    };
 
     return (
         <>

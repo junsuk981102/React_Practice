@@ -18,7 +18,6 @@ const ScreenRoomList = (props) => {
 
   const [communities, setCommunities] = useState([]);
 
-
   useEffect(() => {
     dbService.collection("community_list").onSnapshot(snapshot => {
       const communityArray = snapshot.docs.map((doc) => ({

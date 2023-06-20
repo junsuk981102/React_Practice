@@ -3,11 +3,9 @@ import { firestore } from "../firebase-config";
 import { Box, Text, Flex, Button, Input, InputGroup, InputRightAddon } from "@chakra-ui/react";
 
 // import { mintAnimalTokenContract, mintAnimalTokenAddress} from "../web3Config";
-// import { mintPlantTokenContract, mintPlantTokenAddress} from "../web3Config";
 import { mintGovernanceTokenContract, mintGovernanceTokenAddress} from "../web3Config";
 
 // import  AnimalCard  from "../components/AnimalCard"
-// import  PlantCard  from "../components/PlantCard"
 
 interface MainProps {
     account: string;
@@ -15,7 +13,6 @@ interface MainProps {
 
 const ScreenMinting: FC<MainProps> = ({ account }) => {
     // const [newAnimalType, setNewAnimalType] = useState<string>();
-    // const [newPlantType, setNewPlantType] = useState<string>();
     const [count, setCount] =useState<string>("");
     const [name, setName] =useState<string>("");
     const [initialprice, setInitialPrice] =useState<string>("");
@@ -40,41 +37,11 @@ const ScreenMinting: FC<MainProps> = ({ account }) => {
     //     }
     // };
 
-    // const onClickMint_P = async () => {
-    //     try{
-    //         if(!account) return;
-
-    //         const response = await mintPlantTokenContract.methods.mintPlantToken().send({from: account});
-
-    //         if(response.status){
-    //             const balanceLength = await mintPlantTokenContract.methods.balanceOf(account).call();
-    //             const plantTokenId = await mintPlantTokenContract.methods.tokenOfOwnerByIndex(account, parseInt(balanceLength,10) - 1).call();
-    //             const plantType = await mintPlantTokenContract.methods.plantTypes(plantTokenId).call();
-    //             //const plantTokenAddress = await mintPlantTokenContract.methods.plantTokenAddr(plantTokenId).call();
-    //             setNewPlantType(plantType);
-    //         }
-    //     } catch(error) {
-    //         console.error(error);
-    //     }
-    // };
-
     // const onClickSave_A = async () => {
     //     await firestore.collection("animal").add({
     //         address: mintAnimalTokenAddress,
     //     });
     // };
-
-    // const onClickSave_P = async () => {
-    //     await firestore.collection("plant").add({
-    //         address: mintPlantTokenAddress,
-    //     });
-    // };
-
-    const onClickSave_G = async () => {
-        await firestore.collection("governance").add({
-            address: mintGovernanceTokenAddress,
-        });
-    };
 
     const onChangeInitialPrice = (e: ChangeEvent<HTMLInputElement>) =>{
         setInitialPrice(e.target.value);
@@ -122,6 +89,12 @@ const ScreenMinting: FC<MainProps> = ({ account }) => {
             console.error(error);
         }
     }
+
+    const onClickSave_G = async () => {
+        await firestore.collection("governance").add({
+            address: mintGovernanceTokenAddress,
+        });
+    };
 
     return (
         <Flex w="full" h="100vh" justifyContent="center" alignItems="center" direction="column">
