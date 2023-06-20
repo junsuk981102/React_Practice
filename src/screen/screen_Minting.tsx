@@ -6,6 +6,7 @@ import { Box, Text, Flex, Button, Input, InputGroup, InputRightAddon } from "@ch
 import { mintGovernanceTokenContract, mintGovernanceTokenAddress} from "../web3Config";
 
 // import  AnimalCard  from "../components/AnimalCard"
+import  GovernanceCard  from "../components/GovernanceCard"
 
 interface MainProps {
     account: string;
@@ -106,19 +107,7 @@ const ScreenMinting: FC<MainProps> = ({ account }) => {
                 )}
             </Box>
             <Button mt={4} size="sm" onClick={onClickMint_A}>Mint Animal</Button>
-            <Button mt={4} size="sm" onClick={onClickSave_A}>Save Animal</Button>
-            <Box>
-                {newPlantType ? (
-                    <PlantCard plantType={newPlantType} />
-                ) : (
-                    <Text>Let's mint Plant Card!!!</Text>
-                )}
-            </Box>
-            <Button mt={4} size="sm" onClick={onClickMint_P}>Mint Plant</Button>
-            <Button mt={4} size="sm" onClick={onClickSave_P}>Save Plant</Button> */}
-            
-            <Box>
-                <Text>Let's mint Governance Card!!!</Text>
+            <Button mt={4} size="sm" onClick={onClickSave_A}>Save Animal</Button> */}
             </Box>
 
             <InputGroup>
