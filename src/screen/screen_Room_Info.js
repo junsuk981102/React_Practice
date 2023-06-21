@@ -14,7 +14,6 @@ const ScreenRoomInfo = (props) => {
     return (
         <>
             <h3>ScreenRoomInfo 페이지입니다.</h3>
-            <h3>ScreenRoomInfo 페이지입니다.</h3>
             <h4>커뮤니티 이름: {state.com_name}</h4>
             <h4>커뮤니티 범주: {state.com_category}</h4>
             <h4>커뮤니티 정보: {state.com_info}</h4>
