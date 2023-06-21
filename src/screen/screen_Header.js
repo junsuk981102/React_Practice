@@ -1,5 +1,4 @@
 import React from 'react';
-//import {Link} from "react-router-dom";
 import {useNavigate} from "react-router-dom";
 
 function Header(props) {
@@ -11,8 +10,8 @@ function Header(props) {
 
     return (
         <>
-            <h1>헤더입니다.</h1>
             <div>
+                <img src="image/stot_minilogo.png" alt="logo"/>
                 <button onClick={() => handleClick("")}>홈</button>
                 {" "}
                 <button onClick={() => handleClick("/screen_wallet_connect")}>지갑</button>
@@ -25,7 +24,6 @@ function Header(props) {
                 {" "}
                 <button onClick={() => handleClick("/screen_test")}>screen_test 페이지</button>
             </div>
-            <hr/>
         </>
     );
 }

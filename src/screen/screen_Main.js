@@ -10,10 +10,9 @@ const ScreenMain = (props) => {
     
     return (
         <>
-            <h3>ScreenMain 페이지입니다.</h3>
-            <img src="image/stot_logo.jpg" alt="logo"/>
-            <br/>
-            <button onClick={() => handleClick("/screen_login")}>screen_login 페이지</button>
+            <img src="image/stot_main.png" alt="logo"/>\
+            <h3>새로운 스타트업 찾기</h3>
+            <h3>투자중인 스타트업</h3>
         </>
     );
 };
