@@ -41,6 +41,7 @@ const ScreenRoomList = (props) => {
         ))}
       </div>
       <h3>원하는 커뮤니티가 없으신가요?</h3>
+      
       <button className="open" onClick={togglePopup} value='false'>커뮤니티를 직접 만들거나 찾아보세요</button>
       {showPopup ? (
         <div className="popup">

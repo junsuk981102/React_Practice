@@ -86,6 +86,8 @@ function Header(props) {
                 <button onClick={() => handleClick("/screen_my_governance")}>screen_my_governance 페이지</button>
                 {" "}
                 <button onClick={() => handleClick("/screen_example")}>screen_example 페이지</button>
+                {" "}
+                <button onClick={() => handleClick("/screen_test")}>screen_test 페이지</button>
             </div>
             <hr/>
         </>

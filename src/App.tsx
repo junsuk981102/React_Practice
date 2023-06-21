@@ -24,6 +24,9 @@ import ScreenTokenGating from "./screen/screen_Token_Gating";
 import ScreenWalletConnect from "./screen/screen_Wallet_Connect";
 import ScreenWalletToken from "./screen/screen_Wallet_Token";
 
+
+import ScreenTest from "./screen/screen_Test";
+
 // import WalletCard from './WalletCard';
 
 export default function App() {
@@ -74,6 +77,7 @@ export default function App() {
               <Route path="/screen_token_gating/*" element={<ScreenTokenGating />}></Route>
               <Route path="/screen_wallet_connect/*" element={<ScreenWalletConnect />}></Route>
               <Route path="/screen_wallet_token/*" element={<ScreenWalletToken />}></Route>
+              <Route path="/screen_test/*" element={<ScreenTest />}></Route>
               {/* 상단에 위치하는 라우트들의 규칙을 모두 확인, 일치하는 라우트가 없는경우 처리 */}
               {/*<Route path="*" element={<NotFound />}></Route>*/}
           </Routes>

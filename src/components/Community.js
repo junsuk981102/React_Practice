@@ -38,7 +38,7 @@ const Community = ({ communityObj }) => {
 
   return (
     <div>
-      <h4>{communityObj.name}</h4>
+      <h4>{communityObj.com_name}</h4>
       <button onClick={() => handleClick()}>Move to Community</button>
       <br />
       <button onClick={() => handleClick_chat()}>Move to ChatRoom</button>
