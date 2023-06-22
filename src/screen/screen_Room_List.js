@@ -4,59 +4,59 @@ import { dbService } from "../firebase-config";
 import Community from "../components/Community";
 
 const ScreenRoomList = (props) => {
-
   const [showPopup, setShowPopup] = useState(false);
 
   const togglePopup = (event) => {
-    setShowPopup(event.target.value)
+    setShowPopup(event.target.value);
   };
+  
   const navi = useNavigate();
 
   function handleClick(text) {
-    navi(`${text}`)
+    navi(`${text}`);
   }
 
   const [communities, setCommunities] = useState([]);
 
   useEffect(() => {
-    dbService.collection("community_list").onSnapshot(snapshot => {
+    dbService.collection("community_list").onSnapshot((snapshot) => {
       const communityArray = snapshot.docs.map((doc) => ({
         id: doc.id,
         ...doc.data(),
       }));
       setCommunities(communityArray);
-    })
-  }, [])
+    });
+  }, []);
 
-    return (
-        <>
-      <h3>ScreenRoomList 페이지입니다.</h3>
-      <button onClick={() => handleClick("/screen_wallet_token")}>screen_wallet_token 페이지</button>
-      <button onClick={() => handleClick("/screen_room_list")}>screen_room_list 페이지</button>
-      <button onClick={() => handleClick("/screen_profile")}>screen_profile 페이지</button>
-      <br/><br/><br/>
-      <div>
-        {communities.map(community => (
-          <Community key={community.id} communityObj={community} />
-        ))}
+  const renderCommunities = () => {
+    return communities.map((community) => (
+      <div
+        key={community.id}
+        style={{
+          border: "1px solid gray",
+          padding: "10px",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          width : "500px",
+          height : "360px"
+        }}
+      >
+        <Community communityObj={community} />
       </div>
-      <h3>원하는 커뮤니티가 없으신가요?</h3>
-      
-      <button className="open" onClick={togglePopup} value='false'>커뮤니티를 직접 만들거나 찾아보세요</button>
-      {showPopup ? (
-        <div className="popup">
-          <div className="popup_inner">
-            <button onClick={() => handleClick("/screen_room_make")}>screen_room_make 페이지</button>
-            <button onClick={() => handleClick("/screen_room_find")}>screen_room_find 페이지</button>
-            <br/>
-            <button className="close"  onClick={togglePopup}>
-              Close me
-            </button>
-          </div>
+    ));
+  };
+
+  return (
+    <>
+      <div style={{ paddingLeft: "88px", paddingRight: "88px" }}>
+        <h3 style={{ margin: "0",marginBottom: "20px" }}>커뮤니티</h3>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "20px" }}>
+          {renderCommunities()}
         </div>
-      ) : null}
-        </>
-    );
-}
+      </div>
+    </>
+  );
+};
 
 export default ScreenRoomList;

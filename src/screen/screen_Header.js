@@ -17,7 +17,7 @@ function Header(props) {
                 </div>
                 <button onClick={() => handleClick("")} style={{marginRight: '32px'}}>홈</button>
                 <button onClick={() => handleClick("/screen_wallet_connect")} style={{marginRight: '32px'}}>지갑</button>
-                <button onClick={() => handleClick("/screen_room_list")} style={{marginRight: '32px'}}>커뮤니티 페이지</button>
+                <button onClick={() => handleClick("/screen_room_list")} style={{marginRight: '32px'}}>커뮤니티</button>
             </div>
             <div>
                 <button onClick={() => handleClick("/screen_login")} style={{marginRight: '20px'}}>로그인</button>

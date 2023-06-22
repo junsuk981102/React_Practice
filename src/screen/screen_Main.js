@@ -74,18 +74,17 @@ const ScreenMain = (props) => {
 
   return (
     <>
-      <img src="image/stot_main.png" alt="logo" style={{ marginBottom: "35px" }} />
-
-<div style={{ paddingLeft: "88px", paddingRight: "88px" }}>
-  <h3 style={{ margin: "0",marginBottom: "20px" }}>새로운 스타트업 찾기</h3>
-  <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "20px" }}>
-    {renderStartups()}
-  </div>
-  <h3 style={{ margin: "0", marginTop: "40px",marginBottom: "20px" }}>새로운 VC 찾기</h3>
-  <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "20px" }}>
-    {renderVCs()}
-  </div>
-</div>
+      <img src="image/stot_main.png" alt="logo" style={{ marginBottom: "35px" }} /> 
+      <div style={{ paddingLeft: "88px", paddingRight: "88px" }}>
+        <h3 style={{ margin: "0",marginBottom: "20px" }}>새로운 스타트업 찾기</h3>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "20px" }}>
+          {renderStartups()}
+        </div>
+        <h3 style={{ margin: "0", marginTop: "40px",marginBottom: "20px" }}>새로운 VC 찾기</h3>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "20px" }}>
+          {renderVCs()}
+        </div>
+      </div>
     </>
   );
 };
