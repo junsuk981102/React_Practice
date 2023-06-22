@@ -20,7 +20,9 @@ import ScreenRoomInfo from "./screen/screen_Room_Info";
 import ScreenRoomList from "./screen/screen_Room_List";
 import ScreenRoomMake from "./screen/screen_Room_Make";
 import ScreenRoomSetting from "./screen/screen_Room_Setting";
+import ScreenStartupInfo from "./screen/screen_Startup_Info";
 import ScreenTokenGating from "./screen/screen_Token_Gating";
+import ScreenVCInfo from "./screen/screen_VC_Info";
 import ScreenWalletConnect from "./screen/screen_Wallet_Connect";
 import ScreenWalletToken from "./screen/screen_Wallet_Token";
 
@@ -74,9 +76,12 @@ export default function App() {
               <Route path="/screen_room_list/*" element={<ScreenRoomList />}></Route>
               <Route path="/screen_room_make/*" element={<ScreenRoomMake />}></Route>
               <Route path="/screen_room_setting/*" element={<ScreenRoomSetting />}></Route>
+              <Route path="/screen_startup_info/*" element={<ScreenStartupInfo />}></Route>
               <Route path="/screen_token_gating/*" element={<ScreenTokenGating />}></Route>
+              <Route path="/screen_vc_info/*" element={<ScreenVCInfo />}></Route>
               <Route path="/screen_wallet_connect/*" element={<ScreenWalletConnect />}></Route>
               <Route path="/screen_wallet_token/*" element={<ScreenWalletToken />}></Route>
+
               <Route path="/screen_test/*" element={<ScreenTest />}></Route>
               {/* 상단에 위치하는 라우트들의 규칙을 모두 확인, 일치하는 라우트가 없는경우 처리 */}
               {/*<Route path="*" element={<NotFound />}></Route>*/}
