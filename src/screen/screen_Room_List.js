@@ -50,7 +50,7 @@ const ScreenRoomList = (props) => {
   return (
     <>
       <div style={{ paddingLeft: "88px", paddingRight: "88px" }}>
-        <h3 style={{ margin: "0",marginBottom: "20px" }}>커뮤니티</h3>
+        <h3 style={{ margin: "0",marginTop: "35px", marginBottom: "20px" }}>커뮤니티</h3>
         <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "20px" }}>
           {renderCommunities()}
         </div>
