@@ -12,7 +12,7 @@ function Header(props) {
         <>
             <div style={{display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '15px'}}>
             <div style={{display: 'flex', alignItems: 'center'}}>
-                <div style={{marginRight: '32px'}}>
+                <div style={{marginRight: '32px',marginLeft: '15px'}}>
                 <img src="image/stot_minilogo.png" alt="logo" width="143px" height="48.1px" />
                 </div>
                 <button onClick={() => handleClick("")} style={{marginRight: '32px'}}>홈</button>
@@ -22,7 +22,6 @@ function Header(props) {
             <div>
                 <button onClick={() => handleClick("/screen_login")} style={{marginRight: '20px'}}>로그인</button>
                 <button onClick={() => handleClick("/screen_register")} style={{marginRight: '10px'}}>회원가입</button>
-                <button onClick={() => handleClick("/screen_test")} style={{marginRight: '10px'}}>test</button>
             </div>
             </div>
         </>

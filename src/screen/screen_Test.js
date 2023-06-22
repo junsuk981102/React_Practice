@@ -8,10 +8,10 @@ const ScreenTest = (props) => {
 
     const onSubmit = async (event) => {
         event.preventDefault();
-        await dbService.collection("startup_list").add({
-            sup_name : name,
-            sup_category : category,
-            sup_info : information,
+        await dbService.collection("vc_list").add({
+            vc_name : name,
+            vc_category : category,
+            vc_info : information,
         });
         setName("")
         setCategory("")
