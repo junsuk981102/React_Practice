@@ -10,19 +10,20 @@ function Header(props) {
 
     return (
         <>
+            <div style={{display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '15px'}}>
+            <div style={{display: 'flex', alignItems: 'center'}}>
+                <div style={{marginRight: '32px'}}>
+                <img src="image/stot_minilogo.png" alt="logo" width="143px" height="48.1px" />
+                </div>
+                <button onClick={() => handleClick("")} style={{marginRight: '32px'}}>홈</button>
+                <button onClick={() => handleClick("/screen_wallet_connect")} style={{marginRight: '32px'}}>지갑</button>
+                <button onClick={() => handleClick("/screen_room_list")} style={{marginRight: '32px'}}>커뮤니티 페이지</button>
+            </div>
             <div>
-                <img src="image/stot_minilogo.png" alt="logo"/>
-                <button onClick={() => handleClick("")}>홈</button>
-                {" "}
-                <button onClick={() => handleClick("/screen_wallet_connect")}>지갑</button>
-                {" "}
-                <button onClick={() => handleClick("/screen_room_list")}>커뮤니티 페이지</button>
-                {" "}
-                <button onClick={() => handleClick("/screen_login")}>로그인</button>
-                {" "}
-                <button onClick={() => handleClick("/screen_register")}>회원가입</button>
-                {" "}
-                <button onClick={() => handleClick("/screen_test")}>screen_test 페이지</button>
+                <button onClick={() => handleClick("/screen_login")} style={{marginRight: '20px'}}>로그인</button>
+                <button onClick={() => handleClick("/screen_register")} style={{marginRight: '10px'}}>회원가입</button>
+                <button onClick={() => handleClick("/screen_test")} style={{marginRight: '10px'}}>test</button>
+            </div>
             </div>
         </>
     );
