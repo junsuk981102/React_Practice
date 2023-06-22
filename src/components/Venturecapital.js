@@ -8,14 +8,14 @@ const Venturecapital = ({ venturecapitalObj }) => {
     navi(`/screen_room_info`, {
       state: {
         id: venturecapitalObj.id,
-        com_name : venturecapitalObj.com_name,
-        com_category : venturecapitalObj.com_category,
-        com_info : venturecapitalObj.com_info,
-        com_total_investment : venturecapitalObj.com_total_investment,
-        com_now_investment : venturecapitalObj.com_now_investment,
-        com_ticket_price : venturecapitalObj.com_ticket_price,
-        com_ticket_max : venturecapitalObj.com_ticket_max,
-        com_member : venturecapitalObj.com_member,
+        vc_name : venturecapitalObj.com_name,
+        vc_category : venturecapitalObj.com_category,
+        vc_info : venturecapitalObj.com_info,
+        vc_total_investment : venturecapitalObj.com_total_investment,
+        vc_now_investment : venturecapitalObj.com_now_investment,
+        vc_ticket_price : venturecapitalObj.com_ticket_price,
+        vc_ticket_max : venturecapitalObj.com_ticket_max,
+        vc_member : venturecapitalObj.com_member,
       },
     });
   }
