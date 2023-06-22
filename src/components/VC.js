@@ -18,7 +18,7 @@ const VC = ({ vcObj }) => {
   return (
     <div>
       <h4>{vcObj.vc_name}</h4>
-      <button onClick={() => handleClick()}>Move to Startup</button>
+      <button onClick={() => handleClick()}>Move to VC</button>
       <br />
       {/* <button>Delete Community</button>
         <button>Edit Community name</button> */}
