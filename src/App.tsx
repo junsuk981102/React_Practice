@@ -26,7 +26,6 @@ import ScreenVCInfo from "./screen/screen_VC_Info";
 import ScreenWalletConnect from "./screen/screen_Wallet_Connect";
 import ScreenWalletToken from "./screen/screen_Wallet_Token";
 
-
 import ScreenTest from "./screen/screen_Test";
 
 // import WalletCard from './WalletCard';

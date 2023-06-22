@@ -17,11 +17,6 @@ const ScreenStartupInfo = (props) => {
             <h4>커뮤니티 이름: {state.sup_name}</h4>
             <h4>커뮤니티 범주: {state.sup_category}</h4>
             <h4>커뮤니티 정보: {state.sup_info}</h4>
-            <h4>커뮤니티 목표 투자금액: {state.sup_total_investment}원</h4>
-            <h4>커뮤니티 현재 투자금액: {state.sup_now_investment}원</h4>
-            <h4>커뮤니티 티켓 가격: {state.sup_ticket_price}원</h4>
-            <h4>커뮤니티 티켓 최대 개수: {state.sup_ticket_max}개</h4>
-            <h4>커뮤니티 참여 인원 수: {state.sup_member}명</h4>
         </>
     );
 }

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { dbService } from "../firebase-config";
 import Community from "../components/Community";
+import Startup from "../components/Startup";
 
 const ScreenMain = (props) => {
     const navi = useNavigate();
@@ -11,6 +12,7 @@ const ScreenMain = (props) => {
     }
   
     const [communities, setCommunities] = useState([]);
+    const [startups, setStartups] = useState([]);
   
     useEffect(() => {
       dbService.collection("community_list").onSnapshot(snapshot => {
@@ -19,6 +21,15 @@ const ScreenMain = (props) => {
           ...doc.data(),
         }));
         setCommunities(communityArray);
+      })
+    }, [])
+    useEffect(() => {
+      dbService.collection("startup_list").onSnapshot(snapshot => {
+        const startupArray = snapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+        setStartups(startupArray);
       })
     }, [])
     
@@ -31,6 +42,11 @@ const ScreenMain = (props) => {
             <div>
                 {communities.map(community => (
                 <Community key={community.id} communityObj={community} />
+                ))}
+            </div>
+            <div>
+                {startups.map(startup => (
+                <Startup key={startup.id} startupObj={startup} />
                 ))}
             </div>
         </>
