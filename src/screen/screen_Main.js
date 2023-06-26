@@ -135,8 +135,8 @@ const ScreenMain = (props) => {
         alt="logo"
         style={{
           marginBottom: "35px",
-          width: "100%", /* Make the image width 100% of its container */
-          height: "auto", /* Maintain aspect ratio */
+          width: "100%",
+          height: "auto",
         }}
       />
       <div style={{ paddingLeft: "88px", paddingRight: "88px" }}>

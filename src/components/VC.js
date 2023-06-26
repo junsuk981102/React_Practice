@@ -21,7 +21,7 @@ const VC = ({ vcObj }) => {
       <div
         style={{
           position: "absolute",
-          top: 0,
+          top: 5,
           right: 20,
           borderRadius: "20%",
           backgroundColor: "#00A29D",
@@ -30,10 +30,10 @@ const VC = ({ vcObj }) => {
       >
         <h4 style={{ margin: 0, fontSize: "12px", fontWeight: "bold" }}>{vcObj.vc_category}</h4>
       </div>
-      <button style={{ position: "absolute", top: 30, right: 20, fontSize: "20px", fontWeight: "bold" }} onClick={() => handleClick()}>
+      <button style={{ position: "absolute", top: 35, right: 20, fontSize: "20px", fontWeight: "bold" }} onClick={() => handleClick()}>
         자세히 보기 {'>'}
       </button>
-      <h4 style={{ position: "absolute", top: 60, left: 20,fontSize: "16px"}}>{vcObj.vc_info}</h4>
+      <h4 style={{ position: "absolute", top: 70, left: 25,fontSize: "16px"}}>{vcObj.vc_info}</h4>
     </div>
   );
 };

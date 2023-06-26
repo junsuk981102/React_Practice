@@ -21,19 +21,19 @@ const Startup = ({ startupObj }) => {
       <div
         style={{
           position: "absolute",
-          top: 0,
+          top: 5,
           right: 20,
           borderRadius: "20%",
           backgroundColor: "#00A29D",
           padding: "4px 8px",
         }}
       >
-        <h4 style={{ margin: 0, fontSize: "12px", fontWeight: "bold" }}>{startupObj.sup_category}</h4>
+        <h4 style={{ margin: 0, fontSize: "12px", color : "white", fontWeight: "bold" }}>{startupObj.sup_category}</h4>
       </div>
-      <button style={{ position: "absolute", top: 30, right: 20, fontSize: "20px", fontWeight: "bold" }} onClick={() => handleClick()}>
+      <button style={{ position: "absolute", top: 35, right: 20, fontSize: "20px", fontWeight: "bold" }} onClick={() => handleClick()}>
         자세히 보기 {'>'}
       </button>
-      <h4 style={{ position: "absolute", top: 60, left: 20,fontSize: "16px"}}>{startupObj.sup_info}</h4>
+      <h4 style={{ position: "absolute", top: 70, left: 25,fontSize: "16px"}}>{startupObj.sup_info}</h4>
     </div>
   );
 };

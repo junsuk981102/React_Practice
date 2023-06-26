@@ -38,27 +38,15 @@ const Community = ({ communityObj }) => {
 
   return (
     <div style={{ position: "relative", width: "100%", height: "100%" }}>
-    <h4 style={{ position: "absolute", top: 30, left: 20 }}>{communityObj.com_name}</h4>
-    <div
-      style={{
-        position: "absolute",
-        top: 0,
-        right: 20,
-        borderRadius: "20%",
-        backgroundColor: "#00A29D",
-        padding: "4px 8px",
-      }}
-    >
-      <h4 style={{ margin: 0 }}>{communityObj.com_category}</h4>
-    </div>
-    <button style={{ position: "absolute", top: 30, right: 20 }} onClick={() => handleClick()}>
+    <h4 style={{ position: "absolute", top: 10, left: 10, fontSize: "28px", fontWeight: "bold" }}>{communityObj.com_name}</h4>
+    <h4 style={{ position: "absolute", top: 50, left: 12, fontSize: "12px", fontWeight: "bold", color: "#00A29D" }}>{communityObj.com_category}</h4>
+    <button style={{ position: "absolute", top: 15, right: 20, fontSize: "10px",fontWeight: "bold" }} onClick={() => handleClick()}>
     자세히 보기 {'>'}
     </button>
-    <h4 style={{ position: "absolute", top: 60, left: 20 }}>{communityObj.com_info}</h4>
-    <button style={{ position: "absolute", top: 60, right: 20 }} onClick={() => handleClick_chat()}>
+    <button style={{ position: "absolute",borderRadius: "15%",color: "white",backgroundColor: "#00A29D",padding: "4px 8px",bottom: 15, right: 20, fontSize: "18px", fontWeight: "bold" }} onClick={() => handleClick_chat()}>
     채팅방 입장 {'>'}
     </button>
-    <h4 style={{ position: "absolute", bottom: 30, left: 20 }}>현재 : {communityObj.com_member}명</h4>
+    <h4 style={{ position: "absolute", bottom: 20, left: 12, fontSize: "16px", color: "#00A29D", fontWeight: "bold" }}>현재 : {communityObj.com_member}명</h4>
     </div>
   );
 };
