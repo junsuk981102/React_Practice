@@ -44,17 +44,41 @@ const ScreenMain = (props) => {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          width : "500px",
-          height : "360px",
-          backgroundImage: `url(/image/animal/1.png)`, // Add background image
-          backgroundSize: "cover", // Adjust background image size
-          backgroundPosition: "center", // Adjust background image position
+          width: "500px",
+          height: "360px",
+          position: "relative",
         }}
       >
-        <Startup startupObj={startup} />
+        <div
+          style={{
+            backgroundImage: `url(/image/animal/1.png)`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            width: "100%",
+            height: "50%",
+            position: "absolute",
+            top: 0,
+            left: 0,
+          }}
+        />
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            width: "100%",
+            height: "50%",
+            position: "absolute",
+            top: 0,
+            right: 0,
+          }}
+        >
+          <Startup startupObj={startup} />
+        </div>
       </div>
     ));
   };
+
 
   const renderVCs = () => {
     return vcs.map((vc) => (
