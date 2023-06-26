@@ -17,12 +17,23 @@ const Startup = ({ startupObj }) => {
 
   return (
     <div style={{ position: "relative", width: "100%", height: "100%" }}>
-      <h4 style={{ position: "absolute", top: 0, left: 0 }}>{startupObj.sup_name}</h4>
-      <button style={{ position: "absolute", top: 0, right: 0 }} onClick={() => handleClick()}>
-        자세히 보기
+      <h4 style={{ position: "absolute", top: 30, left: 20 }}>{startupObj.sup_name}</h4>
+      <div
+        style={{
+          position: "absolute",
+          top: 0,
+          right: 20,
+          borderRadius: "20%",
+          backgroundColor: "#00A29D",
+          padding: "4px 8px",
+        }}
+      >
+        <h4 style={{ margin: 0 }}>{startupObj.sup_category}</h4>
+      </div>
+      <button style={{ position: "absolute", top: 30, right: 20 }} onClick={() => handleClick()}>
+        자세히 보기 >
       </button>
-      {/* <button>Delete Community</button>
-        <button>Edit Community name</button> */}
+      <h4 style={{ position: "absolute", top: 60, left: 20 }}>{startupObj.sup_info}</h4>
     </div>
   );
 };

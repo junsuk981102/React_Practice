@@ -40,6 +40,7 @@ const ScreenMain = (props) => {
         key={startup.id}
         style={{
           border: "1px solid gray",
+          borderRadius: "5%",
           padding: "10px",
           display: "flex",
           alignItems: "center",
@@ -85,6 +86,7 @@ const ScreenMain = (props) => {
         key={vc.id}
         style={{
           border: "1px solid gray",
+          borderRadius: "5%",
           padding: "10px",
           display: "flex",
           alignItems: "center",
