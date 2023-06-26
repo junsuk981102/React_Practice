@@ -45,7 +45,10 @@ const ScreenMain = (props) => {
           alignItems: "center",
           justifyContent: "center",
           width : "500px",
-          height : "360px"
+          height : "360px",
+          backgroundImage: `url(/image/animal/1.png)`, // Add background image
+          backgroundSize: "cover", // Adjust background image size
+          backgroundPosition: "center", // Adjust background image position
         }}
       >
         <Startup startupObj={startup} />
@@ -64,7 +67,10 @@ const ScreenMain = (props) => {
           alignItems: "center",
           justifyContent: "center",
           width : "500px",
-          height : "360px"
+          height : "360px",
+          backgroundImage: `url(/image/animal/2.png)`, // Add background image
+          backgroundSize: "cover", // Adjust background image size
+          backgroundPosition: "center", // Adjust background image position
         }}
       >
         <VC vcObj={vc} />
