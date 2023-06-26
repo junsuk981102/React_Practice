@@ -17,7 +17,20 @@ const Startup = ({ startupObj }) => {
 
   return (
     <div style={{ position: "relative", width: "100%", height: "100%" }}>
-      <h4 style={{ position: "absolute", top: 30, left: 20, fontSize: "28px", fontWeight: "bold"}}>{startupObj.sup_name}</h4>
+      <div
+        style={{
+          position: "absolute",
+          top: -40,
+          left: 20,
+          width: "80px",
+          height: "80px",
+          borderRadius: "20%",
+          backgroundImage: `url(/image/animal/4.png)`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+        }}
+      />
+      <h4 style={{ position: "absolute", top: 40, left: 20, fontSize: "28px", fontWeight: "bold"}}>{startupObj.sup_name}</h4>
       <div
         style={{
           position: "absolute",
@@ -33,7 +46,7 @@ const Startup = ({ startupObj }) => {
       <button style={{ position: "absolute", top: 35, right: 20, fontSize: "20px", fontWeight: "bold" }} onClick={() => handleClick()}>
         자세히 보기 {'>'}
       </button>
-      <h4 style={{ position: "absolute", top: 70, left: 25,fontSize: "16px"}}>{startupObj.sup_info}</h4>
+      <h4 style={{ position: "absolute", top: 80, left: 22,fontSize: "16px"}}>{startupObj.sup_info}</h4>
     </div>
   );
 };
