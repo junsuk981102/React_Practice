@@ -43,6 +43,8 @@ const ScreenRoomList = (props) => {
           height: "400px",
           position: "relative",
           overflow: "hidden",
+          borderColor: "#00A29D",  // 테두리 색상
+          boxShadow: "0 0 15px #00A29D"  // 그림자 효과
         }}
       >
         <div
@@ -74,10 +76,13 @@ const ScreenRoomList = (props) => {
       </div>
     ));
   };
+  
   return (
-    <>
-      <div style={{ paddingLeft: "88px", paddingRight: "88px" }}>
-        <h3 style={{ margin: "0",marginTop: "35px", marginBottom: "20px", fontSize: "28px", fontWeight: "bold" }}>커뮤니티</h3>
+    <div style={{ backgroundColor: "#E5F2F2", minHeight: "100vh" }}>
+      <div
+        style={{ paddingLeft: "500px", paddingRight: "300px" }}
+      >
+        <h3 style={{ margin: "0", marginTop: "35px", marginBottom: "20px", fontSize: "24px", fontWeight: "bold" }}>커뮤니티</h3>
         <div
           style={{
             display: "grid",
@@ -88,7 +93,7 @@ const ScreenRoomList = (props) => {
           {renderCommunities()}
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

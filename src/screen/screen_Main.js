@@ -49,6 +49,8 @@ const ScreenMain = (props) => {
           height: "360px",
           position: "relative",
           overflow: "hidden",
+          borderColor: "#00A29D",  // 테두리 색상
+          boxShadow: "0 0 15px #00A29D"  // 그림자 효과
         }}
       >
         <div
@@ -96,6 +98,8 @@ const ScreenMain = (props) => {
           height: "360px",
           position: "relative",
           overflow: "hidden",
+          borderColor: "#00A29D",  // 테두리 색상
+          boxShadow: "0 0 15px #00A29D"  // 그림자 효과
         }}
       >
         <div
