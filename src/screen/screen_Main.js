@@ -143,7 +143,7 @@ const ScreenMain = (props) => {
           height: "auto",
         }}
       />
-      <div style={{ paddingLeft: "88px", paddingRight: "88px" }}>
+      <div style={{ paddingLeft: "150px", paddingRight: "88px" }}>
         <h3 style={{ margin: "0", marginBottom: "5px", fontSize: "20px"}}>새로운 스타트업 찾기</h3>
         <h3 style={{ margin: "0", marginBottom: "20px", fontSize: "28px", fontWeight: "bold" }}>투자 중인 스타트업</h3>
         <div
