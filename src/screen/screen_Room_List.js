@@ -34,19 +34,45 @@ const ScreenRoomList = (props) => {
         key={community.id}
         style={{
           border: "1px solid gray",
+          borderRadius: "5%",
           padding: "10px",
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          width : "500px",
-          height : "360px"
+          width: "500px",
+          height: "360px",
+          position: "relative",
         }}
       >
+        <div
+          style={{
+            backgroundImage: `url(/image/animal/3.png)`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            width: "100%",
+            height: "50%",
+            position: "absolute",
+            top: 0,
+            left: 0,
+          }}
+        />
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            width: "100%",
+            height: "50%",
+            position: "absolute",
+            bottom: 0,
+            left: 0,
+          }}
+        >
         <Community communityObj={community} />
+        </div>
       </div>
     ));
   };
-
   return (
     <>
       <div style={{ paddingLeft: "88px", paddingRight: "88px" }}>

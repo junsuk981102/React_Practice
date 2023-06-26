@@ -31,7 +31,7 @@ const Startup = ({ startupObj }) => {
         <h4 style={{ margin: 0 }}>{startupObj.sup_category}</h4>
       </div>
       <button style={{ position: "absolute", top: 30, right: 20 }} onClick={() => handleClick()}>
-        자세히 보기 >
+        자세히 보기 {'>'}
       </button>
       <h4 style={{ position: "absolute", top: 60, left: 20 }}>{startupObj.sup_info}</h4>
     </div>
