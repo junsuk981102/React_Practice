@@ -16,12 +16,11 @@ const VC = ({ vcObj }) => {
   }
 
   return (
-    <div>
-      <h4>{vcObj.vc_name}</h4>
-      <button onClick={() => handleClick()}>Move to VC</button>
-      <br />
-      {/* <button>Delete Community</button>
-        <button>Edit Community name</button> */}
+    <div style={{ position: "relative", width: "100%", height: "100%" }}>
+      <h4 style={{ position: "absolute", top: 0, left: 0 }}>{vcObj.vc_name}</h4>
+      <button style={{ position: "absolute", top: 0, right: 0 }} onClick={() => handleClick()}>
+        자세히 보기
+      </button>
     </div>
   );
 };

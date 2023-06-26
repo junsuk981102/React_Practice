@@ -69,8 +69,8 @@ const ScreenMain = (props) => {
             width: "100%",
             height: "50%",
             position: "absolute",
-            top: 0,
-            right: 0,
+            bottom: 0,
+            left: 0,
           }}
         >
           <Startup startupObj={startup} />
@@ -78,7 +78,6 @@ const ScreenMain = (props) => {
       </div>
     ));
   };
-
 
   const renderVCs = () => {
     return vcs.map((vc) => (
@@ -90,14 +89,37 @@ const ScreenMain = (props) => {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          width : "500px",
-          height : "360px",
-          backgroundImage: `url(/image/animal/2.png)`, // Add background image
-          backgroundSize: "cover", // Adjust background image size
-          backgroundPosition: "center", // Adjust background image position
+          width: "500px",
+          height: "360px",
+          position: "relative",
         }}
       >
-        <VC vcObj={vc} />
+        <div
+          style={{
+            backgroundImage: `url(/image/animal/2.png)`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            width: "100%",
+            height: "50%",
+            position: "absolute",
+            top: 0,
+            left: 0,
+          }}
+        />
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            width: "100%",
+            height: "50%",
+            position: "absolute",
+            bottom: 0,
+            left: 0,
+          }}
+        >
+          <VC vcObj={vc} />
+        </div>
       </div>
     ));
   };
