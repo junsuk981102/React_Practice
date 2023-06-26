@@ -39,9 +39,10 @@ const ScreenRoomList = (props) => {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          width: "500px",
-          height: "360px",
+          width: "300px",
+          height: "400px",
           position: "relative",
+          overflow: "hidden",
         }}
       >
         <div
@@ -76,8 +77,14 @@ const ScreenRoomList = (props) => {
   return (
     <>
       <div style={{ paddingLeft: "88px", paddingRight: "88px" }}>
-        <h3 style={{ margin: "0",marginTop: "35px", marginBottom: "20px" }}>커뮤니티</h3>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "20px" }}>
+        <h3 style={{ margin: "0",marginTop: "35px", marginBottom: "20px", fontSize: "28px", fontWeight: "bold" }}>커뮤니티</h3>
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
+            gap: "20px",
+          }}
+        >
           {renderCommunities()}
         </div>
       </div>

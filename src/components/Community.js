@@ -58,6 +58,7 @@ const Community = ({ communityObj }) => {
     <button style={{ position: "absolute", top: 60, right: 20 }} onClick={() => handleClick_chat()}>
     채팅방 입장 {'>'}
     </button>
+    <h4 style={{ position: "absolute", bottom: 30, left: 20 }}>현재 : {communityObj.com_member}명</h4>
     </div>
   );
 };

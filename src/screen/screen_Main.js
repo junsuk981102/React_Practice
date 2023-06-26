@@ -48,6 +48,7 @@ const ScreenMain = (props) => {
           width: "500px",
           height: "360px",
           position: "relative",
+          overflow: "hidden",
         }}
       >
         <div
@@ -94,6 +95,7 @@ const ScreenMain = (props) => {
           width: "500px",
           height: "360px",
           position: "relative",
+          overflow: "hidden",
         }}
       >
         <div
@@ -138,7 +140,8 @@ const ScreenMain = (props) => {
         }}
       />
       <div style={{ paddingLeft: "88px", paddingRight: "88px" }}>
-        <h3 style={{ margin: "0", marginBottom: "20px" }}>새로운 스타트업 찾기</h3>
+        <h3 style={{ margin: "0", marginBottom: "5px", fontSize: "20px"}}>새로운 스타트업 찾기</h3>
+        <h3 style={{ margin: "0", marginBottom: "20px", fontSize: "28px", fontWeight: "bold" }}>투자 중인 스타트업</h3>
         <div
           style={{
             display: "grid",
@@ -148,7 +151,8 @@ const ScreenMain = (props) => {
         >
           {renderStartups()}
         </div>
-        <h3 style={{ margin: "0", marginTop: "40px", marginBottom: "20px" }}>새로운 VC 찾기</h3>
+        <h3 style={{ margin: "0", marginTop: "40px", marginBottom: "5px", fontSize: "20px"}}>새로운 VC 찾기</h3>
+        <h3 style={{ margin: "0", marginBottom: "20px", fontSize: "28px", fontWeight: "bold" }}>투자 중인 VC</h3>
         <div
           style={{
             display: "grid",
