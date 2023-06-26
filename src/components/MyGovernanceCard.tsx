@@ -53,32 +53,29 @@ const MyGovernanceCard : FC<MyGovernanceCardProps> = ({
     }
 
     return (
-        <Box textAlign="center" w={150}>
-            <GovernanceCard GNT_name={GNT_name}/>;
-            <Box mt={2}>
-                {myGovernanceSalePrice === "0" ? (
-                    <>
-                        <InputGroup> 
-                            <Input type="number" value={sellPrice} onChange={onChangeSellPrice}/>
-                            <InputRightAddon children="ETH"/>
-                        </InputGroup>
-                        <Button size="sm" colorScheme="green" mt={2} onClick={onClickSell}>
-                            Sell
-                        </Button>
-                        <Text>ID : {GNT_Id} </Text>
-                        <Text>Initial Price : {GNT_Initial_Price} ETH</Text>
-                    </>
-                ) : (
-                    <>
-                        <Text>ID : {GNT_Id} </Text>
-                        <Text>Initial Price : {web3.utils.fromWei(GNT_Initial_Price)} ETH</Text>
-                        <Text>Sale Price : {web3.utils.fromWei(myGovernanceSalePrice)} ETH</Text>
-                    </>
-                    
-                )}
-            </Box>
-        </Box>
-    )
-};
+        <div style={{ textAlign: "center", width: 150 }}>
+          <GovernanceCard GNT_name={GNT_name} />
+          <div style={{ marginTop: 2 }}>
+            {myGovernanceSalePrice === "0" ? (
+              <>
+                <input type="number" value={sellPrice} onChange={onChangeSellPrice} />
+                <span>ETH</span>
+                <button style={{ color: "green", marginTop: 2 }} onClick={onClickSell}>
+                  Sell
+                </button>
+                <p>ID: {GNT_Id}</p>
+                <p>Initial Price: {GNT_Initial_Price} ETH</p>
+              </>
+            ) : (
+              <>
+                <p>ID: {GNT_Id}</p>
+                <p>Initial Price: {web3.utils.fromWei(GNT_Initial_Price)} ETH</p>
+                <p>Sale Price: {web3.utils.fromWei(myGovernanceSalePrice)} ETH</p>
+              </>
+            )}
+          </div>
+        </div>
+      );
+    };
 
 export default MyGovernanceCard;

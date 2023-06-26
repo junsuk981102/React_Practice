@@ -1,11 +1,9 @@
-import { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import MessageFormat from "./cpn_Message_Format";
-import {db} from '../firebase-config';
+import {db, auth} from '../firebase-config';
 import {query, collection, orderBy, onSnapshot} from 'firebase/firestore';
 import MessageSend from "./cpn_Message_Send";
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { auth } from '../firebase-config';
-import React from 'react';
 import { useLocation } from "react-router-dom";
 
 const Chat = () => {

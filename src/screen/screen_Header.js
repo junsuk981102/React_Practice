@@ -21,7 +21,7 @@ function Header(props) {
             </div>
             <div>
                 <button onClick={() => handleClick("/screen_login")} style={{marginRight: '20px'}}>로그인</button>
-                <button onClick={() => handleClick("/screen_register")} style={{marginRight: '10px'}}>회원가입</button>
+                <button onClick={() => handleClick("/screen_minting")} style={{marginRight: '10px'}}>회원가입</button>
             </div>
             </div>
         </>

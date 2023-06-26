@@ -1,6 +1,5 @@
 import React, { FC, useState, ChangeEvent } from "react";
 import { firestore } from "../firebase-config";
-import { Box, Text, Flex, Button, Input, InputGroup, InputRightAddon } from "@chakra-ui/react";
 
 // import { mintAnimalTokenContract, mintAnimalTokenAddress} from "../web3Config";
 import { mintGovernanceTokenContract, mintGovernanceTokenAddress} from "../web3Config";
@@ -98,40 +97,39 @@ const ScreenMinting: FC<MainProps> = ({ account }) => {
     };
 
     return (
-        <Flex w="full" h="100vh" justifyContent="center" alignItems="center" direction="column">
+        <div style={{ display: "flex", width: "100%", height: "100vh", justifyContent: "center", alignItems: "center", flexDirection: "column" }}>
 
-            {/* <Box>
-                {newAnimalType ? (
-                    <AnimalCard animalType={newAnimalType} />
-                ) : (
-                    <Text>Let's mint Animal Card!!!</Text>
-                )}
-            </Box>
-            <Button mt={4} size="sm" onClick={onClickMint_A}>Mint Animal</Button>
-            <Button mt={4} size="sm" onClick={onClickSave_A}>Save Animal</Button>
-            </Box> */}
+        {/* <div>
+            {newAnimalType ? (
+                <AnimalCard animalType={newAnimalType} />
+            ) : (
+                <p>Let's mint Animal Card!!!</p>
+            )}
+        </div>
+        <button style={{ marginTop: "4px", fontSize: "small" }} onClick={onClickMint_A}>Mint Animal</button>
+        <button style={{ marginTop: "4px", fontSize: "small" }} onClick={onClickSave_A}>Save Animal</button>
+        </div> */}
 
-            <InputGroup>
-                <InputRightAddon children="Initial Price"/>
-                <Input type="number" value={initialprice} onChange={onChangeInitialPrice}/>
-                <InputRightAddon children="Name"/>
-                <Input type="string" value={name} onChange={onChangeName}/>
-            </InputGroup>
-            <Button mt={4} size="sm" onClick={onClickMint_G}> Mint Governance </Button>
+        <div>
+            <span>Initial Price</span>
+            <input type="number" value={initialprice} onChange={onChangeInitialPrice} />
+            <span>Name</span>
+            <input type="text" value={name} onChange={onChangeName} />
+        </div>
+        <button style={{ marginTop: "4px", fontSize: "small" }} onClick={onClickMint_G}>Mint Governance</button>
 
-            <InputGroup>
-                <InputRightAddon children="Count"/>
-                <Input type="number" value={count} onChange={onChangeCount}/>
-                <InputRightAddon children="Initial Price"/>
-                <Input type="number" value={initialpricemulti} onChange={onChangeInitialPriceMulti}/>
-                <InputRightAddon children="Name"/>
-                <Input type="string" value={namemulti} onChange={onChangeNameMulti}/>
-            </InputGroup>
-            <Button mt={4} size="sm" onClick={onClickMultiMint_G}> Multi Mint Governance </Button>
+        <div>
+            <span>Count</span>
+            <input type="number" value={count} onChange={onChangeCount} />
+            <span>Initial Price</span>
+            <input type="number" value={initialpricemulti} onChange={onChangeInitialPriceMulti} />
+            <span>Name</span>
+            <input type="text" value={namemulti} onChange={onChangeNameMulti} />
+        </div>
+        <button style={{ marginTop: "4px", fontSize: "small" }} onClick={onClickMultiMint_G}>Multi Mint Governance</button>
 
-            <Button mt={4} size="sm" onClick={onClickSave_G}> Save Governance </Button>
-            
-        </Flex>
+        <button style={{ marginTop: "4px", fontSize: "small" }} onClick={onClickSave_G}>Save Governance</button>
+        </div>
     );
 }
 

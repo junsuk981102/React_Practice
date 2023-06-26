@@ -1,5 +1,4 @@
 import React, {FC, useState, ChangeEvent} from "react";
-import { Box, Input, InputGroup, InputRightAddon, Text, Button } from "@chakra-ui/react";
 
 import {saleAnimalTokenContract, web3 } from "../web3Config";
 import AnimalCard from "./AnimalCard";
@@ -51,25 +50,23 @@ const MyAnimalCard : FC<MyAnimalCardProps> = ({
     }
 
     return (
-        <Box textAlign="center" w={150}>
-            <AnimalCard animalType={animalType}/>;
-            <Box mt={2}>
-                {myAnimalPrice === "0" ? (
-                    <>
-                        <InputGroup> 
-                            <Input type="number" value={sellPrice} onChange={onChangeSellPrice}/>
-                            <InputRightAddon children="ETH"/>
-                        </InputGroup>
-                        <Button size="sm" colorScheme="green" mt={2} onClick={onClickSell}>
-                            Sell
-                        </Button>
-                    </>
-                ) : (
-                    <Text>{web3.utils.fromWei(myAnimalPrice)} ETH</Text>
-                )}
-            </Box>
-        </Box>
-    )
-};
-
+        <div style={{ textAlign: "center", width: 150 }}>
+          <AnimalCard animalType={animalType} />
+          <div style={{ marginTop: 2 }}>
+            {myAnimalPrice === "0" ? (
+              <>
+                <input type="number" value={sellPrice} onChange={onChangeSellPrice} />
+                <span>ETH</span>
+                <button style={{ color: "green", marginTop: 2 }} onClick={onClickSell}>
+                  Sell
+                </button>
+              </>
+            ) : (
+              <span>{web3.utils.fromWei(myAnimalPrice)} ETH</span>
+            )}
+          </div>
+        </div>
+      );
+    };
+    
 export default MyAnimalCard;

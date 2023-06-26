@@ -1,6 +1,5 @@
 import React, {FC, useEffect, useState} from 'react';
 import {useNavigate} from "react-router-dom";
-import {Grid, Flex, Text, Button} from "@chakra-ui/react";
 
 import { mintGovernanceTokenContract, saleGovernanceTokenAddress } from '../web3Config';
 import MyGovernanceCard, { IMyGovernanceCard }  from '../components/MyGovernanceCard';
@@ -106,34 +105,38 @@ const ScreenMyGovernance: FC<MyGovernanceProps> = ({account}) => {
         console.log(governanceCardArray)
     }, [governanceCardArray]);
 
-    return(
+    return (
         <>
-            <Flex alignItems="center">
-                <Text display="inline-block">Sale Status : {saleStatus ? "True" : "False"}</Text>
-                <Button size="xs" ml={2} colorScheme={saleStatus ? "red" : "blue"} onClick={onClickApproveToggle}> 
-                    {saleStatus ? "Cancel" : "Approve"}
-                </Button>
-            </Flex>
-            <Button size="sm" colorScheme="green" mt={2} onClick={onClickRoom}>
-                Room
-            </Button>
-            <Grid templateColumns="repeat(4, 1fr)" gap={8} mt={4}>
-                {governanceCardArray &&
-                governanceCardArray.map((v,i)=> {
-                    return <MyGovernanceCard
-                        key={i} 
-                        GNT_Id={v.GNT_Id}
-                        GNT_name={v.GNT_name}
-                        GNT_Initial_Price={v.GNT_Initial_Price}
-                        GNT_Sale_Price={v.GNT_Sale_Price}
-                        GNT_Address={v.GNT_Address}
-                        saleStatus={saleStatus}
-                        account={account}
-                    />
-                })}
-            </Grid>
+          <div style={{ display: 'flex', alignItems: 'center' }}>
+            <span>Sale Status : {saleStatus ? 'True' : 'False'}</span>
+            <button
+              style={{ fontSize: '12px', marginLeft: '8px', color: saleStatus ? 'red' : 'blue' }}
+              onClick={onClickApproveToggle}
+            >
+              {saleStatus ? 'Cancel' : 'Approve'}
+            </button>
+          </div>
+          <button style={{ fontSize: '14px', color: 'green', marginTop: '8px' }} onClick={onClickRoom}>
+            Room
+          </button>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '8px', marginTop: '16px' }}>
+            {governanceCardArray &&
+              governanceCardArray.map((v, i) => {
+                return (
+                  <MyGovernanceCard
+                    key={i}
+                    GNT_Id={v.GNT_Id}
+                    GNT_name={v.GNT_name}
+                    GNT_Initial_Price={v.GNT_Initial_Price}
+                    GNT_Sale_Price={v.GNT_Sale_Price}
+                    GNT_Address={v.GNT_Address}
+                    saleStatus={saleStatus}
+                    account={account}
+                  />
+                );
+              })}
+          </div>
         </>
-    ) 
-};
-
+      );
+    };
 export default ScreenMyGovernance;

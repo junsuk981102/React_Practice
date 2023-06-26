@@ -1,6 +1,5 @@
 import React, {FC, useEffect, useState} from 'react';
 import {useNavigate} from "react-router-dom";
-import {Grid, Flex, Text, Button} from "@chakra-ui/react";
 
 import { mintAnimalTokenContract, saleAnimalTokenAddress } from '../web3Config';
 import MyAnimalCard, { IMyAnimalCard }  from '../components/MyAnimalCard';
@@ -105,33 +104,41 @@ const ScreenMyAnimal: FC<MyAnimalProps> = ({account}) => {
         console.log(animalCardArray)
     }, [animalCardArray]);
 
-    return(
+    return (
         <>
-            <Flex alignItems="center">
-                <Text display="inline-block">Sale Status : {saleStatus ? "True" : "False"}</Text>
-                <Button size="xs" ml={2} colorScheme={saleStatus ? "red" : "blue"} onClick={onClickApproveToggle}> 
-                    {saleStatus ? "Cancel" : "Approve"}
-                </Button>
-            </Flex>
-            <Button size="sm" colorScheme="green" mt={2} onClick={onClickRoom}>
-                Room
-            </Button>
-            <Grid templateColumns="repeat(4, 1fr)" gap={8} mt={4}>
-                {animalCardArray &&
-                animalCardArray.map((v,i)=> {
-                    return <MyAnimalCard
-                        key={i} 
-                        animalTokenId={v.animalTokenId}
-                        animalType={v.animalType}
-                        animalPrice={v.animalPrice}
-                        animalTokenAddress={v.animalTokenAddress}
-                        saleStatus={saleStatus}
-                        account={account}
-                    />
-                })}
-            </Grid>
+          <div style={{ display: 'flex', alignItems: 'center' }}>
+            <span>Sale Status: {saleStatus ? 'True' : 'False'}</span>
+            <button
+              style={{ fontSize: '12px', marginLeft: '8px', color: saleStatus ? 'red' : 'blue' }}
+              onClick={onClickApproveToggle}
+            >
+              {saleStatus ? 'Cancel' : 'Approve'}
+            </button>
+          </div>
+          <button
+            style={{ fontSize: '14px', marginTop: '8px', backgroundColor: 'green', color: 'white' }}
+            onClick={onClickRoom}
+          >
+            Room
+          </button>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '8px', marginTop: '16px' }}>
+            {animalCardArray &&
+              animalCardArray.map((v, i) => {
+                return (
+                  <MyAnimalCard
+                    key={i}
+                    animalTokenId={v.animalTokenId}
+                    animalType={v.animalType}
+                    animalPrice={v.animalPrice}
+                    animalTokenAddress={v.animalTokenAddress}
+                    saleStatus={saleStatus}
+                    account={account}
+                  />
+                );
+              })}
+          </div>
         </>
-    ) 
-};
+      );
+    };
 
 export default ScreenMyAnimal;

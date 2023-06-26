@@ -55,7 +55,7 @@ const Community = ({ communityObj }) => {
     자세히 보기 {'>'}
     </button>
     <h4 style={{ position: "absolute", top: 60, left: 20 }}>{communityObj.com_info}</h4>
-    <button style={{ position: "absolute", top: 60, right: 20 }} onClick={() => handleClick()}>
+    <button style={{ position: "absolute", top: 60, right: 20 }} onClick={() => handleClick_chat()}>
     채팅방 입장 {'>'}
     </button>
     </div>
