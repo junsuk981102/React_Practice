@@ -39,68 +39,53 @@ const ScreenRegister = (props) => {
         backgroundColor: "#E5F2F2",
       }}
     >
-      <div style={{ width: "600px", padding: "20px", backgroundColor: "#E5F2F2" }}>
-        <h3 style={{ textAlign: "center" }}>회원가입</h3>
-        <div style={{ display: "flex", flexDirection: "column" }}>
-          <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "10px" }}>
-            <label htmlFor="id">아이디:</label>
-            <input type="text" id="id" placeholder="아이디를 입력해주세요" style={{ width: "200px" }} />
+      <div style={{ width: "600px", padding: "20px", backgroundColor: "#E5F2F2"}}>
+        <h3 style={{ textAlign: "center", marginBottom: "30px", fontSize: "24px", fontWeight: "bold"}}>회원가입</h3>
+        <div style={{ display: "flex", flexDirection: "column"}}>
+          <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "10px"}}>
+            <label htmlFor="id" style={{fontSize: "20px", fontWeight: "bold"}}>아이디:</label>
+            <input type="text" id="id" placeholder="아이디를 입력해주세요" style={{fontSize: "15px", fontWeight: "bold" }} />
           </div>
-
-          <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "10px" }}>
-            <label htmlFor="email">Email:</label>
-            <input
-              type="text"
-              id="email"
-              placeholder="예: stot1234@stot.com"
-              value={registerEmail}
+          <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "10px"}}>
+            <label htmlFor="email" style={{fontSize: "20px", fontWeight: "bold"}}>이메일:</label>
+            <input type="text" id="email" placeholder="예: stot1234@stot.com" value={registerEmail}
               onChange={(event) => {
                 setRegisterEmail(event.target.value);
               }}
-              style={{ width: "200px" }}
+              style={{fontSize: "15px", fontWeight: "bold"}}
             />
           </div>
-
-          <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "10px" }}>
-            <label htmlFor="password">비밀번호:</label>
-            <input
-              type="text"
-              id="password"
-              placeholder="비밀번호를 입력해주세요"
-              value={registerPassword}
+          <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "10px"}}>
+            <label htmlFor="password" style={{fontSize: "20px", fontWeight: "bold"}}>비밀번호:</label>
+            <input type="text" id="password" placeholder="비밀번호를 입력해주세요" value={registerPassword}
               onChange={(event) => {
                 setRegisterPassword(event.target.value);
               }}
-              style={{ width: "200px" }}
+              style={{fontSize: "15px", fontWeight: "bold"}}
             />
           </div>
-
-          <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "10px" }}>
-            <label htmlFor="confirmPassword">비밀번호 확인:</label>
-            <input
-              type="text"
-              id="confirmPassword"
-              placeholder="비밀번호를 한 번 더 입력해주세요"
-              value={confirmPassword}
+          <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "10px"}}>
+            <label htmlFor="confirmPassword" style={{fontSize: "20px", fontWeight: "bold"}}>비밀번호 확인:</label>
+            <input type="text" id="confirmPassword" placeholder="비밀번호를 한 번 더 입력해주세요" value={confirmPassword}
               onChange={(event) => {
                 setConfirmPassword(event.target.value);
               }}
-              style={{ width: "200px" }}
+              style={{fontSize: "15px", fontWeight: "bold"}}
             />
           </div>
 
-          <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "10px" }}>
-            <label htmlFor="birthDate">생년월일:</label>
-            <input type="date" id="birthDate" placeholder="생년월일을 입력해주세요" style={{ width: "200px" }} />
+          <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "10px"}}>
+            <label htmlFor="birthDate" style={{fontSize: "20px", fontWeight: "bold"}}>생년월일:</label>
+            <input type="date" id="birthDate" style={{fontSize: "15px", fontWeight: "bold" }}/>
           </div>
 
-          <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "10px" }}>
-            <label htmlFor="address">주소:</label>
-            <input type="text" id="address" placeholder="주소를 입력해주세요" style={{ width: "200px" }} />
+          <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "10px"}}>
+            <label htmlFor="address" style={{fontSize: "20px", fontWeight: "bold"}}>주소:</label>
+            <input type="text" id="address" placeholder="주소를 입력해주세요" style={{fontSize: "15px", fontWeight: "bold" }}/>
           </div>
 
           <div style={{ textAlign: "center", marginTop: "20px" }}>
-            <button onClick={register}>가입하기</button>
+            <button onClick={register} style={{fontSize: "20px", fontWeight: "bold" }}>가입하기</button>
           </div>
         </div>
       </div>
