@@ -6,6 +6,23 @@ import VC from "../components/VC";
 
 const ScreenMain = (props) => {
   const navi = useNavigate();
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
+  useEffect(() => {
+    setWindowWidth(window.innerWidth);
+  }, []);
 
   function handleClick(text) {
     navi(`${text}`);
@@ -143,7 +160,7 @@ const ScreenMain = (props) => {
           height: "auto",
         }}
       />
-      <div style={{ paddingLeft: "500px", paddingRight: "500px" }}>
+      <div style={{ paddingLeft: `${windowWidth > 1700 ? '500px' : '50px'}`, paddingRight: `${windowWidth > 1700 ? '500px' : '10px'}` }}>
         <h3 style={{ margin: "0", marginBottom: "5px", fontSize: "20px"}}>새로운 스타트업 찾기</h3>
         <h3 style={{ margin: "0", marginBottom: "20px", fontSize: "28px", fontWeight: "bold" }}>투자 중인 스타트업</h3>
         <div

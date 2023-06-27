@@ -31,7 +31,7 @@ function Header(props) {
     <>
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '15px' }}>
         <div style={{ display: 'flex', alignItems: 'center' }}>
-          <div style={{ marginRight: `${windowWidth > 1700 ? '32px' : '10px'}`, marginLeft: `${windowWidth > 1700 ? '480px' : '10px'}` }}>
+          <div style={{ marginRight: `${windowWidth > 1700 ? '32px' : '10px'}`, marginLeft: `${windowWidth > 1700 ? '485px' : '35px'}` }}>
             <img src="image/stot_minilogo.png" alt="logo" width="143px" height="48.1px" />
           </div>
           <button

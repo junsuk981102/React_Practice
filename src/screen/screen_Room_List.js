@@ -5,6 +5,23 @@ import Community from "../components/Community";
 
 const ScreenRoomList = (props) => {
   const [showPopup, setShowPopup] = useState(false);
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
+  useEffect(() => {
+    setWindowWidth(window.innerWidth);
+  }, []);
 
   const togglePopup = (event) => {
     setShowPopup(event.target.value);
@@ -80,7 +97,7 @@ const ScreenRoomList = (props) => {
   return (
     <div style={{ backgroundColor: "#E5F2F2", minHeight: "100vh" }}>
       <div
-        style={{ paddingLeft: "500px", paddingRight: "500px" }}
+        style={{ paddingLeft: `${windowWidth > 1700 ? '500px' : '50px'}`, paddingRight: `${windowWidth > 1700 ? '500px' : '10px'}` }}
       >
         <h3 style={{ margin: "0", paddingTop: "50px", marginBottom: "30px", fontSize: "24px", fontWeight: "bold" }}>커뮤니티</h3>
         <div
