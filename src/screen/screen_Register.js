@@ -73,19 +73,16 @@ const ScreenRegister = (props) => {
               style={{fontSize: "15px", fontWeight: "bold"}}
             />
           </div>
-
           <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "10px"}}>
             <label htmlFor="birthDate" style={{fontSize: "20px", fontWeight: "bold"}}>생년월일:</label>
-            <input type="date" id="birthDate" style={{fontSize: "15px", fontWeight: "bold" }}/>
+            <input type="date" id="birthDate" style={{fontSize: "15px", fontWeight: "bold"}}/>
           </div>
-
           <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "10px"}}>
             <label htmlFor="address" style={{fontSize: "20px", fontWeight: "bold"}}>주소:</label>
             <input type="text" id="address" placeholder="주소를 입력해주세요" style={{fontSize: "15px", fontWeight: "bold" }}/>
           </div>
-
-          <div style={{ textAlign: "center", marginTop: "20px" }}>
-            <button onClick={register} style={{fontSize: "20px", fontWeight: "bold" }}>가입하기</button>
+          <div style={{ textAlign: "center", marginTop: "20px"}}>
+            <button onClick={register} style={{fontSize: "20px", fontWeight: "bold"}}>가입하기</button>
           </div>
         </div>
       </div>
