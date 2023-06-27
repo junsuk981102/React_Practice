@@ -4,10 +4,13 @@ import '../chat.css'
 function ScreenLogin() {
   return (
     <>
-      <h3>ScreenLogin 페이지입니다.</h3>
-      <div className="ScreenProfileUser">
-        <User/>
+      <div style={{ backgroundColor: "#E5F2F2", minHeight: "100vh" }}>
+        <h3>ScreenLogin 페이지입니다.</h3>
+          <div className="ScreenProfileUser">
+            <User/>
+          </div>
       </div>
+
     </>
   )
 }
