@@ -50,7 +50,6 @@ const ScreenWalletConnect = (props) => {
 
     return(
         <div className='walletCard' style={{ backgroundColor: "#E5F2F2", minHeight: "100vh" }}>
-            <h3>ScreenWalletConnect 페이지입니다.</h3>
             <h4> {"Connection to MetaMask using window.ethereum methods"}</h4>
             <button onClick={connectWalletHandler}>{connButtonText}</button>
             <div className='accountDisplay'>
