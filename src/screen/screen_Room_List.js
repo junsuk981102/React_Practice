@@ -82,7 +82,7 @@ const ScreenRoomList = (props) => {
       <div
         style={{ paddingLeft: "500px", paddingRight: "500px" }}
       >
-        <h3 style={{ margin: "0", marginTop: "35px", marginBottom: "20px", fontSize: "24px", fontWeight: "bold" }}>커뮤니티</h3>
+        <h3 style={{ margin: "0", paddingTop: "50px", marginBottom: "30px", fontSize: "24px", fontWeight: "bold" }}>커뮤니티</h3>
         <div
           style={{
             display: "grid",
