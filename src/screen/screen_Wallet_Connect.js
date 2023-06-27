@@ -49,7 +49,7 @@ const ScreenWalletConnect = (props) => {
     }
 
     return(
-        <div className='walletCard'>
+        <div className='walletCard' style={{ backgroundColor: "#E5F2F2", minHeight: "100vh" }}>
             <h3>ScreenWalletConnect 페이지입니다.</h3>
             <h4> {"Connection to MetaMask using window.ethereum methods"}</h4>
             <button onClick={connectWalletHandler}>{connButtonText}</button>
@@ -63,5 +63,24 @@ const ScreenWalletConnect = (props) => {
         </div>
     )
 }
+
+{/* <div style={{ backgroundColor: "#E5F2F2", minHeight: "100vh" }}>
+<div
+style={{ paddingLeft: "500px", paddingRight: "500px" }}
+>
+<h3 style={{ margin: "0", paddingTop: "50px", marginBottom: "30px", fontSize: "24px", fontWeight: "bold" }}>커뮤니티</h3>
+<div
+style={{
+display: "grid",
+gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
+gap: "20px",
+}}
+>
+{renderCommunities()}
+</div>
+</div>
+</div>
+);
+}; */}
 
 export default ScreenWalletConnect;

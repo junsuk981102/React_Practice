@@ -77,7 +77,7 @@ const ScreenWalletToken = (props) => {
     // }
 
     return(
-        <div className='walletCard'>
+        <div className='walletCard' style={{ backgroundColor: "#E5F2F2", minHeight: "100vh" }}>
             <h3>ScreenWalletToken 페이지입니다.</h3>
             <button onClick={() => handleClick("/screen_wallet_token")}>screen_wallet_token 페이지</button>
             <button onClick={() => handleClick("/screen_room_list")}>screen_room_list 페이지</button>
@@ -95,6 +95,25 @@ const ScreenWalletToken = (props) => {
         </div>
     )
 }
+
+{/* <div style={{ backgroundColor: "#E5F2F2", minHeight: "100vh" }}>
+<div
+style={{ paddingLeft: "500px", paddingRight: "500px" }}
+>
+<h3 style={{ margin: "0", paddingTop: "50px", marginBottom: "30px", fontSize: "24px", fontWeight: "bold" }}>커뮤니티</h3>
+<div
+style={{
+display: "grid",
+gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
+gap: "20px",
+}}
+>
+{renderCommunities()}
+</div>
+</div>
+</div>
+);
+}; */}
 
 export default ScreenWalletToken;
 
