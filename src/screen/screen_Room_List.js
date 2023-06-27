@@ -80,7 +80,7 @@ const ScreenRoomList = (props) => {
   return (
     <div style={{ backgroundColor: "#E5F2F2", minHeight: "100vh" }}>
       <div
-        style={{ paddingLeft: "500px", paddingRight: "300px" }}
+        style={{ paddingLeft: "500px", paddingRight: "500px" }}
       >
         <h3 style={{ margin: "0", marginTop: "35px", marginBottom: "20px", fontSize: "24px", fontWeight: "bold" }}>커뮤니티</h3>
         <div

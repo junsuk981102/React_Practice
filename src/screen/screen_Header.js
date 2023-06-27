@@ -59,7 +59,7 @@ function Header(props) {
                         로그인
                     </button>
                     <button
-                        onClick={() => handleClick("/screen_minting")}
+                        onClick={() => handleClick("/screen_room_make")}
                         style={{
                             marginRight: '10px',fontSize: '20px',
                             fontWeight: 'bold',
