@@ -14,7 +14,7 @@ function Header(props) {
         <>
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '15px' }}>
                 <div style={{ display: 'flex', alignItems: 'center' }}>
-                    <div style={{ marginRight: '32px', marginLeft: '15px' }}>
+                    <div style={{ marginRight: '32px', marginLeft: '480px' }}>
                         <img src="image/stot_minilogo.png" alt="logo" width="143px" height="48.1px" />
                     </div>
                     <button
@@ -61,7 +61,7 @@ function Header(props) {
                     <button
                         onClick={() => handleClick("/screen_room_make")}
                         style={{
-                            marginRight: '10px',fontSize: '20px',
+                            marginRight: '500px',fontSize: '20px',
                             fontWeight: 'bold',
                             color:  '#00A29D'
                         }}
