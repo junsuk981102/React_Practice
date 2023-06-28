@@ -69,7 +69,14 @@ const ScreenWalletConnect = (props) => {
         <div className='walletCard' style={{ backgroundColor: "#E5F2F2", minHeight: "100vh", borderTop: "1px solid #00A29D" }}>
             <div style={{ paddingLeft: `${windowWidth > 1700 ? '500px' : '50px'}`, paddingRight: `${windowWidth > 1700 ? '500px' : '10px'}` }}>
                 <h3 style={{ margin: "0", paddingTop: "50px", marginBottom: "30px", fontSize: "24px", fontWeight: "bold" }}>내 지갑 연결하기</h3>
-                <button onClick={connectWalletHandler}>{connButtonText}</button>
+                <button onClick={connectWalletHandler} style={{width: "400px",height: "75px",fontSize: "20px", fontWeight: "bold", backgroundColor: "#00A29D", color: "white", border: "none", padding: "10px 20px", borderRadius: "45px" }}>
+                <img
+                    src="\image\metamaskicon.png"
+                    alt="Metamask"
+                    style={{ marginRight: '10px',width:'36px',height:'45px'}}
+                />
+                {connButtonText}
+                </button>
             </div>
         </div>
     )

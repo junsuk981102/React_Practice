@@ -36,7 +36,7 @@ const Startup = ({ startupObj }) => {
           position: "absolute",
           top: 5,
           right: 20,
-          borderRadius: "20%",
+          borderRadius: "15px",
           backgroundColor: "#00A29D",
           padding: "4px 8px",
         }}

@@ -43,7 +43,7 @@ const Community = ({ communityObj }) => {
     <button style={{ position: "absolute", top: 15, right: 20, fontSize: "10px",fontWeight: "bold" }} onClick={() => handleClick()}>
     자세히 보기 {'>'}
     </button>
-    <button style={{ position: "absolute",borderRadius: "15%",color: "white",backgroundColor: "#00A29D",padding: "4px 8px",bottom: 15, right: 20, fontSize: "18px", fontWeight: "bold" }} onClick={() => handleClick_chat()}>
+    <button style={{ position: "absolute",borderRadius: "10px",color: "white",backgroundColor: "#00A29D",padding: "4px 8px",bottom: 15, right: 20, fontSize: "18px", fontWeight: "bold" }} onClick={() => handleClick_chat()}>
     채팅방 입장 {'>'}
     </button>
     <h4 style={{ position: "absolute", bottom: 20, left: 12, fontSize: "16px", color: "#00A29D", fontWeight: "bold" }}>현재 : {communityObj.com_member}명</h4>
