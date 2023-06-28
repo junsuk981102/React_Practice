@@ -77,7 +77,7 @@ const ScreenWalletToken = (props) => {
     // }
 
     return(
-        <div className='walletCard' style={{ backgroundColor: "#E5F2F2", minHeight: "100vh" }}>
+        <div className='walletCard' style={{ backgroundColor: "#E5F2F2", minHeight: "100vh",  borderTop: "1px solid #00A29D" }}>
             <div className='accountDisplay'>
                 <h3>Address: {address}</h3>
             </div>

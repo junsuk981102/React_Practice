@@ -37,12 +37,13 @@ const ScreenRegister = (props) => {
         alignItems: "center",
         minHeight: "100vh",
         backgroundColor: "#E5F2F2",
+        borderTop: "1px solid #00A29D"
       }}
     >
       <div style={{ width: "700px", padding: "20px", backgroundColor: "#E5F2F2"}}>
         <h3 style={{ textAlign: "center", marginBottom: "50px", fontSize: "35px", fontWeight: "bold"}}>회원가입</h3>
         <div style={{ display: "flex", flexDirection: "column"}}>
-        <hr style={{ backgroundColor: "black", height: "2px", margin: "30px 0" }} />
+        <hr style={{ backgroundColor: "#00A29D", height: "2px", margin: "30px 0" }} />
           <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "20px"}}>
             <label htmlFor="id" style={{fontSize: "20px", fontWeight: "bold"}}>아이디:</label>
             <input type="text" id="id" placeholder="아이디를 입력해주세요" 
@@ -80,7 +81,7 @@ const ScreenRegister = (props) => {
             <label htmlFor="address" style={{fontSize: "20px", fontWeight: "bold"}}>주소:</label>
             <input type="text" id="address" placeholder="주소를 입력해주세요" style={{fontSize: "23px", maxWidth: "450px" }}/>
           </div>
-          <hr style={{ backgroundColor: "black", height: "2px", margin: "30px 0" }} />
+          <hr style={{ backgroundColor: "#00A29D", height: "2px", margin: "30px 0" }} />
           <div style={{ textAlign: "center", marginTop: "50px"}}>
             <button onClick={register} style={{fontSize: "20px", fontWeight: "bold"}}>가입하기</button>
           </div>

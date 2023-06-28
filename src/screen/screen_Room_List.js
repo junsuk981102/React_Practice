@@ -95,7 +95,7 @@ const ScreenRoomList = (props) => {
   };
   
   return (
-    <div style={{ backgroundColor: "#E5F2F2", minHeight: "100vh" }}>
+    <div style={{ backgroundColor: "#E5F2F2", minHeight: "100vh", borderTop: "1px solid #00A29D" }}>
       <div
         style={{ paddingLeft: `${windowWidth > 1700 ? '500px' : '50px'}`, paddingRight: `${windowWidth > 1700 ? '500px' : '10px'}` }}
       >
