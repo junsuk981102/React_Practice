@@ -87,7 +87,7 @@ const ScreenRegister = (props) => {
 
           <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "20px"}}>
             <label htmlFor="phonenumber" style={{fontSize: "20px", fontWeight: "bold"}}>전화번호:</label>
-            <input type="text" id="phonenumber" placeholder="예: stot1234@stot.com" value={registerPhonenumber}
+            <input type="text" id="phonenumber" placeholder="예: 010-1234-5678" value={registerPhonenumber}
               onChange={(event) => {
                 setRegisterPhonenumber(event.target.value);
               }}
