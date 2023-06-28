@@ -5,6 +5,8 @@ import {useNavigate} from "react-router-dom";
 import {useEffect } from 'react';
 import Web3 from 'web3';
 
+import ScreenMyGovernance from './screen_My_Governance';
+
 const ScreenWalletToken = (props) => {
     const [errorMessage, setErrorMessage] = useState(null);
     // const [defaultAccount, setDefaultAccount] = useState(null);
@@ -125,6 +127,7 @@ const ScreenWalletToken = (props) => {
                 <h3>Balance: {userBalance}</h3>
             </div> */}
             {errorMessage}
+            <ScreenMyGovernance />
             </div>
         </div>
     )

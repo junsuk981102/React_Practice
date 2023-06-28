@@ -37,7 +37,7 @@ const ScreenWalletConnect = (props) => {
         .then((result) => {
           accountChangedHandler(result[0]);
         });
-      handleClick('/screen_wallet_token');
+      handleClick('/screen_my_governance');
     } else {
       setErrorMessage('Install MetaMask');
     }

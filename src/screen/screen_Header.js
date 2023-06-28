@@ -46,12 +46,12 @@ function Header(props) {
             홈
           </button>
           <button
-            onClick={() => handleClick("/screen_wallet_connect")}
+            onClick={() => handleClick("/screen_my_governance")}
             style={{
               marginRight: '32px',
               fontSize: '20px',
               fontWeight: 'bold',
-              color: activeButton === '/screen_wallet_connect' ? '#00A29D' : 'black'
+              color: activeButton === '/screen_my_governance' ? '#00A29D' : 'black'
             }}
           >
             지갑
@@ -70,7 +70,7 @@ function Header(props) {
         </div>
         <div>
           <button
-            onClick={() => handleClick("/screen_test")}
+            onClick={() => handleClick("/screen_login")}
             style={{ marginRight: '20px', fontSize: '20px', fontWeight: 'bold' }}
           >
             로그인
