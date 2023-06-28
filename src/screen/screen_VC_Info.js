@@ -13,10 +13,21 @@ const ScreenVCInfo = (props) => {
 
     return (
         <>
-            <h3>ScreenVCInfo 페이지입니다.</h3>
-            <h4>커뮤니티 이름: {state.vc_name}</h4>
-            <h4>커뮤니티 범주: {state.vc_category}</h4>
-            <h4>커뮤니티 정보: {state.vc_info}</h4>
+            <div
+                style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    minHeight: "100vh",
+                    backgroundColor: "#E5F2F2",
+                    borderTop: "1px solid #00A29D"
+                }}
+            >   
+                <h3>ScreenVCInfo 페이지입니다.</h3>
+                <h4>커뮤니티 이름: {state.vc_name}</h4>
+                <h4>커뮤니티 범주: {state.vc_category}</h4>
+                <h4>커뮤니티 정보: {state.vc_info}</h4>
+            </div>
         </>
     );
 }
