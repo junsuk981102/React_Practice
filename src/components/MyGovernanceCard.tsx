@@ -70,46 +70,83 @@ const MyGovernanceCard: FC<MyGovernanceCardProps> = ({
 
   return (
     <div>
-      <GovernanceCard GNT_name={GNT_name} />
-      <div style={{ marginTop: 2 }}>
-        {saleStatus ? (
-          myGovernanceSalePrice === "0" ? (
-            // 판매가능&판매이전
-            <>
-              <p>NFT ID : {GNT_Id}</p>
-              <p>초기 가격 : {GNT_Initial_Price} ETH</p>
-              <input type="number" value={sellPrice} onChange={onChangeSellPrice} placeholder="판매가격을 입력하세요.(단위:ETH)" style={{
-                width: '153px',
-                fontSize: '10px',
-                backgroundColor: '#E5F2F2',
-                color: 'white',
-                borderBottom: "3px solid #00A29D",
-              }} />
-              <span> ETH</span>
-              <button style={{
-                width: 'auto',
-                height: 'auto',
-                fontSize: '10px',
-                fontWeight: 'bold',
-                backgroundColor: 'green',
-                color: 'white',
-                border: 'none',
-                padding: '5px 5px',
-                borderRadius: '10px',
-                marginLeft: '10px' }} onClick={onClickSell}>
-                판매 등록
-              </button>
-            </>
-          ) : (
-            // 판매가능&판매이후
-            <>
-              <p>NFT ID : {GNT_Id}</p>
-              <p>초기가격 : {web3.utils.fromWei(GNT_Initial_Price)} ETH</p>
-              <p>판매가격 : {web3.utils.fromWei(myGovernanceSalePrice)} ETH</p>
-            </>
-          )
-        ) : (
-          myGovernanceSalePrice === "0" ? (
+      <div
+        style={{
+          width: "300px",
+          height: "270px",
+          backgroundColor: "white",
+          border: "3px solid #00A29D",
+          padding: "10px",
+          margin: "10px",
+          alignItems: "center",
+          display: "flex",
+          position: "relative",
+          borderRadius: "15px",
+          fontSize: "15px",
+          fontWeight: "bold" // 상위 요소를 기준으로 배치
+        }}
+      >
+        <img
+          src='../image/ticketicon.png' // 이미지 파일 경로
+          alt="Ticket Icon"
+          style={{
+            position: "absolute", // 상위 요소 내에서 위치를 조정
+            top: 10,
+            left : 100,
+            width: "100px", // 이미지 너비 조정
+            height: "100px", // 이미지 높이 조정
+          }}
+        />
+        <div style={{ marginTop: 20,top:120,position: "absolute"}}>
+        <h3>NFT 이름 : <GovernanceCard GNT_name={GNT_name} /></h3>
+          {saleStatus ? (
+            myGovernanceSalePrice === "0" ? (
+              // 판매가능&판매이전
+              <>
+                <h3>NFT ID : {GNT_Id}</h3>
+                <h3>초기 가격 : {GNT_Initial_Price} ETH</h3>
+                <input
+                  type="number"
+                  value={sellPrice}
+                  onChange={onChangeSellPrice}
+                  placeholder="판매가격을 입력하세요."
+                  style={{
+                    width: "160px",
+                    fontSize: "15px",
+                    textAlign: "center",
+                    backgroundColor: "#E5F2F2",
+                    color: "black",
+                    borderBottom: "3px solid #00A29D",
+                  }}
+                />
+                <span> ETH</span>
+                <button
+                  style={{
+                    width: "auto",
+                    height: "auto",
+                    fontSize: "10px",
+                    fontWeight: "bold",
+                    backgroundColor: "green",
+                    color: "white",
+                    border: "none",
+                    padding: "5px 5px",
+                    borderRadius: "10px",
+                    marginLeft: "10px",
+                  }}
+                  onClick={onClickSell}
+                >
+                  판매 등록
+                </button>
+              </>
+            ) : (
+              // 판매가능&판매이후
+              <>
+                <p>NFT ID : {GNT_Id}</p>
+                <p>초기가격 : {web3.utils.fromWei(GNT_Initial_Price)} ETH</p>
+                <p>판매가격 : {web3.utils.fromWei(myGovernanceSalePrice)} ETH</p>
+              </>
+            )
+          ) : myGovernanceSalePrice === "0" ? (
             // 판매불가&판매이전
             <>
               <p>NFT ID : {GNT_Id}</p>
@@ -122,8 +159,8 @@ const MyGovernanceCard: FC<MyGovernanceCardProps> = ({
               <p>초기가격 : {web3.utils.fromWei(GNT_Initial_Price)} ETH</p>
               <p>판매가격 : {web3.utils.fromWei(myGovernanceSalePrice)} ETH</p>
             </>
-          )
-        )}
+          )}
+        </div>
       </div>
     </div>
   );

@@ -24,7 +24,7 @@ const Startup = ({ startupObj }) => {
           left: 20,
           width: "80px",
           height: "80px",
-          borderRadius: "20%",
+          borderRadius: "15px",
           backgroundImage: `url(/image/animal/4.png)`,
           backgroundSize: "cover",
           backgroundPosition: "center",
