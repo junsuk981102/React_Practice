@@ -82,8 +82,10 @@ const ScreenRegister = (props) => {
             <input type="text" id="address" placeholder="주소를 입력해주세요" style={{fontSize: "23px", maxWidth: "450px" }}/>
           </div>
           <hr style={{ backgroundColor: "#00A29D", height: "2px", margin: "30px 0" }} />
-          <div style={{ textAlign: "center", marginTop: "50px"}}>
-            <button onClick={register} style={{fontSize: "20px", fontWeight: "bold"}}>가입하기</button>
+          <div style={{ textAlign: "center", marginTop: "50px" }}>
+            <button onClick={register} style={{width: "150px",height: "75px",fontSize: "20px", fontWeight: "bold", backgroundColor: "#00A29D", color: "white", border: "none", padding: "10px 20px", borderRadius: "5px" }}>
+              가입하기
+            </button>
           </div>
         </div>
       </div>
