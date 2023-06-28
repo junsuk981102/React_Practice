@@ -1,18 +1,23 @@
-import User from '../components/cpn_User'
-import '../chat.css'
+import User from "../components/cpn_User";
+import "../chat.css";
 
 function ScreenLogin() {
   return (
     <>
-      <div style={{ backgroundColor: "#E5F2F2", minHeight: "100vh", borderTop: "1px solid #00A29D" }}>
+      <div
+        style={{
+          backgroundColor: "#E5F2F2",
+          minHeight: "100vh",
+          borderTop: "1px solid #00A29D",
+        }}
+      >
         <h3>ScreenLogin 페이지입니다.</h3>
-          <div className="ScreenProfileUser">
-            <User/>
-          </div>
+        <div className="ScreenProfileUser">
+          <User />
+        </div>
       </div>
-
     </>
-  )
+  );
 }
 
 export default ScreenLogin;
