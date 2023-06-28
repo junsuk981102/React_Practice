@@ -12,7 +12,24 @@ const ScreenWalletToken = (props) => {
     // const [userBalance, setUserBalance] = useState(null);
     const [connButtonText] = useState('Connect Wallet');
     const navi = useNavigate();
+    const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
+    useEffect(() => {
+      const handleResize = () => {
+        setWindowWidth(window.innerWidth);
+      };
+  
+      window.addEventListener('resize', handleResize);
+  
+      return () => {
+        window.removeEventListener('resize', handleResize);
+      };
+    }, []);
+  
+    useEffect(() => {
+      setWindowWidth(window.innerWidth);
+    }, []);
+    
     function handleClick(text) {
         navi(`${text}`)
     }
@@ -78,35 +95,22 @@ const ScreenWalletToken = (props) => {
 
     return(
         <div className='walletCard' style={{ backgroundColor: "#E5F2F2", minHeight: "100vh",  borderTop: "1px solid #00A29D" }}>
+          <div style={{ paddingLeft: `${windowWidth > 1700 ? '500px' : '50px'}`, paddingRight: `${windowWidth > 1700 ? '500px' : '10px'}` }}>
+
             <div className='accountDisplay'>
-                <h3>Address: {address}</h3>
+                <h3 style={{ margin: "0", paddingTop: "50px", marginBottom: "30px", fontSize: "24px", fontWeight: "bold" }}>
+                  내 지갑
+                </h3>
+                <h3>
+                  Address: {address}
+                </h3>
             </div>
             {/* <div className='balanceDisplay'>
                 <h3>Balance: {userBalance}</h3>
             </div> */}
             {errorMessage}
+            </div>
         </div>
     )
 }
-
-{/* <div style={{ backgroundColor: "#E5F2F2", minHeight: "100vh" }}>
-<div
-style={{ paddingLeft: "500px", paddingRight: "500px" }}
->
-<h3 style={{ margin: "0", paddingTop: "50px", marginBottom: "30px", fontSize: "24px", fontWeight: "bold" }}>커뮤니티</h3>
-<div
-style={{
-display: "grid",
-gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
-gap: "20px",
-}}
->
-{renderCommunities()}
-</div>
-</div>
-</div>
-);
-}; */}
-
 export default ScreenWalletToken;
-

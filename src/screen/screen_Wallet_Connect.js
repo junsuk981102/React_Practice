@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import {ethers} from 'ethers';
 import {useNavigate} from "react-router-dom";
 
@@ -8,6 +8,23 @@ const ScreenWalletConnect = (props) => {
     const [userBalance, setUserBalance] = useState(null);
     const [connButtonText] = useState('Connect Wallet');
     const navi = useNavigate();
+    const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+    useEffect(() => {
+      const handleResize = () => {
+        setWindowWidth(window.innerWidth);
+      };
+  
+      window.addEventListener('resize', handleResize);
+  
+      return () => {
+        window.removeEventListener('resize', handleResize);
+      };
+    }, []);
+  
+    useEffect(() => {
+      setWindowWidth(window.innerWidth);
+    }, []);
 
     function handleClick(text) {
         navi(`${text}`)
@@ -50,36 +67,11 @@ const ScreenWalletConnect = (props) => {
 
     return(
         <div className='walletCard' style={{ backgroundColor: "#E5F2F2", minHeight: "100vh", borderTop: "1px solid #00A29D" }}>
-            <h4> {"Connection to MetaMask using window.ethereum methods"}</h4>
-            <button onClick={connectWalletHandler}>{connButtonText}</button>
-            <div className='accountDisplay'>
-                <h3>Address: {defaultAccount}</h3>
+            <div style={{ paddingLeft: `${windowWidth > 1700 ? '500px' : '50px'}`, paddingRight: `${windowWidth > 1700 ? '500px' : '10px'}` }}>
+                <h3 style={{ margin: "0", paddingTop: "50px", marginBottom: "30px", fontSize: "24px", fontWeight: "bold" }}>내 지갑 연결하기</h3>
+                <button onClick={connectWalletHandler}>{connButtonText}</button>
             </div>
-            <div className='balanceDisplay'>
-                <h3>Balance: {userBalance}</h3>
-            </div>
-            {errorMessage}
         </div>
     )
 }
-
-{/* <div style={{ backgroundColor: "#E5F2F2", minHeight: "100vh" }}>
-<div
-style={{ paddingLeft: "500px", paddingRight: "500px" }}
->
-<h3 style={{ margin: "0", paddingTop: "50px", marginBottom: "30px", fontSize: "24px", fontWeight: "bold" }}>커뮤니티</h3>
-<div
-style={{
-display: "grid",
-gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
-gap: "20px",
-}}
->
-{renderCommunities()}
-</div>
-</div>
-</div>
-);
-}; */}
-
 export default ScreenWalletConnect;
