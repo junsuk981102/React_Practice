@@ -96,14 +96,30 @@ const ScreenWalletToken = (props) => {
     return(
         <div className='walletCard' style={{ backgroundColor: "#E5F2F2", minHeight: "100vh",  borderTop: "1px solid #00A29D" }}>
           <div style={{ paddingLeft: `${windowWidth > 1700 ? '500px' : '50px'}`, paddingRight: `${windowWidth > 1700 ? '500px' : '10px'}` }}>
-
             <div className='accountDisplay'>
                 <h3 style={{ margin: "0", paddingTop: "50px", marginBottom: "30px", fontSize: "24px", fontWeight: "bold" }}>
                   내 지갑
                 </h3>
-                <h3>
-                  Address: {address}
-                </h3>
+                <div style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  width: '700px',
+                  height: '75px',
+                  fontSize: '20px',
+                  fontWeight: 'bold',
+                  backgroundColor: '#00A29D',
+                  color: 'white',
+                  border: 'none',
+                  padding: '10px 20px',
+                  borderRadius: '45px',
+                }}>
+                  <img
+                    src="/image/metamaskicon.png"
+                    alt="Metamask"
+                    style={{ width: '36px', height: '45px', marginRight: '20px' }}
+                  />
+                  <h3> Address: {address} </h3>
+                </div>
             </div>
             {/* <div className='balanceDisplay'>
                 <h3>Balance: {userBalance}</h3>
@@ -112,5 +128,6 @@ const ScreenWalletToken = (props) => {
             </div>
         </div>
     )
-}
+};
+
 export default ScreenWalletToken;
