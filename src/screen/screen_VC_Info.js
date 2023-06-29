@@ -28,7 +28,7 @@ const ScreenVCInfo = (props) => {
         <div style={{ backgroundColor: "#E5F2F2", minHeight: "100vh", borderTop: "1px solid #00A29D" }}>
           <div style={{ paddingLeft: `${windowWidth > 1700 ? '500px' : '50px'}`, paddingRight: `${windowWidth > 1700 ? '500px' : '10px'}` }}>
             <h3 style={{ margin: "0", paddingTop: "50px", marginBottom: "30px", fontSize: "24px", fontWeight: "bold" }}>VC 소개</h3>
-            <div className="test"
+            <div className
               style={{
                 width: "1000px",height: "1000px",backgroundColor: "white",border: "3px solid #00A29D",
                 padding: "30px",position: "relative",borderRadius: "15px",
