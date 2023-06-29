@@ -30,16 +30,28 @@ const ScreenStartupInfo = (props) => {
                 style={{ paddingLeft: `${windowWidth > 1700 ? '500px' : '50px'}`, paddingRight: `${windowWidth > 1700 ? '500px' : '10px'}` }}
                 >
                     <h3 style={{ margin: "0", paddingTop: "50px", marginBottom: "30px", fontSize: "24px", fontWeight: "bold" }}>스타트업 소개</h3>
-                    <div
+                    <div className="test"
                         style={{
                         width: "1000px",height: "1000px",backgroundColor: "white",border: "3px solid #00A29D",
-                        padding: "10px",alignItems: "center",display: "flex",position: "relative",borderRadius: "15px",
+                        padding: "30px",display: "flex",position: "relative",borderRadius: "15px",
                         fontSize: "15px",fontWeight: "bold"
                         }}
                     >
-                    <h4>스타트업 이름: {state.sup_name}</h4>
-                    <h4>스타트업 범주: {state.sup_category}</h4>
-                    <h4>스타트업 정보: {state.sup_info}</h4>
+                    <img
+                    src="../image/animal/1.png"
+                    alt="Animal"
+                    style={{
+                        width: "250px",
+                        height: "250px",
+                        objectFit: "cover",
+                        borderRadius: "50%"
+                    }}
+                    />
+                    <div style={{ padding: "20px" }}>
+                        <h4>스타트업 이름: {state.sup_name}</h4>
+                        <h4>스타트업 범주: {state.sup_category}</h4>
+                        <h4>스타트업 정보: {state.sup_info}</h4>
+                    </div>
                   </div>
                 </div>
             </div>
