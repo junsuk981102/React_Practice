@@ -47,7 +47,7 @@ const ScreenRoomInfo = (props) => {
                     <h4>커뮤니티 정보: {state.com_info}</h4>
                 </div>
     
-                <div style={{width:"170px",height:"auto",padding: "5px",borderRadius: "15px",backgroundColor: "#00A29D",marginLeft:"10px",marginTop: "10px"}}>
+                <div style={{height:"auto",padding: "20px",marginTop: "10px"}}>
                     <h4>커뮤니티 목표 투자금액: {state.com_total_investment}원</h4>
                     <h4>커뮤니티 현재 투자금액: {state.com_now_investment}원</h4>
                 </div>
@@ -56,13 +56,17 @@ const ScreenRoomInfo = (props) => {
                     <h4>커뮤니티 티켓 가격: {state.com_ticket_price}원</h4>
                     <h4>커뮤니티 티켓 최대 개수: {state.com_ticket_max}개</h4>
                 </div>
-                <div style={{padding: "20px"}}>
-                    <h4>커뮤니티 참여 인원 수: {state.com_member}명</h4>
+
+                <div style={{display:"flex",justifyContent:"center",textAlign:"center"}} >
+                    <div style={{border: "1px solid black",padding: "5px",width: "110px",height: "30px",fontSize: "15px", fontWeight: "bold", backgroundColor: "#E5F2F2", borderRadius: "10px"}}>
+                        <h4>{state.com_member}명 참여중</h4>
+                    </div>
                 </div>
-                <div style={{padding: "20px"}}>
+
+                <div style={{padding: "20px",display: "flex",justifyContent:"center"}}>
                     <button onClick={() => handleClick("/screen_chat")} style={{width: "700px",height: "60px",fontSize: "20px", fontWeight: "bold", backgroundColor: "#00A29D", color: "white", border: "none", padding: "10px 20px", borderRadius: "5px" }}>
                         커뮤니티 참여하기
-                </button>
+                    </button>
                 </div>
               </div>
           </div>
