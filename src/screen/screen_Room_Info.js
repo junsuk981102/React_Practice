@@ -29,7 +29,6 @@ const ScreenRoomInfo = (props) => {
         navi(`${text}`)
     }
 
-
     return (
         <>
             <div style={{ backgroundColor: "#E5F2F2", minHeight: "100vh", borderTop: "1px solid #00A29D" }}>
@@ -54,7 +53,6 @@ const ScreenRoomInfo = (props) => {
                     }}
                     />
                     <div style={{ padding: "20px"}}>
-                        <h3>ScreenRoomInfo 페이지입니다.</h3>
                         <h4>커뮤니티 이름: {state.com_name}</h4>
                         <h4>커뮤니티 범주: {state.com_category}</h4>
                         <h4>커뮤니티 정보: {state.com_info}</h4>
@@ -63,9 +61,9 @@ const ScreenRoomInfo = (props) => {
                         <h4>커뮤니티 티켓 가격: {state.com_ticket_price}원</h4>
                         <h4>커뮤니티 티켓 최대 개수: {state.com_ticket_max}개</h4>
                         <h4>커뮤니티 참여 인원 수: {state.com_member}명</h4>
-                        <button onClick={() => handleClick("/screen_room_find")}>뒤로가기</button>
-                        <br/><br/>
-                        <button onClick={() => handleClick("/screen_chat")}>screen_chat 페이지</button>
+                        <button onClick={() => handleClick("/screen_chat")} style={{width: "700px",height: "60px",fontSize: "20px", fontWeight: "bold", backgroundColor: "#00A29D", color: "white", border: "none", padding: "10px 20px", borderRadius: "5px" }}>
+                            커뮤니티 참여하기
+                        </button>
                     </div>
                 </div>
                 </div>

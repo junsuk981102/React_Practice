@@ -1,11 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import { dbService } from "../firebase-config";
 import Community from "../components/Community";
-import { background } from "@chakra-ui/react";
 
 const ScreenRoomList = (props) => {
-  const [showPopup, setShowPopup] = useState(false);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
   useEffect(() => {
@@ -23,16 +20,6 @@ const ScreenRoomList = (props) => {
   useEffect(() => {
     setWindowWidth(window.innerWidth);
   }, []);
-
-  const togglePopup = (event) => {
-    setShowPopup(event.target.value);
-  };
-  
-  const navi = useNavigate();
-
-  function handleClick(text) {
-    navi(`${text}`);
-  }
 
   const [communities, setCommunities] = useState([]);
 

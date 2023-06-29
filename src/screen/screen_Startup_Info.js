@@ -25,36 +25,32 @@ const ScreenStartupInfo = (props) => {
 
     return (
         <>
-            <div style={{ backgroundColor: "#E5F2F2", minHeight: "100vh", borderTop: "1px solid #00A29D" }}>
-                <div
-                style={{ paddingLeft: `${windowWidth > 1700 ? '500px' : '50px'}`, paddingRight: `${windowWidth > 1700 ? '500px' : '10px'}` }}
-                >
-                    <h3 style={{ margin: "0", paddingTop: "50px", marginBottom: "30px", fontSize: "24px", fontWeight: "bold" }}>스타트업 소개</h3>
-                    <div className="test"
-                        style={{
-                        width: "1000px",height: "1000px",backgroundColor: "white",border: "3px solid #00A29D",
-                        padding: "30px",display: "flex",position: "relative",borderRadius: "15px",
-                        }}
-                    >
-                    <img
-                    src="../image/animal/1.png"
-                    alt="Animal"
-                    style={{
-                        width: "200px",
-                        height: "200px",
-                        objectFit: "cover",
-                        borderRadius: "50%"
-                    }}
-                    />
-                    <div style={{ padding: "20px"}}>
-                        <h4 style={{fontSize: "50px",fontWeight: "bold",marginBottom:"200px"}}>스타트업 이름: {state.sup_name}</h4>
-                        <h4 style={{fontSize: "35px",fontWeight: "bold"}}>스타트업 범주: {state.sup_category}</h4>
-                        <h4 style={{fontSize: "25px",fontWeight: "bold"}}>스타트업 정보: {state.sup_info}</h4>
-                    </div>
-                  </div>
+          <div style={{ backgroundColor: "#E5F2F2", minHeight: "100vh", borderTop: "1px solid #00A29D" }}>
+            <div style={{ paddingLeft: `${windowWidth > 1700 ? '500px' : '50px'}`, paddingRight: `${windowWidth > 1700 ? '500px' : '10px'}` }}>
+              <h3 style={{ margin: "0", paddingTop: "50px", marginBottom: "30px", fontSize: "24px", fontWeight: "bold" }}>스타트업 소개</h3>
+              <div className="test"
+                style={{
+                  width: "1000px",height: "1000px",backgroundColor: "white",border: "3px solid #00A29D",
+                  padding: "30px",position: "relative",borderRadius: "15px",
+                  }}>
+
+                <div style={{height: "auto",display: "flex",position: "relative"}}>
+                  <img src="../image/animal/1.png" alt="Animal"
+                    style={{width: "200px", height: "200px", objectFit: "cover", borderRadius: "50%"}}/>
+                  <h4 style={{fontSize: "50px",fontWeight: "bold"}}>스타트업 이름: {state.sup_name}</h4>
                 </div>
-            </div>
-        </>
+
+                <div style={{padding: "20px"}}>
+                  <h4 style={{fontSize: "35px",fontWeight: "bold"}}>스타트업 범주: {state.sup_category}</h4>
+                </div>
+
+                <div style={{padding: "20px"}}>
+                  <h4 style={{fontSize: "25px",fontWeight: "bold"}}>스타트업 정보: {state.sup_info}</h4>
+                </div>
+              </div>
+          </div>
+        </div>
+      </>
     );
 }
 
