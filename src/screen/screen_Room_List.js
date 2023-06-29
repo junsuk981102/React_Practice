@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { dbService } from "../firebase-config";
 import Community from "../components/Community";
+import { background } from "@chakra-ui/react";
 
 const ScreenRoomList = (props) => {
   const [showPopup, setShowPopup] = useState(false);
@@ -61,7 +62,8 @@ const ScreenRoomList = (props) => {
           position: "relative",
           overflow: "hidden",
           borderColor: "#00A29D",  // 테두리 색상
-          boxShadow: "0 0 15px #00A29D"  // 그림자 효과
+          boxShadow: "0 0 15px #00A29D",  // 그림자 효과
+          backgroundColor: "white"
         }}
       >
         <div
