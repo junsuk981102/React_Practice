@@ -94,32 +94,7 @@ const ScreenMain = (props) => {
           boxShadow: "0 0 15px #00A29D", // 그림자 효과
         }}
       >
-        <div
-          style={{
-            backgroundImage: `url(/image/animal/2.png)`,
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-            width: "100%",
-            height: "50%",
-            position: "absolute",
-            top: 0,
-            left: 0,
-          }}
-        />
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            width: "100%",
-            height: "50%",
-            position: "absolute",
-            bottom: 0,
-            left: 0,
-          }}
-        >
-          <VC vcObj={vc} />
-        </div>
+        <VC vcObj={vc} />
       </div>
     ));
   };
