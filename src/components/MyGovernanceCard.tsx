@@ -144,6 +144,7 @@ const MyGovernanceCard: FC<MyGovernanceCardProps> = ({
                 <p>NFT ID : {GNT_Id}</p>
                 <p>초기가격 : {web3.utils.fromWei(GNT_Initial_Price)} ETH</p>
                 <p>판매가격 : {web3.utils.fromWei(myGovernanceSalePrice)} ETH</p>
+                <h3 style={{ fontWeight: "bold", color: "blue", textAlign: "center" }}>{'<'}판매 등록 완료{'>'}</h3> 
               </>
             )
           ) : myGovernanceSalePrice === "0" ? (
@@ -158,6 +159,7 @@ const MyGovernanceCard: FC<MyGovernanceCardProps> = ({
               <p>NFT ID : {GNT_Id}</p>
               <p>초기가격 : {web3.utils.fromWei(GNT_Initial_Price)} ETH</p>
               <p>판매가격 : {web3.utils.fromWei(myGovernanceSalePrice)} ETH</p>
+              <h3 style={{ fontWeight: "bold", color: "blue", textAlign: "center" }}>{'<'}판매 등록 완료{'>'}</h3> 
             </>
           )}
         </div>
