@@ -63,7 +63,7 @@ function Header(props) {
             홈
           </button>
           <button
-            onClick={() => handleClick("/screen_wallet_connect")}
+            onClick={() => handleClick("/screen_my_governance")}
             style={{
               marginRight: "32px",
               fontSize: "20px",
