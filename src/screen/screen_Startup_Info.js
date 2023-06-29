@@ -34,14 +34,14 @@ const ScreenStartupInfo = (props) => {
                   padding: "30px",position: "relative",borderRadius: "15px",
                   }}>
 
-                <div style={{height: "auto",display: "flex",position: "relative"}}>
+                <div style={{height: "auto",display: "flex",position: "relative",alignItems:"center"}}>
                   <img src="../image/animal/1.png" alt="Animal"
                     style={{width: "200px", height: "200px", objectFit: "cover", borderRadius: "50%"}}/>
-                  <h4 style={{fontSize: "50px",fontWeight: "bold"}}>스타트업 이름: {state.sup_name}</h4>
+                  <h4 style={{fontSize: "50px",fontWeight: "bold",marginLeft:"20px"}}>스타트업 이름: {state.sup_name}</h4>
                 </div>
 
-                <div style={{padding: "20px"}}>
-                  <h4 style={{fontSize: "35px",fontWeight: "bold"}}>스타트업 범주: {state.sup_category}</h4>
+                <div style={{width:"170px",height:"auto",padding: "5px",borderRadius: "15px",backgroundColor: "#00A29D",marginLeft:"10px",marginTop: "10px"}}>
+                  <h4 style={{textAlign:"center",fontSize: "20px",fontWeight: "bold",color: "white"}}> {state.sup_category}</h4>
                 </div>
 
                 <div style={{padding: "20px"}}>
