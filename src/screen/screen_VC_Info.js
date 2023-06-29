@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {useNavigate, useLocation} from "react-router-dom";
+import {useLocation} from "react-router-dom";
 
 const ScreenVCInfo = (props) => {
     const [windowWidth, setWindowWidth] = useState(window.innerWidth);
@@ -22,12 +22,6 @@ const ScreenVCInfo = (props) => {
 
     const { state } = useLocation();
     console.log(state.name);
-
-    const navi = useNavigate();
-
-    function handleClick(text) {
-        navi(`${text}`)
-    }
 
     return (
         <>
