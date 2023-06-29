@@ -1,8 +1,9 @@
-import React from 'react';
+import React from "react";
 import { useState } from "react";
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../firebase-config";
+import { auth, db } from "../firebase-config";
 import { useNavigate } from "react-router-dom";
+import { doc, setDoc } from "firebase/firestore";
 
 const ScreenRegister = (props) => {
   const [registerId, setRegisterId] = useState("");
@@ -21,13 +22,29 @@ const ScreenRegister = (props) => {
 
   const register = async () => {
     try {
-      const user = await createUserWithEmailAndPassword(
+      const userCredential = await createUserWithEmailAndPassword(
         auth,
         registerEmail,
         registerPassword
       );
-      console.log(user);
-      handleClick("/screen_login");
+
+      // Firebase Auth에 사용자가 성공적으로 등록되었습니다.
+      const user = userCredential.user;
+
+      // Firestore에 사용자 정보 추가하기
+      const userRef = doc(db, "user_list", user.uid);
+      const userData = {
+        id: registerId,
+        email: registerEmail,
+        phone: registerPhonenumber,
+        birth: registerBirthdate,
+        address: registerAddress,
+      };
+      await setDoc(userRef, userData);
+
+      console.log("사용자 등록 및 정보 추가 완료:", user);
+
+      handleClick("/screen_Login");
     } catch (error) {
       console.log(error.message);
     }
@@ -41,80 +58,232 @@ const ScreenRegister = (props) => {
         alignItems: "center",
         minHeight: "100vh",
         backgroundColor: "#E5F2F2",
-        borderTop: "1px solid #00A29D"
+        borderTop: "1px solid #00A29D",
       }}
     >
-      <div style={{ width: "700px", padding: "20px", backgroundColor: "#E5F2F2"}}>
-        <h3 style={{ textAlign: "center", marginBottom: "50px", fontSize: "35px", fontWeight: "bold"}}>회원가입</h3>
-        <div style={{ display: "flex", flexDirection: "column"}}>
-        <hr style={{ backgroundColor: "#00A29D", height: "2px", margin: "30px 0" }} />
+      <div
+        style={{ width: "700px", padding: "20px", backgroundColor: "#E5F2F2" }}
+      >
+        <h3
+          style={{
+            textAlign: "center",
+            marginBottom: "50px",
+            fontSize: "35px",
+            fontWeight: "bold",
+          }}
+        >
+          회원가입
+        </h3>
+        <div style={{ display: "flex", flexDirection: "column" }}>
+          <hr
+            style={{
+              backgroundColor: "#00A29D",
+              height: "2px",
+              margin: "30px 0",
+            }}
+          />
 
-          <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "20px"}}>
-            <label htmlFor="id" style={{fontSize: "20px", fontWeight: "bold"}}>아이디:</label>
-            <input type="text" id="id" placeholder="아이디를 입력해주세요" value={registerId}
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              marginBottom: "20px",
+            }}
+          >
+            <label
+              htmlFor="id"
+              style={{ fontSize: "20px", fontWeight: "bold" }}
+            >
+              아이디:
+            </label>
+            <input
+              type="text"
+              id="id"
+              placeholder="아이디를 입력해주세요"
+              value={registerId}
               onChange={(event) => {
                 setRegisterId(event.target.value);
               }}
-              style={{fontSize: "23px", maxWidth: "450px" }} />
+              style={{ fontSize: "23px", maxWidth: "450px" }}
+            />
           </div>
 
-          <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "20px"}}>
-            <label htmlFor="password" style={{fontSize: "20px", fontWeight: "bold"}}>비밀번호:</label>
-            <input type="text" id="password" placeholder="비밀번호를 입력해주세요" value={registerPassword}
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              marginBottom: "20px",
+            }}
+          >
+            <label
+              htmlFor="password"
+              style={{ fontSize: "20px", fontWeight: "bold" }}
+            >
+              비밀번호:
+            </label>
+            <input
+              type="text"
+              id="password"
+              placeholder="비밀번호를 입력해주세요"
+              value={registerPassword}
               onChange={(event) => {
                 setRegisterPassword(event.target.value);
               }}
-              style={{fontSize: "23px", maxWidth: "450px" }} />
+              style={{ fontSize: "23px", maxWidth: "450px" }}
+            />
           </div>
 
-          <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "20px"}}>
-            <label htmlFor="confirmpassword" style={{fontSize: "20px", fontWeight: "bold"}}>비밀번호 확인:</label>
-            <input type="text" id="confirmpassword" placeholder="비밀번호를 한 번 더 입력해주세요" value={registerConfirmpassword}
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              marginBottom: "20px",
+            }}
+          >
+            <label
+              htmlFor="confirmpassword"
+              style={{ fontSize: "20px", fontWeight: "bold" }}
+            >
+              비밀번호 확인:
+            </label>
+            <input
+              type="text"
+              id="confirmpassword"
+              placeholder="비밀번호를 한 번 더 입력해주세요"
+              value={registerConfirmpassword}
               onChange={(event) => {
                 setRegisterConfirmpassword(event.target.value);
               }}
-              style={{fontSize: "23px", maxWidth: "450px" }} />
+              style={{ fontSize: "23px", maxWidth: "450px" }}
+            />
           </div>
 
-          <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "20px"}}>
-            <label htmlFor="email" style={{fontSize: "20px", fontWeight: "bold"}}>이메일:</label>
-            <input type="text" id="email" placeholder="예: stot1234@stot.com" value={registerEmail}
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              marginBottom: "20px",
+            }}
+          >
+            <label
+              htmlFor="email"
+              style={{ fontSize: "20px", fontWeight: "bold" }}
+            >
+              이메일:
+            </label>
+            <input
+              type="text"
+              id="email"
+              placeholder="예: stot1234@stot.com"
+              value={registerEmail}
               onChange={(event) => {
                 setRegisterEmail(event.target.value);
               }}
-              style={{fontSize: "23px", maxWidth: "450px" }} />
+              style={{ fontSize: "23px", maxWidth: "450px" }}
+            />
           </div>
 
-          <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "20px"}}>
-            <label htmlFor="phonenumber" style={{fontSize: "20px", fontWeight: "bold"}}>전화번호:</label>
-            <input type="text" id="phonenumber" placeholder="예: 010-1234-5678" value={registerPhonenumber}
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              marginBottom: "20px",
+            }}
+          >
+            <label
+              htmlFor="phonenumber"
+              style={{ fontSize: "20px", fontWeight: "bold" }}
+            >
+              전화번호:
+            </label>
+            <input
+              type="text"
+              id="phonenumber"
+              placeholder="예: 010-1234-5678"
+              value={registerPhonenumber}
               onChange={(event) => {
                 setRegisterPhonenumber(event.target.value);
               }}
-              style={{fontSize: "23px", maxWidth: "450px" }} />
+              style={{ fontSize: "23px", maxWidth: "450px" }}
+            />
           </div>
-          
-          <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "20px"}}>
-            <label htmlFor="birthDate" style={{fontSize: "20px", fontWeight: "bold", marginRight: "50px"}}>생년월일:</label>
-            <input type="text" id="birthDate"  placeholder="예: 1999/12/31" value={registerBirthdate}
+
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              marginBottom: "20px",
+            }}
+          >
+            <label
+              htmlFor="birthDate"
+              style={{
+                fontSize: "20px",
+                fontWeight: "bold",
+                marginRight: "50px",
+              }}
+            >
+              생년월일:
+            </label>
+            <input
+              type="text"
+              id="birthDate"
+              placeholder="예: 1999/12/31"
+              value={registerBirthdate}
               onChange={(event) => {
                 setRegisterBirthdate(event.target.value);
               }}
-              style={{fontSize: "23px", maxWidth: "450px" }}/>
+              style={{ fontSize: "23px", maxWidth: "450px" }}
+            />
           </div>
 
-          <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "10px"}}>
-            <label htmlFor="address" style={{fontSize: "20px", fontWeight: "bold"}}>주소:</label>
-            <input type="text" id="address" placeholder="주소를 입력해주세요" value={registerAddress}
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              marginBottom: "10px",
+            }}
+          >
+            <label
+              htmlFor="address"
+              style={{ fontSize: "20px", fontWeight: "bold" }}
+            >
+              주소:
+            </label>
+            <input
+              type="text"
+              id="address"
+              placeholder="주소를 입력해주세요"
+              value={registerAddress}
               onChange={(event) => {
                 setRegisterAddress(event.target.value);
               }}
-              style={{fontSize: "23px", maxWidth: "450px" }}/>
+              style={{ fontSize: "23px", maxWidth: "450px" }}
+            />
           </div>
 
-          <hr style={{ backgroundColor: "#00A29D", height: "2px", margin: "30px 0" }} />
+          <hr
+            style={{
+              backgroundColor: "#00A29D",
+              height: "2px",
+              margin: "30px 0",
+            }}
+          />
           <div style={{ textAlign: "center", marginTop: "50px" }}>
-            <button onClick={register} style={{width: "150px",height: "75px",fontSize: "20px", fontWeight: "bold", backgroundColor: "#00A29D", color: "white", border: "none", padding: "10px 20px", borderRadius: "5px" }}>
+            <button
+              onClick={register}
+              style={{
+                width: "150px",
+                height: "75px",
+                fontSize: "20px",
+                fontWeight: "bold",
+                backgroundColor: "#00A29D",
+                color: "white",
+                border: "none",
+                padding: "10px 20px",
+                borderRadius: "5px",
+              }}
+            >
               가입하기
             </button>
           </div>
