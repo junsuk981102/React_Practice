@@ -13,6 +13,8 @@ const ScreenRegister = (props) => {
   const [registerPhonenumber, setRegisterPhonenumber] = useState("");
   const [registerBirthdate, setRegisterBirthdate] = useState("");
   const [registerAddress, setRegisterAddress] = useState("");
+  const [passwordError, setPasswordError] = useState("");
+  const [confirmPasswordError, setConfirmPasswordError] = useState("");
 
   const navi = useNavigate();
 
@@ -20,7 +22,24 @@ const ScreenRegister = (props) => {
     navi(`${text}`);
   }
 
-  const register = async () => {
+  const handleFormSubmit = async (e) => {
+    e.preventDefault();
+
+    // 비밀번호 규칙 검사
+    const passwordRegex =
+      /^(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[a-z\d@$!%*?&]{8,}$/;
+    if (!passwordRegex.test(registerPassword)) {
+      setPasswordError(
+        "비밀번호는 최소 8자 이상이어야 하며, 영어 소문자, 숫자, 특수 문자를 포함해야 합니다."
+      );
+      return;
+    }
+
+    // 비밀번호 확인 검사
+    if (registerPassword !== registerConfirmpassword) {
+      setConfirmPasswordError("비밀번호가 일치하지 않습니다.");
+      return;
+    }
     try {
       const userCredential = await createUserWithEmailAndPassword(
         auth,
@@ -50,13 +69,23 @@ const ScreenRegister = (props) => {
     }
   };
 
+  const handlePasswordChange = (e) => {
+    setRegisterPassword(e.target.value);
+    setPasswordError("");
+  };
+
+  const handleConfirmPasswordChange = (e) => {
+    setRegisterConfirmpassword(e.target.value);
+    setConfirmPasswordError("");
+  };
+
   return (
     <div
       style={{
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        minHeight: "100vh",
+        Height: "80vh",
         backgroundColor: "#E5F2F2",
         borderTop: "1px solid #00A29D",
       }}
@@ -67,14 +96,20 @@ const ScreenRegister = (props) => {
         <h3
           style={{
             textAlign: "center",
-            marginBottom: "50px",
             fontSize: "35px",
             fontWeight: "bold",
           }}
         >
           회원가입
         </h3>
-        <div style={{ display: "flex", flexDirection: "column" }}>
+        <form
+          onSubmit={handleFormSubmit}
+          style={{
+            backgroundColor: "#E5F2F2",
+            display: "flex",
+            flexDirection: "column",
+          }}
+        >
           <hr
             style={{
               backgroundColor: "#00A29D",
@@ -82,12 +117,11 @@ const ScreenRegister = (props) => {
               margin: "30px 0",
             }}
           />
-
           <div
             style={{
               display: "flex",
               justifyContent: "space-between",
-              marginBottom: "20px",
+              alignItems: "center",
             }}
           >
             <label
@@ -104,7 +138,16 @@ const ScreenRegister = (props) => {
               onChange={(event) => {
                 setRegisterId(event.target.value);
               }}
-              style={{ fontSize: "23px", maxWidth: "450px" }}
+              style={{
+                border: "solid 1px #d4d3d3",
+                padding: "14px 12px",
+
+                borderRadius: "6px",
+                outline: "none",
+                flexGrow: "6",
+
+                maxWidth: "450px",
+              }}
             />
           </div>
 
@@ -112,7 +155,7 @@ const ScreenRegister = (props) => {
             style={{
               display: "flex",
               justifyContent: "space-between",
-              marginBottom: "20px",
+              alignItems: "center",
             }}
           >
             <label
@@ -122,22 +165,35 @@ const ScreenRegister = (props) => {
               비밀번호:
             </label>
             <input
-              type="text"
+              type="password"
               id="password"
               placeholder="비밀번호를 입력해주세요"
               value={registerPassword}
               onChange={(event) => {
                 setRegisterPassword(event.target.value);
               }}
-              style={{ fontSize: "23px", maxWidth: "450px" }}
+              required
+              style={{
+                border: "solid 1px #d4d3d3",
+                padding: "14px 12px",
+
+                borderRadius: "6px",
+                outline: "none",
+                flexGrow: "6",
+
+                maxWidth: "450px",
+              }}
             />
+          </div>
+          <div style={{ display: "flex", justifyContent: "end" }}>
+            {passwordError && <p className="error">{passwordError}</p>}
           </div>
 
           <div
             style={{
               display: "flex",
               justifyContent: "space-between",
-              marginBottom: "20px",
+              alignItems: "center",
             }}
           >
             <label
@@ -147,22 +203,37 @@ const ScreenRegister = (props) => {
               비밀번호 확인:
             </label>
             <input
-              type="text"
+              type="password"
               id="confirmpassword"
               placeholder="비밀번호를 한 번 더 입력해주세요"
               value={registerConfirmpassword}
               onChange={(event) => {
                 setRegisterConfirmpassword(event.target.value);
               }}
-              style={{ fontSize: "23px", maxWidth: "450px" }}
+              required
+              style={{
+                border: "solid 1px #d4d3d3",
+                padding: "14px 12px",
+
+                borderRadius: "6px",
+                outline: "none",
+                flexGrow: "6",
+
+                maxWidth: "450px",
+              }}
             />
+          </div>
+          <div style={{ display: "flex", justifyContent: "end" }}>
+            {confirmPasswordError && (
+              <p className="error">{confirmPasswordError}</p>
+            )}
           </div>
 
           <div
             style={{
               display: "flex",
               justifyContent: "space-between",
-              marginBottom: "20px",
+              alignItems: "center",
             }}
           >
             <label
@@ -172,14 +243,24 @@ const ScreenRegister = (props) => {
               이메일:
             </label>
             <input
-              type="text"
+              type="email"
               id="email"
               placeholder="예: stot1234@stot.com"
               value={registerEmail}
               onChange={(event) => {
                 setRegisterEmail(event.target.value);
               }}
-              style={{ fontSize: "23px", maxWidth: "450px" }}
+              required
+              style={{
+                border: "solid 1px #d4d3d3",
+                padding: "14px 12px",
+
+                borderRadius: "6px",
+                outline: "none",
+                flexGrow: "6",
+
+                maxWidth: "450px",
+              }}
             />
           </div>
 
@@ -187,7 +268,7 @@ const ScreenRegister = (props) => {
             style={{
               display: "flex",
               justifyContent: "space-between",
-              marginBottom: "20px",
+              alignItems: "center",
             }}
           >
             <label
@@ -197,14 +278,23 @@ const ScreenRegister = (props) => {
               전화번호:
             </label>
             <input
-              type="text"
+              type="tel"
               id="phonenumber"
               placeholder="예: 010-1234-5678"
               value={registerPhonenumber}
               onChange={(event) => {
                 setRegisterPhonenumber(event.target.value);
               }}
-              style={{ fontSize: "23px", maxWidth: "450px" }}
+              style={{
+                border: "solid 1px #d4d3d3",
+                padding: "14px 12px",
+
+                borderRadius: "6px",
+                outline: "none",
+                flexGrow: "6",
+
+                maxWidth: "450px",
+              }}
             />
           </div>
 
@@ -212,7 +302,7 @@ const ScreenRegister = (props) => {
             style={{
               display: "flex",
               justifyContent: "space-between",
-              marginBottom: "20px",
+              alignItems: "center",
             }}
           >
             <label
@@ -226,14 +316,22 @@ const ScreenRegister = (props) => {
               생년월일:
             </label>
             <input
-              type="text"
+              type="date"
               id="birthDate"
-              placeholder="예: 1999/12/31"
               value={registerBirthdate}
               onChange={(event) => {
                 setRegisterBirthdate(event.target.value);
               }}
-              style={{ fontSize: "23px", maxWidth: "450px" }}
+              style={{
+                border: "solid 1px #d4d3d3",
+                padding: "14px 12px",
+
+                borderRadius: "6px",
+                outline: "none",
+                flexGrow: "6",
+
+                maxWidth: "450px",
+              }}
             />
           </div>
 
@@ -241,7 +339,7 @@ const ScreenRegister = (props) => {
             style={{
               display: "flex",
               justifyContent: "space-between",
-              marginBottom: "10px",
+              alignItems: "center",
             }}
           >
             <label
@@ -258,7 +356,16 @@ const ScreenRegister = (props) => {
               onChange={(event) => {
                 setRegisterAddress(event.target.value);
               }}
-              style={{ fontSize: "23px", maxWidth: "450px" }}
+              style={{
+                border: "solid 1px #d4d3d3",
+                padding: "14px 12px",
+
+                borderRadius: "6px",
+                outline: "none",
+                flexGrow: "6",
+
+                maxWidth: "450px",
+              }}
             />
           </div>
 
@@ -269,9 +376,9 @@ const ScreenRegister = (props) => {
               margin: "30px 0",
             }}
           />
-          <div style={{ textAlign: "center", marginTop: "50px" }}>
+          <div style={{ textAlign: "center" }}>
             <button
-              onClick={register}
+              type="submit"
               style={{
                 width: "150px",
                 height: "75px",
@@ -287,7 +394,7 @@ const ScreenRegister = (props) => {
               가입하기
             </button>
           </div>
-        </div>
+        </form>
       </div>
     </div>
   );
