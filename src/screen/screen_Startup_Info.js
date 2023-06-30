@@ -90,22 +90,6 @@ const ScreenStartupInfo = (props) => {
               </h4>
             </div>
 
-<<<<<<< Updated upstream
-                <div style={{height: "auto",display: "flex",position: "relative"}}>
-                  <img src="../image/animal/1.png" alt="Animal"
-                    style={{width: "200px", height: "200px", objectFit: "cover", borderRadius: "50%"}}/>
-                  <h4 style={{fontSize: "50px",fontWeight: "bold"}}>스타트업 이름: {state.sup_name}</h4>
-                </div>
-
-                <div style={{padding: "20px"}}>
-                  <h4 style={{fontSize: "35px",fontWeight: "bold"}}>스타트업 범주: {state.sup_category}</h4>
-                </div>
-
-                <div style={{padding: "20px"}}>
-                  <h4 style={{fontSize: "25px",fontWeight: "bold"}}>스타트업 정보: {state.sup_info}</h4>
-                </div>
-              </div>
-=======
             <div
               style={{
                 width: "170px",
@@ -135,7 +119,6 @@ const ScreenStartupInfo = (props) => {
                 스타트업 정보: {state.sup_info}
               </h4>
             </div>
->>>>>>> Stashed changes
           </div>
         </div>
       </div>

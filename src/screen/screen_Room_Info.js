@@ -16,54 +16,6 @@ const ScreenRoomInfo = (props) => {
     };
   }, []);
 
-<<<<<<< Updated upstream
-    function handleClick(text) {
-        navi(`${text}`)
-    }
-
-    return (
-        <>
-            <div style={{ backgroundColor: "#E5F2F2", minHeight: "100vh", borderTop: "1px solid #00A29D" }}>
-                <div
-                style={{ paddingLeft: `${windowWidth > 1700 ? '500px' : '50px'}`, paddingRight: `${windowWidth > 1700 ? '500px' : '10px'}` }}
-                >
-                    <h3 style={{ margin: "0", paddingTop: "50px", marginBottom: "30px", fontSize: "24px", fontWeight: "bold" }}>커뮤니티 소개</h3>
-                    <div className="test"
-                        style={{
-                        width: "1000px",height: "1000px",backgroundColor: "white",border: "3px solid #00A29D",
-                        padding: "30px",display: "flex",position: "relative",borderRadius: "15px",
-                        }}
-                    >
-                    <img
-                    src="../image/animal/2.png"
-                    alt="Animal"
-                    style={{
-                        width: "200px",
-                        height: "200px",
-                        objectFit: "cover",
-                        borderRadius: "50%"
-                    }}
-                    />
-                    <div style={{ padding: "20px"}}>
-                        <h4>커뮤니티 이름: {state.com_name}</h4>
-                        <h4>커뮤니티 범주: {state.com_category}</h4>
-                        <h4>커뮤니티 정보: {state.com_info}</h4>
-                        <h4>커뮤니티 목표 투자금액: {state.com_total_investment}원</h4>
-                        <h4>커뮤니티 현재 투자금액: {state.com_now_investment}원</h4>
-                        <h4>커뮤니티 티켓 가격: {state.com_ticket_price}원</h4>
-                        <h4>커뮤니티 티켓 최대 개수: {state.com_ticket_max}개</h4>
-                        <h4>커뮤니티 참여 인원 수: {state.com_member}명</h4>
-                        <button onClick={() => handleClick("/screen_chat")} style={{width: "700px",height: "60px",fontSize: "20px", fontWeight: "bold", backgroundColor: "#00A29D", color: "white", border: "none", padding: "10px 20px", borderRadius: "5px" }}>
-                            커뮤니티 참여하기
-                        </button>
-                    </div>
-                </div>
-                </div>
-            </div>
-        </>
-    );
-}
-=======
   useEffect(() => {
     setWindowWidth(window.innerWidth);
   }, []);
@@ -236,6 +188,5 @@ const ScreenRoomInfo = (props) => {
     </>
   );
 };
->>>>>>> Stashed changes
 
 export default ScreenRoomInfo;
