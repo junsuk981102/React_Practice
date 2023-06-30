@@ -41,7 +41,7 @@ const User = () => {
             e.target.src = defaultProfileImage;
           }}
         />
-        <p style={{ fontWeight: "500" }}>{name || "Please Sign in"}</p>
+        <p style={{ fontWeight: "500" }}>{name || "User default"}</p>
         {user ? <Logout /> : <Login />}
       </article>
     </div>
