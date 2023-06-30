@@ -6,6 +6,11 @@
   gap: 20px;
 }
 
+.error {
+  color: red;
+  font-size: small;
+}
+
 /* Chat Section */
 .chat-content {
   background-color: #f3f6fb;

@@ -1,7 +1,7 @@
 import "./App.css";
-import { ChakraProvider } from '@chakra-ui/react'
+import { ChakraProvider } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
-import {Routes, Route} from "react-router-dom"
+import { Routes, Route } from "react-router-dom";
 
 import ScreenChat from "./screen/screen_Chat";
 import ScreenExample from "./screen/screen_Example";
@@ -30,64 +30,102 @@ import ScreenTest from "./screen/screen_Test";
 // import WalletCard from './WalletCard';
 
 export default function App() {
-  
   const [account, setAccount] = useState<string>("");
 
-  const getAccount = async() => {
-    try{
-      if(window.ethereum){
+  const getAccount = async () => {
+    try {
+      if (window.ethereum) {
         const accounts = await window.ethereum.request({
           method: "eth_requestAccounts",
         });
-        
+
         setAccount(accounts[0]);
-      } else{
+      } else {
         alert("Install Metamask!");
       }
-    } catch (error){
+    } catch (error) {
       console.error(error);
     }
-  }
+  };
   useEffect(() => {
     getAccount();
-  },[account]);
+  }, [account]);
 
   return (
     <ChakraProvider>
       <div className={"app"}>
-          <Header/>
-          {/* <WalletCard/> */}
-          <Routes>
-              <Route path="/" element={<ScreenMain />}></Route>
-              <Route path="/screen_chat/*" element={<ScreenChat />}></Route>
-              <Route path="/screen_example/*" element={<ScreenExample />}></Route>
-              <Route path="/screen_login/*" element={<ScreenLogin />}></Route>
-              <Route path="/screen_minting/*" element={<ScreenMinting account={account}/>}></Route>
-              {/* <Route path="/screen_my_animal/*" element={<ScreenMyAnimal account={account}/>}></Route> */}
-              <Route path="/screen_my_governance/*" element={<ScreenMyGovernance account={account}/>}></Route>
-              <Route path="/screen_profile_info/*" element={<ScreenProfileInfo />}></Route>
-              <Route path="/screen_profile_user/*" element={<ScreenProfileUser />}></Route>
-              <Route path="/screen_profile/*" element={<ScreenProfile />}></Route>
-              <Route path="/screen_register/*" element={<ScreenRegister />}></Route>
-              <Route path="/screen_room_find/*" element={<ScreenRoomFind />}></Route>
-              <Route path="/screen_room_info/*" element={<ScreenRoomInfo />}></Route>
-              <Route path="/screen_room_list/*" element={<ScreenRoomList />}></Route>
-              <Route path="/screen_room_make/*" element={<ScreenRoomMake />}></Route>
-              <Route path="/screen_room_setting/*" element={<ScreenRoomSetting />}></Route>
-              <Route path="/screen_startup_info/*" element={<ScreenStartupInfo />}></Route>
-              <Route path="/screen_token_gating/*" element={<ScreenTokenGating />}></Route>
-              <Route path="/screen_vc_info/*" element={<ScreenVCInfo />}></Route>
-              <Route path="/screen_wallet_connect/*" element={<ScreenWalletConnect />}></Route>
-              <Route path="/screen_wallet_token/*" element={<ScreenWalletToken />}></Route>
+        <Header />
+        {/* <WalletCard/> */}
+        <Routes>
+          <Route path="/" element={<ScreenMain />}></Route>
+          <Route path="/screen_chat/*" element={<ScreenChat />}></Route>
+          <Route path="/screen_example/*" element={<ScreenExample />}></Route>
+          <Route path="/screen_login/*" element={<ScreenLogin />}></Route>
+          <Route
+            path="/screen_minting/*"
+            element={<ScreenMinting account={account} />}
+          ></Route>
+          {/* <Route path="/screen_my_animal/*" element={<ScreenMyAnimal account={account}/>}></Route> */}
+          <Route
+            path="/screen_my_governance/*"
+            element={<ScreenMyGovernance account={account} />}
+          ></Route>
+          <Route
+            path="/screen_profile_info/*"
+            element={<ScreenProfileInfo />}
+          ></Route>
+          <Route
+            path="/screen_profile_user/*"
+            element={<ScreenProfileUser />}
+          ></Route>
+          <Route path="/screen_profile/*" element={<ScreenProfile />}></Route>
+          <Route path="/screen_register/*" element={<ScreenRegister />}></Route>
+          <Route
+            path="/screen_room_find/*"
+            element={<ScreenRoomFind />}
+          ></Route>
+          <Route
+            path="/screen_room_info/*"
+            element={<ScreenRoomInfo />}
+          ></Route>
+          <Route
+            path="/screen_room_list/*"
+            element={<ScreenRoomList />}
+          ></Route>
+          <Route
+            path="/screen_room_make/*"
+            element={<ScreenRoomMake />}
+          ></Route>
+          <Route
+            path="/screen_room_setting/*"
+            element={<ScreenRoomSetting />}
+          ></Route>
+          <Route
+            path="/screen_startup_info/*"
+            element={<ScreenStartupInfo />}
+          ></Route>
+          <Route
+            path="/screen_token_gating/*"
+            element={<ScreenTokenGating />}
+          ></Route>
+          <Route path="/screen_vc_info/*" element={<ScreenVCInfo />}></Route>
+          <Route
+            path="/screen_wallet_connect/*"
+            element={<ScreenWalletConnect />}
+          ></Route>
+          <Route
+            path="/screen_wallet_token/*"
+            element={<ScreenWalletToken />}
+          ></Route>
 
-              <Route path="/screen_test/*" element={<ScreenTest />}></Route>
+          <Route path="/screen_test/*" element={<ScreenTest />}></Route>
 
-              {/* 상단에 위치하는 라우트들의 규칙을 모두 확인, 일치하는 라우트가 없는경우 처리 */}
-              {/*<Route path="*" element={<NotFound />}></Route>*/}
-          </Routes>
-              {/*<Header />*/}
-              {/*<Main />*/}
-              {/*<Product />*/}
+          {/* 상단에 위치하는 라우트들의 규칙을 모두 확인, 일치하는 라우트가 없는경우 처리 */}
+          {/*<Route path="*" element={<NotFound />}></Route>*/}
+        </Routes>
+        {/*<Header />*/}
+        {/*<Main />*/}
+        {/*<Product />*/}
       </div>
     </ChakraProvider>
   );

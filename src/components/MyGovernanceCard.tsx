@@ -26,7 +26,8 @@ const MyGovernanceCard: FC<MyGovernanceCardProps> = ({
   account,
 }) => {
   const [sellPrice, setSellPrice] = useState<string>("");
-  const [myGovernanceSalePrice, setMyGovernanceSalePrice] = useState<string>(GNT_Sale_Price);
+  const [myGovernanceSalePrice, setMyGovernanceSalePrice] =
+    useState<string>(GNT_Sale_Price);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
   useEffect(() => {
@@ -34,10 +35,10 @@ const MyGovernanceCard: FC<MyGovernanceCardProps> = ({
       setWindowWidth(window.innerWidth);
     };
 
-    window.addEventListener('resize', handleResize);
+    window.addEventListener("resize", handleResize);
 
     return () => {
-      window.removeEventListener('resize', handleResize);
+      window.removeEventListener("resize", handleResize);
     };
   }, []);
 
@@ -54,10 +55,7 @@ const MyGovernanceCard: FC<MyGovernanceCardProps> = ({
       if (!account || !saleStatus) return;
 
       const response = await saleGovernanceTokenContract.methods
-        .setForSaleGovernanceToken(
-          GNT_Id,
-          web3.utils.toWei(sellPrice, "ether")
-        )
+        .setForSaleGovernanceToken(GNT_Id, web3.utils.toWei(sellPrice, "ether"))
         .send({ from: account });
 
       if (response.status) {
@@ -83,22 +81,24 @@ const MyGovernanceCard: FC<MyGovernanceCardProps> = ({
           position: "relative",
           borderRadius: "15px",
           fontSize: "15px",
-          fontWeight: "bold" // 상위 요소를 기준으로 배치
+          fontWeight: "bold", // 상위 요소를 기준으로 배치
         }}
       >
         <img
-          src='../image/ticketicon.png' // 이미지 파일 경로
+          src="../image/ticketicon.png" // 이미지 파일 경로
           alt="Ticket Icon"
           style={{
             position: "absolute", // 상위 요소 내에서 위치를 조정
             top: 10,
-            left : 100,
+            left: 100,
             width: "100px", // 이미지 너비 조정
             height: "100px", // 이미지 높이 조정
           }}
         />
-        <div style={{ marginTop: 20,top:120,position: "absolute"}}>
-        <h3>NFT 이름 : <GovernanceCard GNT_name={GNT_name} /></h3>
+        <div style={{ marginTop: 20, top: 120, position: "absolute" }}>
+          <h3>
+            NFT 이름 : <GovernanceCard GNT_name={GNT_name} />
+          </h3>
           {saleStatus ? (
             myGovernanceSalePrice === "0" ? (
               // 판매가능&판매이전
@@ -143,8 +143,18 @@ const MyGovernanceCard: FC<MyGovernanceCardProps> = ({
               <>
                 <p>NFT ID : {GNT_Id}</p>
                 <p>초기가격 : {web3.utils.fromWei(GNT_Initial_Price)} ETH</p>
-                <p>판매가격 : {web3.utils.fromWei(myGovernanceSalePrice)} ETH</p>
-                <h3 style={{ fontWeight: "bold", color: "blue", textAlign: "center" }}>{'<'}판매 등록 완료{'>'}</h3> 
+                <p>
+                  판매가격 : {web3.utils.fromWei(myGovernanceSalePrice)} ETH
+                </p>
+                <h3
+                  style={{
+                    fontWeight: "bold",
+                    color: "blue",
+                    textAlign: "center",
+                  }}
+                >
+                  {"<"}판매 등록 완료{">"}
+                </h3>
               </>
             )
           ) : myGovernanceSalePrice === "0" ? (
@@ -159,7 +169,15 @@ const MyGovernanceCard: FC<MyGovernanceCardProps> = ({
               <p>NFT ID : {GNT_Id}</p>
               <p>초기가격 : {web3.utils.fromWei(GNT_Initial_Price)} ETH</p>
               <p>판매가격 : {web3.utils.fromWei(myGovernanceSalePrice)} ETH</p>
-              <h3 style={{ fontWeight: "bold", color: "blue", textAlign: "center" }}>{'<'}판매 등록 완료{'>'}</h3> 
+              <h3
+                style={{
+                  fontWeight: "bold",
+                  color: "blue",
+                  textAlign: "center",
+                }}
+              >
+                {"<"}판매 등록 완료{">"}
+              </h3>
             </>
           )}
         </div>

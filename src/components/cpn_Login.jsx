@@ -67,7 +67,6 @@ const Login = () => {
         onClick={handleGoogleSignIn}
         style={{ margin: "5px" }} // margin 추가
       >
-        <i className="fa-brands fa-google"></i>
         Sign in with Google
       </button>
     </>
