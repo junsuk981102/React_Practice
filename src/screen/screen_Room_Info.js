@@ -28,6 +28,7 @@ const ScreenRoomInfo = (props) => {
     function handleClick(text) {
         navi(`${text}`)
     }
+    
 
     return (
         <>
@@ -50,11 +51,16 @@ const ScreenRoomInfo = (props) => {
                 <div style={{height:"auto",padding: "20px",marginTop: "10px"}}>
                     <h4>커뮤니티 목표 투자금액: {state.com_total_investment}원</h4>
                     <h4>커뮤니티 현재 투자금액: {state.com_now_investment}원</h4>
+                    <div style={{width: "100%",height: "30px",backgroundColor: "#00A29D", borderRadius: "5px"}}>
+                    </div>
+                    <div style={{width: (state.com_now_investment/state.com_total_investment)*100+"%",height: "30px",backgroundColor: "#00A29D", borderRadius: "5px"}}>
+                    </div>
                 </div>
     
                 <div style={{padding: "20px"}}>
-                    <h4>커뮤니티 티켓 가격: {state.com_ticket_price}원</h4>
-                    <h4>커뮤니티 티켓 최대 개수: {state.com_ticket_max}개</h4>
+                  <h4>티켓 쿠매하기</h4>
+                  <h4>커뮤니티 티켓 가격: {state.com_ticket_price}원</h4>
+                  <h4>커뮤니티 티켓 최대 개수: {state.com_ticket_max}개</h4>
                 </div>
 
                 <div style={{display:"flex",justifyContent:"center",textAlign:"center"}} >
