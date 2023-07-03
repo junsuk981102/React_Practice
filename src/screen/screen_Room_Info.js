@@ -98,11 +98,11 @@ const ScreenRoomInfo = (props) => {
                     position: "absolute",
                     top: 0,
                     left: 0,
-                    width: "100%",
-                    height: "30px",
-                    backgroundColor: "#00A29D",
-                    borderRadius: "5px",
-                    border: "1px solid #000",
+                    width: "90%",
+                    height: "50px",
+                    backgroundColor: "white",
+                    borderRadius: "25px",
+                    border: "1px solid #00A29D",
                   }}
                 ></div>
                 <div
@@ -112,18 +112,18 @@ const ScreenRoomInfo = (props) => {
                     left: 0,
                     width:
                       (state.com_now_investment / state.com_total_investment) *
-                        100 +
+                        90 +
                       "%",
-                    height: "30px",
-                    backgroundColor: "#00A29D",
-                    borderRadius: "5px",
-                    border: "1px solid #000",
+                    height: "50px",
+                    background: `linear-gradient(to right, #00A29D, #FFFFFF)`,
+                    borderRadius: "25px",
+                    border: "1px solid #00A29D",
                   }}
                 ></div>
               </div>
             </div>
 
-            <div style={{ padding: "20px" }}>
+            <div style={{ padding: "20px", marginTop: "40px" }}>
               <h4>티켓 쿠매하기</h4>
               <h4>커뮤니티 티켓 가격: {state.com_ticket_price}원</h4>
               <h4>커뮤니티 티켓 최대 개수: {state.com_ticket_max}개</h4>
