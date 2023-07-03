@@ -10,10 +10,10 @@ const ScreenRoomList = (props) => {
       setWindowWidth(window.innerWidth);
     };
 
-    window.addEventListener('resize', handleResize);
+    window.addEventListener("resize", handleResize);
 
     return () => {
-      window.removeEventListener('resize', handleResize);
+      window.removeEventListener("resize", handleResize);
     };
   }, []);
 
@@ -48,9 +48,9 @@ const ScreenRoomList = (props) => {
           height: "400px",
           position: "relative",
           overflow: "hidden",
-          borderColor: "#00A29D",  // 테두리 색상
-          boxShadow: "0 0 15px #00A29D",  // 그림자 효과
-          backgroundColor: "white"
+          borderColor: "#00A29D", // 테두리 색상
+          boxShadow: "0 0 15px #00A29D", // 그림자 효과
+          backgroundColor: "white",
         }}
       >
         <div
@@ -77,18 +77,37 @@ const ScreenRoomList = (props) => {
             left: 0,
           }}
         >
-        <Community communityObj={community} />
+          <Community communityObj={community} />
         </div>
       </div>
     ));
   };
-  
+
   return (
-    <div style={{ backgroundColor: "#E5F2F2", minHeight: "100vh", borderTop: "1px solid #00A29D" }}>
+    <div
+      style={{
+        backgroundColor: "#E5F2F2",
+        minHeight: "100vh",
+        borderTop: "1px solid #00A29D",
+      }}
+    >
       <div
-        style={{ paddingLeft: `${windowWidth > 1700 ? '500px' : '50px'}`, paddingRight: `${windowWidth > 1700 ? '500px' : '10px'}` }}
+        style={{
+          paddingLeft: `${windowWidth > 1700 ? "500px" : "50px"}`,
+          paddingRight: `${windowWidth > 1700 ? "500px" : "10px"}`,
+        }}
       >
-        <h3 style={{ margin: "0", paddingTop: "50px", marginBottom: "30px", fontSize: "24px", fontWeight: "bold" }}>커뮤니티</h3>
+        <h3
+          style={{
+            margin: "0",
+            paddingTop: "50px",
+            marginBottom: "30px",
+            fontSize: "24px",
+            fontWeight: "bold",
+          }}
+        >
+          커뮤니티
+        </h3>
         <div
           style={{
             display: "grid",

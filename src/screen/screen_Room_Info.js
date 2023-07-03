@@ -84,14 +84,50 @@ const ScreenRoomInfo = (props) => {
                   borderRadius: "50%",
                 }}
               />
-              <h4>커뮤니티 이름: {state.com_name}</h4>
-              <h4>커뮤니티 범주: {state.com_category}</h4>
-              <h4>커뮤니티 정보: {state.com_info}</h4>
+              <div style={{ marginLeft: "25px" }}>
+                <h4
+                  style={{
+                    fontSize: "40px",
+                    fontWeight: "bold",
+                  }}
+                >
+                  {state.com_name}
+                </h4>
+                <div
+                  style={{
+                    width: "100px",
+                    height: "auto",
+                    padding: "5px",
+                    borderRadius: "15px",
+                    backgroundColor: "#00A29D",
+                    marginTop: "10px",
+                    marginBottom: "10px",
+                  }}
+                >
+                  <h4
+                    style={{
+                      textAlign: "center",
+                      fontSize: "15px",
+                      fontWeight: "bold",
+                      color: "white",
+                    }}
+                  >
+                    {" "}
+                    {state.com_category}
+                  </h4>
+                </div>
+                <div>
+                  <h4 style={{ fontSize: "20px", fontWeight: "bold" }}>
+                    {state.com_info}
+                  </h4>
+                </div>
+              </div>
             </div>
 
-            <div style={{ height: "auto", padding: "20px", marginTop: "10px" }}>
-              <h4>커뮤니티 목표 투자금액: {state.com_total_investment}원</h4>
-              <h4>커뮤니티 현재 투자금액: {state.com_now_investment}원</h4>
+            <div style={{ height: "auto", padding: "20px", marginTop: "30px" }}>
+              <h4 style={{ fontSize: "20px", fontWeight: "bold" }}>
+                투자 목표 금액
+              </h4>
               <div style={{ position: "relative" }}>
                 <div
                   style={{
@@ -121,10 +157,35 @@ const ScreenRoomInfo = (props) => {
                   }}
                 ></div>
               </div>
+              <div style={{ position: "relative", color: "#00A29D" }}>
+                <div
+                  style={{
+                    position: "absolute",
+                    top: 55,
+                    left: "85%",
+                  }}
+                >
+                  <h4>{state.com_total_investment}원</h4>
+                </div>
+                <div
+                  style={{
+                    position: "absolute",
+                    top: 55,
+                    left:
+                      (state.com_now_investment / state.com_total_investment) *
+                        85 +
+                      "%",
+                  }}
+                >
+                  <h4>{state.com_now_investment}원</h4>
+                </div>
+              </div>
             </div>
 
-            <div style={{ padding: "20px", marginTop: "40px" }}>
-              <h4>티켓 쿠매하기</h4>
+            <div style={{ padding: "20px", marginTop: "100px" }}>
+              <h4 style={{ fontSize: "20px", fontWeight: "bold" }}>
+                티켓 쿠매하기
+              </h4>
               <h4>커뮤니티 티켓 가격: {state.com_ticket_price}원</h4>
               <h4>커뮤니티 티켓 최대 개수: {state.com_ticket_max}개</h4>
             </div>
@@ -134,8 +195,20 @@ const ScreenRoomInfo = (props) => {
                 display: "flex",
                 justifyContent: "center",
                 textAlign: "center",
+                marginTop: "100px",
               }}
             >
+              <h4
+                style={{
+                  fontSize: "20px",
+                  fontWeight: "bold",
+                  color: "#00A29D",
+                  marginRight: "20px",
+                }}
+              >
+                {(state.com_now_investment / state.com_total_investment) * 100}%
+                달성
+              </h4>
               <div
                 style={{
                   border: "1px solid black",
@@ -170,7 +243,7 @@ const ScreenRoomInfo = (props) => {
                   color: "white",
                   border: "none",
                   padding: "10px 20px",
-                  borderRadius: "5px",
+                  borderRadius: "10px",
                 }}
               >
                 커뮤니티 참여하기
