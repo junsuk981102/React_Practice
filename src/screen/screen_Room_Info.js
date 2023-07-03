@@ -16,12 +16,15 @@ const ScreenRoomInfo = (props) => {
   useEffect(() => {
     setWindowWidth(window.innerWidth);
   }, []);
+
   const { state } = useLocation();
   console.log(state.com_now_investment);
+
   const navi = useNavigate();
   function handleClick(text) {
     navi(`${text}`);
   }
+
   function handleClick_chat() {
     navi("/screen_chat", {
       state: {
@@ -37,6 +40,7 @@ const ScreenRoomInfo = (props) => {
       },
     });
   }
+
   return (
     <>
       <div
