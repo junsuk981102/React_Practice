@@ -125,7 +125,13 @@ const ScreenRoomInfo = (props) => {
             </div>
 
             <div style={{ height: "auto", padding: "20px", marginTop: "30px" }}>
-              <h4 style={{ fontSize: "20px", fontWeight: "bold" }}>
+              <h4
+                style={{
+                  fontSize: "20px",
+                  fontWeight: "bold",
+                  marginBottom: "20px",
+                }}
+              >
                 투자 목표 금액
               </h4>
               <div style={{ position: "relative" }}>
@@ -157,7 +163,13 @@ const ScreenRoomInfo = (props) => {
                   }}
                 ></div>
               </div>
-              <div style={{ position: "relative", color: "#00A29D" }}>
+              <div
+                style={{
+                  position: "relative",
+                  color: "#00A29D",
+                  fontWeight: "bold",
+                }}
+              >
                 <div
                   style={{
                     position: "absolute",
@@ -182,12 +194,120 @@ const ScreenRoomInfo = (props) => {
               </div>
             </div>
 
-            <div style={{ padding: "20px", marginTop: "100px" }}>
-              <h4 style={{ fontSize: "20px", fontWeight: "bold" }}>
-                티켓 쿠매하기
-              </h4>
-              <h4>커뮤니티 티켓 가격: {state.com_ticket_price}원</h4>
-              <h4>커뮤니티 티켓 최대 개수: {state.com_ticket_max}개</h4>
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                marginTop: "130px",
+              }}
+            >
+              <div style={{ marginRight: "50px" }}>
+                <h4
+                  style={{
+                    fontSize: "20px",
+                    fontWeight: "bold",
+                    marginBottom: "15px",
+                  }}
+                >
+                  티켓 구매하기
+                </h4>
+                <div style={{ display: "flex" }}>
+                  <div>
+                    <img
+                      src="../image/ticketgrey.png"
+                      alt="ticketgrey"
+                      style={{
+                        width: "175px",
+                        height: "175px",
+                        marginBottom: "15px",
+                      }}
+                    />
+                    <div
+                      style={{
+                        border: "1px solid black",
+                        padding: "5px",
+                        width: "175px",
+                        height: "30px",
+                        fontSize: "12px",
+                        fontWeight: "bold",
+                        backgroundColor: "#E5F2F2",
+                        borderRadius: "15px",
+                        textAlign: "center",
+                        color: "#00A29D",
+                      }}
+                    >
+                      <h4>현재 보유한 티켓 수 OO매</h4>
+                    </div>
+                  </div>
+                  <div style={{ marginLeft: "30px" }}>
+                    <h4
+                      style={{
+                        fontSize: "22px",
+                        fontWeight: "bold",
+                        marginBottom: "15px",
+                        textAlign: "center",
+                      }}
+                    >
+                      {state.com_ticket_price}원
+                    </h4>
+                    <button
+                      onClick={() => handleClick()}
+                      style={{
+                        width: "160px",
+                        height: "40px",
+                        fontSize: "15px",
+                        backgroundColor: "#00A29D",
+                        color: "white",
+                        border: "none",
+                        padding: "10px 20px",
+                        borderRadius: "20px",
+                        marginTop: "20px",
+                      }}
+                    >
+                      구매하기
+                    </button>
+                    <h4
+                      style={{
+                        color: "grey",
+                        fontSize: "13px",
+                        marginTop: "5px",
+                        textAlign: "center",
+                      }}
+                    >
+                      * 최대 {state.com_ticket_max}매까지 구매 가능
+                    </h4>
+                  </div>
+                </div>
+              </div>
+
+              <div>
+                <h4
+                  style={{
+                    fontSize: "20px",
+                    fontWeight: "bold",
+                    marginBottom: "15px",
+                  }}
+                >
+                  관심있는 회사
+                </h4>
+                <div style={{ display: "flex" }}>
+                  <img
+                    src="../image/startup1.png"
+                    alt="Startup1"
+                    style={{ width: "154px", height: "185px" }}
+                  />
+                  <img
+                    src="../image/startup2.png"
+                    alt="Startup2"
+                    style={{ width: "154px", height: "185px" }}
+                  />
+                  <img
+                    src="../image/startup3.png"
+                    alt="Startup3"
+                    style={{ width: "154px", height: "185px" }}
+                  />
+                </div>
+              </div>
             </div>
 
             <div
