@@ -59,7 +59,7 @@ export default function App() {
         <Routes>
           <Route path="/" element={<ScreenMain />}></Route>
           <Route path="/screen_chat/*" element={<ScreenChat />}></Route>
-          <Route path="/screen_example/*" element={<ScreenExample />}></Route>
+          <Route path="/screen_Example/*" element={<ScreenExample />}></Route>
           <Route path="/screen_login/*" element={<ScreenLogin />}></Route>
           <Route
             path="/screen_minting/*"
