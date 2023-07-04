@@ -3,9 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@chakra-ui/react": "^2.4.9",
-    "@emotion/react": "^11.10.6",
-    "@emotion/styled": "^11.10.6",
+    "@chakra-ui/react": "^2.7.1",
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
@@ -15,7 +15,7 @@
     "@types/react-dom": "^17.0.11",
     "ethers": "^5.7.2",
     "firebase": "^9.15.0",
-    "framer-motion": "^9.0.7",
+    "framer-motion": "^9.1.7",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-firebase-hooks": "^5.1.1",
@@ -25,8 +25,8 @@
     "source-map-loader": "^4.0.1",
     "web-vitals": "^2.1.4",
     "web3": "^1.8.2",
-    "window": "^4.2.7",
-    "web3-utils": "^1.8.2"
+    "web3-utils": "^1.8.2",
+    "window": "^4.2.7"
   },
   "scripts": {
     "start": "react-scripts start",
