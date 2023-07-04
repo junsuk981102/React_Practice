@@ -39,38 +39,142 @@ const Login = () => {
   };
 
   return (
-    <>
-      <input
-        type="email"
-        value={email}
-        onChange={handleEmailChange}
-        placeholder="Email"
-        style={{ margin: "5px" }} // margin 추가
+    <form
+      style={{
+        backgroundColor: "#E5F2F2",
+        display: "flex",
+        flexDirection: "column",
+        width: "100%",
+      }}
+    >
+      <hr
+        style={{
+          backgroundColor: "#00A29D",
+          height: "2px",
+          margin: "30px 0",
+        }}
       />
-      <input
-        type="password"
-        value={password}
-        onChange={handlePasswordChange}
-        placeholder="Password"
-        style={{ margin: "5px" }} // margin 추가
-      />
-      <button
-        className="btn-login"
-        onClick={handleEmailLogin}
-        style={{ margin: "5px" }} // margin 추가
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+        }}
       >
-        Sign in with Email
-      </button>
+        <label htmlFor="email" style={{ fontSize: "20px", fontWeight: "bold" }}>
+          이메일:
+        </label>
+        <input
+          type="email"
+          value={email}
+          onChange={handleEmailChange}
+          placeholder="Email"
+          required
+          style={{
+            border: "solid 1px #d4d3d3",
+            padding: "14px 12px",
+
+            borderRadius: "6px",
+            outline: "none",
+            flexGrow: "6",
+
+            maxWidth: "450px",
+          }}
+        />
+      </div>
+
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+        }}
+      >
+        <label
+          htmlFor="confirmpassword"
+          style={{ fontSize: "20px", fontWeight: "bold" }}
+        >
+          비밀번호:
+        </label>
+        <input
+          type="password"
+          value={password}
+          onChange={handlePasswordChange}
+          placeholder="Password"
+          required
+          style={{
+            border: "solid 1px #d4d3d3",
+            padding: "14px 12px",
+
+            borderRadius: "6px",
+            outline: "none",
+            flexGrow: "6",
+
+            maxWidth: "450px",
+          }}
+        />
+      </div>
+      <hr
+        style={{
+          backgroundColor: "#00A29D",
+          height: "2px",
+          margin: "30px 0",
+        }}
+      />
+      <div
+        style={{
+          textAlign: "center",
+          display: "flex",
+          justifyContent: "center",
+        }}
+      >
+        <button
+          className="btn-login"
+          onClick={handleEmailLogin}
+          style={{
+            width: "150px",
+            height: "75px",
+            fontSize: "20px",
+            fontWeight: "bold",
+            backgroundColor: "#00A29D",
+            color: "white",
+            border: "none",
+            padding: "10px 20px",
+            borderRadius: "5px",
+          }}
+        >
+          Sign in with Email
+        </button>
+      </div>
+
       <p>or</p>
-      <button
-        className="btn-login"
-        onClick={handleGoogleSignIn}
-        style={{ margin: "5px" }} // margin 추가
+      <div
+        style={{
+          textAlign: "center",
+          display: "flex",
+          justifyContent: "center",
+        }}
       >
-        <i className="fa-brands fa-google"></i>
-        Sign in with Google
-      </button>
-    </>
+        <button
+          className="btn-login"
+          onClick={handleGoogleSignIn}
+          style={{
+            width: "150px",
+            height: "75px",
+            fontSize: "20px",
+            fontWeight: "bold",
+            backgroundColor: "#00A29D",
+            color: "white",
+            border: "none",
+            padding: "10px 20px",
+            borderRadius: "5px",
+          }}
+        >
+          <i className="fa-brands fa-google"></i>
+          Sign in with Google
+        </button>
+      </div>
+    </form>
   );
 };
 

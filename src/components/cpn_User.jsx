@@ -13,20 +13,25 @@ const User = () => {
   return (
     <div
       style={{
-        margin: "15px",
+        padding: "15px",
+        width: "700px",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "space-between",
       }}
     >
       <article
         style={{
-          border: "1px solid #d4d3d3",
-          borderRadius: "25px",
-          backgroundColor: "#f5f8fc",
+          // border: "1px solid #d4d3d3",
+          // borderRadius: "25px",
+          //backgroundColor: "#f5f8fc",
+          backgroundColor: "#E5F2F2",
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
           flexDirection: "column",
           padding: "20px",
-          width: "30vw",
+          width: "100%",
         }}
       >
         <img
@@ -41,7 +46,16 @@ const User = () => {
             e.target.src = defaultProfileImage;
           }}
         />
-        <p style={{ fontWeight: "500" }}>{name || "User default"}</p>
+        <p style={{ fontWeight: "500" }}>{name || ""}</p>
+        <h3
+          style={{
+            textAlign: "center",
+            fontSize: "35px",
+            fontWeight: "bold",
+          }}
+        >
+          로그인
+        </h3>
         {user ? <Logout /> : <Login />}
       </article>
     </div>
