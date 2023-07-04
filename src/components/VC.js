@@ -11,6 +11,8 @@ const VC = ({ vcObj }) => {
         vc_name: vcObj.vc_name,
         vc_category: vcObj.vc_category,
         vc_info: vcObj.vc_info,
+        vc_backgroundImg: vcObj.vc_backgroundImg,
+        vc_logo: vcObj.vc_logo,
       },
     });
   }

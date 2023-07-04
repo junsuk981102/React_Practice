@@ -70,13 +70,13 @@ const ScreenVCInfo = (props) => {
               }}
             >
               <img
-                src="../image/animal/2.png"
-                alt="Animal"
+                src={state.vc_logo}
+                alt="logo"
                 style={{
                   width: "200px",
                   height: "200px",
                   objectFit: "cover",
-                  borderRadius: "50%",
+                  borderRadius: "25%",
                 }}
               />
               <h4
@@ -86,7 +86,7 @@ const ScreenVCInfo = (props) => {
                   marginLeft: "20px",
                 }}
               >
-                VC 이름: {state.vc_name}
+                {state.vc_name}
               </h4>
             </div>
 
@@ -116,7 +116,7 @@ const ScreenVCInfo = (props) => {
 
             <div style={{ padding: "20px" }}>
               <h4 style={{ fontSize: "25px", fontWeight: "bold" }}>
-                VC 정보: {state.vc_info}
+                {state.vc_info}
               </h4>
             </div>
           </div>
