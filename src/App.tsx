@@ -2,6 +2,7 @@ import "./App.css";
 import { ChakraProvider } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import { Routes, Route } from "react-router-dom";
+import theme from "./theme";
 
 import ScreenChat from "./screen/screen_Chat";
 import ScreenExample from "./screen/screen_Example";
@@ -52,7 +53,7 @@ export default function App() {
   }, [account]);
 
   return (
-    <ChakraProvider>
+    <ChakraProvider theme={theme}>
       <div className={"app"}>
         <Header />
         {/* <WalletCard/> */}
