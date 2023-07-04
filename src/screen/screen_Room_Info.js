@@ -29,6 +29,22 @@ const ScreenRoomInfo = (props) => {
     navi(`${text}`);
   }
 
+  function handleClick_chat() {
+    navi(`/screen_chat`, {
+      state: {
+        id: state.id,
+        com_name: state.com_name,
+        com_category: state.com_category,
+        com_info: state.com_info,
+        com_total_investment: state.com_total_investment,
+        com_now_investment: state.com_now_investment,
+        com_ticket_price: state.com_ticket_price,
+        com_ticket_max: state.com_ticket_max,
+        com_member: state.com_member,
+      },
+    });
+  }
+
   return (
     <>
       <div
@@ -353,7 +369,7 @@ const ScreenRoomInfo = (props) => {
               }}
             >
               <button
-                onClick={() => handleClick("/screen_chat")}
+                onClick={() => handleClick_chat()}
                 style={{
                   width: "700px",
                   height: "60px",
