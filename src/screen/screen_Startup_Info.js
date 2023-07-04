@@ -70,13 +70,13 @@ const ScreenStartupInfo = (props) => {
               }}
             >
               <img
-                src="../image/animal/1.png"
-                alt="Animal"
+                src={state.sup_logo}
+                alt="logo"
                 style={{
                   width: "200px",
                   height: "200px",
                   objectFit: "cover",
-                  borderRadius: "50%",
+                  borderRadius: "25%",
                 }}
               />
               <h4
@@ -86,7 +86,7 @@ const ScreenStartupInfo = (props) => {
                   marginLeft: "20px",
                 }}
               >
-                스타트업 이름: {state.sup_name}
+                {state.sup_name}
               </h4>
             </div>
 
@@ -116,7 +116,7 @@ const ScreenStartupInfo = (props) => {
 
             <div style={{ padding: "20px" }}>
               <h4 style={{ fontSize: "25px", fontWeight: "bold" }}>
-                스타트업 정보: {state.sup_info}
+                {state.sup_info}
               </h4>
             </div>
           </div>

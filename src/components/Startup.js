@@ -12,7 +12,7 @@ const Startup = ({ startupObj }) => {
         sup_category: startupObj.sup_category,
         sup_info: startupObj.sup_info,
         sup_logo: startupObj.sup_logo,
-        sup_backgroundImg: startupObj.sup_backgorundImg,
+        sup_backgroundImg: startupObj.sup_backgroundImg,
       },
     });
   }
