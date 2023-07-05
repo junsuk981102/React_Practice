@@ -1,5 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import { Box, Image, Badge, Button, Heading, Text } from "@chakra-ui/react";
 
 const VC = ({ vcObj }) => {
   const navi = useNavigate();

@@ -56,17 +56,11 @@ const ScreenMain = (props) => {
     return startups.map((startup) => (
       <Box
         key={startup.id}
-        borderWidth="1px"
-        borderRadius="5%"
-        padding="10px"
-        display="flex"
-        alignItems="center"
-        justifyContent="center"
-        width="500px"
-        height="360px"
+        w="420px"
+        h="280px"
+        borderRadius="md"
         position="relative"
         overflow="hidden"
-        borderColor="#00A29D"
         boxShadow="0 0 15px #00A29D"
       >
         <Startup startupObj={startup} />
@@ -78,17 +72,11 @@ const ScreenMain = (props) => {
     return vcs.map((vc) => (
       <Box
         key={vc.id}
-        borderWidth="1px"
-        borderRadius="5%"
-        padding="10px"
-        display="flex"
-        alignItems="center"
-        justifyContent="center"
-        width="500px"
-        height="360px"
+        w="500px"
+        h="360px"
+        borderRadius="md"
         position="relative"
         overflow="hidden"
-        borderColor="#00A29D"
         boxShadow="0 0 15px #00A29D"
       >
         <VC vcObj={vc} />
@@ -132,7 +120,7 @@ const ScreenMain = (props) => {
         <Grid
           display="grid"
           gridTemplateColumns="repeat(auto-fit, minmax(500px, 1fr))"
-          gap="20px"
+          gap="30px"
         >
           {renderVCs()}
         </Grid>
