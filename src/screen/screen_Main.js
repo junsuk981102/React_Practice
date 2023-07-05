@@ -56,8 +56,8 @@ const ScreenMain = (props) => {
     return startups.map((startup) => (
       <Box
         key={startup.id}
-        w="420px"
-        h="280px"
+        w="500px"
+        h="360px"
         borderRadius="md"
         position="relative"
         overflow="hidden"
@@ -90,7 +90,7 @@ const ScreenMain = (props) => {
         src="image/stot_main.png"
         alt="logo"
         style={{
-          width: "100%",
+          width: "auto",
           height: "auto",
         }}
       />
@@ -98,7 +98,7 @@ const ScreenMain = (props) => {
         paddingLeft={windowWidth > 1700 ? "500px" : "50px"}
         paddingRight={windowWidth > 1700 ? "500px" : "10px"}
       >
-        <Heading as="h2" size="md" marginTop="40px" marginBottom="5px">
+        <Heading as="h2" size="md" marginTop="50px" marginBottom="5px">
           새로운 스타트업 찾기
         </Heading>
         <Heading as="h1" size="lg" marginBottom="20px">
@@ -111,7 +111,7 @@ const ScreenMain = (props) => {
         >
           {renderStartups()}
         </Grid>
-        <Heading as="h2" size="md" marginTop="40px" marginBottom="5px">
+        <Heading as="h2" size="md" marginTop="50px" marginBottom="5px">
           새로운 VC 찾기
         </Heading>
         <Heading as="h1" size="lg" marginBottom="20px">
@@ -120,7 +120,7 @@ const ScreenMain = (props) => {
         <Grid
           display="grid"
           gridTemplateColumns="repeat(auto-fit, minmax(500px, 1fr))"
-          gap="30px"
+          gap="20px"
         >
           {renderVCs()}
         </Grid>
