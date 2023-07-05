@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { dbService } from "../firebase-config";
 import Startup from "../components/Startup";
 import VC from "../components/VC";
+import { Box, Grid, Heading } from "@chakra-ui/react";
 
 const ScreenMain = (props) => {
   const navi = useNavigate();
@@ -53,49 +54,45 @@ const ScreenMain = (props) => {
 
   const renderStartups = () => {
     return startups.map((startup) => (
-      <div
+      <Box
         key={startup.id}
-        style={{
-          border: "1px solid gray",
-          borderRadius: "5%",
-          padding: "10px",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          width: "500px",
-          height: "360px",
-          position: "relative",
-          overflow: "hidden",
-          borderColor: "#00A29D", // 테두리 색상
-          boxShadow: "0 0 15px #00A29D", // 그림자 효과
-        }}
+        borderWidth="1px"
+        borderRadius="5%"
+        padding="10px"
+        display="flex"
+        alignItems="center"
+        justifyContent="center"
+        width="500px"
+        height="360px"
+        position="relative"
+        overflow="hidden"
+        borderColor="#00A29D"
+        boxShadow="0 0 15px #00A29D"
       >
         <Startup startupObj={startup} />
-      </div>
+      </Box>
     ));
   };
 
   const renderVCs = () => {
     return vcs.map((vc) => (
-      <div
+      <Box
         key={vc.id}
-        style={{
-          border: "1px solid gray",
-          borderRadius: "5%",
-          padding: "10px",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          width: "500px",
-          height: "360px",
-          position: "relative",
-          overflow: "hidden",
-          borderColor: "#00A29D", // 테두리 색상
-          boxShadow: "0 0 15px #00A29D", // 그림자 효과
-        }}
+        borderWidth="1px"
+        borderRadius="5%"
+        padding="10px"
+        display="flex"
+        alignItems="center"
+        justifyContent="center"
+        width="500px"
+        height="360px"
+        position="relative"
+        overflow="hidden"
+        borderColor="#00A29D"
+        boxShadow="0 0 15px #00A29D"
       >
         <VC vcObj={vc} />
-      </div>
+      </Box>
     ));
   };
 
@@ -105,69 +102,41 @@ const ScreenMain = (props) => {
         src="image/stot_main.png"
         alt="logo"
         style={{
-          marginBottom: "35px",
           width: "100%",
           height: "auto",
         }}
       />
-      <div
-        style={{
-          paddingLeft: `${windowWidth > 1700 ? "500px" : "50px"}`,
-          paddingRight: `${windowWidth > 1700 ? "500px" : "10px"}`,
-        }}
+      <Box
+        paddingLeft={windowWidth > 1700 ? "500px" : "50px"}
+        paddingRight={windowWidth > 1700 ? "500px" : "10px"}
       >
-        <h3 style={{ margin: "0", marginBottom: "5px", fontSize: "20px" }}>
+        <Heading as="h2" size="md" marginTop="40px" marginBottom="5px">
           새로운 스타트업 찾기
-        </h3>
-        <h3
-          style={{
-            margin: "0",
-            marginBottom: "20px",
-            fontSize: "28px",
-            fontWeight: "bold",
-          }}
-        >
+        </Heading>
+        <Heading as="h1" size="lg" marginBottom="20px">
           투자 중인 스타트업
-        </h3>
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(500px, 1fr))",
-            gap: "20px",
-          }}
+        </Heading>
+        <Grid
+          display="grid"
+          gridTemplateColumns="repeat(auto-fit, minmax(500px, 1fr))"
+          gap="20px"
         >
           {renderStartups()}
-        </div>
-        <h3
-          style={{
-            margin: "0",
-            marginTop: "40px",
-            marginBottom: "5px",
-            fontSize: "20px",
-          }}
-        >
+        </Grid>
+        <Heading as="h2" size="md" marginTop="40px" marginBottom="5px">
           새로운 VC 찾기
-        </h3>
-        <h3
-          style={{
-            margin: "0",
-            marginBottom: "20px",
-            fontSize: "28px",
-            fontWeight: "bold",
-          }}
-        >
+        </Heading>
+        <Heading as="h1" size="lg" marginBottom="20px">
           투자 중인 VC
-        </h3>
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(500px, 1fr))",
-            gap: "20px",
-          }}
+        </Heading>
+        <Grid
+          display="grid"
+          gridTemplateColumns="repeat(auto-fit, minmax(500px, 1fr))"
+          gap="20px"
         >
           {renderVCs()}
-        </div>
-      </div>
+        </Grid>
+      </Box>
     </>
   );
 };
