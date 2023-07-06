@@ -1,9 +1,10 @@
-import Logout from "./cpn_Logout";
 import { useState, useEffect } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "../firebase-config";
+import { Box, Image, Text } from "@chakra-ui/react";
+import Logout from "./cpn_Logout";
 
 const User = () => {
   const auth = getAuth();
@@ -31,45 +32,39 @@ const User = () => {
   const id = user?.id;
 
   return (
-    <div
-      style={{
-        padding: "15px",
-        width: "700px",
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "space-between",
-      }}
+    <Box
+      bg="#f5f8fc"
+      borderRadius="25px"
+      display="flex"
+      justifyContent="center"
+      alignItems="center"
+      flexDirection="column"
+      padding="20px"
+      width="100%"
     >
-      <article
-        style={{
-          // border: "1px solid #d4d3d3",
-          // borderRadius: "25px",
-          // backgroundColor: "#f5f8fc",
-          backgroundColor: "#E5F2F2",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          flexDirection: "column",
-          padding: "20px",
-          width: "100%",
-        }}
+      <Box
+        display="flex"
+        flexDirection="column"
+        alignItems="start"
+        justifyContent="space-between"
+        padding="15px"
+        width="100%"
       >
-        <img
+        <Image
           src={photo}
           alt="User Profile"
-          style={{
-            width: "90px",
-            borderRadius: "50%",
-            display: "block",
-          }}
-          onError={(e) => {
-            e.target.src = defaultProfileImage;
-          }}
+          width="100px"
+          borderRadius="50%"
+          display="block"
+          margin="0 0 15px 0"
+          fallbackSrc={defaultProfileImage}
         />
-        <p style={{ fontWeight: "500" }}>{userId || "유저이름"}</p>
-        <Logout />
-      </article>
-    </div>
+        <Text width="100px" fontSize="18px" fontWeight="bold">
+          {userId || "익명의 투자자"}
+        </Text>
+      </Box>
+      <Logout />
+    </Box>
   );
 };
 
