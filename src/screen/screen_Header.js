@@ -60,7 +60,7 @@ function Header(props) {
           <button
             onClick={() => handleClick("/screen_profile")}
             style={{
-              marginRight: "20px",
+              marginRight: `${windowWidth > 1700 ? "500px" : "10px"}`,
               borderRadius: "50%",
               overflow: "hidden",
               padding: "0",
