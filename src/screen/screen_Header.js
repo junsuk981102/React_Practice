@@ -153,7 +153,7 @@ function Header(props) {
               fontSize: "20px",
               fontWeight: "bold",
               color:
-                activeButton === "/screen_wallet_connect" ? "#00A29D" : "black",
+                activeButton === "/screen_my_governance" ? "#00A29D" : "black",
             }}
           >
             지갑

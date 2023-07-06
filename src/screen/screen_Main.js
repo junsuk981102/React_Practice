@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { dbService } from "../firebase-config";
 import Startup from "../components/Startup";
 import VC from "../components/VC";
-import { Box, Grid, Heading } from "@chakra-ui/react";
+import { Box, Grid, Heading, Image } from "@chakra-ui/react";
 
 const ScreenMain = (props) => {
   const navi = useNavigate();
@@ -86,14 +86,8 @@ const ScreenMain = (props) => {
 
   return (
     <>
-      <img
-        src="image/stot_main.png"
-        alt="logo"
-        style={{
-          width: "auto",
-          height: "auto",
-        }}
-      />
+      <Image src="image/stot_main.png" alt="main logo" w="100%" h="auto" />
+
       <Box
         paddingLeft={windowWidth > 1700 ? "500px" : "50px"}
         paddingRight={windowWidth > 1700 ? "500px" : "10px"}

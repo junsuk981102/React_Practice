@@ -25,7 +25,6 @@ import ScreenStartupInfo from "./screen/screen_Startup_Info";
 import ScreenTokenGating from "./screen/screen_Token_Gating";
 import ScreenVCInfo from "./screen/screen_VC_Info";
 import ScreenWalletConnect from "./screen/screen_Wallet_Connect";
-import ScreenWalletToken from "./screen/screen_Wallet_Token";
 
 import ScreenTest from "./screen/screen_Test";
 // import WalletCard from './WalletCard';
@@ -113,10 +112,6 @@ export default function App() {
           <Route
             path="/screen_wallet_connect/*"
             element={<ScreenWalletConnect />}
-          ></Route>
-          <Route
-            path="/screen_wallet_token/*"
-            element={<ScreenWalletToken />}
           ></Route>
 
           <Route path="/screen_test/*" element={<ScreenTest />}></Route>
