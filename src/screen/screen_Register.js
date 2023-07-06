@@ -85,13 +85,18 @@ const ScreenRegister = (props) => {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        height: "100vh",
+        height: "100%",
         backgroundColor: "#E5F2F2",
         borderTop: "1px solid #00A29D",
       }}
     >
       <div
-        style={{ width: "700px", padding: "20px", backgroundColor: "#E5F2F2" }}
+        style={{
+          height: "100%",
+          width: "700px",
+          padding: "20px",
+          backgroundColor: "#E5F2F2",
+        }}
       >
         <h3
           style={{

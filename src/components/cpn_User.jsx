@@ -1,14 +1,34 @@
-import Login from "./cpn_Login";
 import Logout from "./cpn_Logout";
+import { useState, useEffect } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { auth } from "../firebase-config";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { doc, getDoc } from "firebase/firestore";
+import { db } from "../firebase-config";
 
 const User = () => {
-  const [user] = useAuthState(auth);
+  const auth = getAuth();
+  const [user, loading, error] = useAuthState(auth);
+  const [userId, setUserId] = useState("");
+
+  useEffect(() => {
+    const fetchUserId = async () => {
+      if (user) {
+        const userRef = doc(db, "user_list", user.uid);
+        const docSnapshot = await getDoc(userRef);
+        if (docSnapshot.exists()) {
+          const userData = docSnapshot.data();
+          setUserId(userData.id);
+        }
+      }
+    };
+
+    fetchUserId();
+  }, [user]);
 
   const defaultProfileImage = "/image/user.png"; // 기본 디폴트 이미지 경로
   const photo = user?.photoURL || defaultProfileImage;
   const name = user?.displayName;
+  const id = user?.id;
 
   return (
     <div
@@ -24,7 +44,7 @@ const User = () => {
         style={{
           // border: "1px solid #d4d3d3",
           // borderRadius: "25px",
-          //backgroundColor: "#f5f8fc",
+          // backgroundColor: "#f5f8fc",
           backgroundColor: "#E5F2F2",
           display: "flex",
           justifyContent: "center",
@@ -46,17 +66,8 @@ const User = () => {
             e.target.src = defaultProfileImage;
           }}
         />
-        <p style={{ fontWeight: "500" }}>{name || ""}</p>
-        <h3
-          style={{
-            textAlign: "center",
-            fontSize: "35px",
-            fontWeight: "bold",
-          }}
-        >
-          로그인
-        </h3>
-        {user ? <Logout /> : <Login />}
+        <p style={{ fontWeight: "500" }}>{userId || "유저이름"}</p>
+        <Logout />
       </article>
     </div>
   );

@@ -1,4 +1,5 @@
 import React from "react";
+import User from "../components/cpn_User";
 import { useNavigate } from "react-router-dom";
 
 const ScreenProfile = (props) => {
@@ -31,6 +32,7 @@ const ScreenProfile = (props) => {
       <button onClick={() => handleClick("/screen_profile_user")}>
         screen_profile_user 페이지
       </button>
+      <User />
     </>
   );
 };

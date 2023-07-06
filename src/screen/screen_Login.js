@@ -1,7 +1,10 @@
-import User from "../components/cpn_User";
+import Login from "../components/cpn_Login";
 import "../chat.css";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { auth } from "../firebase-config";
 
 function ScreenLogin() {
+  const [user] = useAuthState(auth);
   return (
     <>
       <div
@@ -22,7 +25,7 @@ function ScreenLogin() {
             justifyContent: "center",
           }}
         >
-          <User />
+          <Login />
         </div>
       </div>
     </>

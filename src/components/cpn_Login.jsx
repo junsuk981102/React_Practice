@@ -1,14 +1,20 @@
 import { useState } from "react";
-import { auth } from "../firebase-config";
+//import { auth } from "../firebase-config";
 import {
   GoogleAuthProvider,
   signInWithRedirect,
   signInWithEmailAndPassword,
+  getAuth,
 } from "firebase/auth";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
+  const navigate = useNavigate(); // 페이지 이동을 처리하기 위해 navigate 변수를 선언
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState(""); // 에러 메시지를 저장할 상태 변수
+  const [user, setUser] = useState("");
+  const auth = getAuth();
 
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
@@ -23,19 +29,26 @@ const Login = () => {
       .then((userCredential) => {
         // 로그인 성공 후 처리
         const user = userCredential.user;
-        console.log("로그인 성공:", user);
       })
       .catch((error) => {
         // 로그인 실패 처리
         const errorCode = error.code;
         const errorMessage = error.message;
-        console.error("로그인 실패:", errorCode, errorMessage);
       });
   };
 
   const handleGoogleSignIn = () => {
     const provider = new GoogleAuthProvider();
-    signInWithRedirect(auth, provider);
+    signInWithRedirect(auth, provider)
+      .then(() => {
+        navigate("/"); // 로그인 성공 후 홈 페이지로 이동
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        setError(errorMessage); // 에러 메시지 업데이트
+        console.error("로그인 실패:", errorCode, errorMessage);
+      });
   };
 
   return (
@@ -47,6 +60,15 @@ const Login = () => {
         width: "100%",
       }}
     >
+      <h3
+        style={{
+          textAlign: "center",
+          fontSize: "35px",
+          fontWeight: "bold",
+        }}
+      >
+        로그인
+      </h3>
       <hr
         style={{
           backgroundColor: "#00A29D",
@@ -73,16 +95,13 @@ const Login = () => {
           style={{
             border: "solid 1px #d4d3d3",
             padding: "14px 12px",
-
             borderRadius: "6px",
             outline: "none",
             flexGrow: "6",
-
             maxWidth: "450px",
           }}
         />
       </div>
-
       <div
         style={{
           display: "flex",
@@ -114,6 +133,8 @@ const Login = () => {
           }}
         />
       </div>
+      <div style={{ color: "red", textAlign: "center" }}>{error}</div>{" "}
+      {/* 에러 메시지 표시 */}
       <hr
         style={{
           backgroundColor: "#00A29D",
@@ -146,7 +167,6 @@ const Login = () => {
           Sign in with Email
         </button>
       </div>
-
       <p>or</p>
       <div
         style={{
@@ -170,7 +190,6 @@ const Login = () => {
             borderRadius: "5px",
           }}
         >
-          <i className="fa-brands fa-google"></i>
           Sign in with Google
         </button>
       </div>
