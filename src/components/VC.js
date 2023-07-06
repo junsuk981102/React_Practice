@@ -74,16 +74,29 @@ const VC = ({ vcObj }) => {
 
           {/* VC 이름 */}
           <Heading
-            //글자
-            as="h1"
-            size="lg"
             //위치
             position="absolute"
             mt="40px"
-            left="20px"
+            ml="20px"
+            //글자
+            as="h1"
+            size="lg"
           >
             {vcObj.vc_name}
           </Heading>
+
+          {/* VC 정보 */}
+          <Text
+            //위치
+            position="absolute"
+            mt="80px"
+            ml="20px"
+            mr="20px"
+            //글자
+            size="md"
+          >
+            {vcObj.vc_info}
+          </Text>
 
           {/* VC 카테고리 */}
           <Box
@@ -103,28 +116,22 @@ const VC = ({ vcObj }) => {
             {vcObj.vc_category}
           </Box>
 
-          <button
-            style={{
-              position: "absolute",
-              top: 35,
-              right: 20,
-              fontSize: "20px",
-              fontWeight: "bold",
-            }}
+          {/* VC INFO 이동버튼 */}
+          <Button
+            //위치
+            position="absolute"
+            mt="30px"
+            ml="370px"
+            //배경
+            bg="none"
+            variant="none"
+            //글자
+            as="b"
+            fontSize="md"
             onClick={() => handleClick()}
           >
             자세히 보기 {">"}
-          </button>
-          <h4
-            style={{
-              position: "absolute",
-              top: 80,
-              left: 22,
-              fontSize: "16px",
-            }}
-          >
-            {vcObj.vc_info}
-          </h4>
+          </Button>
         </div>
       </div>
     </div>
