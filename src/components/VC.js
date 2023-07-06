@@ -92,7 +92,7 @@ const VC = ({ vcObj }) => {
           //위치
           position="absolute"
           mt="5px"
-          ml="425px"
+          ml="390px"
           //배경
           borderRadius="xl"
           bg="primary"
