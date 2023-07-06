@@ -85,7 +85,7 @@ const ScreenRegister = (props) => {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        height: "100%",
+        height: "100vh",
         backgroundColor: "#E5F2F2",
         borderTop: "1px solid #00A29D",
       }}
