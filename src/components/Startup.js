@@ -1,5 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import { Box, Grid, Heading, Image } from "@chakra-ui/react";
 
 const Startup = ({ startupObj }) => {
   const navi = useNavigate();
@@ -74,17 +75,10 @@ const Startup = ({ startupObj }) => {
               }}
             />
           </div>
-          <h4
-            style={{
-              position: "absolute",
-              top: 40,
-              left: 20,
-              fontSize: "28px",
-              fontWeight: "bold",
-            }}
-          >
+
+          <Heading as="h1" size="lg" position="absolute" top="10" left="5">
             {startupObj.sup_name}
-          </h4>
+          </Heading>
           <div
             style={{
               position: "absolute",

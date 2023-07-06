@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { Box, Image, Badge, Button, Heading, Text } from "@chakra-ui/react";
+import { Box, Image, Button, Heading, Text } from "@chakra-ui/react";
 
 const VC = ({ vcObj }) => {
   const navi = useNavigate();
@@ -31,13 +31,11 @@ const VC = ({ vcObj }) => {
           left: 0,
         }}
       >
-        <img
+        <Image
           src={vcObj.vc_backgroundImg}
-          alt="vc background image"
-          style={{
-            width: "100%",
-            height: "100%",
-          }}
+          alt="vc background img"
+          w="100%"
+          h="100%"
         />
       </div>
       <div
@@ -65,48 +63,46 @@ const VC = ({ vcObj }) => {
               backgroundPosition: "center",
             }}
           >
-            <img
+            <Image
               src={vcObj.vc_logo}
               alt="VC logo"
-              style={{
-                width: "100%",
-                height: "100%",
-                borderRadius: "20%",
-              }}
+              w="100%"
+              h="100%"
+              borderRadius="20%"
             />
           </div>
-          <h4
-            style={{
-              position: "absolute",
-              top: 40,
-              left: 20,
-              fontSize: "28px",
-              fontWeight: "bold",
-            }}
+
+          {/* VC 이름 */}
+          <Heading
+            //글자
+            as="h1"
+            size="lg"
+            //위치
+            position="absolute"
+            mt="40px"
+            left="20px"
           >
             {vcObj.vc_name}
-          </h4>
-          <div
-            style={{
-              position: "absolute",
-              top: 5,
-              right: 20,
-              borderRadius: "15px",
-              backgroundColor: "#00A29D",
-              padding: "4px 8px",
-            }}
+          </Heading>
+
+          {/* VC 카테고리 */}
+          <Box
+            //위치
+            position="absolute"
+            mt="5px"
+            ml="425px"
+            //배경
+            borderRadius="xl"
+            bg="primary"
+            padding="5px 10px"
+            //글자
+            as="b"
+            fontSize="xs"
+            color="white"
           >
-            <h4
-              style={{
-                margin: 0,
-                fontSize: "12px",
-                color: "white",
-                fontWeight: "bold",
-              }}
-            >
-              {vcObj.vc_category}
-            </h4>
-          </div>
+            {vcObj.vc_category}
+          </Box>
+
           <button
             style={{
               position: "absolute",
