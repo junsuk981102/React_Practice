@@ -1,5 +1,6 @@
 import { auth } from "../firebase-config";
 import { useNavigate } from "react-router-dom";
+import { Button } from "@chakra-ui/react";
 
 const Logout = () => {
   const navigate = useNavigate(); // 페이지 이동을 처리하기 위해 navigate 변수를 선언
@@ -14,11 +15,9 @@ const Logout = () => {
       });
   };
   return (
-    <>
-      <button onClick={handleLogout} className="btn-login btn-logout">
-        Logout
-      </button>
-    </>
+    <Button onClick={handleLogout} variant="outline" mt={4}>
+      Logout
+    </Button>
   );
 };
 

@@ -4,6 +4,17 @@ import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth, db } from "../firebase-config";
 import { useNavigate } from "react-router-dom";
 import { doc, setDoc } from "firebase/firestore";
+import {
+  Heading,
+  Box,
+  Button,
+  FormControl,
+  FormLabel,
+  Input,
+  Text,
+  Flex,
+  Divider,
+} from "@chakra-ui/react";
 
 const Register = (props) => {
   const [registerId, setRegisterId] = useState("");
@@ -80,49 +91,27 @@ const Register = (props) => {
   };
 
   return (
-    <div
-      style={{
-        height: "100%",
-        width: "700px",
-        padding: "20px",
-        backgroundColor: "#E5F2F2",
-      }}
-    >
-      <h3
-        style={{
-          textAlign: "center",
-          fontSize: "35px",
-          fontWeight: "bold",
-        }}
-      >
+    <Box height="100%" width="700px" padding="20px" backgroundColor="#E5F2F2">
+      <Heading textAlign="center" fontSize="35px" fontWeight="bold">
         회원가입
-      </h3>
-      <form
+      </Heading>
+      <FormControl
+        as="form"
         onSubmit={handleFormSubmit}
-        style={{
-          backgroundColor: "#E5F2F2",
-          display: "flex",
-          flexDirection: "column",
-        }}
+        backgroundColor="#E5F2F2"
+        display="flex"
+        flexDirection="column"
       >
-        <hr
-          style={{
-            backgroundColor: "#00A29D",
-            height: "2px",
-            margin: "30px 0",
-          }}
-        />
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-          }}
+        <Divider backgroundColor="#00A29D" height="2px" margin="30px 0" />
+        <FormControl
+          display="flex"
+          justifyContent="space-between"
+          alignItems="center"
         >
-          <label htmlFor="id" style={{ fontSize: "20px", fontWeight: "bold" }}>
+          <FormLabel fontSize="20px" fontWeight="bold" htmlFor="id">
             아이디:
-          </label>
-          <input
+          </FormLabel>
+          <Input
             type="text"
             id="id"
             placeholder="아이디를 입력해주세요"
@@ -130,111 +119,86 @@ const Register = (props) => {
             onChange={(event) => {
               setRegisterId(event.target.value);
             }}
-            style={{
-              border: "solid 1px #d4d3d3",
-              padding: "14px 12px",
-
-              borderRadius: "6px",
-              outline: "none",
-              flexGrow: "6",
-
-              maxWidth: "450px",
-            }}
+            border="solid 1px #d4d3d3"
+            padding="14px 12px"
+            borderRadius="6px"
+            outline="none"
+            flexGrow="6"
+            maxW="450px"
           />
-        </div>
+        </FormControl>
 
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-          }}
+        <FormControl
+          display="flex"
+          justifyContent="space-between"
+          alignItems="center"
         >
-          <label
-            htmlFor="password"
-            style={{ fontSize: "20px", fontWeight: "bold" }}
-          >
+          <FormLabel fontSize="20px" fontWeight="bold" htmlFor="password">
             비밀번호:
-          </label>
-          <input
+          </FormLabel>
+          <Input
             type="password"
             id="password"
             placeholder="비밀번호를 입력해주세요"
             value={registerPassword}
-            onChange={(event) => {
-              setRegisterPassword(event.target.value);
-            }}
+            onChange={handlePasswordChange}
             required
-            style={{
-              border: "solid 1px #d4d3d3",
-              padding: "14px 12px",
-
-              borderRadius: "6px",
-              outline: "none",
-              flexGrow: "6",
-
-              maxWidth: "450px",
-            }}
+            border="solid 1px #d4d3d3"
+            padding="14px 12px"
+            borderRadius="6px"
+            outline="none"
+            flexGrow="6"
+            maxW="450px"
           />
-        </div>
-        <div style={{ display: "flex", justifyContent: "end" }}>
-          {passwordError && <p className="error">{passwordError}</p>}
-        </div>
+        </FormControl>
+        {passwordError && (
+          <Text textAlign="end" color="red" fontSize="14px">
+            {passwordError}
+          </Text>
+        )}
 
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-          }}
+        <FormControl
+          display="flex"
+          justifyContent="space-between"
+          alignItems="center"
         >
-          <label
+          <FormLabel
+            fontSize="20px"
+            fontWeight="bold"
             htmlFor="confirmpassword"
-            style={{ fontSize: "20px", fontWeight: "bold" }}
           >
             비밀번호 확인:
-          </label>
-          <input
+          </FormLabel>
+          <Input
             type="password"
             id="confirmpassword"
             placeholder="비밀번호를 한 번 더 입력해주세요"
             value={registerConfirmpassword}
-            onChange={(event) => {
-              setRegisterConfirmpassword(event.target.value);
-            }}
+            onChange={handleConfirmPasswordChange}
             required
-            style={{
-              border: "solid 1px #d4d3d3",
-              padding: "14px 12px",
-
-              borderRadius: "6px",
-              outline: "none",
-              flexGrow: "6",
-
-              maxWidth: "450px",
-            }}
+            border="solid 1px #d4d3d3"
+            padding="14px 12px"
+            borderRadius="6px"
+            outline="none"
+            flexGrow="6"
+            maxW="450px"
           />
-        </div>
-        <div style={{ display: "flex", justifyContent: "end" }}>
-          {confirmPasswordError && (
-            <p className="error">{confirmPasswordError}</p>
-          )}
-        </div>
+        </FormControl>
+        {confirmPasswordError && (
+          <Text textAlign="end" color="red" fontSize="14px">
+            {confirmPasswordError}
+          </Text>
+        )}
 
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-          }}
+        <FormControl
+          display="flex"
+          justifyContent="space-between"
+          alignItems="center"
         >
-          <label
-            htmlFor="email"
-            style={{ fontSize: "20px", fontWeight: "bold" }}
-          >
+          <FormLabel fontSize="20px" fontWeight="bold" htmlFor="email">
             이메일:
-          </label>
-          <input
+          </FormLabel>
+          <Input
             type="email"
             id="email"
             placeholder="예: stot1234@stot.com"
@@ -242,34 +206,24 @@ const Register = (props) => {
             onChange={(event) => {
               setRegisterEmail(event.target.value);
             }}
-            required
-            style={{
-              border: "solid 1px #d4d3d3",
-              padding: "14px 12px",
-
-              borderRadius: "6px",
-              outline: "none",
-              flexGrow: "6",
-
-              maxWidth: "450px",
-            }}
+            border="solid 1px #d4d3d3"
+            padding="14px 12px"
+            borderRadius="6px"
+            outline="none"
+            flexGrow="6"
+            maxW="450px"
           />
-        </div>
+        </FormControl>
 
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-          }}
+        <FormControl
+          display="flex"
+          justifyContent="space-between"
+          alignItems="center"
         >
-          <label
-            htmlFor="phonenumber"
-            style={{ fontSize: "20px", fontWeight: "bold" }}
-          >
+          <FormLabel fontSize="20px" fontWeight="bold" htmlFor="phonenumber">
             전화번호:
-          </label>
-          <input
+          </FormLabel>
+          <Input
             type="tel"
             id="phonenumber"
             placeholder="예: 010-1234-5678"
@@ -277,70 +231,48 @@ const Register = (props) => {
             onChange={(event) => {
               setRegisterPhonenumber(event.target.value);
             }}
-            style={{
-              border: "solid 1px #d4d3d3",
-              padding: "14px 12px",
-
-              borderRadius: "6px",
-              outline: "none",
-              flexGrow: "6",
-
-              maxWidth: "450px",
-            }}
+            border="solid 1px #d4d3d3"
+            padding="14px 12px"
+            borderRadius="6px"
+            outline="none"
+            flexGrow="6"
+            maxW="450px"
           />
-        </div>
+        </FormControl>
 
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-          }}
+        <FormControl
+          display="flex"
+          justifyContent="space-between"
+          alignItems="center"
         >
-          <label
-            htmlFor="birthDate"
-            style={{
-              fontSize: "20px",
-              fontWeight: "bold",
-              marginRight: "50px",
-            }}
-          >
+          <FormLabel fontSize="20px" fontWeight="bold" htmlFor="birthDate">
             생년월일:
-          </label>
-          <input
+          </FormLabel>
+          <Input
             type="date"
             id="birthDate"
             value={registerBirthdate}
             onChange={(event) => {
               setRegisterBirthdate(event.target.value);
             }}
-            style={{
-              border: "solid 1px #d4d3d3",
-              padding: "14px 12px",
-
-              borderRadius: "6px",
-              outline: "none",
-              flexGrow: "6",
-
-              maxWidth: "450px",
-            }}
+            border="solid 1px #d4d3d3"
+            padding="14px 12px"
+            borderRadius="6px"
+            outline="none"
+            flexGrow="6"
+            maxW="450px"
           />
-        </div>
+        </FormControl>
 
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-          }}
+        <FormControl
+          display="flex"
+          justifyContent="space-between"
+          alignItems="center"
         >
-          <label
-            htmlFor="address"
-            style={{ fontSize: "20px", fontWeight: "bold" }}
-          >
+          <FormLabel fontSize="20px" fontWeight="bold" htmlFor="address">
             주소:
-          </label>
-          <input
+          </FormLabel>
+          <Input
             type="text"
             id="address"
             placeholder="주소를 입력해주세요"
@@ -348,46 +280,34 @@ const Register = (props) => {
             onChange={(event) => {
               setRegisterAddress(event.target.value);
             }}
-            style={{
-              border: "solid 1px #d4d3d3",
-              padding: "14px 12px",
-
-              borderRadius: "6px",
-              outline: "none",
-              flexGrow: "6",
-
-              maxWidth: "450px",
-            }}
+            border="solid 1px #d4d3d3"
+            padding="14px 12px"
+            borderRadius="6px"
+            outline="none"
+            flexGrow="6"
+            maxW="450px"
           />
-        </div>
+        </FormControl>
 
-        <hr
-          style={{
-            backgroundColor: "#00A29D",
-            height: "2px",
-            margin: "30px 0",
-          }}
-        />
-        <div style={{ textAlign: "center" }}>
-          <button
+        <Divider backgroundColor="#00A29D" height="2px" margin="30px 0" />
+        <Flex justifyContent="center">
+          <Button
             type="submit"
-            style={{
-              width: "150px",
-              height: "75px",
-              fontSize: "20px",
-              fontWeight: "bold",
-              backgroundColor: "#00A29D",
-              color: "white",
-              border: "none",
-              padding: "10px 20px",
-              borderRadius: "5px",
-            }}
+            width="150px"
+            height="75px"
+            fontSize="20px"
+            fontWeight="bold"
+            backgroundColor="#00A29D"
+            color="white"
+            border="none"
+            padding="10px 20px"
+            borderRadius="5px"
           >
             가입하기
-          </button>
-        </div>
-      </form>
-    </div>
+          </Button>
+        </Flex>
+      </FormControl>
+    </Box>
   );
 };
 
