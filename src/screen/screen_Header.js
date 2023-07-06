@@ -2,12 +2,17 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 //로그인 상태를 감지하기 위한 firebase auth
 import { auth } from "../firebase-config";
+import { useAuthState } from "react-firebase-hooks/auth";
+import User from "../components/cpn_User"; // User 컴포넌트 import
 
 function Header(props) {
   const navi = useNavigate();
   const [activeButton, setActiveButton] = useState("");
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [isLoggedIn, setIsLoggedIn] = useState(false); // 추가된 상태
+  const [user] = useAuthState(auth);
+  const defaultProfileImage = "/image/user.png"; // 기본 디폴트 이미지 경로
+  const photo = user?.photoURL || defaultProfileImage;
 
   useEffect(() => {
     const handleResize = () => {
@@ -25,7 +30,6 @@ function Header(props) {
     setWindowWidth(window.innerWidth);
   }, []);
 
-  // 추가된 useEffect
   useEffect(() => {
     // 로그인 상태 변경 감지
     const unsubscribe = auth.onAuthStateChanged((user) => {
@@ -44,24 +48,39 @@ function Header(props) {
 
   // 수정된 renderButton 함수
   const renderButton = () => {
-    if (isLoggedIn) {
+    if (auth.currentUser) {
+      //사용자가 로그인 상태인 경우에만 버튼을 렌더링
       return (
-        <button
-          onClick={() => {
-            // 로그아웃 처리
-            auth.signOut().then(() => {
-              // 로그아웃 후 처리
-              console.log("로그아웃 성공");
-            });
-          }}
+        <div
           style={{
-            marginRight: "20px",
-            fontSize: "20px",
-            fontWeight: "bold",
+            display: "flex",
+            alignItems: "center",
           }}
         >
-          로그아웃
-        </button>
+          <button
+            onClick={() => handleClick("/screen_profile")}
+            style={{
+              marginRight: "20px",
+              borderRadius: "50%",
+              overflow: "hidden",
+              padding: "0",
+              width: "40px",
+              height: "40px",
+              border: "none",
+              backgroundColor: "transparent",
+            }}
+          >
+            <img
+              src={photo}
+              alt="User Profile"
+              style={{
+                width: "100%",
+                height: "100%",
+                objectFit: "cover",
+              }}
+            />
+          </button>
+        </div>
       );
     } else {
       return (
@@ -151,7 +170,7 @@ function Header(props) {
             커뮤니티
           </button>
         </div>
-        <div>{renderButton()}</div> {/* 수정된 버튼 렌더링 */}
+        <div>{renderButton()}</div> {/* 로그인-로그아웃 변경 버튼 렌더링 */}
       </div>
     </>
   );
