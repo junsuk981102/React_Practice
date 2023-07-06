@@ -170,7 +170,12 @@ function Header(props) {
             커뮤니티
           </button>
         </div>
-        <div>{renderButton()}</div> {/* 로그인-로그아웃 변경 버튼 렌더링 */}
+        <div
+          style={{ marginRight: `${windowWidth > 1700 ? "500px" : "10px"}` }}
+        >
+          {renderButton()}
+        </div>{" "}
+        {/* 로그인-로그아웃 변경 버튼 렌더링 */}
       </div>
     </>
   );
