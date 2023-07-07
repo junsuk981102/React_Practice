@@ -1,5 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import { Heading, Box, Image, Text, Button } from "@chakra-ui/react";
 
 const Community = ({ communityObj }) => {
   const navi = useNavigate();
@@ -37,71 +38,114 @@ const Community = ({ communityObj }) => {
   }
 
   return (
-    <div style={{ position: "relative", width: "100%", height: "100%" }}>
-      <h4
-        style={{
-          position: "absolute",
-          top: 10,
-          left: 10,
-          fontSize: "28px",
-          fontWeight: "bold",
-        }}
+    <Box>
+      {/* 상단 */}
+      <Box
+        //위치
+        position="absolute"
+        mt="0px"
+        //크기
+        w="100%"
+        h="50%"
       >
-        {communityObj.com_name}
-      </h4>
-      <h4
-        style={{
-          position: "absolute",
-          top: 50,
-          left: 12,
-          fontSize: "12px",
-          fontWeight: "bold",
-          color: "#00A29D",
-        }}
+        <Image
+          //크기
+          w="100%"
+          h="100%"
+          //배경
+          src="/image/animal/3.png"
+          alt="community background img"
+        />
+      </Box>
+
+      {/* 하단 */}
+      <Box
+        //위치
+        position="absolute"
+        mt="200px"
+        //크기
+        w="100%"
+        h="50%"
       >
-        {communityObj.com_category}
-      </h4>
-      <button
-        style={{
-          position: "absolute",
-          top: 15,
-          right: 20,
-          fontSize: "10px",
-          fontWeight: "bold",
-        }}
-        onClick={() => handleClick()}
-      >
-        자세히 보기 {">"}
-      </button>
-      <button
-        style={{
-          position: "absolute",
-          borderRadius: "10px",
-          color: "white",
-          backgroundColor: "#00A29D",
-          padding: "4px 8px",
-          bottom: 15,
-          right: 20,
-          fontSize: "18px",
-          fontWeight: "bold",
-        }}
-        onClick={() => handleClick_chat()}
-      >
-        채팅방 입장 {">"}
-      </button>
-      <h4
-        style={{
-          position: "absolute",
-          bottom: 20,
-          left: 12,
-          fontSize: "16px",
-          color: "#00A29D",
-          fontWeight: "bold",
-        }}
-      >
-        현재 : {communityObj.com_member}명
-      </h4>
-    </div>
+        {/* 커뮤니티 이름 */}
+        <Heading
+          //위치
+          position="absolute"
+          mt="10px"
+          ml="5px"
+          //글자
+          as="h1"
+          size="lg"
+        >
+          {communityObj.com_name}
+        </Heading>
+
+        {/* 커뮤니티 카테고리 */}
+        <Text
+          //위치
+          position="absolute"
+          mt="45px"
+          ml="7px"
+          //글자
+          as="b"
+          fontSize="xs"
+          color="#00A29D"
+        >
+          {communityObj.com_category}
+        </Text>
+
+        {/* 커뮤니티 참가인원 */}
+        <Text
+          //위치
+          position="absolute"
+          mt="155px"
+          ml="15px"
+          //글자
+          as="b"
+          fontSize="md"
+          color="#00A29D"
+        >
+          현재 : {communityObj.com_member}명
+        </Text>
+
+        <Button
+          //위치
+          position="absolute"
+          mt="5px"
+          ml="210px"
+          //배경
+          bg="none"
+          variant="none"
+          //글자
+          fontSize="xs"
+          //기능
+          onClick={() => handleClick()}
+        >
+          자세히 보기 {">"}
+        </Button>
+
+        <Button
+          //위치
+          position="absolute"
+          mt="150px"
+          ml="205px"
+          //배경
+          bg="#00A29D"
+          variant="none"
+          //크기
+          px="6px"
+          borderRadius="lg"
+          //글자
+          as="b"
+          fontSize="sm"
+          color="white"
+          //기능
+          onClick={() => handleClick_chat()}
+        >
+          채팅방 입장 {">"}
+        </Button>
+      </Box>
+    </Box>
   );
 };
 export default Community;

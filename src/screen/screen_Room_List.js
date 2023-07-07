@@ -1,28 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { dbService } from "../firebase-config";
 import Community from "../components/Community";
-import { Heading, Grid } from "@chakra-ui/react";
+import { Heading, Grid, Box, useBreakpointValue } from "@chakra-ui/react";
 
 const ScreenRoomList = (props) => {
-  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-
-  useEffect(() => {
-    const handleResize = () => {
-      setWindowWidth(window.innerWidth);
-    };
-
-    window.addEventListener("resize", handleResize);
-
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
-
-  useEffect(() => {
-    setWindowWidth(window.innerWidth);
-  }, []);
-
   const [communities, setCommunities] = useState([]);
+  const boxPaddingLeft = useBreakpointValue({ base: "50px", xl: "500px" });
+  const boxPaddingRight = useBreakpointValue({ base: "10px", xl: "500px" });
 
   useEffect(() => {
     dbService.collection("community_list").onSnapshot((snapshot) => {
@@ -36,80 +20,56 @@ const ScreenRoomList = (props) => {
 
   const renderCommunities = () => {
     return communities.map((community) => (
-      <div
+      <Box
+        //커뮤니티 ID
         key={community.id}
-        style={{
-          border: "1px solid gray",
-          borderRadius: "5%",
-          padding: "10px",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          width: "300px",
-          height: "400px",
-          position: "relative",
-          overflow: "hidden",
-          borderColor: "#00A29D", // 테두리 색상
-          boxShadow: "0 0 15px #00A29D", // 그림자 효과
-          backgroundColor: "white",
-        }}
+        //크기
+        w="300px"
+        h="400px"
+        //배경
+        bg="white"
+        borderRadius="md"
+        boxShadow="0 0 15px #00A29D"
+        //구조
+        position="relative"
+        overflow="hidden"
       >
-        <div
-          style={{
-            backgroundImage: `url(/image/animal/3.png)`,
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-            width: "100%",
-            height: "50%",
-            position: "absolute",
-            top: 0,
-            left: 0,
-          }}
-        />
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            width: "100%",
-            height: "50%",
-            position: "absolute",
-            bottom: 0,
-            left: 0,
-          }}
-        >
-          <Community communityObj={community} />
-        </div>
-      </div>
+        <Community communityObj={community} />
+      </Box>
     ));
   };
 
   return (
-    <div
-      style={{
-        backgroundColor: "#E5F2F2",
-        minHeight: "100vh",
-        borderTop: "1px solid #00A29D",
-      }}
+    <Box
+      //크기
+      h="100vh"
+      //배경
+      bg="#E5F2F2"
+      borderTop="1px solid #00A29D"
     >
-      <div
-        style={{
-          paddingLeft: `${windowWidth > 1700 ? "500px" : "50px"}`,
-          paddingRight: `${windowWidth > 1700 ? "500px" : "10px"}`,
-        }}
-      >
-        <Heading as="h1" size="lg" mt="30px" mb="30px">
+      <Box pl={boxPaddingLeft} pr={boxPaddingRight}>
+        {/* 페이지 제목 */}
+        <Heading
+          //위치
+          mt="30px"
+          mb="30px"
+          //크기
+          as="h1"
+          size="lg"
+        >
           커뮤니티{" "}
         </Heading>
 
+        {/* 커뮤니티 리스트 */}
         <Grid
+          //형식
           gridTemplateColumns="repeat(auto-fit, minmax(300px, 1fr))"
           gap="5px"
         >
           {renderCommunities()}
         </Grid>
-      </div>
-    </div>
+      </Box>
+    </Box>
   );
 };
 

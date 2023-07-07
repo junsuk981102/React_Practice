@@ -3,27 +3,18 @@ import { useNavigate } from "react-router-dom";
 import { dbService } from "../firebase-config";
 import Startup from "../components/Startup";
 import VC from "../components/VC";
-import { Box, Grid, Heading, Image } from "@chakra-ui/react";
+import {
+  Box,
+  Grid,
+  Heading,
+  Image,
+  useBreakpointValue,
+} from "@chakra-ui/react";
 
 const ScreenMain = (props) => {
   const navi = useNavigate();
-  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-
-  useEffect(() => {
-    const handleResize = () => {
-      setWindowWidth(window.innerWidth);
-    };
-
-    window.addEventListener("resize", handleResize);
-
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
-
-  useEffect(() => {
-    setWindowWidth(window.innerWidth);
-  }, []);
+  const boxPaddingLeft = useBreakpointValue({ base: "50px", xl: "500px" });
+  const boxPaddingRight = useBreakpointValue({ base: "10px", xl: "500px" });
 
   function handleClick(text) {
     navi(`${text}`);
@@ -88,10 +79,7 @@ const ScreenMain = (props) => {
     <>
       <Image src="image/stot_main.png" alt="main logo" w="100%" h="auto" />
 
-      <Box
-        paddingLeft={windowWidth > 1700 ? "500px" : "50px"}
-        paddingRight={windowWidth > 1700 ? "500px" : "10px"}
-      >
+      <Box pl={boxPaddingLeft} pr={boxPaddingRight}>
         <Heading as="h2" size="md" marginTop="50px" marginBottom="5px">
           새로운 스타트업 찾기
         </Heading>
