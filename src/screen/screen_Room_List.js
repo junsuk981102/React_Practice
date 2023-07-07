@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { dbService } from "../firebase-config";
 import Community from "../components/Community";
+import { Heading, Grid } from "@chakra-ui/react";
 
 const ScreenRoomList = (props) => {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
@@ -97,26 +98,16 @@ const ScreenRoomList = (props) => {
           paddingRight: `${windowWidth > 1700 ? "500px" : "10px"}`,
         }}
       >
-        <h3
-          style={{
-            margin: "0",
-            paddingTop: "50px",
-            marginBottom: "30px",
-            fontSize: "24px",
-            fontWeight: "bold",
-          }}
-        >
-          커뮤니티
-        </h3>
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
-            gap: "20px",
-          }}
+        <Heading as="h1" size="lg" mt="30px" mb="30px">
+          커뮤니티{" "}
+        </Heading>
+
+        <Grid
+          gridTemplateColumns="repeat(auto-fit, minmax(300px, 1fr))"
+          gap="5px"
         >
           {renderCommunities()}
-        </div>
+        </Grid>
       </div>
     </div>
   );
