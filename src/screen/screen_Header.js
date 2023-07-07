@@ -1,19 +1,22 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-//로그인 상태를 감지하기 위한 firebase auth
 import { auth } from "../firebase-config";
 import { useAuthState } from "react-firebase-hooks/auth";
 import User from "../components/cpn_User"; // User 컴포넌트 import
 
 function Header(props) {
   const navi = useNavigate();
+
+  // REFACT: 상태값이 많으면 사용이 복잡해질 수 있으나, 이 경우에는 정해진 상태 값들이므로 문제되지 않습니다.
   const [activeButton, setActiveButton] = useState("");
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-  const [isLoggedIn, setIsLoggedIn] = useState(false); // 추가된 상태
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [user] = useAuthState(auth);
-  const defaultProfileImage = "/image/user.png"; // 기본 디폴트 이미지 경로
+
+  const defaultProfileImage = "/image/user.png";
   const photo = user?.photoURL || defaultProfileImage;
 
+  // REFACT: window resize event를 통해 windowWidth 상태를 변경하는 대신 CSS media query를 사용하면 더 효율적일 수 있습니다.
   useEffect(() => {
     const handleResize = () => {
       setWindowWidth(window.innerWidth);
@@ -26,18 +29,18 @@ function Header(props) {
     };
   }, []);
 
+  // REFACT: window 크기에 따른 상태 변경을 처리하는 useEffect는 하나로 합쳐서 관리하면 더 간결하게 코드를 작성할 수 있습니다.
   useEffect(() => {
     setWindowWidth(window.innerWidth);
   }, []);
 
   useEffect(() => {
-    // 로그인 상태 변경 감지
     const unsubscribe = auth.onAuthStateChanged((user) => {
-      setIsLoggedIn(!!user); // 로그인 상태에 따라 true 또는 false 설정
+      setIsLoggedIn(!!user);
     });
 
     return () => {
-      unsubscribe(); // cleanup 함수에서 구독 해제
+      unsubscribe();
     };
   }, []);
 
@@ -46,10 +49,9 @@ function Header(props) {
     navi(text);
   }
 
-  // 수정된 renderButton 함수
+  // REFACT: renderButton 함수를 두개의 다른 하위 컴포넌트로 분리해서 가독성을 높일 수 있습니다.
   const renderButton = () => {
     if (auth.currentUser) {
-      //사용자가 로그인 상태인 경우에만 버튼을 렌더링
       return (
         <div
           style={{
@@ -60,7 +62,7 @@ function Header(props) {
           <button
             onClick={() => handleClick("/screen_profile")}
             style={{
-              marginRight: `${windowWidth > 1700 ? "500px" : "10px"}`,
+              marginRight: `${windowWidth > 1700 ? "500px" : "10px"}`, // REFACT: Magic numbers like "1700" or "500px" 등을 상수로 선언해서 사용하면 좀 더 가독성이 좋고, 이해하기 쉽습니다.
               borderRadius: "50%",
               overflow: "hidden",
               padding: "0",
