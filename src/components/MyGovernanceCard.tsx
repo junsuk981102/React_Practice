@@ -4,10 +4,12 @@ import { saleGovernanceTokenContract, web3 } from "../web3Config";
 import GovernanceCard from "./GovernanceCard";
 import {
   Box,
-  Grid,
-  Heading,
+  Button,
+  Input,
+  Text,
   Image,
-  useBreakpointValue,
+  InputGroup,
+  InputRightAddon,
 } from "@chakra-ui/react";
 
 export interface IMyGovernanceCard {
@@ -35,9 +37,6 @@ const MyGovernanceCard: FC<MyGovernanceCardProps> = ({
   const [sellPrice, setSellPrice] = useState<string>("");
   const [myGovernanceSalePrice, setMyGovernanceSalePrice] =
     useState<string>(GNT_Sale_Price);
-  const boxPaddingLeft = useBreakpointValue({ base: "50px", xl: "500px" });
-  const boxPaddingRight = useBreakpointValue({ base: "10px", xl: "500px" });
-
   const onChangeSellPrice = (e: ChangeEvent<HTMLInputElement>) => {
     setSellPrice(e.target.value);
   };
@@ -60,75 +59,77 @@ const MyGovernanceCard: FC<MyGovernanceCardProps> = ({
 
   return (
     <div>
-      <div
-        style={{
-          width: "300px",
-          height: "270px",
-          backgroundColor: "white",
-          border: "3px solid #00A29D",
-          padding: "10px",
-          margin: "10px",
-          alignItems: "center",
-          display: "flex",
-          position: "relative",
-          borderRadius: "15px",
-          fontSize: "15px",
-          fontWeight: "bold", // 상위 요소를 기준으로 배치
-        }}
+      <Box
+        //크기
+        w="300px"
+        h="250px"
+        pt="5px"
+        m="10px"
+        //배경
+        borderRadius="md"
+        bg="white"
+        border="3px solid #00A29D"
       >
-        <img
-          src="../image/ticketicon.png" // 이미지 파일 경로
-          alt="Ticket Icon"
-          style={{
-            position: "absolute", // 상위 요소 내에서 위치를 조정
-            top: 10,
-            left: 100,
-            width: "100px", // 이미지 너비 조정
-            height: "100px", // 이미지 높이 조정
-          }}
+        {/* 티켓 아이콘 */}
+        <Image
+          //위치
+          position="absolute"
+          ml="100px"
+          //배경
+          src="../image/ticketicon.png"
+          alt="ticket icon"
+          //크기
+          w="100px"
+          h="100px"
         />
-        <div style={{ marginTop: 20, top: 120, position: "absolute" }}>
-          <h3>
+        {/* 하단 */}
+        <Box
+          //위치
+          position="absolute"
+          mt="120px"
+          ml="10px"
+          //글자
+          fontSize="sm"
+          as="b"
+        >
+          <Text>
             NFT 이름 : <GovernanceCard GNT_name={GNT_name} />
-          </h3>
+          </Text>
           {saleStatus ? (
             myGovernanceSalePrice === "0" ? (
               // 판매가능&판매이전
               <>
-                <h3>NFT ID : {GNT_Id}</h3>
-                <h3>초기 가격 : {GNT_Initial_Price} ETH</h3>
-                <input
-                  type="number"
-                  value={sellPrice}
-                  onChange={onChangeSellPrice}
-                  placeholder="판매가격을 입력하세요."
-                  style={{
-                    width: "160px",
-                    fontSize: "15px",
-                    textAlign: "center",
-                    backgroundColor: "#E5F2F2",
-                    color: "black",
-                    borderBottom: "3px solid #00A29D",
-                  }}
-                />
-                <span> ETH</span>
-                <button
-                  style={{
-                    width: "auto",
-                    height: "auto",
-                    fontSize: "10px",
-                    fontWeight: "bold",
-                    backgroundColor: "green",
-                    color: "white",
-                    border: "none",
-                    padding: "5px 5px",
-                    borderRadius: "10px",
-                    marginLeft: "10px",
-                  }}
-                  onClick={onClickSell}
-                >
-                  판매 등록
-                </button>
+                <Text>NFT ID : {GNT_Id}</Text>
+                <Text>초기가격 : {GNT_Initial_Price} ETH</Text>
+                <InputGroup size="sm">
+                  <Input
+                    type="number"
+                    value={sellPrice}
+                    onChange={onChangeSellPrice}
+                    placeholder="판매가격을 입력하세요."
+                    w="160px"
+                    fontSize="sm"
+                  ></Input>
+                  <InputRightAddon children="ETH" />
+                  <Button>판매 등록</Button>
+                  <button
+                    style={{
+                      width: "auto",
+                      height: "auto",
+                      fontSize: "10px",
+                      fontWeight: "bold",
+                      backgroundColor: "green",
+                      color: "white",
+                      border: "none",
+                      padding: "5px 5px",
+                      borderRadius: "10px",
+                      marginLeft: "10px",
+                    }}
+                    onClick={onClickSell}
+                  >
+                    판매 등록
+                  </button>
+                </InputGroup>
               </>
             ) : (
               // 판매가능&판매이후
@@ -172,8 +173,8 @@ const MyGovernanceCard: FC<MyGovernanceCardProps> = ({
               </h3>
             </>
           )}
-        </div>
-      </div>
+        </Box>
+      </Box>
     </div>
   );
 };
