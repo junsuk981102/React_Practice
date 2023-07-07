@@ -82,7 +82,7 @@ const VC = ({ vcObj }) => {
           ml="20px"
           mr="20px"
           //글자
-          size="md"
+          fontSize="md"
           noOfLines={[1, 2]}
         >
           {vcObj.vc_info}

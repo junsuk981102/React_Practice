@@ -36,7 +36,7 @@ const Startup = ({ startupObj }) => {
           h="100%"
           //배경
           src={startupObj.sup_backgroundImg}
-          alt="vc background img"
+          alt="startup background img"
         />
       </Box>
       {/* 하단 */}
@@ -82,7 +82,7 @@ const Startup = ({ startupObj }) => {
           ml="20px"
           mr="20px"
           //글자
-          size="md"
+          fontSize="md"
           noOfLines={[1, 2]}
         >
           {startupObj.sup_info}
