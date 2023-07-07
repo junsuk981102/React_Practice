@@ -15,12 +15,12 @@ function ScreenChat() {
   return (
     <>
       <div style={{ backgroundColor: "#E5F2F2", minHeight: "100vh" }}>
-        <h3>ScreenChat 페이지입니다.</h3>
-        <h4>{state.name}의 커뮤니티 입니다.</h4>
+        {/* <h3>ScreenChat 페이지입니다.</h3>
+        <h4>{state.name}의 커뮤니티 입니다.</h4> 
         <button onClick={() => handleClick("/screen_room_list")}>
           뒤로가기
-        </button>
-        <div className="ScreenChat">
+  </button>*/}
+        <div className="ScreenChat" style={{ padding: "50px" }}>
           <Chat />
         </div>
       </div>
