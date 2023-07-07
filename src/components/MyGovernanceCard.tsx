@@ -2,6 +2,13 @@ import React, { FC, useState, ChangeEvent, useEffect } from "react";
 
 import { saleGovernanceTokenContract, web3 } from "../web3Config";
 import GovernanceCard from "./GovernanceCard";
+import {
+  Box,
+  Grid,
+  Heading,
+  Image,
+  useBreakpointValue,
+} from "@chakra-ui/react";
 
 export interface IMyGovernanceCard {
   GNT_Id: string;
@@ -28,23 +35,8 @@ const MyGovernanceCard: FC<MyGovernanceCardProps> = ({
   const [sellPrice, setSellPrice] = useState<string>("");
   const [myGovernanceSalePrice, setMyGovernanceSalePrice] =
     useState<string>(GNT_Sale_Price);
-  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-
-  useEffect(() => {
-    const handleResize = () => {
-      setWindowWidth(window.innerWidth);
-    };
-
-    window.addEventListener("resize", handleResize);
-
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
-
-  useEffect(() => {
-    setWindowWidth(window.innerWidth);
-  }, []);
+  const boxPaddingLeft = useBreakpointValue({ base: "50px", xl: "500px" });
+  const boxPaddingRight = useBreakpointValue({ base: "10px", xl: "500px" });
 
   const onChangeSellPrice = (e: ChangeEvent<HTMLInputElement>) => {
     setSellPrice(e.target.value);
