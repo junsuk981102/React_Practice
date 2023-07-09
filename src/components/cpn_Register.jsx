@@ -7,6 +7,7 @@ import { doc, setDoc } from "firebase/firestore";
 import {
   Heading,
   Box,
+  Alert,
   Button,
   FormControl,
   FormLabel,
@@ -152,9 +153,9 @@ const Register = (props) => {
           />
         </FormControl>
         {passwordError && (
-          <Text textAlign="end" color="red" fontSize="14px">
+          <Alert textAlign="end" color="red" fontSize="14px">
             {passwordError}
-          </Text>
+          </Alert>
         )}
 
         <FormControl
@@ -185,9 +186,9 @@ const Register = (props) => {
           />
         </FormControl>
         {confirmPasswordError && (
-          <Text textAlign="end" color="red" fontSize="14px">
+          <Alert textAlign="end" color="red" fontSize="14px">
             {confirmPasswordError}
-          </Text>
+          </Alert>
         )}
 
         <FormControl
@@ -293,7 +294,7 @@ const Register = (props) => {
         <Flex justifyContent="center">
           <Button
             type="submit"
-            width="150px"
+            maxWidth="300px"
             height="75px"
             fontSize="20px"
             fontWeight="bold"

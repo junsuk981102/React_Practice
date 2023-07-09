@@ -140,7 +140,7 @@ const Login = () => {
           <Button
             onClick={handleEmailLogin}
             type="submit"
-            width="150px"
+            maxWidth="300px"
             height="75px"
             fontSize="20px"
             fontWeight="bold"
@@ -160,7 +160,7 @@ const Login = () => {
           <Button
             onClick={handleGoogleSignIn}
             type="submit"
-            width="150px"
+            maxWidth="300px"
             height="75px"
             fontSize="20px"
             fontWeight="bold"
