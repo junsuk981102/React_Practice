@@ -17,6 +17,7 @@ const Community = ({ communityObj }) => {
         com_ticket_price: communityObj.com_ticket_price,
         com_ticket_max: communityObj.com_ticket_max,
         com_member: communityObj.com_member,
+        com_profileImg: communityObj.com_profileImg,
       },
     });
   }
@@ -53,7 +54,7 @@ const Community = ({ communityObj }) => {
           w="100%"
           h="100%"
           //배경
-          src="/image/animal/3.png"
+          src={communityObj.com_profileImg}
           alt="community background img"
         />
       </Box>

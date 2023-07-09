@@ -41,6 +41,7 @@ const ScreenRoomInfo = (props) => {
         com_ticket_price: state.com_ticket_price,
         com_ticket_max: state.com_ticket_max,
         com_member: state.com_member,
+        com_profileImg: state.com_profileImg,
       },
     });
   }
@@ -91,7 +92,7 @@ const ScreenRoomInfo = (props) => {
               }}
             >
               <img
-                src="../image/animal/2.png"
+                src={state.com_profileImg}
                 alt="Animal"
                 style={{
                   width: "200px",
