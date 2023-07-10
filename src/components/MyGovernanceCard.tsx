@@ -1,4 +1,4 @@
-import React, { FC, useState, ChangeEvent, useEffect } from "react";
+import React, { FC, useState, ChangeEvent } from "react";
 
 import { saleGovernanceTokenContract, web3 } from "../web3Config";
 import GovernanceCard from "./GovernanceCard";
