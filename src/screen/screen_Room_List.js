@@ -42,7 +42,7 @@ const ScreenRoomList = (props) => {
   return (
     <Box
       //크기
-      h="100%"
+      h="100vh"
       //배경
       bg="#E5F2F2"
       borderTop="1px solid #00A29D"
