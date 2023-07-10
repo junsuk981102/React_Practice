@@ -57,7 +57,7 @@ const ScreenRoomList = (props) => {
           as="h1"
           size="lg"
         >
-          커뮤니티{" "}
+          커뮤니티
         </Heading>
 
         {/* 커뮤니티 리스트 */}
