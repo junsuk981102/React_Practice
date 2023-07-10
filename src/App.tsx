@@ -18,7 +18,6 @@ import ScreenRoomInfo from "./screen/screen_Room_Info";
 import ScreenRoomList from "./screen/screen_Room_List";
 import ScreenRoomMake from "./screen/screen_Room_Make";
 import ScreenStartupInfo from "./screen/screen_Startup_Info";
-import ScreenTokenGating from "./screen/screen_Token_Gating";
 import ScreenVCInfo from "./screen/screen_VC_Info";
 import ScreenWalletConnect from "./screen/screen_Wallet_Connect";
 
@@ -83,10 +82,6 @@ export default function App() {
           <Route
             path="/screen_startup_info/*"
             element={<ScreenStartupInfo />}
-          ></Route>
-          <Route
-            path="/screen_token_gating/*"
-            element={<ScreenTokenGating />}
           ></Route>
           <Route path="/screen_vc_info/*" element={<ScreenVCInfo />}></Route>
           <Route
