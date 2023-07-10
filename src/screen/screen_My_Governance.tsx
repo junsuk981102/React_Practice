@@ -1,6 +1,4 @@
 import React, { FC, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-
 import {
   mintGovernanceTokenContract,
   saleGovernanceTokenAddress,
@@ -8,32 +6,26 @@ import {
 import MyGovernanceCard, {
   IMyGovernanceCard,
 } from "../components/MyGovernanceCard";
+import {
+  Box,
+  Button,
+  Text,
+  Grid,
+  Heading,
+  Image,
+  useBreakpointValue,
+} from "@chakra-ui/react";
 
 interface MyGovernanceProps {
   account: string;
 }
 
 const ScreenMyGovernance: FC<MyGovernanceProps> = ({ account }) => {
+  const boxPaddingLeft = useBreakpointValue({ base: "50px", xl: "500px" });
+  const boxPaddingRight = useBreakpointValue({ base: "10px", xl: "500px" });
+  const [saleStatus, setSaleStatus] = useState<boolean>(false);
   const [governanceCardArray, setGovernanceCardArray] =
     useState<IMyGovernanceCard[]>();
-  const [saleStatus, setSaleStatus] = useState<boolean>(false);
-  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-
-  useEffect(() => {
-    const handleResize = () => {
-      setWindowWidth(window.innerWidth);
-    };
-
-    window.addEventListener("resize", handleResize);
-
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
-
-  useEffect(() => {
-    setWindowWidth(window.innerWidth);
-  }, []);
 
   const getGovernanceTokens = async () => {
     try {
@@ -95,28 +87,6 @@ const ScreenMyGovernance: FC<MyGovernanceProps> = ({ account }) => {
     }
   };
 
-  const navigate = useNavigate();
-
-  // const onClickRoom = async () => {
-  //     try{
-  //         if(!account) return;
-
-  //         const balanceLength = await mintGovernanceTokenContract.methods
-  //             .balanceOf(account)
-  //             .call();
-
-  //         if(balanceLength==="0"){
-  //             alert("You cannot enter the room because you don't have NFTs for this room.");
-  //             return;
-  //         }
-
-  //         alert("You can enter the room because you have NFTs for this room.");
-  //         navigate("/screen_token_gating");
-  //     } catch (error) {
-  //         console.error(error);
-  //     }
-  // }
-
   useEffect(() => {
     if (!account) return;
 
@@ -130,138 +100,105 @@ const ScreenMyGovernance: FC<MyGovernanceProps> = ({ account }) => {
 
   return (
     <>
-      {/* <button style={{ fontSize: '14px', color: 'green', marginTop: '8px' }} onClick={onClickRoom}>
-                Room
-            </button> */}
-      <div
-        style={{
-          backgroundColor: "#E5F2F2",
-          minHeight: "100vh",
-          borderTop: "1px solid #00A29D",
-        }}
+      <Box
+        pl={boxPaddingLeft}
+        pr={boxPaddingRight}
+        h="100vh"
+        bg="#E5F2F2"
+        borderTop="1px solid #00A29D"
       >
-        <div
-          style={{
-            paddingLeft: `${windowWidth > 1700 ? "500px" : "50px"}`,
-            paddingRight: `${windowWidth > 1700 ? "500px" : "10px"}`,
-          }}
+        <Heading
+          //위치
+          mt="30px"
+          mb="30px"
+          //크기
+          as="h1"
+          size="lg"
         >
-          <div>
-            <h3
-              style={{
-                margin: "0",
-                paddingTop: "50px",
-                marginBottom: "30px",
-                fontSize: "24px",
-                fontWeight: "bold",
-              }}
-            >
-              내 지갑
-            </h3>
-            <div
-              style={{
-                display: "flex",
-                alignItems: "center",
-                width: "700px",
-                height: "75px",
-                fontSize: "20px",
-                fontWeight: "bold",
-                backgroundColor: "#00A29D",
-                color: "white",
-                border: "none",
-                padding: "10px 20px",
-                borderRadius: "45px",
-              }}
-            >
-              <img
-                src="/image/metamaskicon.png"
-                alt="Metamask"
-                style={{ width: "36px", height: "45px", marginRight: "20px" }}
-              />
-              <h3> 내 지갑 주소 : {account} </h3>
-            </div>
-          </div>
+          내 지갑
+        </Heading>
+        <Box
+          display="flex"
+          alignItems="center"
+          w="670px"
+          h="70px"
+          bg="#00A29D"
+          px="10px"
+          py="20px"
+          borderRadius="lg"
+        >
+          <Image
+            src="/image/metamaskicon.png"
+            alt="Metamask"
+            w="36px"
+            h="45px"
+            m="20px"
+          />
+          <Text as="b" color="white" fontSize="lg">
+            내 지갑 주소 : {account}{" "}
+          </Text>
+        </Box>
+        <Heading
+          //위치
+          mt="30px"
+          mb="30px"
+          //크기
+          as="h1"
+          size="lg"
+        >
+          내 티켓
+        </Heading>
+        <Box display="flex" alignItems="center">
+          <Heading
+            //크기
+            as="h2"
+            size="md"
+          >
+            티켓 판매 상태 : {saleStatus ? "판매 가능" : "판매 불가능"}
+          </Heading>
+          <Button
+            ml="10px"
+            w="auto"
+            h="auto"
+            p="5px"
+            as="b"
+            color="white"
+            fontSize="sm"
+            bg={saleStatus ? "red" : "blue"}
+            onClick={onClickApproveToggle}
+          >
+            {saleStatus ? "상태 변경" : "상태 변경"}
+          </Button>
+        </Box>
 
-          <h3
-            style={{
-              margin: "0",
-              paddingTop: "50px",
-              marginBottom: "30px",
-              fontSize: "24px",
-              fontWeight: "bold",
-            }}
-          >
-            내 티켓
-          </h3>
+        <Heading
+          mt="20px"
+          mb="10px"
+          //크기
+          as="h2"
+          size="md"
+        >
+          티켓 리스트
+        </Heading>
 
-          <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-              fontSize: "20px",
-              fontWeight: "bold",
-            }}
-          >
-            <span>
-              {" "}
-              티켓 판매 상태 : {saleStatus ? "판매 가능" : "판매 불가능"}
-            </span>
-            <button
-              style={{
-                width: "auto",
-                height: "auto",
-                fontSize: "10px",
-                fontWeight: "bold",
-                backgroundColor: saleStatus ? "red" : "blue",
-                color: "white",
-                border: "none",
-                padding: "5px 5px",
-                borderRadius: "10px",
-                marginLeft: "10px",
-              }}
-              onClick={onClickApproveToggle}
-            >
-              {saleStatus ? "상태 변경" : "상태 변경"}
-            </button>
-          </div>
-
-          <h3
-            style={{
-              marginTop: "20px",
-              marginBottom: "10px",
-              display: "flex",
-              alignItems: "center",
-              fontSize: "20px",
-              fontWeight: "bold",
-            }}
-          >
-            티켓 리스트
-          </h3>
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(4, 1fr)",
-              gap: "8px",
-            }}
-          >
-            {governanceCardArray &&
-              governanceCardArray.map((v, i) => {
-                return (
-                  <MyGovernanceCard
-                    key={i}
-                    GNT_Id={v.GNT_Id}
-                    GNT_name={v.GNT_name}
-                    GNT_Initial_Price={v.GNT_Initial_Price}
-                    GNT_Sale_Price={v.GNT_Sale_Price}
-                    GNT_Address={v.GNT_Address}
-                    saleStatus={saleStatus}
-                    account={account}
-                  />
-                );
-              })}
-          </div>
-        </div>
-      </div>
+        <Grid gridTemplateColumns="repeat(auto-fit, minmax(300px, 1fr))">
+          {governanceCardArray &&
+            governanceCardArray.map((v, i) => {
+              return (
+                <MyGovernanceCard
+                  key={i}
+                  GNT_Id={v.GNT_Id}
+                  GNT_name={v.GNT_name}
+                  GNT_Initial_Price={v.GNT_Initial_Price}
+                  GNT_Sale_Price={v.GNT_Sale_Price}
+                  GNT_Address={v.GNT_Address}
+                  saleStatus={saleStatus}
+                  account={account}
+                />
+              );
+            })}
+        </Grid>
+      </Box>
     </>
   );
 };
