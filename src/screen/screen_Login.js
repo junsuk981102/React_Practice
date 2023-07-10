@@ -1,33 +1,20 @@
 import Login from "../components/cpn_Login";
-import "../chat.css";
-import { useAuthState } from "react-firebase-hooks/auth";
-import { auth } from "../firebase-config";
+import { Box } from "@chakra-ui/react";
 
 function ScreenLogin() {
-  const [user] = useAuthState(auth);
   return (
     <>
-      <div
-        style={{
-          display: "flex",
-          backgroundColor: "#E5F2F2",
-          borderTop: "1px solid #00A29D",
-          justifyContent: "center",
-          height: "100vh",
-        }}
+      <Box
+        display="flex"
+        justifyContent="center"
+        h="100vh"
+        bg="#E5F2F2"
+        borderTop="1px solid #00A29D"
       >
-        {/* <h3>ScreenLogin 페이지입니다.</h3> */}
-        <div
-          style={{
-            width: "700px",
-            display: "flex",
-            textAlign: "center",
-            justifyContent: "center",
-          }}
-        >
+        <Box w="700px">
           <Login />
-        </div>
-      </div>
+        </Box>
+      </Box>
     </>
   );
 }
