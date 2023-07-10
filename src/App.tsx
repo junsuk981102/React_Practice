@@ -14,7 +14,6 @@ import ScreenMinting from "./screen/screen_Minting";
 import ScreenMyGovernance from "./screen/screen_My_Governance";
 import ScreenProfile from "./screen/screen_Profile";
 import ScreenRegister from "./screen/screen_Register";
-import ScreenRoomFind from "./screen/screen_Room_Find";
 import ScreenRoomInfo from "./screen/screen_Room_Info";
 import ScreenRoomList from "./screen/screen_Room_List";
 import ScreenRoomMake from "./screen/screen_Room_Make";
@@ -70,10 +69,6 @@ export default function App() {
           ></Route>
           <Route path="/screen_profile/*" element={<ScreenProfile />}></Route>
           <Route path="/screen_register/*" element={<ScreenRegister />}></Route>
-          <Route
-            path="/screen_room_find/*"
-            element={<ScreenRoomFind />}
-          ></Route>
           <Route
             path="/screen_room_info/*"
             element={<ScreenRoomInfo />}
