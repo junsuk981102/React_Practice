@@ -10,7 +10,6 @@ import Header from "./screen/screen_Header";
 import ScreenLogin from "./screen/screen_Login";
 import ScreenMain from "./screen/screen_Main";
 import ScreenMinting from "./screen/screen_Minting";
-// import ScreenMyAnimal from "./screen/screen_My_Animal";
 import ScreenMyGovernance from "./screen/screen_My_Governance";
 import ScreenProfile from "./screen/screen_Profile";
 import ScreenRegister from "./screen/screen_Register";
@@ -22,7 +21,6 @@ import ScreenVCInfo from "./screen/screen_VC_Info";
 import ScreenWalletConnect from "./screen/screen_Wallet_Connect";
 
 import ScreenTest from "./screen/screen_Test";
-// import WalletCard from './WalletCard';
 
 export default function App() {
   const [account, setAccount] = useState<string>("");
@@ -60,7 +58,6 @@ export default function App() {
             path="/screen_minting/*"
             element={<ScreenMinting account={account} />}
           ></Route>
-          {/* <Route path="/screen_my_animal/*" element={<ScreenMyAnimal account={account}/>}></Route> */}
           <Route
             path="/screen_my_governance/*"
             element={<ScreenMyGovernance account={account} />}
