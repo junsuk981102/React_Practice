@@ -80,7 +80,6 @@ const ScreenMain = (props) => {
           투자 중인 스타트업
         </Heading>
         <Grid
-          display="grid"
           gridTemplateColumns="repeat(auto-fit, minmax(500px, 1fr))"
           gap="20px"
         >
@@ -93,7 +92,6 @@ const ScreenMain = (props) => {
           투자 중인 VC
         </Heading>
         <Grid
-          display="grid"
           gridTemplateColumns="repeat(auto-fit, minmax(500px, 1fr))"
           gap="20px"
         >
