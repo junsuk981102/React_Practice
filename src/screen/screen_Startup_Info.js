@@ -1,127 +1,85 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { useLocation } from "react-router-dom";
+import {
+  Box,
+  Text,
+  Heading,
+  Image,
+  useBreakpointValue,
+} from "@chakra-ui/react";
 
-const ScreenStartupInfo = (props) => {
-  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-
-  useEffect(() => {
-    const handleResize = () => {
-      setWindowWidth(window.innerWidth);
-    };
-
-    window.addEventListener("resize", handleResize);
-
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
-
-  useEffect(() => {
-    setWindowWidth(window.innerWidth);
-  }, []);
-
+const ScreenStartupInfo = () => {
+  const boxPaddingLeft = useBreakpointValue({ base: "50px", xl: "500px" });
+  const boxPaddingRight = useBreakpointValue({ base: "10px", xl: "500px" });
   const { state } = useLocation();
-  console.log(state.name);
 
   return (
     <>
-      <div
-        style={{
-          backgroundColor: "#E5F2F2",
-          minHeight: "100vh",
-          borderTop: "1px solid #00A29D",
-        }}
+      <Box
+        pl={boxPaddingLeft}
+        pr={boxPaddingRight}
+        h="100vh"
+        bg="#E5F2F2"
+        borderTop="1px solid #00A29D"
       >
-        <div
-          style={{
-            paddingLeft: `${windowWidth > 1700 ? "500px" : "50px"}`,
-            paddingRight: `${windowWidth > 1700 ? "500px" : "10px"}`,
-          }}
+        <Heading
+          //위치
+          mt="30px"
+          mb="30px"
+          //크기
+          as="h1"
+          size="lg"
         >
-          <h3
-            style={{
-              margin: "0",
-              paddingTop: "50px",
-              marginBottom: "30px",
-              fontSize: "24px",
-              fontWeight: "bold",
-            }}
-          >
-            스타트업 소개
-          </h3>
-          <div
-            className="test"
-            style={{
-              width: "1000px",
-              height: "1000px",
-              backgroundColor: "white",
-              border: "3px solid #00A29D",
-              padding: "30px",
-              position: "relative",
-              borderRadius: "15px",
-            }}
-          >
-            <div
-              style={{
-                height: "auto",
-                display: "flex",
-                position: "relative",
-                alignItems: "center",
-              }}
-            >
-              <img
-                src={state.sup_logo}
-                alt="logo"
-                style={{
-                  width: "200px",
-                  height: "200px",
-                  objectFit: "cover",
-                  borderRadius: "25%",
-                }}
-              />
-              <h4
-                style={{
-                  fontSize: "50px",
-                  fontWeight: "bold",
-                  marginLeft: "20px",
-                }}
-              >
-                {state.sup_name}
-              </h4>
-            </div>
+          스타트업 소개
+        </Heading>
 
-            <div
-              style={{
-                width: "170px",
-                height: "auto",
-                padding: "5px",
-                borderRadius: "15px",
-                backgroundColor: "#00A29D",
-                marginLeft: "10px",
-                marginTop: "10px",
-              }}
+        <Box
+          w="1000px"
+          h="1000px"
+          p="30px"
+          bg="white"
+          border="3px solid #00A29D"
+          borderRadius="lg"
+        >
+          <Box display="flex" position="relative" alignItems="center">
+            <Image
+              src={state.sup_logo}
+              alt="logo"
+              w="200px"
+              h="200px"
+              borderRadius="lg"
+            />
+            <Text
+              //위치
+              ml="20px"
+              //크기
+              as="b"
+              fontSize="5xl"
             >
-              <h4
-                style={{
-                  textAlign: "center",
-                  fontSize: "20px",
-                  fontWeight: "bold",
-                  color: "white",
-                }}
-              >
-                {" "}
-                {state.sup_category}
-              </h4>
-            </div>
+              {state.sup_name}
+            </Text>
+          </Box>
 
-            <div style={{ padding: "20px" }}>
-              <h4 style={{ fontSize: "25px", fontWeight: "bold" }}>
-                {state.sup_info}
-              </h4>
-            </div>
-          </div>
-        </div>
-      </div>
+          <Box
+            mt="15px"
+            w="200px"
+            bg="#00A29D"
+            borderRadius="lg"
+            p="5px"
+            textAlign="center"
+          >
+            <Text as="b" color="white" fontSize="lg">
+              {state.sup_category}
+            </Text>
+          </Box>
+
+          <Box mt="30px">
+            <Text as="b" fontSize="2xl">
+              {state.sup_info}
+            </Text>
+          </Box>
+        </Box>
+      </Box>
     </>
   );
 };
