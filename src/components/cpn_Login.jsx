@@ -68,107 +68,78 @@ const Login = () => {
   };
 
   return (
-    <Box
-      bg="#E5F2F2"
-      display="flex"
-      flexDirection="column"
-      alignItems="center"
-      p={4}
-      width="700px"
-    >
-      <Heading textAlign="center" fontSize="35px" fontWeight="bold">
+    <Box display="flex" alignItems="center" flexDirection="column" bg="#E5F2F2">
+      <Heading mt="30px" mb="30px" textAlign="center" as="h1" size="xl">
         로그인
       </Heading>
-      <FormControl
-        as="form"
-        backgroundColor="#E5F2F2"
-        display="flex"
-        flexDirection="column"
-      >
-        <Divider backgroundColor="#00A29D" height="2px" margin="30px 0" />
-        <FormControl
-          display="flex"
-          justifyContent="space-between"
-          alignItems="center"
-        >
-          <FormLabel fontSize="20px" fontWeight="bold" mr={2}>
-            이메일:
+
+      <FormControl as="form" bg="#E5F2F2" display="flex" flexDirection="column">
+        <Divider bg="#00A29D" h="2px" mb="20px" />
+        <FormControl display="flex" justifyContent="space-between">
+          <FormLabel fontSize="2xl" fontWeight="bold">
+            이메일 :
           </FormLabel>
           <Input
             type="email"
             value={email}
             onChange={handleEmailChange}
-            placeholder="Email"
+            placeholder="이메일"
             required
-            border="solid 1px #d4d3d3"
-            px={3}
-            py={2}
-            borderRadius="6px"
-            outline="none"
-            flex="1"
-            maxW="450px"
+            border="solid 1px #00A29D"
+            borderRadius="xl"
+            w="450px"
           />
         </FormControl>
-        <FormControl
-          display="flex"
-          justifyContent="space-between"
-          alignItems="center"
-        >
-          <FormLabel fontSize="20px" fontWeight="bold" mr={2}>
-            비밀번호:
+        <FormControl display="flex" justifyContent="space-between">
+          <FormLabel fontSize="2xl" fontWeight="bold">
+            비밀번호 :
           </FormLabel>
           <Input
             type="password"
             value={password}
             onChange={handlePasswordChange}
-            placeholder="Password"
+            placeholder="비밀번호"
             required
-            border="solid 1px #d4d3d3"
-            px={3}
-            py={2}
-            borderRadius="6px"
-            outline="none"
-            flex="1"
-            maxW="450px"
+            border="solid 1px #00A29D"
+            borderRadius="xl"
+            w="450px"
           />
         </FormControl>
-        <Text color="red" textAlign="center" mb={2}>
+        <Text color="red" textAlign="center">
           {error}
         </Text>
-        <Divider backgroundColor="#00A29D" height="2px" margin="30px 0" />
+
+        <Divider bg="#00A29D" h="2px" mt="20px" mb="20px" />
+
         <Flex justifyContent="center">
           <Button
-            onClick={handleEmailLogin}
-            type="submit"
-            maxWidth="300px"
-            height="75px"
-            fontSize="20px"
-            fontWeight="bold"
-            backgroundColor="#00A29D"
+            w="300px"
+            h="75px"
+            as="b"
             color="white"
-            border="none"
-            padding="10px 20px"
-            borderRadius="5px"
+            fontSize="xl"
+            bg="#00A29D"
+            borderRadius="lg"
+            type="submit"
+            onClick={handleEmailLogin}
           >
             Sign in with Email
           </Button>
         </Flex>
-        <Text textAlign="center" fontSize="20px" mb={2}>
+        <Text textAlign="center" fontSize="xl">
           or
         </Text>
         <Flex justifyContent="center">
           <Button
-            onClick={handleGoogleSignIn}
-            type="submit"
-            maxWidth="300px"
-            height="75px"
-            fontSize="20px"
-            fontWeight="bold"
-            backgroundColor="#00A29D"
+            w="300px"
+            h="75px"
+            as="b"
             color="white"
-            border="none"
-            padding="10px 20px"
-            borderRadius="5px"
+            fontSize="xl"
+            bg="#00A29D"
+            borderRadius="lg"
+            type="submit"
+            onClick={handleGoogleSignIn}
             leftIcon={<FaGoogle />}
           >
             Sign in with Google
