@@ -12,8 +12,6 @@ import ScreenMain from "./screen/screen_Main";
 import ScreenMinting from "./screen/screen_Minting";
 // import ScreenMyAnimal from "./screen/screen_My_Animal";
 import ScreenMyGovernance from "./screen/screen_My_Governance";
-import ScreenProfileInfo from "./screen/screen_Profile_Info";
-import ScreenProfileUser from "./screen/screen_Profile_User";
 import ScreenProfile from "./screen/screen_Profile";
 import ScreenRegister from "./screen/screen_Register";
 import ScreenRoomFind from "./screen/screen_Room_Find";
@@ -69,14 +67,6 @@ export default function App() {
           <Route
             path="/screen_my_governance/*"
             element={<ScreenMyGovernance account={account} />}
-          ></Route>
-          <Route
-            path="/screen_profile_info/*"
-            element={<ScreenProfileInfo />}
-          ></Route>
-          <Route
-            path="/screen_profile_user/*"
-            element={<ScreenProfileUser />}
           ></Route>
           <Route path="/screen_profile/*" element={<ScreenProfile />}></Route>
           <Route path="/screen_register/*" element={<ScreenRegister />}></Route>

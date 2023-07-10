@@ -1,5 +1,6 @@
 import Chat from "../components/cpn_Chat";
 import { Box } from "@chakra-ui/react";
+import "../chat.css";
 
 function ScreenChat() {
   return (
