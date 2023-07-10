@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import { dbService } from "../firebase-config";
 import Startup from "../components/Startup";
 import VC from "../components/VC";
@@ -12,14 +11,8 @@ import {
 } from "@chakra-ui/react";
 
 const ScreenMain = (props) => {
-  const navi = useNavigate();
   const boxPaddingLeft = useBreakpointValue({ base: "50px", xl: "500px" });
   const boxPaddingRight = useBreakpointValue({ base: "10px", xl: "500px" });
-
-  function handleClick(text) {
-    navi(`${text}`);
-  }
-
   const [startups, setStartups] = useState([]);
   const [vcs, setVCs] = useState([]);
 
