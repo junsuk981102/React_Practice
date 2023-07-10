@@ -5,8 +5,6 @@ import {
   mintGovernanceTokenAddress,
 } from "../web3Config";
 
-import GovernanceCard from "../components/GovernanceCard";
-
 interface MainProps {
   account: string;
 }
