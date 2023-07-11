@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { dbService } from "../firebase-config";
-import { Box, Input, Text, Button } from "@chakra-ui/react";
+import { Box, Input } from "@chakra-ui/react";
 
 const ScreenRoomMake = (props) => {
   const [name, setName] = useState("");
