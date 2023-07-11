@@ -2,16 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { auth } from "../firebase-config";
 import { useAuthState } from "react-firebase-hooks/auth";
-import User from "../components/cpn_User"; // User 컴포넌트 import
 
-import {
-  Box,
-  Grid,
-  Heading,
-  Image,
-  useBreakpointValue,
-  Button,
-} from "@chakra-ui/react";
+import { Box, Image, Button } from "@chakra-ui/react";
 
 function Header(props) {
   const navi = useNavigate();
@@ -136,42 +128,40 @@ function Header(props) {
               alt="logo"
             />
           </Box>
-          <button
+          <Button
+            mr="32px"
+            fontSize="xl"
+            fontWeight="bold"
+            variant="none"
+            color={activeButton === "" ? "#00A29D" : "black"}
             onClick={() => handleClick("")}
-            style={{
-              marginRight: "32px",
-              fontSize: "20px",
-              fontWeight: "bold",
-              color: activeButton === "" ? "#00A29D" : "black",
-            }}
           >
             홈
-          </button>
-          <button
+          </Button>
+          <Button
+            mr="32px"
+            fontSize="xl"
+            fontWeight="bold"
+            variant="none"
+            color={
+              activeButton === "/screen_my_governance" ? "#00A29D" : "black"
+            }
             onClick={() => handleClick("/screen_my_governance")}
-            style={{
-              marginRight: "32px",
-              fontSize: "20px",
-              fontWeight: "bold",
-              color:
-                activeButton === "/screen_my_governance" ? "#00A29D" : "black",
-            }}
           >
             지갑
-          </button>
-          <button
+          </Button>
+          <Button
+            mr="32px"
+            fontSize="xl"
+            fontWeight="bold"
+            variant="none"
             onClick={() => handleClick("/screen_room_list")}
-            style={{
-              marginRight: "32px",
-              fontSize: "20px",
-              fontWeight: "bold",
-              color: activeButton === "/screen_room_list" ? "#00A29D" : "black",
-            }}
+            color={activeButton === "/screen_room_list" ? "#00A29D" : "black"}
           >
             커뮤니티
-          </button>
+          </Button>
         </Box>
-        <div>{renderButton()}</div> {/* 로그인-로그아웃 변경 버튼 렌더링 */}
+        <Box>{renderButton()}</Box> {/* 로그인-로그아웃 변경 버튼 렌더링 */}
       </Box>
     </>
   );
