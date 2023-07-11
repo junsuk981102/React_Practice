@@ -4,6 +4,15 @@ import { auth } from "../firebase-config";
 import { useAuthState } from "react-firebase-hooks/auth";
 import User from "../components/cpn_User"; // User 컴포넌트 import
 
+import {
+  Box,
+  Grid,
+  Heading,
+  Image,
+  useBreakpointValue,
+  Button,
+} from "@chakra-ui/react";
+
 function Header(props) {
   const navi = useNavigate();
 
@@ -53,61 +62,53 @@ function Header(props) {
   const renderButton = () => {
     if (auth.currentUser) {
       return (
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-          }}
-        >
-          <button
+        <Box display="flex" alignItems="center">
+          <Button
+            w="40px"
+            h="40px"
+            p="0px"
+            bg="transparent"
+            overflow="hidden"
+            borderRadius="50%"
             onClick={() => handleClick("/screen_profile")}
             style={{
               marginRight: `${windowWidth > 1700 ? "500px" : "10px"}`, // REFACT: Magic numbers like "1700" or "500px" 등을 상수로 선언해서 사용하면 좀 더 가독성이 좋고, 이해하기 쉽습니다.
-              borderRadius: "50%",
-              overflow: "hidden",
-              padding: "0",
-              width: "40px",
-              height: "40px",
-              border: "none",
-              backgroundColor: "transparent",
             }}
           >
-            <img
+            <Image
+              w="100%"
+              h="100%"
+              objectFit="cover"
               src={photo}
               alt="User Profile"
-              style={{
-                width: "100%",
-                height: "100%",
-                objectFit: "cover",
-              }}
             />
-          </button>
-        </div>
+          </Button>
+        </Box>
       );
     } else {
       return (
         <>
-          <button
+          <Button
+            mr="20px"
+            fontSize="xl"
+            fontWeight="bold"
+            variant="none"
             onClick={() => handleClick("/screen_Login")}
-            style={{
-              marginRight: "20px",
-              fontSize: "20px",
-              fontWeight: "bold",
-            }}
           >
             로그인
-          </button>
-          <button
+          </Button>
+          <Button
+            fontSize="xl"
+            fontWeight="bold"
+            color="#00A29D"
+            variant="none"
             onClick={() => handleClick("/screen_register")}
             style={{
               marginRight: `${windowWidth > 1700 ? "500px" : "10px"}`,
-              fontSize: "20px",
-              fontWeight: "bold",
-              color: "#00A29D",
             }}
           >
             회원가입
-          </button>
+          </Button>
         </>
       );
     }
@@ -115,28 +116,26 @@ function Header(props) {
 
   return (
     <>
-      <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-          padding: "15px",
-        }}
+      <Box
+        display="flex"
+        alignItems="center"
+        justifyContent="space-between"
+        p="15px"
       >
-        <div style={{ display: "flex", alignItems: "center" }}>
-          <div
+        <Box display="flex" alignItems="center">
+          <Box
             style={{
               marginRight: `${windowWidth > 1700 ? "32px" : "40px"}`,
               marginLeft: `${windowWidth > 1700 ? "485px" : "35px"}`,
             }}
           >
-            <img
+            <Image
+              w="143px"
+              h="48px"
               src="image/stot_minilogo.png"
               alt="logo"
-              width="143px"
-              height="48.1px"
             />
-          </div>
+          </Box>
           <button
             onClick={() => handleClick("")}
             style={{
@@ -171,9 +170,9 @@ function Header(props) {
           >
             커뮤니티
           </button>
-        </div>
+        </Box>
         <div>{renderButton()}</div> {/* 로그인-로그아웃 변경 버튼 렌더링 */}
-      </div>
+      </Box>
     </>
   );
 }
