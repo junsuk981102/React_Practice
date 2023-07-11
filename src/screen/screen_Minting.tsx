@@ -4,6 +4,7 @@ import {
   mintGovernanceTokenContract,
   mintGovernanceTokenAddress,
 } from "../web3Config";
+import { Box, Text, Input, Button } from "@chakra-ui/react";
 
 interface MainProps {
   account: string;
@@ -63,59 +64,49 @@ const ScreenMinting: FC<MainProps> = ({ account }) => {
   };
 
   return (
-    <div
-      style={{
-        display: "flex",
-        width: "100%",
-        height: "100vh",
-        justifyContent: "center",
-        alignItems: "center",
-        flexDirection: "column",
-      }}
+    <Box
+      display="flex"
+      alignItems="center"
+      justifyContent="center"
+      flexDirection="column"
+      w="100%"
+      h="100vh"
     >
-      <div>
-        <span>Initial Price</span>
-        <input
+      <Box>
+        <Text>Initial Price</Text>
+        <Input
           type="number"
           value={initialprice}
           onChange={onChangeInitialPrice}
         />
-        <span>Name</span>
-        <input type="text" value={name} onChange={onChangeName} />
-      </div>
-      <button
-        style={{ marginTop: "4px", fontSize: "small" }}
-        onClick={onClickMint_G}
-      >
+        <Text>Name</Text>
+        <Input type="text" value={name} onChange={onChangeName} />
+      </Box>
+      <Button mt="4px" fontSize="sm" onClick={onClickMint_G}>
         Mint Governance
-      </button>
+      </Button>
 
-      <div>
-        <span>Count</span>
-        <input type="number" value={count} onChange={onChangeCount} />
-        <span>Initial Price</span>
-        <input
+      <Box>
+        <Text>Count</Text>
+        <Input type="number" value={count} onChange={onChangeCount} />
+        <Text>Initial Price</Text>
+        <Input
           type="number"
           value={initialpricemulti}
           onChange={onChangeInitialPriceMulti}
         />
-        <span>Name</span>
-        <input type="text" value={namemulti} onChange={onChangeNameMulti} />
-      </div>
-      <button
-        style={{ marginTop: "4px", fontSize: "small" }}
-        onClick={onClickMultiMint_G}
-      >
-        Multi Mint Governance
-      </button>
+        <Text>Name</Text>
+        <Input type="text" value={namemulti} onChange={onChangeNameMulti} />
+      </Box>
 
-      <button
-        style={{ marginTop: "4px", fontSize: "small" }}
-        onClick={onClickSave_G}
-      >
+      <Button mt="4px" fontSize="sm" onClick={onClickMultiMint_G}>
+        Multi Mint Governance
+      </Button>
+
+      <Button mt="4px" fontSize="sm" onClick={onClickSave_G}>
         Save Governance
-      </button>
-    </div>
+      </Button>
+    </Box>
   );
 };
 
