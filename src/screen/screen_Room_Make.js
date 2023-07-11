@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { dbService } from "../firebase-config";
+import { Box, Input, Text, Button } from "@chakra-ui/react";
 
 const ScreenRoomMake = (props) => {
   const [name, setName] = useState("");
@@ -69,54 +70,53 @@ const ScreenRoomMake = (props) => {
 
   return (
     <>
-      <h3>ScreenRoomMake 페이지입니다.</h3>
-      <div>
+      <Box>
         <form onSubmit={onSubmit}>
-          <input
+          <Input
             value={name}
             onChange={onChangeName}
             type="text"
             placeholder="커뮤니티 이름"
-            maxLength={120}
+            maxW="120px"
           />
-          <input
+          <Input
             value={category}
             onChange={onChangeCategory}
             type="text"
             placeholder="커뮤니티 범주"
-            maxLength={120}
+            maxW="120px"
           />
-          <input
+          <Input
             value={information}
             onChange={onChangeInformation}
             type="text"
             placeholder="커뮤니티 설명"
-            maxLength={120}
+            maxW="120px"
           />
-          <input
+          <Input
             value={investment}
             onChange={onChangeInvesetment}
             type="number"
             placeholder="커뮤니티 목표 투자금액"
-            maxLength={120}
+            maxW="120px"
           />
-          <input
+          <Input
             value={price}
             onChange={onChangePrice}
             type="number"
             placeholder="커뮤니티 티켓 가격"
-            maxLength={120}
+            maxW="120px"
           />
-          <input
+          <Input
             value={maxticket}
             onChange={onChangeMaxticket}
             type="number"
             placeholder="커뮤니티 티켓 최대 구매 개수"
-            maxLength={120}
+            maxW="120px"
           />
-          <input type="submit" value="커뮤니티 만들기" />
+          <Input type="submit" value="커뮤니티 만들기" />
         </form>
-      </div>
+      </Box>
     </>
   );
 };
