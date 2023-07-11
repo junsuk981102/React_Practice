@@ -1,5 +1,6 @@
 import { getAuth } from "firebase/auth";
 import { useAuthState } from "react-firebase-hooks/auth";
+import { Box, Text, Image } from "@chakra-ui/react";
 
 const MessageFormat = ({ message }) => {
   const auth = getAuth();
@@ -30,18 +31,14 @@ const MessageFormat = ({ message }) => {
   const newDate = date.toLocaleDateString("en-US", options);
   return (
     <article className={newStyles}>
-      <div
-        style={{
-          maxWidth: "80%", // 채팅 버블의 전체 넓이가 채팅창의 80%까지만 차지하도록
-        }}
-      >
-        <p className="user">{message.userName}</p>
-        <div className="text-message">
-          <p className="text">{message.text}</p>
-        </div>
-        <p className="user">{`${newDate} . ${time}`}</p>
-      </div>
-      <img src={message.photo || defaultProfileImage} alt="user profile" />
+      <Box maxW="80%">
+        <Text className="user">{message.userName}</Text>
+        <Box className="text-message">
+          <Text className="text">{message.text}</Text>
+        </Box>
+        <Box className="user">{`${newDate} . ${time}`}</Box>
+      </Box>
+      <Image src={message.photo || defaultProfileImage} alt="user profile" />
     </article>
   );
 };
