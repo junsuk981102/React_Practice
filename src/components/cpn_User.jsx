@@ -33,33 +33,23 @@ const User = () => {
 
   return (
     <Box
-      bg="#f5f8fc"
-      borderRadius="25px"
       display="flex"
-      justifyContent="center"
       alignItems="center"
       flexDirection="column"
-      padding="20px"
-      width="100%"
+      bg="white"
+      borderRadius="lg"
+      p="35px"
     >
-      <Box
-        display="flex"
-        flexDirection="column"
-        alignItems="start"
-        justifyContent="space-between"
-        padding="15px"
-        width="100%"
-      >
+      <Box width="100%">
         <Image
           src={photo}
           alt="User Profile"
-          width="100px"
+          w="100px"
           borderRadius="50%"
-          display="block"
-          margin="0 0 15px 0"
+          mb="15px"
           fallbackSrc={defaultProfileImage}
         />
-        <Text width="100px" fontSize="18px" fontWeight="bold">
+        <Text w="100px" fontSize="lg" fontWeight="bold">
           {userId || "익명의 투자자"}
         </Text>
       </Box>
