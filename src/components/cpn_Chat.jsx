@@ -13,20 +13,39 @@ const Chat = () => {
   const [user] = useAuthState(auth);
 
   const { state } = useLocation();
+  const boxRef = useRef(null);
 
   const communityid = state.id;
   const communityaddress = "community_list/" + communityid + "/message";
 
+  const scrollToBottom = () => {
+    if (scroll.current) {
+      scroll.current.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   useEffect(() => {
-    const q = query(collection(db, communityaddress), orderBy("timestamp"));
+    const q = query(
+      collection(db, communityaddress),
+      orderBy("timestamp", "desc")
+    );
     const unsubscribe = onSnapshot(q, (querySnapshot) => {
       let messages = [];
       querySnapshot.forEach((doc) => {
-        messages.push({ ...doc.data(), id: doc.id });
+        messages.unshift({ ...doc.data(), id: doc.id });
       });
       setMessage(messages);
+
+      // 스크롤을 맨 아래로 이동시키는 작업
+      if (boxRef.current) {
+        boxRef.current.scrollTop = boxRef.current.scrollHeight;
+      }
     });
     return () => unsubscribe();
+  }, []);
+
+  useEffect(() => {
+    scrollToBottom(); // 컴포넌트가 처음 렌더링될 때 스크롤을 맨 아래로 이동시킴
   }, []);
 
   return (
@@ -38,6 +57,7 @@ const Chat = () => {
       padding="30px 30px 0"
       height="80vh"
       overflow="auto"
+      ref={boxRef} // <Box> 컴포넌트에 ref 추가
     >
       {message &&
         message.map((item) => <MessageFormat key={item.id} message={item} />)}
