@@ -1,3 +1,4 @@
+import React from "react";
 import { getAuth } from "firebase/auth";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { Box, Text, Image } from "@chakra-ui/react";
@@ -29,6 +30,7 @@ const MessageFormat = ({ message }) => {
   let time = h + ":" + m;
 
   const newDate = date.toLocaleDateString("en-US", options);
+
   return (
     <article className={newStyles}>
       <Box maxW="80%">
