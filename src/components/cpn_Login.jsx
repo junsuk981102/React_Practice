@@ -42,7 +42,7 @@ const Login = () => {
         const user = userCredential.user;
         setUser(user); // 사용자 정보 업데이트
         console.log("로그인 성공:", user);
-        navigate("/screen_room_list"); // 로그인 성공 후 홈 페이지로 이동
+        navigate(""); // 로그인 성공 후 홈 페이지로 이동
       })
       .catch((error) => {
         // 로그인 실패 처리
@@ -57,7 +57,7 @@ const Login = () => {
     const provider = new GoogleAuthProvider();
     signInWithRedirect(auth, provider)
       .then(() => {
-        navigate("/screen_room_list"); // 로그인 성공 후 홈 페이지로 이동
+        navigate(""); // 로그인 성공 후 홈 페이지로 이동
       })
       .catch((error) => {
         const errorCode = error.code;

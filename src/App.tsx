@@ -21,6 +21,7 @@ import ScreenVCInfo from "./screen/screen_VC_Info";
 import ScreenWalletConnect from "./screen/screen_Wallet_Connect";
 
 import ScreenTest from "./screen/screen_Test";
+import ScreenNewsletter from "./screen/screen_Newsletter";
 
 export default function App() {
   const [account, setAccount] = useState<string>("");
@@ -87,6 +88,10 @@ export default function App() {
           ></Route>
 
           <Route path="/screen_test/*" element={<ScreenTest />}></Route>
+          <Route
+            path="/screen_newsletter/*"
+            element={<ScreenNewsletter />}
+          ></Route>
         </Routes>
       </div>
     </ChakraProvider>

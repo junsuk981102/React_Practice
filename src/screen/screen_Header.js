@@ -137,7 +137,7 @@ function Header(props) {
           >
             홈
           </Button>
-          <Button
+          {/* <Button
             mr="32px"
             fontSize="xl"
             fontWeight="bold"
@@ -148,7 +148,7 @@ function Header(props) {
             onClick={() => handleClick("/screen_my_governance")}
           >
             지갑
-          </Button>
+          </Button> */}
           <Button
             mr="32px"
             fontSize="xl"
