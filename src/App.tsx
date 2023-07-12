@@ -49,7 +49,6 @@ export default function App() {
     <ChakraProvider theme={theme}>
       <div className={"app"}>
         <Header />
-        {/* <WalletCard/> */}
         <Routes>
           <Route path="/" element={<ScreenMain />}></Route>
           <Route path="/screen_chat/*" element={<ScreenChat />}></Route>
