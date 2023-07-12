@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
+import { Box, Button, Heading, Image, Text } from "@chakra-ui/react";
 
 const ScreenRoomInfo = (props) => {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
@@ -52,356 +53,236 @@ const ScreenRoomInfo = (props) => {
 
   return (
     <>
-      <div
-        style={{
-          backgroundColor: "#E5F2F2",
-          minHeight: "100vh",
-          borderTop: "1px solid #00A29D",
-        }}
-      >
-        <div
+      <Box bg="#E5F2F2" h="100vh" borderTop="1px solid #00A29D">
+        <Box
           style={{
             paddingLeft: `${windowWidth > 1700 ? "500px" : "50px"}`,
             paddingRight: `${windowWidth > 1700 ? "500px" : "10px"}`,
           }}
         >
-          <h3
-            style={{
-              margin: "0",
-              paddingTop: "50px",
-              marginBottom: "30px",
-              fontSize: "24px",
-              fontWeight: "bold",
-            }}
+          <Heading
+            //위치
+            mt="30px"
+            mb="30px"
+            //크기
+            as="h1"
+            size="lg"
           >
             커뮤니티 소개
-          </h3>
-          <div
-            className
-            style={{
-              width: "1000px",
-              height: "1000px",
-              backgroundColor: "white",
-              border: "3px solid #00A29D",
-              padding: "30px",
-              borderRadius: "15px",
-            }}
+          </Heading>
+
+          <Box
+            w="1000px"
+            h="1000px"
+            p="30px"
+            bg="white"
+            border="3px solid #00A29D"
+            borderRadius="lg"
           >
-            <div
-              style={{
-                height: "auto",
-                display: "flex",
-                position: "relative",
-                alignItems: "center",
-              }}
+            <Box
+              h="auto"
+              display="flex"
+              position="relative"
+              alignItems="center"
             >
-              <img
+              <Image
                 src={state.com_profileImg}
-                alt="Animal"
-                style={{
-                  width: "200px",
-                  height: "200px",
-                  objectFit: "cover",
-                  borderRadius: "50%",
-                }}
+                w="200px"
+                h="200px"
+                objectFit="cover"
+                borderRadius="50%"
               />
-              <div style={{ marginLeft: "25px" }}>
-                <h4
-                  style={{
-                    fontSize: "40px",
-                    fontWeight: "bold",
-                  }}
+              <Box ml="25px">
+                <Heading
+                  //글자
+                  as="h1"
+                  size="lg"
                 >
                   {state.com_name}
-                </h4>
-                <div
-                  style={{
-                    width: "100px",
-                    height: "auto",
-                    padding: "5px",
-                    borderRadius: "15px",
-                    backgroundColor: "#00A29D",
-                    marginTop: "10px",
-                    marginBottom: "10px",
-                  }}
+                </Heading>
+                <Box
+                  w="100px"
+                  h="auto"
+                  p="5px"
+                  mt="10px"
+                  mb="10px"
+                  bg="#00A29D"
+                  borderRadius="xl"
+                  textAlign="center"
                 >
-                  <h4
-                    style={{
-                      textAlign: "center",
-                      fontSize: "15px",
-                      fontWeight: "bold",
-                      color: "white",
-                    }}
-                  >
-                    {" "}
+                  <Text fontSize="md" as="b" color="white">
                     {state.com_category}
-                  </h4>
-                </div>
-                <div>
-                  <h4 style={{ fontSize: "20px", fontWeight: "bold" }}>
+                  </Text>
+                </Box>
+                <Box>
+                  <Text fontSize="md" as="b">
                     {state.com_info}
-                  </h4>
-                </div>
-              </div>
-            </div>
+                  </Text>
+                </Box>
+              </Box>
+            </Box>
 
-            <div style={{ height: "auto", padding: "20px", marginTop: "30px" }}>
-              <h4
-                style={{
-                  fontSize: "20px",
-                  fontWeight: "bold",
-                  marginBottom: "20px",
-                }}
-              >
-                투자 목표 금액{" "}
-                <h4
-                  style={{
-                    fontSize: "20px",
-                    fontWeight: "bold",
-                    color: "#00A29D",
-                    marginRight: "20px",
-                  }}
-                >
-                  {(state.com_now_investment / state.com_total_investment) *
-                    100}
-                  % 달성
-                </h4>
-              </h4>
-              <div style={{ position: "relative" }}>
-                <div
-                  style={{
-                    position: "absolute",
-                    top: 0,
-                    left: 0,
-                    width: "90%",
-                    height: "50px",
-                    backgroundColor: "white",
-                    borderRadius: "25px",
-                    border: "1px solid #00A29D",
-                  }}
-                ></div>
-                <div
-                  style={{
-                    position: "absolute",
-                    top: 0,
-                    left: 0,
-                    width:
-                      (state.com_now_investment / state.com_total_investment) *
-                        90 +
-                      "%",
-                    height: "50px",
-                    background: `linear-gradient(to right, #00A29D, #FFFFFF)`,
-                    borderRadius: "25px",
-                    border: "1px solid #00A29D",
-                  }}
-                ></div>
-              </div>
+            <Box h="auto" ml="20px" mt="30px">
+              <Text fontSize="lg" as="b" mr="20px">
+                투자 목표 금액
+              </Text>
+              <Text fontSize="lg" as="b" color="#00A29D">
+                {(state.com_now_investment / state.com_total_investment) * 100}%
+                달성
+              </Text>
+              <Box position="relative" mt="20px">
+                <Box
+                  position="absolute"
+                  top="0"
+                  left="0"
+                  w="90%"
+                  h="45px"
+                  bg="white"
+                  borderRadius="22.5px"
+                  border="1px solid #00A29D"
+                ></Box>
+                <Box
+                  position="absolute"
+                  top="0"
+                  left="0"
+                  w={
+                    (state.com_now_investment / state.com_total_investment) *
+                      90 +
+                    "%"
+                  }
+                  h="45px"
+                  bg={"linear-gradient(to right, #00A29D, #FFFFFF)"}
+                  bo
+                  borderRadius="22.5px"
+                  border="1px solid #00A29D"
+                ></Box>
+              </Box>
 
-              <div
-                style={{
-                  position: "relative",
-                  color: "#00A29D",
-                  fontWeight: "bold",
-                }}
-              >
-                <div
-                  style={{
-                    position: "absolute",
-                    top: 55,
-                    left: "85%",
-                  }}
-                >
-                  <h4>
+              <Box position="relative" color="#00A29D">
+                <Box position="absolute" top="55" left="85%">
+                  <Text as="b">
                     <NumberFormat number={state.com_total_investment} />원
-                  </h4>
-                </div>
-                <div
-                  style={{
-                    position: "absolute",
-                    top: 55,
-                    left:
-                      (state.com_now_investment / state.com_total_investment) *
-                        80 +
-                      "%",
-                  }}
+                  </Text>
+                </Box>
+                <Box
+                  position="absolute"
+                  top="55"
+                  left={
+                    (state.com_now_investment / state.com_total_investment) *
+                      80 +
+                    "%"
+                  }
                 >
-                  <h4>
+                  <Text as="b">
                     <NumberFormat number={state.com_now_investment} />원
-                  </h4>
-                </div>
-              </div>
-            </div>
+                  </Text>
+                </Box>
+              </Box>
+            </Box>
 
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "center",
-                marginTop: "130px",
-              }}
-            >
-              <div style={{ marginRight: "50px" }}>
-                <h4
-                  style={{
-                    fontSize: "20px",
-                    fontWeight: "bold",
-                    marginBottom: "15px",
-                  }}
-                >
+            <Box display="flex" justifyItems="center" mt="120px" ml="20px">
+              <Box mr="50px">
+                <Text fontSize="lg" as="b">
                   티켓 구매하기
-                </h4>
-                <div style={{ display: "flex" }}>
-                  <div>
-                    <img
+                </Text>
+
+                <Box display="flex" mt="20px">
+                  <Box>
+                    <Image
                       src="../image/ticketgrey.png"
-                      alt="ticketgrey"
-                      style={{
-                        width: "175px",
-                        height: "175px",
-                        marginBottom: "15px",
-                      }}
+                      w="150px"
+                      h="150px"
+                      mb="15px"
                     />
-                    <div
-                      style={{
-                        border: "1px solid black",
-                        padding: "5px",
-                        width: "175px",
-                        height: "30px",
-                        fontSize: "12px",
-                        fontWeight: "bold",
-                        backgroundColor: "#E5F2F2",
-                        borderRadius: "15px",
-                        textAlign: "center",
-                        color: "#00A29D",
-                      }}
+                    <Box
+                      w="150px"
+                      h="25px"
+                      p="5px"
+                      fontSize="xs"
+                      color="#00A29D"
+                      textAlign="center"
+                      bg="#E5F2F2"
+                      border="1px solid black"
+                      borderRadius="22.5px"
                     >
-                      <h4>현재 보유한 티켓 수 OO매</h4>
-                    </div>
-                  </div>
-                  <div style={{ marginLeft: "30px" }}>
-                    <h4
-                      style={{
-                        fontSize: "22px",
-                        fontWeight: "bold",
-                        marginBottom: "15px",
-                        textAlign: "center",
-                      }}
-                    >
+                      <Text>현재 보유한 티켓 수 : 5매</Text>
+                    </Box>
+                  </Box>
+                  <Box ml="30px" textAlign="center" fontWeight="bold">
+                    <Text mb="15px" fontSize="xl">
                       <NumberFormat number={state.com_ticket_price} />원
-                    </h4>
-                    <button
+                    </Text>
+                    <Button
+                      w="120px"
+                      h="35px"
+                      p="10px"
+                      mt="15px"
+                      color="white"
+                      fontSize="sm"
+                      bg="#00A29D"
+                      borderRadius="17.5px"
                       onClick={() => handleClick()}
-                      style={{
-                        width: "160px",
-                        height: "40px",
-                        fontSize: "15px",
-                        backgroundColor: "#00A29D",
-                        color: "white",
-                        border: "none",
-                        padding: "10px 20px",
-                        borderRadius: "20px",
-                        marginTop: "20px",
-                      }}
                     >
                       구매하기
-                    </button>
-                    <h4
-                      style={{
-                        color: "grey",
-                        fontSize: "13px",
-                        marginTop: "5px",
-                        textAlign: "center",
-                      }}
-                    >
+                    </Button>
+                    <Text mt="5px" color="grey" fontSize="2xs">
                       * 최대 {state.com_ticket_max}매까지 구매 가능
-                    </h4>
-                  </div>
-                </div>
-              </div>
+                    </Text>
+                  </Box>
+                </Box>
+              </Box>
 
-              <div>
-                <h4
-                  style={{
-                    fontSize: "20px",
-                    fontWeight: "bold",
-                    marginBottom: "15px",
-                  }}
-                >
+              <Box>
+                <Text fontSize="lg" as="b" mb="15px">
                   관심있는 회사
-                </h4>
-                <div style={{ display: "flex" }}>
-                  <img
-                    src="../image/startup1.png"
-                    alt="Startup1"
-                    style={{ width: "154px", height: "185px" }}
-                  />
-                  <img
-                    src="../image/startup2.png"
-                    alt="Startup2"
-                    style={{ width: "154px", height: "185px" }}
-                  />
-                  <img
-                    src="../image/startup3.png"
-                    alt="Startup3"
-                    style={{ width: "154px", height: "185px" }}
-                  />
-                </div>
-              </div>
-            </div>
+                </Text>
+                <Box display="flex">
+                  <Image w="154px" h="185px" src="../image/startup1.png" />
+                  <Image w="154px" h="185px" src="../image/startup2.png" />
+                  <Image w="154px" h="185px" src="../image/startup3.png" />
+                </Box>
+              </Box>
+            </Box>
 
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "center",
-                textAlign: "center",
-                marginTop: "100px",
-              }}
+            <Box
+              display="flex"
+              justifyContent="center"
+              textAlign="center"
+              mt="100px"
             >
-              <div
-                style={{
-                  border: "1px solid black",
-                  padding: "5px",
-                  width: "110px",
-                  height: "30px",
-                  fontSize: "15px",
-                  fontWeight: "bold",
-                  backgroundColor: "#E5F2F2",
-                  borderRadius: "10px",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                }}
+              <Box
+                display="flex"
+                alignItems="center"
+                justifyContent="center"
+                w="120px"
+                h="30px"
+                bg="#E5F2F2"
+                fontSize="md"
+                fontWeight="bold"
+                border="1px solid black"
+                borderRadius="xl"
               >
-                <h4>{state.com_member}명 참여중</h4>
-              </div>
-            </div>
+                <Text>{state.com_member}명 참여중</Text>
+              </Box>
+            </Box>
 
-            <div
-              style={{
-                padding: "20px",
-                display: "flex",
-                justifyContent: "center",
-              }}
-            >
-              <button
+            <Box display="flex" justifyContent="center" p="20px">
+              <Button
+                w="600px"
+                h="60px"
+                fontSize="lg"
+                fontWeight="bold"
+                color="white"
+                bg="#00A29D"
+                borderRadius="xl"
                 onClick={() => handleClick_chat()}
-                style={{
-                  width: "700px",
-                  height: "60px",
-                  fontSize: "20px",
-                  fontWeight: "bold",
-                  backgroundColor: "#00A29D",
-                  color: "white",
-                  border: "none",
-                  padding: "10px 20px",
-                  borderRadius: "10px",
-                }}
               >
                 커뮤니티 참여하기
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
+              </Button>
+            </Box>
+          </Box>
+        </Box>
+      </Box>
     </>
   );
 };
