@@ -46,6 +46,10 @@ const ScreenRoomInfo = (props) => {
     });
   }
 
+  function NumberFormat({ number }) {
+    return <span>{number.toLocaleString()}</span>;
+  }
+
   return (
     <>
       <div
@@ -207,7 +211,9 @@ const ScreenRoomInfo = (props) => {
                     left: "85%",
                   }}
                 >
-                  <h4>{state.com_total_investment}원</h4>
+                  <h4>
+                    <NumberFormat number={state.com_total_investment} />원
+                  </h4>
                 </div>
                 <div
                   style={{
@@ -215,11 +221,13 @@ const ScreenRoomInfo = (props) => {
                     top: 55,
                     left:
                       (state.com_now_investment / state.com_total_investment) *
-                        85 +
+                        80 +
                       "%",
                   }}
                 >
-                  <h4>{state.com_now_investment}원</h4>
+                  <h4>
+                    <NumberFormat number={state.com_now_investment} />원
+                  </h4>
                 </div>
               </div>
             </div>
@@ -278,7 +286,7 @@ const ScreenRoomInfo = (props) => {
                         textAlign: "center",
                       }}
                     >
-                      {state.com_ticket_price}원
+                      <NumberFormat number={state.com_ticket_price} />원
                     </h4>
                     <button
                       onClick={() => handleClick()}
