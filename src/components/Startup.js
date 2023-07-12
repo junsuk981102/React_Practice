@@ -108,13 +108,14 @@ const Startup = ({ startupObj }) => {
         <Button
           //위치
           position="absolute"
-          mt="30px"
-          ml="370px"
+          mt="45px"
+          ml="390px"
           //배경
           bg="none"
-          variant="none"
+          variant="link"
           //글자
           as="b"
+          color="black"
           fontSize="md"
           onClick={() => handleClick()}
         >
