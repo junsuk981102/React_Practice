@@ -63,7 +63,7 @@ function Header(props) {
             borderRadius="50%"
             onClick={() => handleClick("/screen_profile")}
             style={{
-              marginRight: `${windowWidth > 1700 ? "500px" : "10px"}`, // REFACT: Magic numbers like "1700" or "500px" 등을 상수로 선언해서 사용하면 좀 더 가독성이 좋고, 이해하기 쉽습니다.
+              marginRight: `${windowWidth > "50%" ? "100px" : "200px"}`, // REFACT: Magic numbers like "1700" or "500px" 등을 상수로 선언해서 사용하면 좀 더 가독성이 좋고, 이해하기 쉽습니다.
             }}
           >
             <Image
@@ -95,7 +95,7 @@ function Header(props) {
             variant="none"
             onClick={() => handleClick("/screen_register")}
             style={{
-              marginRight: `${windowWidth > 1700 ? "500px" : "10px"}`,
+              marginRight: `${windowWidth > "50%" ? "100px" : "200px"}`,
             }}
           >
             회원가입
@@ -116,8 +116,8 @@ function Header(props) {
         <Box display="flex" alignItems="center">
           <Box
             style={{
-              marginRight: `${windowWidth > 1700 ? "32px" : "40px"}`,
-              marginLeft: `${windowWidth > 1700 ? "485px" : "35px"}`,
+              marginRight: "35px",
+              marginLeft: `${windowWidth > "50%" ? "10px" : "200px"}`,
             }}
           >
             <Image
