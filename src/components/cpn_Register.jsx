@@ -93,9 +93,10 @@ const Register = (props) => {
 
   return (
     <Box height="100%" width="700px" padding="20px" backgroundColor="#E5F2F2">
-      <Heading textAlign="center" fontSize="35px" fontWeight="bold">
+      <Heading mt="30px" mb="30px" textAlign="center" as="h1" size="xl">
         회원가입
       </Heading>
+
       <FormControl
         as="form"
         onSubmit={handleFormSubmit}
