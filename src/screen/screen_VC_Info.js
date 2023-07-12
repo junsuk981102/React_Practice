@@ -35,7 +35,7 @@ const ScreenVCInfo = () => {
 
         <Box
           w="1000px"
-          h="1000px"
+          h="900px"
           p="30px"
           bg="white"
           border="3px solid #00A29D"
