@@ -149,7 +149,19 @@ const ScreenRoomInfo = (props) => {
                   marginBottom: "20px",
                 }}
               >
-                투자 목표 금액
+                투자 목표 금액{" "}
+                <h4
+                  style={{
+                    fontSize: "20px",
+                    fontWeight: "bold",
+                    color: "#00A29D",
+                    marginRight: "20px",
+                  }}
+                >
+                  {(state.com_now_investment / state.com_total_investment) *
+                    100}
+                  % 달성
+                </h4>
               </h4>
               <div style={{ position: "relative" }}>
                 <div
@@ -180,6 +192,7 @@ const ScreenRoomInfo = (props) => {
                   }}
                 ></div>
               </div>
+
               <div
                 style={{
                   position: "relative",
@@ -335,17 +348,6 @@ const ScreenRoomInfo = (props) => {
                 marginTop: "100px",
               }}
             >
-              <h4
-                style={{
-                  fontSize: "20px",
-                  fontWeight: "bold",
-                  color: "#00A29D",
-                  marginRight: "20px",
-                }}
-              >
-                {(state.com_now_investment / state.com_total_investment) * 100}%
-                달성
-              </h4>
               <div
                 style={{
                   border: "1px solid black",
@@ -356,6 +358,9 @@ const ScreenRoomInfo = (props) => {
                   fontWeight: "bold",
                   backgroundColor: "#E5F2F2",
                   borderRadius: "10px",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
                 }}
               >
                 <h4>{state.com_member}명 참여중</h4>

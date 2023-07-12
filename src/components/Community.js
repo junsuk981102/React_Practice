@@ -112,22 +112,6 @@ const Community = ({ communityObj }) => {
         <Button
           //위치
           position="absolute"
-          mt="5px"
-          ml="210px"
-          //배경
-          bg="none"
-          variant="none"
-          //글자
-          fontSize="xs"
-          //기능
-          onClick={() => handleClick()}
-        >
-          자세히 보기 {">"}
-        </Button>
-
-        <Button
-          //위치
-          position="absolute"
           mt="150px"
           ml="205px"
           //배경
@@ -141,9 +125,9 @@ const Community = ({ communityObj }) => {
           fontSize="sm"
           color="white"
           //기능
-          onClick={() => handleClick_chat()}
+          onClick={() => handleClick()}
         >
-          채팅방 입장 {">"}
+          자세히 보기 {">"}
         </Button>
       </Box>
     </Box>
