@@ -1,25 +1,17 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import { Box, Button, Heading, Image, Text } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  Heading,
+  Image,
+  Text,
+  useBreakpointValue,
+} from "@chakra-ui/react";
 
 const ScreenRoomInfo = (props) => {
-  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-
-  useEffect(() => {
-    const handleResize = () => {
-      setWindowWidth(window.innerWidth);
-    };
-
-    window.addEventListener("resize", handleResize);
-
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
-
-  useEffect(() => {
-    setWindowWidth(window.innerWidth);
-  }, []);
+  const boxPaddingLeft = useBreakpointValue({ base: "50px", xl: "500px" });
+  const boxPaddingRight = useBreakpointValue({ base: "10px", xl: "500px" });
 
   const { state } = useLocation();
   console.log(state.name);
@@ -54,12 +46,7 @@ const ScreenRoomInfo = (props) => {
   return (
     <>
       <Box bg="#E5F2F2" h="100vh" borderTop="1px solid #00A29D">
-        <Box
-          style={{
-            paddingLeft: `${windowWidth > 1700 ? "500px" : "50px"}`,
-            paddingRight: `${windowWidth > 1700 ? "500px" : "10px"}`,
-          }}
-        >
+        <Box pl={boxPaddingLeft} pr={boxPaddingRight}>
           <Heading
             //위치
             mt="30px"
