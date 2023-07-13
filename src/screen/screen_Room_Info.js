@@ -65,7 +65,7 @@ const ScreenRoomInfo = (props) => {
         </Heading>
 
         <Box
-          w="1000px"
+          w="900px"
           h="auto"
           p="30px"
           bg="white"

@@ -9,16 +9,18 @@ function ScreenChat() {
     <>
       <Box
         //크기
-        h="100vh"
+        h="auto"
         //배경
         bg="#E5F2F2"
         borderTop="1px solid #00A29D"
         display="flex"
         justifyContent="center"
+        pb="100px"
       >
-        <Box p="50px">
+        <Box>
           <Heading
             //위치
+            mt="30px"
             mb="30px" //margin bottom
             //크기
             as="h1"

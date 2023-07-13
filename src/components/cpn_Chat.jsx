@@ -51,11 +51,11 @@ const Chat = () => {
   return (
     <Box
       bg="#FFFFFF"
-      width="70vw"
-      margin="0 auto"
+      width="800px"
       borderRadius="10px"
-      padding="30px 30px 0"
-      height="80vh"
+      pl="30px"
+      pr="30px"
+      h="80vh"
       overflow="auto"
       ref={boxRef} // <Box> 컴포넌트에 ref 추가
     >
