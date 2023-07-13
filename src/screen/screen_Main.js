@@ -72,7 +72,7 @@ const ScreenMain = (props) => {
     <>
       <Image src="image/stot_main.png" alt="main logo" w="100%" h="auto" />
 
-      <Box pl={boxPaddingLeft} pr={boxPaddingRight} mb="30px">
+      <Box pl={boxPaddingLeft} pr={boxPaddingRight} pb="30px">
         <Heading as="h2" size="md" mt="50px" mb="5px">
           새로운 스타트업 찾기
         </Heading>
