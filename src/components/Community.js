@@ -18,6 +18,7 @@ const Community = ({ communityObj }) => {
         com_ticket_max: communityObj.com_ticket_max,
         com_member: communityObj.com_member,
         com_profileImg: communityObj.com_profileImg,
+        com_owner: communityObj.com_owner,
       },
     });
   }
