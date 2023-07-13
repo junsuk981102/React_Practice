@@ -276,7 +276,7 @@ const ScreenRoomInfo = (props) => {
       </Box>
 
       {/* BasicUsage Modal */}
-      <Modal isOpen={isOpen} onClose={onClose}>
+      <Modal isOpen={isOpen} onClose={onClose} isCentered>
         <ModalOverlay />
         <ModalContent>
           <ModalBody mt="20px" fontSize="xl" fontWeight="bold">
