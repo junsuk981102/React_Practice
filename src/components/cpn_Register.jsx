@@ -12,7 +12,6 @@ import {
   FormControl,
   FormLabel,
   Input,
-  Text,
   Flex,
   Divider,
 } from "@chakra-ui/react";

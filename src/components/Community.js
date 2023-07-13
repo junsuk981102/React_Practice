@@ -22,22 +22,6 @@ const Community = ({ communityObj }) => {
     });
   }
 
-  function handleClick_chat() {
-    navi(`/screen_chat`, {
-      state: {
-        id: communityObj.id,
-        com_name: communityObj.com_name,
-        com_category: communityObj.com_category,
-        com_info: communityObj.com_info,
-        com_total_investment: communityObj.com_total_investment,
-        com_now_investment: communityObj.com_now_investment,
-        com_ticket_price: communityObj.com_ticket_price,
-        com_ticket_max: communityObj.com_ticket_max,
-        com_member: communityObj.com_member,
-      },
-    });
-  }
-
   return (
     <Box>
       {/* 상단 */}

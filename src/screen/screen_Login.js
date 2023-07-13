@@ -7,9 +7,10 @@ function ScreenLogin() {
       <Box
         display="flex"
         justifyContent="center"
-        h="100vh"
+        h="auto"
         bg="#E5F2F2"
         borderTop="1px solid #00A29D"
+        pb="200px"
       >
         <Box w="700px">
           <Login />

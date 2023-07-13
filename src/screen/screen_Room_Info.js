@@ -10,8 +10,8 @@ import {
 } from "@chakra-ui/react";
 
 const ScreenRoomInfo = (props) => {
-  const boxPaddingLeft = useBreakpointValue({ base: "100px", xl: "200px" });
-  const boxPaddingRight = useBreakpointValue({ base: "100px", xl: "200px" });
+  const boxPaddingLeft = useBreakpointValue({ base: "20px", xl: "200px" });
+  const boxPaddingRight = useBreakpointValue({ base: "20x", xl: "200px" });
 
   const { state } = useLocation();
   console.log(state.name);

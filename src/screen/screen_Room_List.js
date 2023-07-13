@@ -5,8 +5,8 @@ import { Heading, Grid, Box, useBreakpointValue } from "@chakra-ui/react";
 
 const ScreenRoomList = (props) => {
   const [communities, setCommunities] = useState([]);
-  const boxPaddingLeft = useBreakpointValue({ base: "100px", xl: "200px" });
-  const boxPaddingRight = useBreakpointValue({ base: "100px", xl: "200px" });
+  const boxPaddingLeft = useBreakpointValue({ base: "20px", xl: "200px" });
+  const boxPaddingRight = useBreakpointValue({ base: "20x", xl: "200px" });
 
   useEffect(() => {
     dbService.collection("community_list").onSnapshot((snapshot) => {
@@ -42,9 +42,10 @@ const ScreenRoomList = (props) => {
   return (
     <Box
       //크기
-      h="1000px"
+      h="auto"
       //배경
       bg="#E5F2F2"
+      pb="200px"
       borderTop="1px solid #00A29D"
     >
       <Box pl={boxPaddingLeft} pr={boxPaddingRight}>

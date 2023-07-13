@@ -2,8 +2,8 @@ import React from "react";
 import { Box, Image, Button, useBreakpointValue, Text } from "@chakra-ui/react";
 
 function Header(props) {
-  const boxPaddingLeft = useBreakpointValue({ base: "100px", xl: "200px" });
-  const boxPaddingRight = useBreakpointValue({ base: "100px", xl: "200px" });
+  const boxPaddingLeft = useBreakpointValue({ base: "20px", xl: "200px" });
+  const boxPaddingRight = useBreakpointValue({ base: "20x", xl: "200px" });
 
   return (
     <>

@@ -8,8 +8,9 @@ const ScreenRegister = () => {
       display="flex"
       justifyContent="center"
       alignItems="center"
-      h="100vh"
+      h="auto"
       bg="#E5F2F2"
+      pb="50px"
       borderTop="1px solid #00A29D"
     >
       <Register />

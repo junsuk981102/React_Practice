@@ -21,8 +21,8 @@ interface MyGovernanceProps {
 }
 
 const ScreenMyGovernance: FC<MyGovernanceProps> = ({ account }) => {
-  const boxPaddingLeft = useBreakpointValue({ base: "50px", xl: "500px" });
-  const boxPaddingRight = useBreakpointValue({ base: "10px", xl: "500px" });
+  const boxPaddingLeft = useBreakpointValue({ base: "20px", xl: "200px" });
+  const boxPaddingRight = useBreakpointValue({ base: "20x", xl: "200px" });
   const [saleStatus, setSaleStatus] = useState<boolean>(false);
   const [governanceCardArray, setGovernanceCardArray] =
     useState<IMyGovernanceCard[]>();

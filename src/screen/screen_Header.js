@@ -6,8 +6,9 @@ import { Box, Image, Button, useBreakpointValue } from "@chakra-ui/react";
 
 function Header(props) {
   const navi = useNavigate();
-  const boxPaddingLeft = useBreakpointValue({ base: "100px", xl: "200px" });
-  const boxPaddingRight = useBreakpointValue({ base: "100px", xl: "200px" });
+  const boxPaddingLeft = useBreakpointValue({ base: "20px", xl: "200px" });
+  const boxPaddingRight = useBreakpointValue({ base: "20x", xl: "200px" });
+  const boxPaddingBetween = useBreakpointValue({ base: "10x", xl: "35px" });
   // REFACT: 상태값이 많으면 사용이 복잡해질 수 있으나, 이 경우에는 정해진 상태 값들이므로 문제되지 않습니다.
   const [activeButton, setActiveButton] = useState("");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -58,25 +59,27 @@ function Header(props) {
     } else {
       return (
         <>
-          <Button
-            mr="10px"
-            fontSize="xl"
-            fontWeight="bold"
-            variant="none"
-            onClick={() => handleClick("/screen_Login")}
-          >
-            로그인
-          </Button>
-          <Button
-            fontSize="xl"
-            fontWeight="bold"
-            color="#00A29D"
-            variant="none"
-            onClick={() => handleClick("/screen_register")}
-            mr={boxPaddingRight}
-          >
-            회원가입
-          </Button>
+          <Box display="flex" flexDirection="row">
+            <Button
+              mr="5px"
+              fontSize="xl"
+              fontWeight="bold"
+              variant="none"
+              onClick={() => handleClick("/screen_Login")}
+            >
+              로그인
+            </Button>
+            <Button
+              fontSize="xl"
+              fontWeight="bold"
+              color="#00A29D"
+              variant="none"
+              onClick={() => handleClick("/screen_register")}
+              mr={boxPaddingRight}
+            >
+              회원가입
+            </Button>
+          </Box>
         </>
       );
     }
@@ -91,7 +94,7 @@ function Header(props) {
         py="15px"
       >
         <Box display="flex" alignItems="center">
-          <Box pl={boxPaddingLeft} mr="35px">
+          <Box pl={boxPaddingLeft} pr={boxPaddingBetween}>
             <Image
               w="143px"
               h="48px"
@@ -100,7 +103,7 @@ function Header(props) {
             />
           </Box>
           <Button
-            mr="32px"
+            pr={boxPaddingBetween}
             fontSize="xl"
             fontWeight="bold"
             variant="none"
@@ -110,7 +113,8 @@ function Header(props) {
             홈
           </Button>
           {/* <Button
-            mr="32px"
+            pr=  {boxPaddingBetween}
+
             fontSize="xl"
             fontWeight="bold"
             variant="none"
