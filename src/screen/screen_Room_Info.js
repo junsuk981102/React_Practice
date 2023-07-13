@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import {
   Box,
@@ -7,7 +7,16 @@ import {
   Image,
   Text,
   useBreakpointValue,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  ModalCloseButton,
+  useDisclosure,
 } from "@chakra-ui/react";
+import {} from "@chakra-ui/react";
 
 const ScreenRoomInfo = (props) => {
   const boxPaddingLeft = useBreakpointValue({ base: "20px", xl: "200px" });
@@ -17,27 +26,35 @@ const ScreenRoomInfo = (props) => {
   console.log(state.name);
 
   const navi = useNavigate();
+  const [ownerCount, setOwnerCount] = useState(state.com_owner);
 
-  function handleClick(text) {
-    navi(`${text}`);
-  }
+  const handleClick = () => {
+    setOwnerCount(ownerCount + 1);
+  };
 
-  function handleClick_chat() {
-    navi(`/screen_chat`, {
-      state: {
-        id: state.id,
-        com_name: state.com_name,
-        com_category: state.com_category,
-        com_info: state.com_info,
-        com_total_investment: state.com_total_investment,
-        com_now_investment: state.com_now_investment,
-        com_ticket_price: state.com_ticket_price,
-        com_ticket_max: state.com_ticket_max,
-        com_member: state.com_member,
-        com_profileImg: state.com_profileImg,
-      },
-    });
-  }
+  const { isOpen, onOpen, onClose } = useDisclosure();
+
+  const handleClick_chat = () => {
+    if (ownerCount === 0) {
+      onOpen(); // Open the modal
+    } else {
+      navi(`/screen_chat`, {
+        state: {
+          id: state.id,
+          com_name: state.com_name,
+          com_category: state.com_category,
+          com_info: state.com_info,
+          com_total_investment: state.com_total_investment,
+          com_now_investment: state.com_now_investment,
+          com_ticket_price: state.com_ticket_price,
+          com_ticket_max: state.com_ticket_max,
+          com_member: state.com_member,
+          com_profileImg: state.com_profileImg,
+          com_owner: state.com_owner,
+        },
+      });
+    }
+  };
 
   function NumberFormat({ number }) {
     return <span>{number.toLocaleString()}</span>;
@@ -53,14 +70,7 @@ const ScreenRoomInfo = (props) => {
         h="auto"
         borderTop="1px solid #00A29D"
       >
-        <Heading
-          //위치
-          mt="30px"
-          mb="30px"
-          //크기
-          as="h1"
-          size="lg"
-        >
+        <Heading mt="30px" mb="30px" as="h1" size="lg">
           커뮤니티 소개
         </Heading>
 
@@ -81,11 +91,7 @@ const ScreenRoomInfo = (props) => {
               borderRadius="50%"
             />
             <Box ml="25px">
-              <Heading
-                //글자
-                as="h1"
-                size="lg"
-              >
+              <Heading as="h1" size="lg">
                 {state.com_name}
               </Heading>
               <Box
@@ -191,7 +197,7 @@ const ScreenRoomInfo = (props) => {
                     border="1px solid black"
                     borderRadius="22.5px"
                   >
-                    <Text>현재 보유한 티켓 수 : 5매</Text>
+                    <Text>현재 보유한 티켓 수: {ownerCount}매</Text>
                   </Box>
                 </Box>
                 <Box ml="30px" textAlign="center" fontWeight="bold">
@@ -207,7 +213,7 @@ const ScreenRoomInfo = (props) => {
                     fontSize="sm"
                     bg="#00A29D"
                     borderRadius="17.5px"
-                    onClick={() => handleClick()}
+                    onClick={handleClick}
                   >
                     구매하기
                   </Button>
@@ -261,13 +267,28 @@ const ScreenRoomInfo = (props) => {
               color="white"
               bg="#00A29D"
               borderRadius="xl"
-              onClick={() => handleClick_chat()}
+              onClick={handleClick_chat}
             >
               커뮤니티 참여하기
             </Button>
           </Box>
         </Box>
       </Box>
+
+      {/* BasicUsage Modal */}
+      <Modal isOpen={isOpen} onClose={onClose}>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalBody mt="20px" fontSize="xl" fontWeight="bold">
+            커뮤니티에 입장하기 위해 티켓을 구매해주세요.
+          </ModalBody>
+          <ModalFooter>
+            <Button bg="#00A29D" mr={3} onClick={onClose}>
+              Close
+            </Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
     </>
   );
 };
