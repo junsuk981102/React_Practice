@@ -1,7 +1,7 @@
 import "./App.css";
-import { ChakraProvider, Flex } from "@chakra-ui/react";
+import { ChakraProvider } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
 import theme from "./theme";
 import { Outlet } from "react-router-dom";
 
@@ -36,6 +36,16 @@ export default function App() {
     );
   };
 
+  const ScrollToTop = () => {
+    const location = useLocation();
+
+    useEffect(() => {
+      window.scrollTo(0, 0);
+    }, [location]);
+
+    return null;
+  };
+
   const [account, setAccount] = useState<string>("");
 
   const getAccount = async () => {
@@ -60,6 +70,8 @@ export default function App() {
   return (
     <ChakraProvider theme={theme}>
       <div className={"app"} style={{ flex: 1 }}>
+        <ScrollToTop />
+
         <Routes>
           <Route element={<MainLayout />}>
             <Route path="/" element={<ScreenMain />}></Route>

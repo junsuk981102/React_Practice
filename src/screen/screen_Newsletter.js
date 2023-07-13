@@ -1,20 +1,128 @@
 import React from "react";
-import { Box, Text, Image, useBreakpointValue } from "@chakra-ui/react";
+import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { Box, Button, Text, Image, Divider } from "@chakra-ui/react";
 
 const ScreenNewsletter = (props) => {
-  const boxPaddingLeft = useBreakpointValue({ base: "20px", xl: "200px" });
-  const boxPaddingRight = useBreakpointValue({ base: "20x", xl: "200px" });
+  const navi = useNavigate();
+
+  function handleClick(text) {
+    navi(text);
+  }
   return (
     <>
-      <Box h="100vh" bg="#EAE7DE" display="flex" justifyContent="center">
+      <Box w="100vw" bg="#EAE7DE" display="flex" justifyContent="center">
         <Box
+          p="50px"
+          w="800px"
+          h="100%"
+          bg="#EAE7DE"
           display="flex"
-          flexDirection="column"
+          alignItems="center"
           justifyContent="center"
-          alignContent="center"
+          flexDirection="column"
         >
-          <Image src="../image/newneek.png" />
-          <Text>기사내용</Text>
+          <Image src="../image/newneek.png" w="360px" h="54px" mb="50px" />
+          <Divider backgroundColor="black" w="750px" h="1px" mb="20px" />
+          <Button color="#FF5C00" variant="link">
+            테크
+          </Button>
+          <Text fontWeight="bold" fontSize="xl" mt="10px" mb="10px">
+            투자의 새로운 길
+          </Text>
+          <Text fontWeight="bold" fontSize="sm">
+            2023/07/14
+          </Text>
+          <Divider
+            backgroundColor="black"
+            w="750px"
+            h="1px"
+            mt="30px"
+            mb="30px"
+          />
+          <Image src="../image/newsletter1.png" w="469px" h="249px" />
+          <Text fontWeight="bold" fontSize="lg" mt="10px" mb="10px">
+            벤처투자 혹한기.. 시장 환경이 근본적으로 변했습니다
+          </Text>
+          <Text fontWeight="bold" fontSize="sm">
+            &nbsp;&nbsp;기술 잠재력, 창업팀의 비전 및 시장의 기대를 조합한
+            스토리만으로도 단계별로 투자가 쉽게 이루어지고 구체적인 비즈니스
+            계획 없이 🤑 투자금만으로 생명 연장하는 스타트업이 양산되던 시대는
+            끝난 것 같습니다.
+            <br />
+            <br />
+            &nbsp;&nbsp;벤처투자 호황기 때는 스타트업이 시드 펀딩부터 시작하여
+            투자금이 소진되는 1~2년마다 투자 라운드를 열며 기업가치를 올리고
+            펀딩 규모도 늘리는 것을 반복하는 것이 당연한 코스인 것처럼
+            받아들여졌습니다.
+            <br />
+            <br />
+            &nbsp;&nbsp;게다가 투자 라운드에서 목표한 만큼 투자금을 유치하게
+            되면 창업자에게 축하 세례가 쏟아지거나 심지어 성공사례 강연 다니는
+            것도 괴랄한 감이 있었죠.
+            <br />
+            <br />
+            &nbsp;&nbsp;이제는 스타트업이 투자자에게 확신을 줄 수 있는 숫자를
+            보여주지 못하면 투자를 기대하기 어려운 시대라고 봐야 할 것입니다.
+            <br />
+            <br />
+            &nbsp;&nbsp;많은 수의 스타트업들은 웬만한 지표 성적만으로는 투자자의
+            눈높이를 충족하기 어렵기에 창업자들은 펀딩하기 전에
+            <br />
+            1. 자체 생존 가능한 손익구조부터 만들고
+            <br />
+            2️. 합리적인 1~2년 사업성장 계획과 비용 효율적인 예산 수립에
+            집중해야 할 것입니다.
+          </Text>
+          <Divider
+            backgroundColor="black"
+            w="750px"
+            h="1px"
+            mt="30px"
+            mb="30px"
+          />{" "}
+          <Image src="../image/newsletter2.png" w="469px" h="249px" />
+          <Text fontWeight="bold" fontSize="lg" mt="10px" mb="10px">
+            “STOT” 새로운 투자에 눈을 뜨다{" "}
+          </Text>
+          <Text fontWeight="bold" fontSize="sm">
+            &nbsp;&nbsp;벤처투자 혹한기가 지속되는 와중에 새로운 방식의 투자
+            플랫폼이 등장하고 있습니다. 바로 커뮤니티형 스타트업 투자 플랫폼으로
+            다양한 투자자들에게 새로운 경험을 제공하면서 성장 가능성이 있는
+            스타트업에게 투자할 수 있는 웹 플랫폼입니다.
+            <br />
+            <br />
+            &nbsp;&nbsp;STOT의 가장 큰 목적 중에 하나는 투자자들에게 새로운
+            방식의 투자 경험을 제공하는 것입니다. 특히 비슷한 관심사를 가진
+            사람들과 커뮤니티에서 스타트업에 대한 다양한 정보를 주고받을 수
+            있습니다. 그 이후에 합리적인 방법으로 선택한 스타트업에 직접 투자할
+            수 있습니다.
+            <br />
+            <br />
+            &nbsp;&nbsp;STOT은 다음과 같은 사람들을 찾고 있습니다.
+            <br />
+            &nbsp;&nbsp;&nbsp;&nbsp;* 스타트업에 투자하고 싶은데 어디서
+            시작해야할지 모르겠다면?
+            <br />
+            &nbsp;&nbsp;&nbsp;&nbsp;* 충분한 정보와 합리적인 방법으로 투자하고
+            싶다면?
+            <br />
+            &nbsp;&nbsp;&nbsp;&nbsp;* 비슷한 관심사를 가진 사람들과 함께
+            투자하고 싶다면?
+          </Text>
+          <Button
+            as={Link}
+            to={"/"}
+            mt="50px"
+            w="500px"
+            color="white"
+            fontSize="xl"
+            fontWeight="bold"
+            bg="#FF5C00"
+            variant="solid"
+          >
+            STOT 참여하기
+          </Button>
         </Box>
       </Box>
     </>
