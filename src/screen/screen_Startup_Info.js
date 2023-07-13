@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import {
   Box,
@@ -8,11 +8,76 @@ import {
   useBreakpointValue,
   Divider,
 } from "@chakra-ui/react";
+import { dbService } from "../firebase-config";
 
 const ScreenStartupInfo = () => {
   const boxPaddingLeft = useBreakpointValue({ base: "20px", xl: "200px" });
   const boxPaddingRight = useBreakpointValue({ base: "20x", xl: "200px" });
   const { state } = useLocation();
+
+  const [sup_nationality, setSupNationality] = useState("");
+  const [sup_ceo, setSupCeo] = useState("");
+  const [sup_homepage, setSupHomepage] = useState("");
+  const [sup_size, setSupSize] = useState("");
+
+  const [sup_amountOfInvestment, setSupAmountOfInvestment] = useState("");
+  const [sup_numOfInvestment, setSupNumOfInvestment] = useState("");
+  const [sup_roundOfInvestment, setSupRroundOfInvestment] = useState("");
+
+  useEffect(() => {
+    const fetchSupInformation = async () => {
+      try {
+        const supInfoRef = dbService
+          .collection("startup_list")
+          .doc(state.id)
+          .collection("info")
+          .doc("sup_info");
+
+        const doc = await supInfoRef.get();
+
+        if (doc.exists) {
+          const data = doc.data();
+          setSupNationality(data.sup_nationality);
+          setSupCeo(data.sup_ceo);
+          setSupHomepage(data.sup_homepage);
+          setSupSize(data.sup_size);
+        } else {
+          console.log("문서가 존재하지 않습니다.");
+        }
+      } catch (error) {
+        console.log("데이터 가져오기 실패:", error);
+      }
+    };
+
+    fetchSupInformation();
+  }, [state.id]);
+
+  useEffect(() => {
+    const fetchInvestInformation = async () => {
+      try {
+        const supInfoRef = dbService
+          .collection("startup_list")
+          .doc(state.id)
+          .collection("info")
+          .doc("invest_info");
+
+        const doc = await supInfoRef.get();
+
+        if (doc.exists) {
+          const data = doc.data();
+          setSupAmountOfInvestment(data.sup_amountOfInvestment);
+          setSupNumOfInvestment(data.sup_numOfInvestment);
+          setSupRroundOfInvestment(data.sup_roundOfInvestment);
+        } else {
+          console.log("문서가 존재하지 않습니다.");
+        }
+      } catch (error) {
+        console.log("데이터 가져오기 실패:", error);
+      }
+    };
+
+    fetchInvestInformation();
+  }, [state.id]);
 
   return (
     <>
@@ -98,9 +163,9 @@ const ScreenStartupInfo = () => {
                   <Text>회사구분</Text>
                 </Box>
                 <Box display="flex" flexDirection="column">
-                  <Text mb="10px">최현일</Text>
-                  <Text mb="10px">한국</Text>
-                  <Text>중소기업</Text>
+                  <Text mb="10px">{sup_ceo}</Text>
+                  <Text mb="10px">{sup_nationality}</Text>
+                  <Text>{sup_size}</Text>
                 </Box>
               </Box>
 
@@ -118,7 +183,7 @@ const ScreenStartupInfo = () => {
                 <Box display="flex" flexDirection="column">
                   <Text mb="10px">통일 주권</Text>
                   <Text mb="10px">데이터베이스 및 온라인 정보 제공업</Text>
-                  <Text>http://www.peopet.co.kr</Text>
+                  <Text>{sup_homepage}</Text>
                 </Box>
               </Box>
             </Box>
@@ -142,9 +207,9 @@ const ScreenStartupInfo = () => {
                   <Text>투자유치 횟수</Text>
                 </Box>
                 <Box display="flex" flexDirection="column">
-                  <Text mb="10px">Seed</Text>
-                  <Text mb="10px">1억 미만</Text>
-                  <Text>3회</Text>
+                  <Text mb="10px">{sup_roundOfInvestment}</Text>
+                  <Text mb="10px">{sup_amountOfInvestment}</Text>
+                  <Text>{sup_numOfInvestment}</Text>
                 </Box>
               </Box>
             </Box>
