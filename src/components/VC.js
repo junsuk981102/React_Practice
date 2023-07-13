@@ -39,6 +39,7 @@ const VC = ({ vcObj }) => {
           //배경
           src={vcObj.vc_backgroundImg}
           alt="vc background img"
+          objectFit="cover"
           // 추가: hover 효과
           _hover={{
             transform: "scale(1.1)",

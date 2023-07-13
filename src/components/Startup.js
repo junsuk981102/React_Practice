@@ -39,6 +39,7 @@ const Startup = ({ startupObj }) => {
           //배경
           src={startupObj.sup_backgroundImg}
           alt="startup background img"
+          objectFit="cover"
           // 추가: hover 효과
           _hover={{
             transform: "scale(1.1)",
