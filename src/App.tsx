@@ -1,5 +1,5 @@
 import "./App.css";
-import { ChakraProvider } from "@chakra-ui/react";
+import { ChakraProvider, Flex } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import theme from "./theme";
@@ -7,6 +7,7 @@ import theme from "./theme";
 import ScreenChat from "./screen/screen_Chat";
 import ScreenExample from "./screen/screen_Example";
 import Header from "./screen/screen_Header";
+import Footer from "./screen/screen_Footer";
 import ScreenLogin from "./screen/screen_Login";
 import ScreenMain from "./screen/screen_Main";
 import ScreenMinting from "./screen/screen_Minting";
@@ -47,7 +48,7 @@ export default function App() {
 
   return (
     <ChakraProvider theme={theme}>
-      <div className={"app"}>
+      <div className={"app"} style={{ flex: 1, marginBottom: "100px" }}>
         <Header />
         <Routes>
           <Route path="/" element={<ScreenMain />}></Route>
@@ -93,6 +94,7 @@ export default function App() {
           ></Route>
         </Routes>
       </div>
+      <Footer />
     </ChakraProvider>
   );
 }
