@@ -70,8 +70,9 @@ const Login = () => {
         로그인
       </Heading>
 
+      <Divider backgroundColor="#00A29D" h="1px" mb="30px" />
+
       <FormControl as="form" bg="#E5F2F2" display="flex" flexDirection="column">
-        <Divider bg="#00A29D" h="2px" mb="20px" />
         <FormControl display="flex" justifyContent="space-between">
           <FormLabel fontSize="2xl" fontWeight="bold">
             이메일 :
@@ -106,7 +107,7 @@ const Login = () => {
           {error}
         </Text>
 
-        <Divider bg="#00A29D" h="2px" mt="20px" mb="20px" />
+        <Divider backgroundColor="#00A29D" h="1px" mt="30px" mb="30px" />
 
         <Flex justifyContent="center">
           <Button
