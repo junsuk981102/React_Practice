@@ -55,16 +55,13 @@ const Login = () => {
 
   const handleGoogleSignIn = () => {
     const provider = new GoogleAuthProvider();
-    signInWithRedirect(auth, provider)
-      .then(() => {
-        navigate(""); // 로그인 성공 후 홈 페이지로 이동
-      })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        setError(errorMessage); // 에러 메시지 업데이트
-        console.error("로그인 실패:", errorCode, errorMessage);
-      });
+    signInWithRedirect(auth, provider).catch((error) => {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      setError(errorMessage); // 에러 메시지 업데이트
+      console.error("로그인 실패:", errorCode, errorMessage);
+    });
+    navigate("/"); // 로그인 성공 후 홈 페이지로 이동
   };
 
   return (
