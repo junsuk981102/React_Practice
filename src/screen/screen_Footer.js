@@ -8,7 +8,7 @@ function Header(props) {
   return (
     <>
       <Box
-        bg="#E5F2F2"
+        bg="white"
         display="flex"
         flexDirection="row"
         justifyContent="space-between"
