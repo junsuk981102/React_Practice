@@ -51,7 +51,7 @@ const Chat = () => {
   return (
     <Box
       bg="#FFFFFF"
-      width="70%"
+      width="70vw"
       margin="0 auto"
       borderRadius="10px"
       padding="30px 30px 0"

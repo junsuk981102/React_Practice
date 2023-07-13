@@ -43,10 +43,6 @@ const MessageSend = ({ scroll }) => {
     setOpen(!open);
   };
 
-  const closeEmojiPicker = () => {
-    setOpen(false);
-  };
-
   return (
     <Flex as="form" onSubmit={sendMessage} alignItems="center">
       <IconButton
@@ -60,18 +56,6 @@ const MessageSend = ({ scroll }) => {
         colorScheme="teal"
         variant="outline"
       />
-
-      {open && (
-        <IconButton
-          maxW="40px"
-          onClick={closeEmojiPicker}
-          aria-label="Close Emoji Picker"
-          icon={<FaTimesCircle />}
-          fontSize="20px"
-          colorScheme="teal"
-          variant="outline"
-        />
-      )}
 
       <FormControl flex={1}>
         <Input
