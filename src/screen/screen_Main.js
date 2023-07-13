@@ -42,7 +42,7 @@ const ScreenMain = (props) => {
         key={startup.id}
         w="500px"
         h="360px"
-        borderRadius="md"
+        borderRadius="10px"
         position="relative"
         overflow="hidden"
         boxShadow="0 0 15px #00A29D"
@@ -58,7 +58,7 @@ const ScreenMain = (props) => {
         key={vc.id}
         w="500px"
         h="360px"
-        borderRadius="md"
+        borderRadius="10px"
         position="relative"
         overflow="hidden"
         boxShadow="0 0 15px #00A29D"

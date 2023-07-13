@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import {
   Box,
@@ -8,11 +8,72 @@ import {
   useBreakpointValue,
   Divider,
 } from "@chakra-ui/react";
+import { dbService } from "../firebase-config";
 
 const ScreenVCInfo = () => {
   const boxPaddingLeft = useBreakpointValue({ base: "20px", xl: "200px" });
   const boxPaddingRight = useBreakpointValue({ base: "20x", xl: "200px" });
   const { state } = useLocation();
+
+  const [vc_nationality, setVcNationality] = useState("");
+  const [vc_ceo, setVcCeo] = useState("");
+  const [vc_homepage, setVcHomepage] = useState("");
+
+  const [vc_amountOfInvestment, setVcAmountOfInvestment] = useState("");
+  const [vc_numOfInvestment, setVcNumOfInvestment] = useState("");
+
+  useEffect(() => {
+    const fetchVcInformation = async () => {
+      try {
+        const vcInfoRef = dbService
+          .collection("vc_list")
+          .doc(state.id)
+          .collection("info")
+          .doc("vc_info");
+
+        const doc = await vcInfoRef.get();
+
+        if (doc.exists) {
+          const data = doc.data();
+          setVcNationality(data.vc_nationality);
+          setVcCeo(data.vc_ceo);
+          setVcHomepage(data.vc_homepage);
+        } else {
+          console.log("문서가 존재하지 않습니다.");
+        }
+      } catch (error) {
+        console.log("데이터 가져오기 실패:", error);
+      }
+    };
+
+    fetchVcInformation();
+  }, [state.id]);
+
+  useEffect(() => {
+    const fetchInvestInformation = async () => {
+      try {
+        const vcInfoRef = dbService
+          .collection("vc_list")
+          .doc(state.id)
+          .collection("info")
+          .doc("invest_info");
+
+        const doc = await vcInfoRef.get();
+
+        if (doc.exists) {
+          const data = doc.data();
+          setVcAmountOfInvestment(data.vc_amountOfInvestment);
+          setVcNumOfInvestment(data.vc_numOfInvestment);
+        } else {
+          console.log("문서가 존재하지 않습니다.");
+        }
+      } catch (error) {
+        console.log("데이터 가져오기 실패:", error);
+      }
+    };
+
+    fetchInvestInformation();
+  }, [state.id]);
 
   return (
     <>
@@ -98,8 +159,8 @@ const ScreenVCInfo = () => {
                   <Text>회사구분</Text>
                 </Box>
                 <Box display="flex" flexDirection="column">
-                  <Text mb="10px">한킴</Text>
-                  <Text mb="10px">미국</Text>
+                  <Text mb="10px">{vc_ceo}</Text>
+                  <Text mb="10px">{vc_nationality}</Text>
                   <Text>벤처캐피탈</Text>
                 </Box>
               </Box>
@@ -118,7 +179,7 @@ const ScreenVCInfo = () => {
                 <Box display="flex" flexDirection="column">
                   <Text mb="10px">주식회사</Text>
                   <Text mb="10px">27.5년차</Text>
-                  <Text>http://altos.vc/</Text>
+                  <Text>{vc_homepage}</Text>
                 </Box>
               </Box>
             </Box>
@@ -142,8 +203,8 @@ const ScreenVCInfo = () => {
                   <Text>운용 펀드</Text>
                 </Box>
                 <Box display="flex" flexDirection="column">
-                  <Text mb="10px">146건</Text>
-                  <Text mb="10px">9125억+</Text>
+                  <Text mb="10px">{vc_numOfInvestment}</Text>
+                  <Text mb="10px">{vc_amountOfInvestment}</Text>
                   <Text>4개</Text>
                 </Box>
               </Box>

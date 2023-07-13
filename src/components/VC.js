@@ -28,6 +28,8 @@ const VC = ({ vcObj }) => {
         //크기
         w="100%"
         h="50%"
+        as="button"
+        onClick={handleClick}
       >
         {/* VC 배경 사진 */}
         <Image
@@ -37,6 +39,11 @@ const VC = ({ vcObj }) => {
           //배경
           src={vcObj.vc_backgroundImg}
           alt="vc background img"
+          // 추가: hover 효과
+          _hover={{
+            transform: "scale(1.1)",
+            transition: "transform 0.3s ease",
+          }}
         />
       </Box>
       {/* 하단 */}
