@@ -48,7 +48,7 @@ export default function App() {
 
   return (
     <ChakraProvider theme={theme}>
-      <div className={"app"} style={{ flex: 1, marginBottom: "100px" }}>
+      <div className={"app"} style={{ flex: 1 }}>
         <Header />
         <Routes>
           <Route path="/" element={<ScreenMain />}></Route>
@@ -93,8 +93,8 @@ export default function App() {
             element={<ScreenNewsletter />}
           ></Route>
         </Routes>
+        <Footer />
       </div>
-      <Footer />
     </ChakraProvider>
   );
 }

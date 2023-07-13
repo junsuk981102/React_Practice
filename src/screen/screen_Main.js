@@ -11,8 +11,8 @@ import {
 } from "@chakra-ui/react";
 
 const ScreenMain = (props) => {
-  const boxPaddingLeft = useBreakpointValue({ base: "50px", xl: "500px" });
-  const boxPaddingRight = useBreakpointValue({ base: "10px", xl: "500px" });
+  const boxPaddingLeft = useBreakpointValue({ base: "100px", xl: "200px" });
+  const boxPaddingRight = useBreakpointValue({ base: "100px", xl: "200px" });
   const [startups, setStartups] = useState([]);
   const [vcs, setVCs] = useState([]);
 
@@ -72,11 +72,11 @@ const ScreenMain = (props) => {
     <>
       <Image src="image/stot_main.png" alt="main logo" w="100%" h="auto" />
 
-      <Box pl={boxPaddingLeft} pr={boxPaddingRight}>
-        <Heading as="h2" size="md" marginTop="50px" marginBottom="5px">
+      <Box pl={boxPaddingLeft} pr={boxPaddingRight} mb="30px">
+        <Heading as="h2" size="md" mt="50px" mb="5px">
           새로운 스타트업 찾기
         </Heading>
-        <Heading as="h1" size="lg" marginBottom="20px">
+        <Heading as="h1" size="lg" mb="20px">
           투자 중인 스타트업
         </Heading>
         <Grid
@@ -85,10 +85,10 @@ const ScreenMain = (props) => {
         >
           {renderStartups()}
         </Grid>
-        <Heading as="h2" size="md" marginTop="50px" marginBottom="5px">
+        <Heading as="h2" size="md" mt="50px" mb="5px">
           새로운 VC 찾기
         </Heading>
-        <Heading as="h1" size="lg" marginBottom="20px">
+        <Heading as="h1" size="lg" mb="20px">
           투자 중인 VC
         </Heading>
         <Grid
