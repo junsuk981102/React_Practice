@@ -91,10 +91,11 @@ const Register = (props) => {
   };
 
   return (
-    <Box height="100%" width="700px" padding="20px" backgroundColor="#E5F2F2">
+    <Box height="100%" width="700px" backgroundColor="#E5F2F2">
       <Heading mt="30px" mb="30px" textAlign="center" as="h1" size="xl">
         회원가입
       </Heading>
+      <Divider backgroundColor="#00A29D" h="1px" mb="30px" />
 
       <FormControl
         as="form"
@@ -103,7 +104,6 @@ const Register = (props) => {
         display="flex"
         flexDirection="column"
       >
-        <Divider backgroundColor="#00A29D" height="2px" margin="30px 0" />
         <FormControl
           display="flex"
           justifyContent="space-between"
@@ -120,7 +120,8 @@ const Register = (props) => {
             onChange={(event) => {
               setRegisterId(event.target.value);
             }}
-            border="solid 1px #d4d3d3"
+            required
+            border="solid 1px #00A29D"
             padding="14px 12px"
             borderRadius="6px"
             outline="none"
@@ -144,7 +145,7 @@ const Register = (props) => {
             value={registerPassword}
             onChange={handlePasswordChange}
             required
-            border="solid 1px #d4d3d3"
+            border="solid 1px #00A29D"
             padding="14px 12px"
             borderRadius="6px"
             outline="none"
@@ -177,7 +178,7 @@ const Register = (props) => {
             value={registerConfirmpassword}
             onChange={handleConfirmPasswordChange}
             required
-            border="solid 1px #d4d3d3"
+            border="solid 1px #00A29D"
             padding="14px 12px"
             borderRadius="6px"
             outline="none"
@@ -207,7 +208,7 @@ const Register = (props) => {
             onChange={(event) => {
               setRegisterEmail(event.target.value);
             }}
-            border="solid 1px #d4d3d3"
+            border="solid 1px #00A29D"
             padding="14px 12px"
             borderRadius="6px"
             outline="none"
@@ -232,7 +233,7 @@ const Register = (props) => {
             onChange={(event) => {
               setRegisterPhonenumber(event.target.value);
             }}
-            border="solid 1px #d4d3d3"
+            border="solid 1px #00A29D"
             padding="14px 12px"
             borderRadius="6px"
             outline="none"
@@ -256,7 +257,7 @@ const Register = (props) => {
             onChange={(event) => {
               setRegisterBirthdate(event.target.value);
             }}
-            border="solid 1px #d4d3d3"
+            border="solid 1px #00A29D"
             padding="14px 12px"
             borderRadius="6px"
             outline="none"
@@ -281,7 +282,7 @@ const Register = (props) => {
             onChange={(event) => {
               setRegisterAddress(event.target.value);
             }}
-            border="solid 1px #d4d3d3"
+            border="solid 1px #00A29D"
             padding="14px 12px"
             borderRadius="6px"
             outline="none"
@@ -290,7 +291,7 @@ const Register = (props) => {
           />
         </FormControl>
 
-        <Divider backgroundColor="#00A29D" height="2px" margin="30px 0" />
+        <Divider backgroundColor="#00A29D" h="1px" mt="30px" mb="30px" />
         <Flex justifyContent="center">
           <Button
             type="submit"
@@ -300,7 +301,7 @@ const Register = (props) => {
             fontWeight="bold"
             backgroundColor="#00A29D"
             color="white"
-            border="none"
+            border="solid 1px #00A29D"
             padding="10px 20px"
             borderRadius="5px"
           >

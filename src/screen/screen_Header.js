@@ -36,11 +36,10 @@ function Header(props) {
   const renderButton = () => {
     if (auth.currentUser) {
       return (
-        <Box display="flex" alignItems="center">
+        <Box display="flex" alignItems="center" pr={boxPaddingRight}>
           <Button
             w="40px"
             h="40px"
-            pr={boxPaddingRight}
             bg="transparent"
             overflow="hidden"
             borderRadius="50%"
