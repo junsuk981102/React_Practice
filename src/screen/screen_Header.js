@@ -45,6 +45,7 @@ function Header(props) {
             overflow="hidden"
             borderRadius="50%"
             onClick={() => handleClick("/screen_profile")}
+            padding="0px"
           >
             <Image
               w="100%"
