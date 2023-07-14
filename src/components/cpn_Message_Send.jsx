@@ -45,7 +45,7 @@ const MessageSend = ({ scroll }) => {
 
   return (
     <Flex as="form" onSubmit={sendMessage} alignItems="center">
-      <IconButton
+      {/* <IconButton
         maxW="100px"
         type="button"
         onClick={toggleEmojiPicker}
@@ -55,7 +55,7 @@ const MessageSend = ({ scroll }) => {
         mr={2}
         colorScheme="teal"
         variant="outline"
-      />
+      /> */}
 
       <FormControl flex={1}>
         <Input
