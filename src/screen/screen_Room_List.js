@@ -45,7 +45,7 @@ const ScreenRoomList = (props) => {
       h="auto"
       //배경
       bg="#E5F2F2"
-      pb="200px"
+      pb="100px"
       borderTop="1px solid #00A29D"
     >
       <Box pl={boxPaddingLeft} pr={boxPaddingRight}>
