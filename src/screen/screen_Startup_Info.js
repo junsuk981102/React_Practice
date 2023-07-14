@@ -151,7 +151,7 @@ const ScreenStartupInfo = () => {
               기업정보
             </Text>
             <Box display="flex" flexDirection="row" ml="10px" mt="25px">
-              <Box display="flex" flexDirection="row" mr="150px">
+              <Box display="flex" flexDirection="row" mr="120px">
                 <Box
                   display="flex"
                   flexDirection="column"
