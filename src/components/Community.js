@@ -33,6 +33,8 @@ const Community = ({ communityObj }) => {
         //크기
         w="100%"
         h="50%"
+        as="button"
+        onClick={handleClick}
       >
         <Image
           //크기
@@ -41,6 +43,12 @@ const Community = ({ communityObj }) => {
           //배경
           src={communityObj.com_profileImg}
           alt="community background img"
+          objectFit="cover"
+          // 추가: hover 효과
+          _hover={{
+            transform: "scale(1.1)",
+            transition: "transform 0.3s ease",
+          }}
         />
       </Box>
 
