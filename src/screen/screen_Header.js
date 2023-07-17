@@ -112,9 +112,8 @@ function Header(props) {
           >
             홈
           </Button>
-          {/* <Button
-            pr=  {boxPaddingBetween}
-
+          <Button
+            pr={boxPaddingBetween}
             fontSize="xl"
             fontWeight="bold"
             variant="none"
@@ -124,7 +123,7 @@ function Header(props) {
             onClick={() => handleClick("/screen_my_governance")}
           >
             지갑
-          </Button> */}
+          </Button>
           <Button
             fontSize="xl"
             fontWeight="bold"
