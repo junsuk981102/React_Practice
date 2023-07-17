@@ -81,7 +81,12 @@ const ScreenNewsletter = (props) => {
             mt="30px"
             mb="30px"
           />{" "}
-          <Image src="../image/newsletter2.png" w="469px" h="249px" />
+          <Image
+            src="../image/newsletter2.png"
+            w="469px"
+            h="249px"
+            objectFit="cover"
+          />
           <Text fontWeight="bold" fontSize="lg" mt="10px" mb="10px">
             “STOT” 새로운 투자에 눈을 뜨다{" "}
           </Text>
