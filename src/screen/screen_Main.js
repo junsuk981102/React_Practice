@@ -42,7 +42,7 @@ const ScreenMain = (props) => {
 
   const renderStartups = () => {
     return startups.map((startup) => (
-      <Box key={startup.id} style={{ margin: "20px" }}>
+      <Box key={startup.id}>
         <Box
           w="500px"
           h="360px"
@@ -50,6 +50,7 @@ const ScreenMain = (props) => {
           position="relative"
           overflow="hidden"
           boxShadow="0 0 15px #00A29D"
+          m="20px"
         >
           <Startup startupObj={startup} />
         </Box>
@@ -59,21 +60,23 @@ const ScreenMain = (props) => {
 
   const renderVCs = () => {
     return vcs.map((vc) => (
-      <Box
-        key={vc.id}
-        w="500px"
-        h="360px"
-        borderRadius="10px"
-        position="relative"
-        overflow="hidden"
-        boxShadow="0 0 15px #00A29D"
-      >
-        <VC vcObj={vc} />
+      <Box key={vc.id}>
+        <Box
+          w="500px"
+          h="360px"
+          borderRadius="10px"
+          position="relative"
+          overflow="hidden"
+          boxShadow="0 0 15px #00A29D"
+          m="20px"
+        >
+          <VC vcObj={vc} />
+        </Box>
       </Box>
     ));
   };
 
-  const SlideList = () => {
+  const SlideList_sup = () => {
     // react-slick 설정 옵션
     const settings = {
       dots: true, // 페이지 표시 여부
@@ -85,7 +88,24 @@ const ScreenMain = (props) => {
 
     return (
       <Box>
-        <Slider {...settings}>{renderStartups()}</Slider>{" "}
+        <Slider {...settings}>{renderStartups()}</Slider>
+      </Box>
+    );
+  };
+
+  const SlideList_vc = () => {
+    // react-slick 설정 옵션
+    const settings = {
+      dots: true, // 페이지 표시 여부
+      infinite: true, // 무한 루프 여부
+      speed: 500, // 슬라이드 전환 속도
+      slidesToShow: 2, // 보여질 슬라이드 개수
+      slidesToScroll: 1, // 슬라이드 이동시 이동하는 슬라이드 개수
+    };
+
+    return (
+      <Box>
+        <Slider {...settings}>{renderVCs()}</Slider>
       </Box>
     );
   };
@@ -101,25 +121,26 @@ const ScreenMain = (props) => {
         <Heading as="h1" size="lg" mb="20px">
           투자 중인 스타트업
         </Heading>
-        <Grid
+        {/* <Grid
           gridTemplateColumns="repeat(auto-fit, minmax(500px, 1fr))"
           gap="20px"
         >
           {renderStartups()}
-        </Grid>
-        <SlideList />
+        </Grid> */}
+        <SlideList_sup />
         <Heading as="h2" size="md" mt="50px" mb="5px">
           새로운 VC 찾기
         </Heading>
         <Heading as="h1" size="lg" mb="20px">
           투자 중인 VC
         </Heading>
-        <Grid
+        {/* <Grid
           gridTemplateColumns="repeat(auto-fit, minmax(500px, 1fr))"
           gap="20px"
         >
           {renderVCs()}
-        </Grid>
+        </Grid> */}
+        <SlideList_vc />
       </Box>
     </>
   );
