@@ -25,9 +25,23 @@ const ScreenRoomInfo = (props) => {
 
   const navi = useNavigate();
   const [ownerCount, setOwnerCount] = useState(state.com_owner);
+  const [sellCount, setSellCount] = useState(0);
 
-  const handleClick = () => {
-    setOwnerCount(ownerCount + 1);
+  const handleClick_plus = () => {
+    if (ownerCount + sellCount < state.com_ticket_max) {
+      setSellCount(sellCount + 1);
+    }
+  };
+
+  const handleClick_minus = () => {
+    if (sellCount > 0) {
+      setSellCount(sellCount - 1);
+    }
+  };
+
+  const handleClick_sell = () => {
+    setOwnerCount(ownerCount + sellCount);
+    setSellCount(0);
   };
 
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -132,7 +146,7 @@ const ScreenRoomInfo = (props) => {
                 bg="white"
                 borderRadius="22.5px"
                 border="1px solid #00A29D"
-              ></Box>
+              />
               <Box
                 position="absolute"
                 top="0"
@@ -143,10 +157,9 @@ const ScreenRoomInfo = (props) => {
                 }
                 h="45px"
                 bg={"linear-gradient(to right, #00A29D, #FFFFFF)"}
-                bo
                 borderRadius="22.5px"
                 border="1px solid #00A29D"
-              ></Box>
+              />
             </Box>
 
             <Box position="relative" color="#00A29D">
@@ -202,6 +215,48 @@ const ScreenRoomInfo = (props) => {
                   <Text mb="15px" fontSize="xl">
                     <NumberFormat number={state.com_ticket_price} />원
                   </Text>
+
+                  <Box
+                    w="120px"
+                    h="40px"
+                    display="flex"
+                    flexDirection="row"
+                    alignItems="center"
+                    justifyContent="center"
+                    border="1px solid #00A29D"
+                    borderRadius="xl"
+                  >
+                    <Button
+                      fontSize="25px"
+                      fontWeight="bold"
+                      w="40px"
+                      h="40px"
+                      borderRadius="50%"
+                      variant="none"
+                      onClick={handleClick_minus}
+                      color={sellCount > 0 ? "#00A29D" : "grey"}
+                    >
+                      -
+                    </Button>
+                    <Text w="30px">{sellCount}</Text>
+                    <Button
+                      fontSize="25px"
+                      fontWeight="bold"
+                      w="40px"
+                      h="40px"
+                      borderRadius="50%"
+                      variant="none"
+                      onClick={handleClick_plus}
+                      color={
+                        ownerCount + sellCount < state.com_ticket_max
+                          ? "#00A29D"
+                          : "grey"
+                      }
+                    >
+                      +
+                    </Button>
+                  </Box>
+
                   <Button
                     w="120px"
                     h="35px"
@@ -211,7 +266,7 @@ const ScreenRoomInfo = (props) => {
                     fontSize="sm"
                     bg="#00A29D"
                     borderRadius="17.5px"
-                    onClick={handleClick}
+                    onClick={handleClick_sell}
                   >
                     구매하기
                   </Button>
