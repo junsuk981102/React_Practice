@@ -1,40 +1,36 @@
 import React, { useState, useEffect } from "react";
 import { dbService } from "../firebase-config";
-import Community from "../components/Community";
+import Startup from "../components/Startup";
 import { Heading, Grid, Box, useBreakpointValue } from "@chakra-ui/react";
 
-const ScreenRoomList = (props) => {
-  const [communities, setCommunities] = useState([]);
+const ScreenStartupList = (props) => {
+  const [startups, setStartups] = useState([]);
   const boxPaddingLeft = useBreakpointValue({ base: "20px", xl: "200px" });
   const boxPaddingRight = useBreakpointValue({ base: "20x", xl: "200px" });
 
   useEffect(() => {
-    dbService.collection("community_list").onSnapshot((snapshot) => {
-      const communityArray = snapshot.docs.map((doc) => ({
+    dbService.collection("startup_list").onSnapshot((snapshot) => {
+      const startupArray = snapshot.docs.map((doc) => ({
         id: doc.id,
         ...doc.data(),
       }));
-      setCommunities(communityArray);
+      setStartups(startupArray);
     });
   }, []);
 
-  const renderCommunities = () => {
-    return communities.map((community) => (
-      <Box
-        //커뮤니티 ID
-        key={community.id}
-        //크기
-        w="300px"
-        h="400px"
-        //배경
-        bg="white"
-        borderRadius="md"
-        boxShadow="0 0 15px #00A29D"
-        //구조
-        position="relative"
-        overflow="hidden"
-      >
-        <Community communityObj={community} />
+  const renderStartups = () => {
+    return startups.map((startup) => (
+      <Box key={startup.id}>
+        <Box
+          w="500px"
+          h="360px"
+          borderRadius="10px"
+          position="relative"
+          overflow="hidden"
+          boxShadow="0 0 15px #00A29D"
+        >
+          <Startup startupObj={startup} />
+        </Box>
       </Box>
     ));
   };
@@ -48,30 +44,22 @@ const ScreenRoomList = (props) => {
       pb="100px"
       borderTop="1px solid #00A29D"
     >
-      <Box pl={boxPaddingLeft} pr={boxPaddingRight}>
-        {/* 페이지 제목 */}
-        <Heading
-          //위치
-          mt="30px"
-          mb="30px"
-          //크기
-          as="h1"
-          size="lg"
-        >
-          커뮤니티
+      <Box pl={boxPaddingLeft} pr={boxPaddingRight} pb="50px">
+        <Heading as="h2" size="md" mt="30px" mb="5px">
+          새로운 스타트업 찾기
         </Heading>
-
-        {/* 커뮤니티 리스트 */}
+        <Heading as="h1" size="lg" mb="20px">
+          투자 중인 스타트업
+        </Heading>
         <Grid
-          //형식
-          gridTemplateColumns="repeat(auto-fit, minmax(300px, 1fr))"
-          gap="5px"
+          gridTemplateColumns="repeat(auto-fit, minmax(500px, 1fr))"
+          gap="20px"
         >
-          {renderCommunities()}
+          {renderStartups()}
         </Grid>
       </Box>
     </Box>
   );
 };
 
-export default ScreenRoomList;
+export default ScreenStartupList;
