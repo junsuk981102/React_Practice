@@ -1,12 +1,22 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { dbService } from "../firebase-config";
 import Community from "../components/Community";
-import { Heading, Grid, Box, useBreakpointValue } from "@chakra-ui/react";
+import {
+  Heading,
+  Grid,
+  Box,
+  useBreakpointValue,
+  Button,
+  Text,
+} from "@chakra-ui/react";
+import { AddIcon } from "@chakra-ui/icons";
 
 const ScreenRoomList = (props) => {
+  const navi = useNavigate();
   const [communities, setCommunities] = useState([]);
   const boxPaddingLeft = useBreakpointValue({ base: "20px", xl: "200px" });
-  const boxPaddingRight = useBreakpointValue({ base: "20x", xl: "200px" });
+  const boxPaddingRight = useBreakpointValue({ base: "20px", xl: "200px" });
 
   useEffect(() => {
     dbService.collection("community_list").onSnapshot((snapshot) => {
@@ -17,6 +27,10 @@ const ScreenRoomList = (props) => {
       setCommunities(communityArray);
     });
   }, []);
+
+  function handleClick() {
+    navi(`/screen_room_make`, {});
+  }
 
   const renderCommunities = () => {
     return communities.map((community) => (
@@ -61,14 +75,33 @@ const ScreenRoomList = (props) => {
           커뮤니티
         </Heading>
 
-        {/* 커뮤니티 리스트 */}
-        <Grid
-          //형식
-          gridTemplateColumns="repeat(auto-fit, minmax(300px, 1fr))"
-          gap="5px"
-        >
-          {renderCommunities()}
-        </Grid>
+        <Box display="flex" flexDirection="column">
+          {/* 커뮤니티 리스트 */}
+          <Grid
+            //형식
+            gridTemplateColumns="repeat(auto-fit, minmax(300px, 1fr))"
+            gap="5px"
+          >
+            <Button
+              display="flex"
+              flexDir="column"
+              w="300px"
+              h="400px"
+              //배경
+              bg="white"
+              borderRadius="md"
+              boxShadow="0 0 15px #00A29D"
+              //구조
+              position="relative"
+              overflow="hidden"
+              onClick={handleClick}
+            >
+              <AddIcon w={35} h={35} m={8} color="#5eccc8" />
+              <Text color="#5eccc8">새로운 투자 커뮤니티 생성</Text>
+            </Button>
+            {renderCommunities()}
+          </Grid>
+        </Box>
       </Box>
     </Box>
   );
