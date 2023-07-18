@@ -36,7 +36,7 @@ function Header(props) {
   const renderButton = () => {
     if (auth.currentUser) {
       return (
-        <Box display="flex" alignItems="center" pr={boxPaddingRight}>
+        <Box display="flex" alignItems="center" mr={boxPaddingRight}>
           <Button
             w="40px"
             h="40px"
@@ -94,16 +94,17 @@ function Header(props) {
         py="15px"
       >
         <Box display="flex" alignItems="center">
-          <Box pl={boxPaddingLeft} pr={boxPaddingBetween}>
+          <Button ml={boxPaddingLeft} mr={boxPaddingBetween} variant="none">
             <Image
               w="143px"
               h="48px"
               src="image/stot_minilogo.png"
               alt="logo"
+              onClick={() => handleClick("")}
             />
-          </Box>
+          </Button>
           <Button
-            pr={boxPaddingBetween}
+            mr={boxPaddingBetween}
             fontSize="xl"
             fontWeight="bold"
             variant="none"
@@ -113,7 +114,7 @@ function Header(props) {
             홈
           </Button>
           <Button
-            pr={boxPaddingBetween}
+            mr={boxPaddingBetween}
             fontSize="xl"
             fontWeight="bold"
             variant="none"
