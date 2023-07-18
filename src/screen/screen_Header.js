@@ -103,17 +103,7 @@ function Header(props) {
               onClick={() => handleClick("")}
             />
           </Button>
-          <Button
-            mr={boxPaddingBetween}
-            fontSize="xl"
-            fontWeight="bold"
-            variant="none"
-            color={activeButton === "" ? "#00A29D" : "black"}
-            onClick={() => handleClick("")}
-          >
-            홈
-          </Button>
-          <Button
+          {/* <Button
             mr={boxPaddingBetween}
             fontSize="xl"
             fontWeight="bold"
@@ -124,8 +114,9 @@ function Header(props) {
             onClick={() => handleClick("/screen_my_governance")}
           >
             지갑
-          </Button>
+          </Button> */}
           <Button
+            mr={boxPaddingBetween}
             fontSize="xl"
             fontWeight="bold"
             variant="none"
@@ -133,6 +124,25 @@ function Header(props) {
             color={activeButton === "/screen_room_list" ? "#00A29D" : "black"}
           >
             커뮤니티
+          </Button>{" "}
+          <Button
+            mr={boxPaddingBetween}
+            fontSize="xl"
+            fontWeight="bold"
+            variant="none"
+            onClick={() => handleClick("screen_startup_list")}
+            color={activeButton === "screen_startup_list" ? "#00A29D" : "black"}
+          >
+            스타트업
+          </Button>
+          <Button
+            fontSize="xl"
+            fontWeight="bold"
+            variant="none"
+            onClick={() => handleClick("screen_vc_list")}
+            color={activeButton === "screen_vc_list" ? "#00A29D" : "black"}
+          >
+            VC
           </Button>
         </Box>
         <Box>{renderButton()}</Box> {/* 로그인-로그아웃 변경 버튼 렌더링 */}
