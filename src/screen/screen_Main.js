@@ -84,6 +84,8 @@ const ScreenMain = (props) => {
       speed: 500, // 슬라이드 전환 속도
       slidesToShow: 2, // 보여질 슬라이드 개수
       slidesToScroll: 1, // 슬라이드 이동시 이동하는 슬라이드 개수
+      autoplay: true, // Enable automatic sliding
+      autoplaySpeed: 3000, // Set the interval (in milliseconds) between each slide transition
     };
 
     return (
@@ -101,6 +103,8 @@ const ScreenMain = (props) => {
       speed: 500, // 슬라이드 전환 속도
       slidesToShow: 2, // 보여질 슬라이드 개수
       slidesToScroll: 1, // 슬라이드 이동시 이동하는 슬라이드 개수
+      autoplay: true, // Enable automatic sliding
+      autoplaySpeed: 3000, // Set the interval (in milliseconds) between each slide transition
     };
 
     return (
