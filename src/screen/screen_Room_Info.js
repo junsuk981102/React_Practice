@@ -14,7 +14,6 @@ import {
   ModalBody,
   useDisclosure,
 } from "@chakra-ui/react";
-import {} from "@chakra-ui/react";
 
 const ScreenRoomInfo = (props) => {
   const boxPaddingLeft = useBreakpointValue({ base: "20px", xl: "200px" });
@@ -63,6 +62,9 @@ const ScreenRoomInfo = (props) => {
           com_member: state.com_member,
           com_profileImg: state.com_profileImg,
           com_owner: state.com_owner,
+          com_favorite1: state.com_favorite1,
+          com_favorite2: state.com_favorite2,
+          com_favorite3: state.com_favorite3,
         },
       });
     }
