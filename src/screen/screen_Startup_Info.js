@@ -12,7 +12,7 @@ import { dbService } from "../firebase-config";
 
 const ScreenStartupInfo = () => {
   const boxPaddingLeft = useBreakpointValue({ base: "20px", xl: "200px" });
-  const boxPaddingRight = useBreakpointValue({ base: "20x", xl: "200px" });
+  const boxPaddingRight = useBreakpointValue({ base: "20px", xl: "200px" });
   const { state } = useLocation();
 
   const [sup_nationality, setSupNationality] = useState("");

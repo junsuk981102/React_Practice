@@ -6,7 +6,7 @@ import { Heading, Grid, Box, useBreakpointValue } from "@chakra-ui/react";
 const ScreenVCList = (props) => {
   const [vcs, setVCs] = useState([]);
   const boxPaddingLeft = useBreakpointValue({ base: "20px", xl: "200px" });
-  const boxPaddingRight = useBreakpointValue({ base: "20x", xl: "200px" });
+  const boxPaddingRight = useBreakpointValue({ base: "20px", xl: "200px" });
 
   useEffect(() => {
     dbService.collection("vc_list").onSnapshot((snapshot) => {
@@ -24,11 +24,11 @@ const ScreenVCList = (props) => {
         <Box
           w="500px"
           h="360px"
+          bg="white"
           borderRadius="10px"
           position="relative"
           overflow="hidden"
           boxShadow="0 0 15px #00A29D"
-          m="20px"
         >
           <VC vcObj={vc} />
         </Box>

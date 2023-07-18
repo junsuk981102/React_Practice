@@ -6,7 +6,7 @@ import { Heading, Grid, Box, useBreakpointValue } from "@chakra-ui/react";
 const ScreenStartupList = (props) => {
   const [startups, setStartups] = useState([]);
   const boxPaddingLeft = useBreakpointValue({ base: "20px", xl: "200px" });
-  const boxPaddingRight = useBreakpointValue({ base: "20x", xl: "200px" });
+  const boxPaddingRight = useBreakpointValue({ base: "20px", xl: "200px" });
 
   useEffect(() => {
     dbService.collection("startup_list").onSnapshot((snapshot) => {
@@ -24,6 +24,7 @@ const ScreenStartupList = (props) => {
         <Box
           w="500px"
           h="360px"
+          bg="white"
           borderRadius="10px"
           position="relative"
           overflow="hidden"

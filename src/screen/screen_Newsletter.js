@@ -1,14 +1,8 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { Box, Button, Text, Image, Divider } from "@chakra-ui/react";
 
-const ScreenNewsletter = (props) => {
-  const navi = useNavigate();
-
-  function handleClick(text) {
-    navi(text);
-  }
+const ScreenNewsletter = () => {
   return (
     <>
       <Box w="100vw" bg="#EAE7DE" display="flex" justifyContent="center">
