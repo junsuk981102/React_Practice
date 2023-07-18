@@ -25,6 +25,7 @@ const ScreenStartupList = (props) => {
           w="500px"
           h="360px"
           bg="white"
+          m="20px"
           borderRadius="10px"
           position="relative"
           overflow="hidden"
