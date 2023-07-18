@@ -7,8 +7,8 @@ import { Outlet } from "react-router-dom";
 
 import ScreenChat from "./screen/screen_Chat";
 import ScreenExample from "./screen/screen_Example";
-import Header from "./screen/screen_Header";
 import Footer from "./screen/screen_Footer";
+import Header from "./screen/screen_Header";
 import ScreenLogin from "./screen/screen_Login";
 import ScreenMain from "./screen/screen_Main";
 import ScreenMinting from "./screen/screen_Minting";
@@ -19,7 +19,9 @@ import ScreenRoomInfo from "./screen/screen_Room_Info";
 import ScreenRoomList from "./screen/screen_Room_List";
 import ScreenRoomMake from "./screen/screen_Room_Make";
 import ScreenStartupInfo from "./screen/screen_Startup_Info";
+import ScreenStartupList from "./screen/screen_Startup_List";
 import ScreenVCInfo from "./screen/screen_VC_Info";
+import ScreenVCList from "./screen/screen_VC_List";
 import ScreenWalletConnect from "./screen/screen_Wallet_Connect";
 
 import ScreenTest from "./screen/screen_Test";
@@ -107,7 +109,12 @@ export default function App() {
               path="/screen_startup_info/*"
               element={<ScreenStartupInfo />}
             ></Route>
+            <Route
+              path="/screen_startup_list/*"
+              element={<ScreenStartupList />}
+            ></Route>
             <Route path="/screen_vc_info/*" element={<ScreenVCInfo />}></Route>
+            <Route path="/screen_vc_list/*" element={<ScreenVCList />}></Route>
             <Route
               path="/screen_wallet_connect/*"
               element={<ScreenWalletConnect />}
