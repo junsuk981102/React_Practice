@@ -47,6 +47,7 @@ const ScreenRoomList = (props) => {
         //구조
         position="relative"
         overflow="hidden"
+        mb="20px"
       >
         <Community communityObj={community} />
       </Box>
@@ -76,12 +77,12 @@ const ScreenRoomList = (props) => {
         </Heading>
 
         <Box display="flex" flexDirection="column">
-          {/* 커뮤니티 리스트 */}
           <Grid
             //형식
             gridTemplateColumns="repeat(auto-fit, minmax(300px, 1fr))"
             gap="5px"
           >
+            {/* 커뮤니티 생성 버튼 */}
             <Button
               display="flex"
               flexDir="column"
@@ -99,6 +100,7 @@ const ScreenRoomList = (props) => {
               <AddIcon w={35} h={35} m={8} color="#5eccc8" />
               <Text color="#5eccc8">새로운 투자 커뮤니티 생성</Text>
             </Button>
+            {/* 커뮤니티 리스트 */}
             {renderCommunities()}
           </Grid>
         </Box>
