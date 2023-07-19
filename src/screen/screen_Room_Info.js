@@ -25,6 +25,14 @@ const ScreenRoomInfo = (props) => {
   const navi = useNavigate();
   const [ownerCount, setOwnerCount] = useState(state.com_owner);
   const [sellCount, setSellCount] = useState(0);
+  let comCategory = [];
+  if (typeof state.com_category === "string") {
+    comCategory = state.com_category.split(",");
+  } else if (Array.isArray(state.com_category)) {
+    comCategory = state.com_category;
+  } else {
+    console.error("Invalid category format");
+  }
 
   const handleClick_plus = () => {
     if (ownerCount + sellCount < state.com_ticket_max) {
@@ -53,7 +61,7 @@ const ScreenRoomInfo = (props) => {
         state: {
           id: state.id,
           com_name: state.com_name,
-          com_category: state.com_category,
+          com_category: comCategory,
           com_info: state.com_info,
           com_total_investment: state.com_total_investment,
           com_now_investment: state.com_now_investment,
@@ -108,20 +116,24 @@ const ScreenRoomInfo = (props) => {
               <Heading as="h1" size="lg">
                 {state.com_name}
               </Heading>
-              <Box
-                w="100px"
-                h="auto"
-                p="5px"
-                mt="10px"
-                mb="10px"
-                bg="#00A29D"
-                borderRadius="xl"
-                textAlign="center"
-              >
-                <Text fontSize="md" as="b" color="white">
-                  {state.com_category}
-                </Text>
-              </Box>
+              {comCategory.map((category, index) => (
+                <Box
+                  key={index}
+                  w="100px"
+                  h="auto"
+                  p="5px"
+                  mt="10px"
+                  mb="10px"
+                  bg="#00A29D"
+                  borderRadius="xl"
+                  textAlign="center"
+                >
+                  {/* 카테고리 표시 */}
+                  <Text fontSize="md" as="b" color="white">
+                    {category}
+                  </Text>
+                </Box>
+              ))}
               <Box>
                 <Text fontSize="md" as="b">
                   {state.com_info}
