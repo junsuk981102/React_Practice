@@ -103,7 +103,7 @@ const VC = ({ vcObj }) => {
           ml="390px"
           //배경
           borderRadius="xl"
-          bg="primary"
+          bg="#00A29D"
           padding="5px 10px"
           //글자
           as="b"
