@@ -18,6 +18,7 @@ import {
   ModalHeader,
   ModalBody,
   ModalCloseButton,
+  Button,
 } from "@chakra-ui/react";
 
 import Slider from "react-slick";
@@ -32,9 +33,20 @@ const ScreenMain = (props) => {
   const [vcs, setVCs] = useState([]);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
+
   useEffect(() => {
-    setIsModalOpen(true);
+    const shouldShowModal = !localStorage.getItem("dontShowAgain");
+    setIsModalOpen(shouldShowModal);
   }, []);
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+    localStorage.setItem("dontShowAgain", "true");
+  };
+
+  const handleOpenModal = () => {
+    setIsModalOpen(true);
+  };
 
   useEffect(() => {
     dbService.collection("community_list").onSnapshot((snapshot) => {
@@ -213,12 +225,17 @@ const ScreenMain = (props) => {
           {renderVCs()}
         </Grid> */}
         <SlideList_vc />
+        <Button
+          position="fixed"
+          bottom="20px"
+          right="20px"
+          colorScheme="teal"
+          onClick={handleOpenModal}
+        >
+          Tutorial
+        </Button>
       </Box>
-      <Modal
-        size="3xl"
-        isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
-      >
+      <Modal size="3xl" isOpen={isModalOpen} onClose={handleCloseModal}>
         <ModalOverlay />
         <ModalContent bg="#E5F2F2">
           <ModalHeader mt="20px" mb="20px" fontSize="2xl" fontWeight="bold">
@@ -226,24 +243,51 @@ const ScreenMain = (props) => {
           </ModalHeader>
           <ModalCloseButton />
           <ModalBody>
-            <Text fontSize="xl" fontWeight="bold" color="#00A29D">
+            <Text fontSize="xl" fontWeight="bold" color="#00A29D" mb="10px">
               STOT에 등록된 스타트업의 정보를 볼 수 있습니다.
             </Text>
-            <Image src="image/modal1.png" w="100%" h="auto" mb="40px" />
-
-            <Text fontSize="xl" fontWeight="bold" color="#00A29D">
+            <Image
+              src="image/modal1.png"
+              w="100%"
+              h="auto"
+              mb="40px"
+              p="5px"
+              border="1px solid #00A29D"
+              borderRadius="xl"
+            />
+            <Text fontSize="xl" fontWeight="bold" color="#00A29D" mb="10px">
               추가적으로 VC의 정보도 볼 수 있습니다.
             </Text>
-            <Image src="image/modal2.png" w="100%" h="auto" mb="40px" />
-
-            <Text fontSize="xl" fontWeight="bold" color="#00A29D">
+            <Image
+              src="image/modal2.png"
+              w="100%"
+              h="auto"
+              mb="40px"
+              p="5px"
+              border="1px solid #00A29D"
+              borderRadius="xl"
+            />
+            <Text fontSize="xl" fontWeight="bold" color="#00A29D" mb="10px">
               스타트업과 VC에 대한 정보를 얻은 후 관심있는 커뮤니티에
               참여해보세요!
             </Text>
-            <Image src="image/modal3.png" w="100%" h="auto" mb="40px" />
+            <Image
+              src="image/modal3.png"
+              w="100%"
+              h="auto"
+              mb="40px"
+              p="5px"
+              border="1px solid #00A29D"
+              borderRadius="xl"
+            />
             {/* <Image src="image/modal4.png" w="100%" h="auto" />
             <Image src="image/modal5.png" w="100%" h="auto" />
             <Image src="image/modal6.png" w="100%" h="auto" /> */}
+            <Box display="flex" justifyContent="right" m="20px">
+              <Button colorScheme="teal" onClick={handleCloseModal}>
+                다시 보지 않기
+              </Button>
+            </Box>
           </ModalBody>
         </ModalContent>
       </Modal>
