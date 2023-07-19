@@ -55,6 +55,15 @@ const ScreenStartupList = (props) => {
     const filteredStartups = startups.filter(
       (startup) => startup.sup_category === selectedValue
     );
+
+    if (filteredStartups.length === 0) {
+      return (
+        <Box textAlign="center" mt="50px" fontSize="2xl" fontWeight="bold">
+          아직 등록된 스타트업이 없습니다.
+        </Box>
+      );
+    }
+
     return filteredStartups.map((startup) => (
       <Box key={startup.id}>
         <Box

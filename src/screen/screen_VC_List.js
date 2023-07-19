@@ -52,6 +52,15 @@ const ScreenVCList = (props) => {
       ));
     }
     const filteredVCs = vcs.filter((vc) => vc.vc_category === selectedValue);
+
+    if (filteredVCs.length === 0) {
+      return (
+        <Box textAlign="center" mt="50px" fontSize="2xl" fontWeight="bold">
+          아직 등록된 VC가 없습니다.
+        </Box>
+      );
+    }
+
     return filteredVCs.map((vc) => (
       <Box key={vc.id}>
         <Box
@@ -123,6 +132,14 @@ const ScreenVCList = (props) => {
                 onClick={() => handleMenuItemClick("CVC")}
               >
                 CVC
+              </MenuItem>
+              <MenuItem
+                bg="none"
+                borderTop="1px solid white"
+                value="opt3"
+                onClick={() => handleMenuItemClick("ABC")}
+              >
+                ABC
               </MenuItem>
             </MenuList>
           </Menu>
