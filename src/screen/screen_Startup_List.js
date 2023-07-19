@@ -115,7 +115,6 @@ const ScreenStartupList = (props) => {
               <MenuItem
                 bg="none"
                 borderTop="1px solid white"
-                value="opt1"
                 onClick={() => handleMenuItemClick("카테고리")}
               >
                 전체
@@ -123,15 +122,13 @@ const ScreenStartupList = (props) => {
               <MenuItem
                 bg="none"
                 borderTop="1px solid white"
-                value="opt1"
-                onClick={() => handleMenuItemClick("이커머스")}
+                onClick={() => handleMenuItemClick("핀테크")}
               >
-                이커머스
+                핀테크
               </MenuItem>
               <MenuItem
                 bg="none"
                 borderTop="1px solid white"
-                value="opt2"
                 onClick={() => handleMenuItemClick("금융")}
               >
                 금융
@@ -139,7 +136,6 @@ const ScreenStartupList = (props) => {
               <MenuItem
                 bg="none"
                 borderTop="1px solid white"
-                value="opt3"
                 onClick={() => handleMenuItemClick("반려동물")}
               >
                 반려동물
@@ -147,7 +143,6 @@ const ScreenStartupList = (props) => {
               <MenuItem
                 bg="none"
                 borderTop="1px solid white"
-                value="opt4"
                 onClick={() => handleMenuItemClick("VR")}
               >
                 VR
@@ -155,11 +150,73 @@ const ScreenStartupList = (props) => {
               <MenuItem
                 bg="none"
                 borderTop="1px solid white"
-                borderBottom="1px solid white"
-                value="opt5"
                 onClick={() => handleMenuItemClick("AR")}
               >
                 AR
+              </MenuItem>
+              <MenuItem
+                bg="none"
+                borderTop="1px solid white"
+                onClick={() => handleMenuItemClick("ESG")}
+              >
+                ESG
+              </MenuItem>
+              <MenuItem
+                bg="none"
+                borderTop="1px solid white"
+                onClick={() => handleMenuItemClick("전기차")}
+              >
+                전기차
+              </MenuItem>
+              <MenuItem
+                bg="none"
+                borderTop="1px solid white"
+                onClick={() => handleMenuItemClick("블록체인")}
+              >
+                블록체인
+              </MenuItem>
+              <MenuItem
+                bg="none"
+                borderTop="1px solid white"
+                onClick={() => handleMenuItemClick("음악")}
+              >
+                음악
+              </MenuItem>
+              <MenuItem
+                bg="none"
+                borderTop="1px solid white"
+                onClick={() => handleMenuItemClick("미술")}
+              >
+                미술
+              </MenuItem>
+              <MenuItem
+                bg="none"
+                borderTop="1px solid white"
+                onClick={() => handleMenuItemClick("자동차")}
+              >
+                자동차
+              </MenuItem>
+              <MenuItem
+                bg="none"
+                borderTop="1px solid white"
+                onClick={() => handleMenuItemClick("신기술")}
+              >
+                신기술
+              </MenuItem>
+              <MenuItem
+                bg="none"
+                borderTop="1px solid white"
+                onClick={() => handleMenuItemClick("F&B")}
+              >
+                F&B
+              </MenuItem>
+              <MenuItem
+                bg="none"
+                borderTop="1px solid white"
+                borderBottom="1px solid white"
+                onClick={() => handleMenuItemClick("헬스케어")}
+              >
+                헬스케어
               </MenuItem>
             </MenuList>
           </Menu>

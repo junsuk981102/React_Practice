@@ -112,7 +112,6 @@ const ScreenVCList = (props) => {
               <MenuItem
                 bg="none"
                 borderTop="1px solid white"
-                value="opt1"
                 onClick={() => handleMenuItemClick("카테고리")}
               >
                 전체
@@ -120,7 +119,6 @@ const ScreenVCList = (props) => {
               <MenuItem
                 bg="none"
                 borderTop="1px solid white"
-                value="opt2"
                 onClick={() => handleMenuItemClick("VC")}
               >
                 VC
@@ -128,7 +126,6 @@ const ScreenVCList = (props) => {
               <MenuItem
                 bg="none"
                 borderTop="1px solid white"
-                value="opt3"
                 onClick={() => handleMenuItemClick("CVC")}
               >
                 CVC
@@ -136,7 +133,7 @@ const ScreenVCList = (props) => {
               <MenuItem
                 bg="none"
                 borderTop="1px solid white"
-                value="opt3"
+                borderBottom="1px solid white"
                 onClick={() => handleMenuItemClick("ABC")}
               >
                 ABC
