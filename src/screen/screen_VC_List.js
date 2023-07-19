@@ -55,7 +55,13 @@ const ScreenVCList = (props) => {
 
     if (filteredVCs.length === 0) {
       return (
-        <Box textAlign="center" mt="50px" fontSize="2xl" fontWeight="bold">
+        <Box
+          textAlign="center"
+          mt="50px"
+          mb="150px"
+          fontSize="2xl"
+          fontWeight="bold"
+        >
           아직 등록된 VC가 없습니다.
         </Box>
       );

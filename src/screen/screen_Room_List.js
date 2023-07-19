@@ -56,7 +56,7 @@ const ScreenRoomList = (props) => {
             //구조
             position="relative"
             overflow="hidden"
-            mb="20px"
+            m="20px"
           >
             <Community communityObj={community} />
           </Box>
@@ -70,7 +70,7 @@ const ScreenRoomList = (props) => {
 
     if (filteredCommunities.length === 0) {
       return (
-        <Box textAlign="center" mt="50px" fontSize="2xl" fontWeight="bold">
+        <Box mt="50px" fontSize="2xl" fontWeight="bold">
           아직 등록된 커뮤니티가 없습니다.
         </Box>
       );
@@ -114,7 +114,7 @@ const ScreenRoomList = (props) => {
           mb="30px"
         >
           <Heading as="h1" size="lg">
-            투자 중인 스타트업
+            커뮤니티
           </Heading>
           <Menu>
             <MenuButton

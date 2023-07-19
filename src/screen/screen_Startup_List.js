@@ -58,7 +58,13 @@ const ScreenStartupList = (props) => {
 
     if (filteredStartups.length === 0) {
       return (
-        <Box textAlign="center" mt="50px" fontSize="2xl" fontWeight="bold">
+        <Box
+          textAlign="center"
+          mt="50px"
+          mb="150px"
+          fontSize="2xl"
+          fontWeight="bold"
+        >
           아직 등록된 스타트업이 없습니다.
         </Box>
       );
