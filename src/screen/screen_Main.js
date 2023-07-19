@@ -9,6 +9,15 @@ import {
   Heading,
   Image,
   useBreakpointValue,
+  Text,
+} from "@chakra-ui/react";
+import {
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalBody,
+  ModalCloseButton,
 } from "@chakra-ui/react";
 
 import Slider from "react-slick";
@@ -19,9 +28,13 @@ const ScreenMain = (props) => {
   const boxPaddingLeft = useBreakpointValue({ base: "20px", xl: "200px" });
   const boxPaddingRight = useBreakpointValue({ base: "20px", xl: "200px" });
   const [communities, setCommunities] = useState([]);
-
   const [startups, setStartups] = useState([]);
   const [vcs, setVCs] = useState([]);
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  useEffect(() => {
+    setIsModalOpen(true);
+  }, []);
 
   useEffect(() => {
     dbService.collection("community_list").onSnapshot((snapshot) => {
@@ -31,9 +44,6 @@ const ScreenMain = (props) => {
       }));
       setCommunities(communityArray);
     });
-  }, []);
-
-  useEffect(() => {
     dbService.collection("startup_list").onSnapshot((snapshot) => {
       const startupArray = snapshot.docs.map((doc) => ({
         id: doc.id,
@@ -41,9 +51,6 @@ const ScreenMain = (props) => {
       }));
       setStartups(startupArray);
     });
-  }, []);
-
-  useEffect(() => {
     dbService.collection("vc_list").onSnapshot((snapshot) => {
       const vcArray = snapshot.docs.map((doc) => ({
         id: doc.id,
@@ -207,6 +214,39 @@ const ScreenMain = (props) => {
         </Grid> */}
         <SlideList_vc />
       </Box>
+      <Modal
+        size="3xl"
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+      >
+        <ModalOverlay />
+        <ModalContent bg="#E5F2F2">
+          <ModalHeader mt="20px" mb="20px" fontSize="2xl" fontWeight="bold">
+            STOT이 처음이신가요?
+          </ModalHeader>
+          <ModalCloseButton />
+          <ModalBody>
+            <Text fontSize="xl" fontWeight="bold" color="#00A29D">
+              STOT에 등록된 스타트업의 정보를 볼 수 있습니다.
+            </Text>
+            <Image src="image/modal1.png" w="100%" h="auto" mb="40px" />
+
+            <Text fontSize="xl" fontWeight="bold" color="#00A29D">
+              추가적으로 VC의 정보도 볼 수 있습니다.
+            </Text>
+            <Image src="image/modal2.png" w="100%" h="auto" mb="40px" />
+
+            <Text fontSize="xl" fontWeight="bold" color="#00A29D">
+              스타트업과 VC에 대한 정보를 얻은 후 관심있는 커뮤니티에
+              참여해보세요!
+            </Text>
+            <Image src="image/modal3.png" w="100%" h="auto" mb="40px" />
+            {/* <Image src="image/modal4.png" w="100%" h="auto" />
+            <Image src="image/modal5.png" w="100%" h="auto" />
+            <Image src="image/modal6.png" w="100%" h="auto" /> */}
+          </ModalBody>
+        </ModalContent>
+      </Modal>
     </>
   );
 };
