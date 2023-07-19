@@ -34,7 +34,28 @@ const ScreenStartupList = (props) => {
   }, []);
 
   const renderStartups = () => {
-    return startups.map((startup) => (
+    if (selectedValue === "카테고리") {
+      return startups.map((startup) => (
+        <Box key={startup.id}>
+          <Box
+            w="500px"
+            h="360px"
+            bg="white"
+            m="20px"
+            borderRadius="10px"
+            position="relative"
+            overflow="hidden"
+            boxShadow="0 0 15px #00A29D"
+          >
+            <Startup startupObj={startup} />
+          </Box>
+        </Box>
+      ));
+    }
+    const filteredStartups = startups.filter(
+      (startup) => startup.sup_category === selectedValue
+    );
+    return filteredStartups.map((startup) => (
       <Box key={startup.id}>
         <Box
           w="500px"
@@ -86,9 +107,17 @@ const ScreenStartupList = (props) => {
                 bg="none"
                 borderTop="1px solid white"
                 value="opt1"
-                onClick={() => handleMenuItemClick("핀테크")}
+                onClick={() => handleMenuItemClick("카테고리")}
               >
-                핀테크
+                전체
+              </MenuItem>
+              <MenuItem
+                bg="none"
+                borderTop="1px solid white"
+                value="opt1"
+                onClick={() => handleMenuItemClick("이커머스")}
+              >
+                이커머스
               </MenuItem>
               <MenuItem
                 bg="none"
