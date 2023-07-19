@@ -103,9 +103,9 @@ const ScreenMyGovernance: FC<MyGovernanceProps> = ({ account }) => {
       <Box
         pl={boxPaddingLeft}
         pr={boxPaddingRight}
-        h="100vh"
+        h="auto"
+        mb="200px"
         bg="#E5F2F2"
-        borderTop="1px solid #00A29D"
       >
         <Heading
           //위치

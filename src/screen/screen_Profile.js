@@ -1,18 +1,22 @@
 import React from "react";
 import User from "../components/cpn_User";
-import { Box, Heading } from "@chakra-ui/react";
+import { Box, Heading, useBreakpointValue } from "@chakra-ui/react";
+import ScreenMyGovernance from "./screen_My_Governance";
 
 const ScreenProfile = () => {
+  const boxPaddingLeft = useBreakpointValue({ base: "20px", xl: "200px" });
+  const boxPaddingRight = useBreakpointValue({ base: "20px", xl: "200px" });
   return (
     <>
       <Box
         display="flex"
+        flexDirection="column"
         justifyContent="center"
-        h="100vh"
+        h="auto"
         bg="#E5F2F2"
         borderTop="1px solid #00A29D"
       >
-        <Box flexDirection="column">
+        <Box flexDirection="column" pr={boxPaddingRight} pl={boxPaddingLeft}>
           <Heading
             //위치
             mt="30px"
@@ -33,6 +37,7 @@ const ScreenProfile = () => {
             <User />
           </Box>
         </Box>
+        <ScreenMyGovernance />
       </Box>
     </>
   );
