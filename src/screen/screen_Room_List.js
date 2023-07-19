@@ -56,7 +56,7 @@ const ScreenRoomList = (props) => {
             //구조
             position="relative"
             overflow="hidden"
-            m="20px"
+            mb="40px"
           >
             <Community communityObj={community} />
           </Box>

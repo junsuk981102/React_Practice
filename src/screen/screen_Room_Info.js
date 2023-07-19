@@ -116,24 +116,28 @@ const ScreenRoomInfo = (props) => {
               <Heading as="h1" size="lg">
                 {state.com_name}
               </Heading>
-              {comCategory.map((category, index) => (
-                <Box
-                  key={index}
-                  w="100px"
-                  h="auto"
-                  p="5px"
-                  mt="10px"
-                  mb="10px"
-                  bg="#00A29D"
-                  borderRadius="xl"
-                  textAlign="center"
-                >
-                  {/* 카테고리 표시 */}
-                  <Text fontSize="md" as="b" color="white">
-                    {category}
-                  </Text>
-                </Box>
-              ))}
+              <Box display="flex" flexDirection="row">
+                {comCategory.map((category, index) => (
+                  <Box
+                    key={index}
+                    w="100px"
+                    h="auto"
+                    p="5px"
+                    mt="10px"
+                    mb="10px"
+                    mr="5px"
+                    bg="#00A29D"
+                    borderRadius="xl"
+                    textAlign="center"
+                  >
+                    {/* 카테고리 표시 */}
+                    <Text fontSize="md" as="b" color="white">
+                      {category}
+                    </Text>
+                  </Box>
+                ))}
+              </Box>
+
               <Box>
                 <Text fontSize="md" as="b">
                   {state.com_info}

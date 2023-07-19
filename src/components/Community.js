@@ -88,7 +88,9 @@ const Community = ({ communityObj }) => {
           fontSize="xs"
           color="#00A29D"
         >
-          {communityObj.com_category}
+          {Array.isArray(communityObj.com_category)
+            ? communityObj.com_category.join("&")
+            : communityObj.com_category}
         </Text>
 
         {/* 커뮤니티 참가인원 */}
