@@ -286,7 +286,8 @@ const ScreenRoomInfo = (props) => {
                     mt="15px"
                     color="white"
                     fontSize="sm"
-                    bg="#00A29D"
+                    bg={sellCount > 0 ? "#00A29D" : "grey"}
+                    variant="none"
                     borderRadius="17.5px"
                     onClick={handleClick_sell}
                   >
@@ -340,7 +341,8 @@ const ScreenRoomInfo = (props) => {
               fontSize="lg"
               fontWeight="bold"
               color="white"
-              bg="#00A29D"
+              bg={ownerCount > 0 ? "#00A29D" : "grey"}
+              variant="none"
               borderRadius="xl"
               onClick={handleClick_chat}
             >
