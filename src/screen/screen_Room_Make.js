@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { dbService, storageService } from "../firebase-config";
+import { dbService } from "../firebase-config";
 import {
   Box,
   FormControl,
@@ -14,7 +14,7 @@ import {
 
 const ScreenRoomMake = (props) => {
   const [selectedCategories, setSelectedCategories] = useState([]);
-  const [selectedImage, setSelectedImage] = useState(null); // 선택한 이미지 파일 상태 변수 추가
+  //const [selectedImage, setSelectedImage] = useState(null); // 선택한 이미지 파일 상태 변수 추가
 
   const [communityData, setCommunityData] = useState({
     name: "",
@@ -63,24 +63,24 @@ const ScreenRoomMake = (props) => {
     }));
   };
 
-  const handleImageChange = (e) => {
-    const file = e.target.files[0];
-    setSelectedImage(file);
-  };
+  // const handleImageChange = (e) => {
+  //   const file = e.target.files[0];
+  //   setSelectedImage(file);
+  // };
 
-  const handleImageUpload = async () => {
-    if (selectedImage) {
-      const imageRef = storageService
-        .ref()
-        .child(`community/${selectedImage.name}`);
-      await imageRef.put(selectedImage);
-      const imageUrl = await imageRef.getDownloadURL();
-      setCommunityData((prevData) => ({
-        ...prevData,
-        image: imageUrl,
-      }));
-    }
-  };
+  // const handleImageUpload = async () => {
+  //   if (selectedImage) {
+  //     const imageRef = storageService
+  //       .ref()
+  //       .child(`community/${selectedImage.name}`);
+  //     await imageRef.put(selectedImage);
+  //     const imageUrl = await imageRef.getDownloadURL();
+  //     setCommunityData((prevData) => ({
+  //       ...prevData,
+  //       image: imageUrl,
+  //     }));
+  //   }
+  // };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -92,7 +92,7 @@ const ScreenRoomMake = (props) => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    await handleImageUpload(); // 이미지 업로드 함수 호출
+    //await handleImageUpload(); // 이미지 업로드 함수 호출
     await dbService.collection("community_list").add({
       com_name: communityData.name,
       com_category: communityData.categories,
