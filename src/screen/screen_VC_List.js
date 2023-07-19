@@ -33,7 +33,26 @@ const ScreenVCList = (props) => {
   }, []);
 
   const renderVCs = () => {
-    return vcs.map((vc) => (
+    if (selectedValue === "카테고리") {
+      return vcs.map((vc) => (
+        <Box key={vc.id}>
+          <Box
+            w="500px"
+            h="360px"
+            bg="white"
+            m="20px"
+            borderRadius="10px"
+            position="relative"
+            overflow="hidden"
+            boxShadow="0 0 15px #00A29D"
+          >
+            <VC vcObj={vc} />
+          </Box>
+        </Box>
+      ));
+    }
+    const filteredVCs = vcs.filter((vc) => vc.vc_category === selectedValue);
+    return filteredVCs.map((vc) => (
       <Box key={vc.id}>
         <Box
           w="500px"
@@ -85,42 +104,25 @@ const ScreenVCList = (props) => {
                 bg="none"
                 borderTop="1px solid white"
                 value="opt1"
-                onClick={() => handleMenuItemClick("핀테크")}
+                onClick={() => handleMenuItemClick("카테고리")}
               >
-                핀테크
+                전체
               </MenuItem>
               <MenuItem
                 bg="none"
                 borderTop="1px solid white"
                 value="opt2"
-                onClick={() => handleMenuItemClick("금융")}
+                onClick={() => handleMenuItemClick("VC")}
               >
-                금융
+                VC
               </MenuItem>
               <MenuItem
                 bg="none"
                 borderTop="1px solid white"
                 value="opt3"
-                onClick={() => handleMenuItemClick("반려동물")}
+                onClick={() => handleMenuItemClick("CVC")}
               >
-                반려동물
-              </MenuItem>
-              <MenuItem
-                bg="none"
-                borderTop="1px solid white"
-                value="opt4"
-                onClick={() => handleMenuItemClick("VR")}
-              >
-                VR
-              </MenuItem>
-              <MenuItem
-                bg="none"
-                borderTop="1px solid white"
-                borderBottom="1px solid white"
-                value="opt5"
-                onClick={() => handleMenuItemClick("AR")}
-              >
-                AR
+                CVC
               </MenuItem>
             </MenuList>
           </Menu>
