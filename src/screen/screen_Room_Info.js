@@ -210,7 +210,11 @@ const ScreenRoomInfo = (props) => {
               <Box display="flex" mt="20px">
                 <Box>
                   <Image
-                    src="../image/ticketgrey.png"
+                    src={
+                      ownerCount > 0
+                        ? "../image/ticketcolor.png"
+                        : "../image/ticketgrey.png"
+                    }
                     w="150px"
                     h="150px"
                     mb="15px"
