@@ -1,12 +1,26 @@
 import React, { useState, useEffect } from "react";
 import { dbService } from "../firebase-config";
 import VC from "../components/VC";
-import { Heading, Grid, Box, useBreakpointValue } from "@chakra-ui/react";
+import {
+  Heading,
+  Grid,
+  Box,
+  useBreakpointValue,
+  Menu,
+  MenuButton,
+  MenuList,
+  MenuItem,
+} from "@chakra-ui/react";
 
 const ScreenVCList = (props) => {
   const [vcs, setVCs] = useState([]);
   const boxPaddingLeft = useBreakpointValue({ base: "20px", xl: "200px" });
   const boxPaddingRight = useBreakpointValue({ base: "20px", xl: "200px" });
+  const [selectedValue, setSelectedValue] = useState("카테고리"); // State to hold the selected value
+
+  const handleMenuItemClick = (value) => {
+    setSelectedValue(value); // Update the selected value when a MenuItem is clicked
+  };
 
   useEffect(() => {
     dbService.collection("vc_list").onSnapshot((snapshot) => {
@@ -50,9 +64,67 @@ const ScreenVCList = (props) => {
         <Heading as="h2" size="md" mt="30px" mb="5px">
           새로운 VC 찾기
         </Heading>
-        <Heading as="h1" size="lg" mb="20px">
-          투자 중인 VC
-        </Heading>
+        <Box display="flex" flexDirection="row" justifyContent="space-between">
+          <Heading as="h1" size="lg" mb="20px">
+            투자 중인 VC
+          </Heading>
+          <Menu>
+            <MenuButton
+              w="100px"
+              h="40px"
+              bg="#00A29D"
+              borderRadius="20px"
+              fontSize="md"
+              fontWeight="bold"
+              color="white"
+            >
+              {selectedValue}
+            </MenuButton>
+            <MenuList bg="#00A29D" color="white">
+              <MenuItem
+                bg="none"
+                borderTop="1px solid white"
+                value="opt1"
+                onClick={() => handleMenuItemClick("핀테크")}
+              >
+                핀테크
+              </MenuItem>
+              <MenuItem
+                bg="none"
+                borderTop="1px solid white"
+                value="opt2"
+                onClick={() => handleMenuItemClick("금융")}
+              >
+                금융
+              </MenuItem>
+              <MenuItem
+                bg="none"
+                borderTop="1px solid white"
+                value="opt3"
+                onClick={() => handleMenuItemClick("반려동물")}
+              >
+                반려동물
+              </MenuItem>
+              <MenuItem
+                bg="none"
+                borderTop="1px solid white"
+                value="opt4"
+                onClick={() => handleMenuItemClick("VR")}
+              >
+                VR
+              </MenuItem>
+              <MenuItem
+                bg="none"
+                borderTop="1px solid white"
+                borderBottom="1px solid white"
+                value="opt5"
+                onClick={() => handleMenuItemClick("AR")}
+              >
+                AR
+              </MenuItem>
+            </MenuList>
+          </Menu>
+        </Box>
         <Grid
           gridTemplateColumns="repeat(auto-fit, minmax(500px, 1fr))"
           gap="20px"
