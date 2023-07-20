@@ -67,7 +67,7 @@ const ScreenStartupList = () => {
       (startup) => startup.sup_category === selectedValue
     );
 
-    //설정한 카테고리 커뮤니티가 없을 경우
+    //설정한 카테고리 스타트업이 없을 경우
     if (filteredStartups.length === 0) {
       return (
         <Box
