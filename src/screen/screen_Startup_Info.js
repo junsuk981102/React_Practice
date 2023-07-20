@@ -7,14 +7,56 @@ import {
   Image,
   useBreakpointValue,
   Divider,
+  IconButton,
+  Flex,
+  Center,
 } from "@chakra-ui/react";
-import { dbService } from "../firebase-config";
+import { auth, dbService } from "../firebase-config";
+import { FaStar, FaRegStar } from "react-icons/fa6";
+import { arrayUnion } from "firebase/firestore";
 
 const ScreenStartupInfo = () => {
+  // 사용자 UID를 저장하는 상태 변수
+  const [userUid, setUserUid] = useState("");
+
+  // 사용자 UID 가져오기
+  useEffect(() => {
+    const getUserUid = async () => {
+      try {
+        const user = auth.currentUser;
+        if (user) {
+          setUserUid(user.uid);
+        }
+      } catch (error) {
+        console.log("사용자 UID 가져오기 실패:", error);
+      }
+    };
+
+    getUserUid();
+  }, []);
+
+  function handleClick() {
+    setActiveButton((prevState) => (prevState === "yellow" ? "" : "yellow")); //아이콘 색깔 변화
+    // 사용자 UID가 유효한 경우에만 실행
+    if (userUid) {
+      // 스타트업의 UID를 저장할 변수
+      const startupUid = state.id;
+
+      // 사용자 문서 참조
+      const userDocRef = dbService.collection("user_list").doc(userUid);
+
+      // 사용자 문서 업데이트
+      userDocRef.update({
+        startupUids: arrayUnion(startupUid),
+      });
+    }
+  }
+
   const boxPaddingLeft = useBreakpointValue({ base: "20px", xl: "200px" });
   const boxPaddingRight = useBreakpointValue({ base: "20px", xl: "200px" });
   const { state } = useLocation();
 
+  const [activeButton, setActiveButton] = useState("");
   const [sup_nationality, setSupNationality] = useState("");
   const [sup_ceo, setSupCeo] = useState("");
   const [sup_homepage, setSupHomepage] = useState("");
@@ -117,13 +159,30 @@ const ScreenStartupInfo = () => {
               borderRadius="lg"
             />
             <Box ml="25px">
-              <Heading
-                //글자
-                as="h1"
-                size="lg"
-              >
-                {state.sup_name}
-              </Heading>
+              <Flex align="center">
+                <Heading
+                  //글자
+                  as="h1"
+                  size="lg"
+                >
+                  {state.sup_name}
+                </Heading>
+                <IconButton
+                  aria-label="Like"
+                  backgroundColor="white"
+                  ml="10px"
+                  onClick={handleClick}
+                  color={activeButton === "yellow" ? "yellow" : "black"}
+                  icon={
+                    activeButton === "yellow" ? (
+                      <FaStar style={{ fontSize: "25px" }} />
+                    ) : (
+                      <FaRegStar style={{ fontSize: "25px" }} />
+                    )
+                  }
+                />
+              </Flex>
+
               <Box
                 w="150px"
                 h="auto"
