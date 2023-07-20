@@ -21,12 +21,15 @@ interface MyGovernanceProps {
 }
 
 const ScreenMyGovernance: FC<MyGovernanceProps> = ({ account }) => {
+  //양쪽여백
   const boxPaddingLeft = useBreakpointValue({ base: "20px", xl: "200px" });
   const boxPaddingRight = useBreakpointValue({ base: "20px", xl: "200px" });
+
   const [saleStatus, setSaleStatus] = useState<boolean>(false);
   const [governanceCardArray, setGovernanceCardArray] =
     useState<IMyGovernanceCard[]>();
 
+  //토큰 정보 가져오기
   const getGovernanceTokens = async () => {
     try {
       const balanceLength = await mintGovernanceTokenContract.methods
@@ -57,6 +60,7 @@ const ScreenMyGovernance: FC<MyGovernanceProps> = ({ account }) => {
     }
   };
 
+  //토큰 판매 가능 여부 등록
   const getIsApprovedForAll = async () => {
     try {
       const response = await mintGovernanceTokenContract.methods
@@ -71,6 +75,7 @@ const ScreenMyGovernance: FC<MyGovernanceProps> = ({ account }) => {
     }
   };
 
+  //토큰 판매 가능 여부 변경
   const onClickApproveToggle = async () => {
     try {
       if (!account) return;
@@ -100,87 +105,113 @@ const ScreenMyGovernance: FC<MyGovernanceProps> = ({ account }) => {
 
   return (
     <>
+      {/* 지갑 & 토큰 전체 화면 */}
+
+      {/* 지갑 & 토큰 전체 배경 화면 */}
       <Box
+        //크기 및 여백
+        h="auto"
         pl={boxPaddingLeft}
         pr={boxPaddingRight}
-        h="auto"
         mb="200px"
+        //배경
         bg="#E5F2F2"
       >
+        {/* 지갑 섹션 */}
         <Heading
-          //위치
+          //여백
           mt="30px"
           mb="30px"
-          //크기
+          //글자
           as="h1"
           size="lg"
         >
           내 지갑
         </Heading>
         <Box
+          //정렬
           display="flex"
           alignItems="center"
+          //크기 및 여백
           w="670px"
           h="70px"
-          bg="#00A29D"
           px="10px"
           py="20px"
+          //배경
+          bg="#00A29D"
           borderRadius="lg"
         >
           <Image
+            //사진 위치
             src="/image/metamaskicon.png"
-            alt="Metamask"
+            //크기 및 여백
             w="36px"
             h="45px"
             m="20px"
           />
-          <Text as="b" color="white" fontSize="lg">
-            내 지갑 주소 : {account}{" "}
+          <Text
+            //글자
+            as="b"
+            fontSize="lg"
+            color="white"
+          >
+            내 지갑 주소 : {account}
           </Text>
         </Box>
+
+        {/* 티켓 판매 가능 여부 변경 섹션 */}
         <Heading
-          //위치
+          //여백
           mt="30px"
           mb="30px"
-          //크기
+          //글자
           as="h1"
           size="lg"
         >
           내 티켓
         </Heading>
-        <Box display="flex" alignItems="center">
+        <Box
+          //정렬
+          display="flex"
+          alignItems="center"
+        >
           <Heading
-            //크기
+            //글자
             as="h2"
             size="md"
           >
             티켓 판매 상태 : {saleStatus ? "판매 가능" : "판매 불가능"}
           </Heading>
           <Button
-            ml="10px"
+            //크기 및 여백
             w="auto"
             h="auto"
             p="5px"
-            as="b"
-            color="white"
-            fontSize="sm"
+            ml="10px"
+            //배경
             bg={saleStatus ? "red" : "blue"}
+            //글자
+            as="b"
+            fontSize="sm"
+            color="white"
+            //기능
             onClick={onClickApproveToggle}
           >
             {saleStatus ? "상태 변경" : "상태 변경"}
           </Button>
         </Box>
 
+        {/* 티켓 리스트 섹션 */}
         <Heading
+          //여백
           mt="20px"
           mb="10px"
-          //크기
+          //글자
           as="h2"
           size="md"
         >
           티켓 리스트
         </Heading>
-
         <Grid gridTemplateColumns="repeat(auto-fit, minmax(300px, 1fr))">
           {governanceCardArray &&
             governanceCardArray.map((v, i) => {
