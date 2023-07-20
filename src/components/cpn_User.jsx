@@ -29,30 +29,78 @@ const User = () => {
           const userData = userSnapshot.data();
           setUserId(userData.id);
           setStartupUids(userData.startupUids || []);
+          console.log("Startup Uids:", userData.startupUids || []);
         }
       }
     };
 
-    const fetchStartups = async () => {
-      if (startupUids.length > 0) {
-        const startupsQuery = query(
-          collection(dbService, "startup_list"),
-          where("id", "in", startupUids)
-        );
-        const startupsSnapshot = await getDocs(startupsQuery);
-        const startupArray = startupsSnapshot.docs.map((doc) => ({
-          id: doc.id,
-          ...doc.data(),
-        }));
-        setStartups(startupArray);
-      } else {
-        setStartups([]); // startupUids가 비어있을 때, startups를 빈 배열로 설정하여 초기화
-      }
-    };
-
     fetchUserData();
-    fetchStartups();
-  }, [user, startupUids]);
+  }, [user]);
+
+  // const fetchStartups = async () => {
+  //   if (startupUids.length > 0) {
+  //     console.log("startup Uid length is more than 3!!");
+  //     try {
+  //       const startupsQuery = query(
+  //         collection(dbService, "startup_list"),
+  //         where("id", "in", startupUids)
+  //       );
+
+  //       const startupsSnapshot = await getDocs(startupsQuery);
+  //       const startupArray = startupsSnapshot.docs.map((doc) => ({
+  //         id: doc.id,
+  //         ...doc.data(),
+  //       }));
+
+  //       if (startupArray.length > 0) {
+  //         console.log("Startup Array:", startupArray);
+  //         setStartups(startupArray);
+  //       } else {
+  //         console.log("No startups found for any uid.");
+  //         // 스타트업이 하나도 없을 때 처리할 로직 추가
+  //         // 예를 들어, 기본값을 설정하거나 사용자에게 알리는 메시지 표시 등
+  //       }
+  //     } catch (error) {
+  //       console.error("Error fetching startups:", error);
+  //     }
+  //   } else {
+  //     setStartups([]); // startupUids가 비어있을 때, startups를 빈 배열로 설정하여 초기화
+  //     console.log("startup Uid length is less than 3");
+  //   }
+  // };
+
+  // fetchStartups();
+
+  // startupUids를 이용하여 데이터를 가져오는 함수
+  const fetchStartupData = async (startupUid) => {
+    try {
+      const startupRef = doc(dbService, "startup_list", startupUid);
+      const startupSnapshot = await getDoc(startupRef);
+
+      if (startupSnapshot.exists()) {
+        const startupData = startupSnapshot.data();
+        console.log("Startup Data for", startupUid, ":", startupData);
+        setStartups((prevStartups) => [
+          ...prevStartups,
+          { id: startupUid, ...startupData },
+        ]);
+      } else {
+        console.log("No Startup Found for uid:", startupUid);
+      }
+    } catch (error) {
+      console.error("Error fetching startup data for uid:", startupUid, error);
+    }
+  };
+
+  // startupUids에 있는 모든 startupUid에 대해 데이터 가져오기
+  useEffect(() => {
+    if (startupUids.length > 0) {
+      console.log("startup Uid length is more than 0!!");
+      startupUids.forEach(fetchStartupData);
+    } else {
+      console.log("startup Uid length is 0");
+    }
+  }, [startupUids]);
 
   const renderStartupCards = () => {
     return startups.map((startup) => (
@@ -60,10 +108,14 @@ const User = () => {
         key={startup.id}
         p="10px"
         m="10px"
-        h="30px"
-        w="30px"
+        w="150px" // 카드의 너비를 조절합니다.
+        h="150px" // 카드의 높이를 조절합니다.
         borderWidth="1px"
         borderRadius="lg"
+        borderColor="black"
+        display="flex"
+        flexDirection="column"
+        alignItems="center"
       >
         <Image
           src={startup.sup_logo}
