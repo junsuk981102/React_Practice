@@ -1,33 +1,40 @@
-import Chat from "../components/cpn_Chat";
-import { Box, Heading } from "@chakra-ui/react";
 import { useLocation } from "react-router-dom";
+import Chat from "../components/cpn_Chat";
 import "../chat.css";
+import { Box, Heading } from "@chakra-ui/react";
 
 function ScreenChat() {
   const { state } = useLocation();
+
   return (
     <>
+      {/* 채팅방 전체 화면 */}
+
+      {/* 채팅방 전체 화면 배경 */}
       <Box
-        //크기
+        //정렬
+        display="flex"
+        justifyContent="center"
+        //크기 및 여백
         h="auto"
+        pb="100px"
         //배경
         bg="#E5F2F2"
         borderTop="1px solid #00A29D"
-        display="flex"
-        justifyContent="center"
-        pb="100px"
       >
+        {/* 채팅방 이름 & 채팅 화면 */}
         <Box>
+          {/* 채팅방 이름 */}
           <Heading
-            //위치
-            mt="30px"
-            mb="30px" //margin bottom
-            //크기
+            //크기 및 여백
             as="h1"
             size="lg"
+            mt="30px"
+            mb="30px"
           >
             {state.com_name} 채팅방
           </Heading>
+          {/* 채팅 화면 */}
           <Chat />
         </Box>
       </Box>
