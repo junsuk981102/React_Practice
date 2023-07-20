@@ -41,6 +41,10 @@ const ScreenMain = (props) => {
 
   const handleCloseModal = () => {
     setIsModalOpen(false);
+  };
+
+  const handleForeverCloseModal = () => {
+    setIsModalOpen(false);
     localStorage.setItem("dontShowAgain", "true");
   };
 
@@ -284,7 +288,7 @@ const ScreenMain = (props) => {
             <Image src="image/modal5.png" w="100%" h="auto" />
             <Image src="image/modal6.png" w="100%" h="auto" /> */}
             <Box display="flex" justifyContent="right" m="20px">
-              <Button colorScheme="teal" onClick={handleCloseModal}>
+              <Button colorScheme="teal" onClick={handleForeverCloseModal}>
                 다시 보지 않기
               </Button>
             </Box>
