@@ -13,28 +13,24 @@ interface MainProps {
 const ScreenMinting: FC<MainProps> = ({ account }) => {
   const [count, setCount] = useState<string>("");
   const [name, setName] = useState<string>("");
-  const [initialprice, setInitialPrice] = useState<string>("");
   const [namemulti, setNameMulti] = useState<string>("");
+  const [initialprice, setInitialPrice] = useState<string>("");
   const [initialpricemulti, setInitialPriceMulti] = useState<string>("");
-
-  const onChangeInitialPrice = (e: ChangeEvent<HTMLInputElement>) => {
-    setInitialPrice(e.target.value);
-  };
-
-  const onChangeName = (e: ChangeEvent<HTMLInputElement>) => {
-    setName(e.target.value);
-  };
 
   const onChangeCount = (e: ChangeEvent<HTMLInputElement>) => {
     setCount(e.target.value);
   };
-
-  const onChangeInitialPriceMulti = (e: ChangeEvent<HTMLInputElement>) => {
-    setInitialPriceMulti(e.target.value);
+  const onChangeName = (e: ChangeEvent<HTMLInputElement>) => {
+    setName(e.target.value);
   };
-
   const onChangeNameMulti = (e: ChangeEvent<HTMLInputElement>) => {
     setNameMulti(e.target.value);
+  };
+  const onChangeInitialPrice = (e: ChangeEvent<HTMLInputElement>) => {
+    setInitialPrice(e.target.value);
+  };
+  const onChangeInitialPriceMulti = (e: ChangeEvent<HTMLInputElement>) => {
+    setInitialPriceMulti(e.target.value);
   };
 
   const onClickMint_G = async () => {
@@ -64,46 +60,91 @@ const ScreenMinting: FC<MainProps> = ({ account }) => {
   };
 
   return (
+    // Minting 페이지 전체 화면
+
+    // Minting 페이지 전체 배경 화면
     <Box
+      //정렬
       display="flex"
+      flexDirection="column"
       alignItems="center"
       justifyContent="center"
-      flexDirection="column"
+      //크기
       w="100%"
       h="100vh"
     >
+      {/* 단수 Minting 섹션 */}
       <Box>
         <Text>Initial Price</Text>
         <Input
+          //기능
           type="number"
           value={initialprice}
           onChange={onChangeInitialPrice}
         />
         <Text>Name</Text>
-        <Input type="text" value={name} onChange={onChangeName} />
+        <Input
+          //기능
+          type="text"
+          value={name}
+          onChange={onChangeName}
+        />
       </Box>
-      <Button mt="4px" fontSize="sm" onClick={onClickMint_G}>
+      <Button
+        //여백
+        mt="4px"
+        //글자
+        fontSize="sm"
+        //기능
+        onClick={onClickMint_G}
+      >
         Mint Governance
       </Button>
 
+      {/* 복수 Minting 섹션 */}
       <Box>
         <Text>Count</Text>
-        <Input type="number" value={count} onChange={onChangeCount} />
+        <Input
+          //기능
+          type="number"
+          value={count}
+          onChange={onChangeCount}
+        />
         <Text>Initial Price</Text>
         <Input
+          //기능
           type="number"
           value={initialpricemulti}
           onChange={onChangeInitialPriceMulti}
         />
         <Text>Name</Text>
-        <Input type="text" value={namemulti} onChange={onChangeNameMulti} />
+        <Input
+          //기능
+          type="text"
+          value={namemulti}
+          onChange={onChangeNameMulti}
+        />
       </Box>
-
-      <Button mt="4px" fontSize="sm" onClick={onClickMultiMint_G}>
+      <Button
+        //여백
+        mt="4px"
+        //글자
+        fontSize="sm"
+        //기능
+        onClick={onClickMultiMint_G}
+      >
         Multi Mint Governance
       </Button>
 
-      <Button mt="4px" fontSize="sm" onClick={onClickSave_G}>
+      {/* Minting 저장 버튼 */}
+      <Button
+        //여백
+        mt="4px"
+        //글자
+        fontSize="sm"
+        //기능
+        onClick={onClickSave_G}
+      >
         Save Governance
       </Button>
     </Box>
