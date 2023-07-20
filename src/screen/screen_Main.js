@@ -5,7 +5,6 @@ import Startup from "../components/Startup";
 import VC from "../components/VC";
 import {
   Box,
-  Grid,
   Heading,
   Image,
   useBreakpointValue,
@@ -209,12 +208,6 @@ const ScreenMain = (props) => {
         <Heading as="h1" size="lg" mb="20px">
           투자 중인 스타트업
         </Heading>
-        {/* <Grid
-          gridTemplateColumns="repeat(auto-fit, minmax(500px, 1fr))"
-          gap="20px"
-        >
-          {renderStartups()}
-        </Grid> */}
         <SlideList_sup />
         <Heading as="h2" size="md" mt="50px" mb="5px">
           새로운 VC 찾기
@@ -222,12 +215,6 @@ const ScreenMain = (props) => {
         <Heading as="h1" size="lg" mb="20px">
           투자 중인 VC
         </Heading>
-        {/* <Grid
-          gridTemplateColumns="repeat(auto-fit, minmax(500px, 1fr))"
-          gap="20px"
-        >
-          {renderVCs()}
-        </Grid> */}
         <SlideList_vc />
         <Button
           position="fixed"
@@ -284,9 +271,6 @@ const ScreenMain = (props) => {
               border="1px solid #00A29D"
               borderRadius="xl"
             />
-            {/* <Image src="image/modal4.png" w="100%" h="auto" />
-            <Image src="image/modal5.png" w="100%" h="auto" />
-            <Image src="image/modal6.png" w="100%" h="auto" /> */}
             <Box display="flex" justifyContent="right" m="20px">
               <Button colorScheme="teal" onClick={handleForeverCloseModal}>
                 다시 보지 않기
