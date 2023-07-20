@@ -12,10 +12,11 @@ import {
   Text,
 } from "@chakra-ui/react";
 
-const ScreenRoomMake = (props) => {
+const ScreenRoomMake = () => {
   const [selectedCategories, setSelectedCategories] = useState([]);
   //const [selectedImage, setSelectedImage] = useState(null); // 선택한 이미지 파일 상태 변수 추가
 
+  //초기값 설정
   const [communityData, setCommunityData] = useState({
     name: "",
     info: "",
@@ -27,6 +28,7 @@ const ScreenRoomMake = (props) => {
     maxTicket: "",
   });
 
+  //카테고리 리스트
   const categories = [
     "핀테크",
     "금융",
@@ -117,6 +119,7 @@ const ScreenRoomMake = (props) => {
     });
   };
 
+  //포맷 변경
   const convertCurrency = (value) => {
     if (value >= 100000000) {
       const billion = Math.floor(value / 100000000);
@@ -131,38 +134,54 @@ const ScreenRoomMake = (props) => {
   };
 
   return (
-    <Box //크기
+    //커뮤니티 만들기 전체 화면
+
+    //커뮤니티 만들기 전체 배경 화면
+    <Box
+      //크기 및 여백
       h="auto"
+      pb="100px"
       //배경
       bg="#E5F2F2"
-      pb="100px"
       borderTop="1px solid #00A29D"
     >
-      <Box maxWidth="50vw" margin="0 auto">
+      <Box
+        //크기 및 여백
+        maxW="50vw"
+        m="0 auto"
+      >
         <Heading
-          //위치
+          //크기
           mt="30px"
           mb="30px"
-          //크기
+          //글자
           as="h1"
           size="lg"
         >
           커뮤니티 만들기
         </Heading>
 
+        {/* 커뮤니티 만들기 Form */}
         <form onSubmit={handleSubmit}>
-          <Box p="0 15px">
+          <Box
+            //여백
+            p="0 15px"
+          >
+            {/* 기본 정보 섹션 */}
             <Heading
-              //위치
+              //여백
               mt="20px"
               mb="20px"
-              //크기
+              //글자
               as="h1"
               size="md"
             >
               기본 정보
             </Heading>
-            <Box p="0 20px">
+            <Box
+              //여백
+              p="0 20px"
+            >
               <FormControl>
                 <FormLabel>커뮤니티 이름</FormLabel>
                 <Input
@@ -187,21 +206,29 @@ const ScreenRoomMake = (props) => {
                 />
               </FormControl>
 
-              <FormControl mt={4}>
+              <FormControl
+                //여백
+                mt={4}
+              >
                 <FormLabel>커뮤니티 카테고리</FormLabel>
                 <Box>
                   {categories.map((category) => (
+                    //카테고리 선택 버튼
                     <Button
-                      key={category}
-                      onClick={() => handleCategoryToggle(category)}
+                      //여백
+                      m={1}
+                      //배경
+                      colorScheme="teal"
                       variant={
                         selectedCategories.includes(category)
                           ? "solid"
                           : "outline"
                       }
-                      colorScheme="teal"
+                      //글자
                       size="sm"
-                      m={1}
+                      //기능
+                      key={category}
+                      onClick={() => handleCategoryToggle(category)}
                     >
                       {category}
                     </Button>
@@ -209,7 +236,10 @@ const ScreenRoomMake = (props) => {
                 </Box>
               </FormControl>
 
-              <FormControl mt={4}>
+              <FormControl
+                //여백
+                mt={4}
+              >
                 <FormLabel>커뮤니티 대표 이미지</FormLabel>
                 <Flex>
                   {/* <Input
@@ -229,20 +259,30 @@ const ScreenRoomMake = (props) => {
                 </Flex>
               </FormControl>
             </Box>
-            <Divider mt={10} />
+            <Divider
+              //여백
+              mt={10}
+            />
 
+            {/* 투자 정보 섹션 */}
             <Heading
-              //위치
+              //여백
               mt="20px"
               mb="20px"
-              //크기
+              //글자
               as="h1"
               size="md"
             >
               투자 정보
             </Heading>
-            <Box p="0 20px">
-              <FormControl mt={4}>
+            <Box
+              //여백
+              p="0 20px"
+            >
+              <FormControl
+                //여백
+                mt={4}
+              >
                 <FormLabel>관심있는 회사</FormLabel>
                 <Input
                   type="text"
@@ -253,9 +293,15 @@ const ScreenRoomMake = (props) => {
                 />
               </FormControl>
 
-              <FormControl mt={4}>
+              <FormControl
+                //여백
+                mt={4}
+              >
                 <FormLabel>투자 목표 금액</FormLabel>
-                <Flex align="center">
+                <Flex
+                  //정렬
+                  align="center"
+                >
                   <Input
                     w="200px"
                     type="text"
@@ -265,18 +311,37 @@ const ScreenRoomMake = (props) => {
                     placeholder="커뮤니티의 최종 투자 목표 금액을 입력하세요."
                     required
                   />
-                  <Text ml={2}>원</Text>
+                  <Text
+                    //여백
+                    ml={2}
+                  >
+                    원
+                  </Text>
                 </Flex>
-                <Text mt="8px">
+                <Text
+                  //여백
+                  mt="8px"
+                >
                   {convertCurrency(communityData.investmentAmount)}
                 </Text>
               </FormControl>
 
-              <FormControl mt={4}>
+              <FormControl
+                //여백
+                mt={4}
+              >
                 {/* 티켓 정보 입력 폼 */}
                 <FormLabel>티켓 정보</FormLabel>
-                <Flex align="center">
-                  <Text mr={2}>티켓 가격: </Text>
+                <Flex
+                  //정렬
+                  align="center"
+                >
+                  <Text
+                    //여백
+                    mr={2}
+                  >
+                    티켓 가격:
+                  </Text>
                   <Input
                     name="ticketPrice"
                     value={communityData.ticketPrice}
@@ -285,13 +350,29 @@ const ScreenRoomMake = (props) => {
                     placeholder="티켓의 가격을 입력하세요."
                     required
                   ></Input>
-                  <Text ml={2}>원</Text>
+                  <Text
+                    //여백
+                    ml={2}
+                  >
+                    원
+                  </Text>
                 </Flex>
-                <Text mt="8px">
+                <Text
+                  //여백
+                  mt="8px"
+                >
                   {convertCurrency(communityData.ticketPrice)}
                 </Text>
-                <Flex align="center">
-                  <Text mr={2}>1인당 최대 구매 개수: </Text>
+                <Flex
+                  //정렬
+                  align="center"
+                >
+                  <Text
+                    //여백
+                    mr={2}
+                  >
+                    1인당 최대 구매 개수:{" "}
+                  </Text>
                   <Input
                     name="maxTicket"
                     value={communityData.maxTicket}
@@ -300,16 +381,28 @@ const ScreenRoomMake = (props) => {
                     placeholder="티켓의 1인당 최대 구매 개수를 입력하세요."
                     required
                   ></Input>
-                  <Text ml={2}>개</Text>
+                  <Text
+                    //여백
+                    ml={2}
+                  >
+                    개
+                  </Text>
                 </Flex>
               </FormControl>
             </Box>
-            <Box display="flex" justifyContent="center">
+            <Box
+              //정렬
+              display="flex"
+              justifyContent="center"
+            >
               <Button
+                //크기 및 여백
                 maxW="300px"
                 h="75px"
                 mt={4}
+                //배경
                 colorScheme="teal"
+                //기능
                 type="submit"
               >
                 커뮤니티 생성
