@@ -150,7 +150,7 @@ const ScreenMain = () => {
   };
 
   //커뮤니티 슬라이드 리스트
-  const SlideList_com = () => {
+  const SlideListCom = () => {
     //슬라이드 설정
     const settings = {
       dots: true, // 페이지 표시 여부
@@ -171,7 +171,7 @@ const ScreenMain = () => {
   };
 
   //스타트업 슬라이드 리스트
-  const SlideList_sup = () => {
+  const SlideListSup = () => {
     //슬라이드 설정
     const settings = {
       dots: true, // 페이지 표시 여부
@@ -192,7 +192,7 @@ const ScreenMain = () => {
   };
 
   //VC 슬라이드 리스트
-  const SlideList_vc = () => {
+  const SlideListVC = () => {
     //슬라이드 설정
     const settings = {
       dots: true, // 페이지 표시 여부
@@ -246,7 +246,7 @@ const ScreenMain = () => {
         >
           투자 중인 커뮤니티
         </Heading>
-        <SlideList_com />
+        <SlideListCom />
 
         {/* 스타트업 섹션 */}
         <Heading
@@ -268,7 +268,7 @@ const ScreenMain = () => {
         >
           투자 중인 스타트업
         </Heading>
-        <SlideList_sup />
+        <SlideListSup />
 
         {/* VC 섹션 */}
         <Heading
@@ -290,7 +290,7 @@ const ScreenMain = () => {
         >
           투자 중인 VC
         </Heading>
-        <SlideList_vc />
+        <SlideListVC />
 
         {/* Modal open 버튼 */}
         <Button
