@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { auth } from "../firebase-config";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { Box, Image, Button, useBreakpointValue } from "@chakra-ui/react";
+import { Flex, Button, Image, useBreakpointValue } from "@chakra-ui/react";
 
 function Header() {
   const navi = useNavigate();
@@ -13,10 +13,7 @@ function Header() {
   const defaultProfileImage = "/image/user.png";
   const photo = user?.photoURL || defaultProfileImage;
 
-  //양쪽 여백
-  const boxPaddingLeft = useBreakpointValue({ base: "5px", xl: "185px" }); //수정해야함!
-  const boxPaddingRight = useBreakpointValue({ base: "20px", xl: "200px" });
-  const boxPaddingBetween = useBreakpointValue({ base: "10x", xl: "35px" });
+  const boxPadding = useBreakpointValue({ base: "20px", xl: "200px" }); // 양쪽 여백
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
@@ -38,53 +35,48 @@ function Header() {
     if (auth.currentUser) {
       //로그인
       return (
-        //프로필 버튼
-        <Box
-          //정렬
-          display="flex"
-          alignItems="center"
-          //여백
-          mr={boxPaddingRight}
-        >
-          {/* 프로필 페이지 이동 버튼 */}
-          <Button
-            //크기 및 여백
-            w="40px"
-            h="40px"
-            padding="0px"
-            //배경
-            bg="transparent"
-            borderRadius="50%"
-            overflow="hidden"
-            //기능
-            onClick={() => handleClick("/screen_profile")}
+        <>
+          {/* 프로필 섹션 */}
+          <Flex
+            //여백
+            pr={boxPadding}
           >
-            {/* 버튼 배경 사진 */}
-            <Image
-              //사진 위치
-              src={photo}
+            {/* 프로필 버튼 */}
+            <Button
               //크기 및 여백
-              w="100%"
-              h="100%"
-              objectFit="cover"
-            />
-          </Button>
-        </Box>
+              w="40px"
+              h="40px"
+              p="0px"
+              //배경
+              borderRadius="50%"
+              overflow="hidden"
+              //기능
+              onClick={() => handleClick("/screen_profile")}
+            >
+              {/* 프로필 버튼 배경*/}
+              <Image
+                //사진 위치
+                src={photo}
+                //크기
+                objectFit="cover"
+              />
+            </Button>
+          </Flex>
+        </>
       );
     } else {
       //로그아웃
       return (
         <>
           {/* 로그인&로그아웃 섹션 */}
-          <Box
+          <Flex
             //정렬
-            display="flex"
             flexDirection="row"
+            //여백
+            pr={boxPadding}
           >
             {/* 로그인 버튼 */}
             <Button
-              //여백
-              mr="5px"
               //배경
               variant="none"
               //글자
@@ -97,20 +89,17 @@ function Header() {
             </Button>
             {/* 로그아웃 버튼 */}
             <Button
-              //여백
-              mr={boxPaddingRight}
               //배경
               variant="none"
               //글자
               fontSize="xl"
               fontWeight="bold"
-              color="#00A29D"
               //기능
               onClick={() => handleClick("/screen_register")}
             >
               회원가입
             </Button>
-          </Box>
+          </Flex>
         </>
       );
     }
@@ -121,25 +110,16 @@ function Header() {
       {/* Header 전체 화면 */}
 
       {/* Header 전체 화면 배경 */}
-      <Box
+      <Flex
         //정렬
-        display="flex"
-        alignItems="center"
         justifyContent="space-between"
         //여백
         py="15px"
       >
         {/* Header 버튼 박스 */}
-        <Box
-          //정렬
-          display="flex"
-          alignItems="center"
-        >
+        <Flex px={boxPadding} justifyContent="space-between">
           {/* 로고 버튼 */}
           <Button
-            //여백
-            ml={boxPaddingLeft}
-            mr={boxPaddingBetween}
             //배경
             variant="none"
           >
@@ -156,9 +136,7 @@ function Header() {
           </Button>
           {/* 커뮤니티 버튼 */}
           <Button
-            //여백
-            mr={boxPaddingBetween}
-            // 배경
+            //배경
             variant="none"
             //글자
             fontSize="xl"
@@ -171,9 +149,7 @@ function Header() {
           </Button>
           {/* 스타트업 버튼 */}
           <Button
-            //여백
-            mr={boxPaddingBetween}
-            // 배경
+            //배경
             variant="none"
             //글자
             fontSize="xl"
@@ -197,25 +173,14 @@ function Header() {
           >
             VC
           </Button>
-        </Box>
+        </Flex>
         {/* switch button 렌더링 */}
-        <Box>{renderButton()}</Box>
-      </Box>
+        {renderButton()}
+      </Flex>
     </>
   );
 }
 
 export default Header;
 
-/* <Button
-            mr={boxPaddingBetween}
-            fontSize="xl"
-            fontWeight="bold"
-            variant="none"
-            color={
-              activeButton === "/screen_my_governance" ? "#00A29D" : "black"
-            }
-            onClick={() => handleClick("/screen_my_governance")}
-          >
-            지갑
-          </Button> */
+//23.07.21 1차 코드 수정 완료
