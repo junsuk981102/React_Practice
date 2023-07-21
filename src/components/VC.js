@@ -24,23 +24,24 @@ const VC = ({ vcObj }) => {
       <Box
         //위치
         position="absolute"
-        mt="0px"
-        //크기
+        //크기 및 여백
         w="100%"
         h="50%"
+        mt="0px"
+        //기능
         as="button"
         onClick={handleClick}
       >
         {/* VC 배경 사진 */}
         <Image
+          //사진 위치
+          src={vcObj.vc_backgroundImg}
           //크기
           w="100%"
           h="100%"
           //배경
-          src={vcObj.vc_backgroundImg}
-          alt="vc background img"
           objectFit="cover"
-          // 추가: hover 효과
+          //효과
           _hover={{
             transform: "scale(1.1)",
             transition: "transform 0.3s ease",
@@ -51,29 +52,30 @@ const VC = ({ vcObj }) => {
       <Box
         //위치
         position="absolute"
-        mt="180px"
-        //크기
+        //크기 및 여백
         w="100%"
         h="50%"
+        mt="180px"
       >
         {/* VC 로고 */}
         <Image
+          //사진 위치
+          src={vcObj.vc_logo}
           //위치
           position="absolute"
-          mt="-40px"
-          ml="20px"
-          //크기
+          //크기 및 여백
           w="80px"
           h="80px"
+          mt="-40px"
+          ml="20px"
           //배경
           borderRadius="20%"
-          src={vcObj.vc_logo}
-          alt="VC logo"
         />
         {/* VC 이름 */}
         <Heading
           //위치
           position="absolute"
+          //여백
           mt="40px"
           ml="20px"
           //글자
@@ -86,6 +88,7 @@ const VC = ({ vcObj }) => {
         <Text
           //위치
           position="absolute"
+          //여백
           mt="80px"
           ml="20px"
           mr="20px"
@@ -99,12 +102,13 @@ const VC = ({ vcObj }) => {
         <Box
           //위치
           position="absolute"
+          //여백
+          p="5px 10px"
           mt="5px"
           ml="390px"
           //배경
-          borderRadius="xl"
           bg="#00A29D"
-          padding="5px 10px"
+          borderRadius="xl"
           //글자
           as="b"
           fontSize="xs"
@@ -116,6 +120,7 @@ const VC = ({ vcObj }) => {
         <Button
           //위치
           position="absolute"
+          //여백
           mt="45px"
           ml="390px"
           //배경
@@ -123,8 +128,8 @@ const VC = ({ vcObj }) => {
           variant="link"
           //글자
           as="b"
-          color="black"
           fontSize="md"
+          color="black"
           onClick={() => handleClick()}
         >
           자세히 보기 {">"}
