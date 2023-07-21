@@ -1,19 +1,18 @@
 import React, { useState, useEffect, useRef } from "react";
-import MessageFormat from "./cpn_Message_Format";
-import { db, auth } from "../firebase-config";
-import { query, collection, orderBy, onSnapshot } from "firebase/firestore";
-import MessageSend from "./cpn_Message_Send";
-import { useAuthState } from "react-firebase-hooks/auth";
 import { useLocation } from "react-router-dom";
+import { db, auth } from "../firebase-config";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { query, collection, orderBy, onSnapshot } from "firebase/firestore";
+import MessageFormat from "./cpn_Message_Format";
+import MessageSend from "./cpn_Message_Send";
 import { Box } from "@chakra-ui/react";
 
 const Chat = () => {
-  const [message, setMessage] = useState([]);
-  const scroll = useRef();
   const [user] = useAuthState(auth);
-
+  const [message, setMessage] = useState([]);
   const { state } = useLocation();
   const boxRef = useRef(null);
+  const scroll = useRef();
 
   const communityid = state.id;
   const communityaddress = "community_list/" + communityid + "/message";
@@ -52,19 +51,28 @@ const Chat = () => {
 
   return (
     <Box
-      bg="#FFFFFF"
+      //크기 및 여백
       width="800px"
-      borderRadius="10px"
+      h="80vh"
       pl="30px"
       pr="30px"
-      h="80vh"
+      //배경
+      bg="#FFFFFF"
+      borderRadius="10px"
       overflow="auto"
       ref={boxRef} // <Box> 컴포넌트에 ref 추가
     >
       {message &&
         message.map((item) => <MessageFormat key={item.id} message={item} />)}
       {user && (
-        <Box position="sticky" bottom={0} left={0} width="100%">
+        <Box
+          //위치
+          position="sticky"
+          bottom={0}
+          left={0}
+          //크기
+          width="100%"
+        >
           <MessageSend scroll={scroll} />
         </Box>
       )}
