@@ -32,22 +32,23 @@ const Community = ({ communityObj }) => {
       <Box
         //위치
         position="absolute"
-        mt="0px"
-        //크기
+        //크기 맟 여백
         w="100%"
         h="50%"
+        mt="0px"
+        //기능
         as="button"
         onClick={handleClick}
       >
         <Image
+          //사진 위치
+          src={communityObj.com_profileImg}
           //크기
           w="100%"
           h="100%"
           //배경
-          src={communityObj.com_profileImg}
-          alt="community background img"
           objectFit="cover"
-          // 추가: hover 효과
+          //효과
           _hover={{
             transform: "scale(1.1)",
             transition: "transform 0.3s ease",
@@ -59,15 +60,16 @@ const Community = ({ communityObj }) => {
       <Box
         //위치
         position="absolute"
-        mt="200px"
-        //크기
+        //크기 및 여백
         w="100%"
         h="50%"
+        mt="200px"
       >
         {/* 커뮤니티 이름 */}
         <Heading
           //위치
           position="absolute"
+          //여백
           mt="10px"
           ml="5px"
           //글자
@@ -81,6 +83,7 @@ const Community = ({ communityObj }) => {
         <Text
           //위치
           position="absolute"
+          //여백
           mt="45px"
           ml="7px"
           //글자
@@ -97,6 +100,7 @@ const Community = ({ communityObj }) => {
         <Text
           //위치
           position="absolute"
+          //여백
           mt="155px"
           ml="15px"
           //글자
@@ -107,17 +111,18 @@ const Community = ({ communityObj }) => {
           현재 : {communityObj.com_member}명
         </Text>
 
+        {/* 자세희 보기 버튼 */}
         <Button
           //위치
           position="absolute"
+          //여백
+          px="6px"
           mt="150px"
           ml="205px"
           //배경
           bg="#00A29D"
-          variant="none"
-          //크기
-          px="6px"
           borderRadius="lg"
+          variant="none"
           //글자
           as="b"
           fontSize="sm"
