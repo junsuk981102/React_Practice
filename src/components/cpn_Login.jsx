@@ -65,80 +65,162 @@ const Login = () => {
   };
 
   return (
-    <Box display="flex" alignItems="center" flexDirection="column" bg="#E5F2F2">
-      <Heading mt="30px" mb="30px" textAlign="center" as="h1" size="xl">
+    <Box
+      //정렬
+      display="flex"
+      flexDirection="column"
+      alignItems="center"
+      //배경
+      bg="#E5F2F2"
+    >
+      <Heading
+        //정렬
+        textAlign="center"
+        //여백
+        mt="30px"
+        mb="30px"
+        //글자
+        as="h1"
+        size="xl"
+      >
         로그인
       </Heading>
 
-      <Divider backgroundColor="#00A29D" h="1px" mb="30px" />
+      <Divider
+        //크기 및 여백
+        h="1px"
+        mb="30px"
+        //배경
+        backgroundColor="#00A29D"
+      />
 
-      <FormControl as="form" bg="#E5F2F2" display="flex" flexDirection="column">
-        <FormControl display="flex" justifyContent="space-between">
-          <FormLabel fontSize="2xl" fontWeight="bold">
+      <FormControl
+        //정렬
+        display="flex"
+        flexDirection="column"
+        //기능
+        as="form"
+        //배경
+        bg="#E5F2F2"
+      >
+        <FormControl
+          //정렬
+          display="flex"
+          justifyContent="space-between"
+        >
+          <FormLabel
+            //글자
+            fontSize="2xl"
+            fontWeight="bold"
+          >
             이메일 :
           </FormLabel>
           <Input
+            //크기
+            w="450px"
+            //배경
+            border="solid 1px #00A29D"
+            borderRadius="xl"
+            //기능
             type="email"
             value={email}
             onChange={handleEmailChange}
             placeholder="이메일"
             required
-            border="solid 1px #00A29D"
-            borderRadius="xl"
-            w="450px"
           />
         </FormControl>
-        <FormControl display="flex" justifyContent="space-between">
-          <FormLabel fontSize="2xl" fontWeight="bold">
+        <FormControl
+          //정렬
+          display="flex"
+          justifyContent="space-between"
+        >
+          <FormLabel
+            //글자
+            fontSize="2xl"
+            fontWeight="bold"
+          >
             비밀번호 :
           </FormLabel>
           <Input
+            //크기
+            w="450px"
+            //배경
+            border="solid 1px #00A29D"
+            borderRadius="xl"
+            //기능
             type="password"
             value={password}
             onChange={handlePasswordChange}
             placeholder="비밀번호"
             required
-            border="solid 1px #00A29D"
-            borderRadius="xl"
-            w="450px"
           />
         </FormControl>
-        <Text color="red" textAlign="center">
+        <Text
+          //글자
+          color="red"
+          textAlign="center"
+        >
           {error}
         </Text>
 
-        <Divider backgroundColor="#00A29D" h="1px" mt="30px" mb="30px" />
+        <Divider
+          //크기 및 여백
+          h="1px"
+          mt="30px"
+          mb="30px"
+          //배경
+          backgroundColor="#00A29D"
+        />
 
-        <Flex justifyContent="center">
+        <Flex
+          //정렬
+          justifyContent="center"
+        >
           <Button
+            //크기
             w="300px"
             h="75px"
-            as="b"
-            color="white"
-            fontSize="xl"
+            //배경
             bg="#00A29D"
             borderRadius="lg"
+            //글자
+            as="b"
+            fontSize="xl"
+            color="white"
+            //기능
             type="submit"
             onClick={handleEmailLogin}
           >
             Sign in with Email
           </Button>
         </Flex>
-        <Text textAlign="center" fontSize="xl">
+        <Text
+          //정렬
+          textAlign="center"
+          //글자
+          fontSize="xl"
+        >
           or
         </Text>
-        <Flex justifyContent="center">
+        <Flex
+          //정렬
+          justifyContent="center"
+        >
           <Button
+            //크기
             w="300px"
             h="75px"
-            as="b"
-            color="white"
-            fontSize="xl"
+            //배경
             bg="#00A29D"
             borderRadius="lg"
+            leftIcon={<FaGoogle />}
+            //글자
+            as="b"
+            fontSize="xl"
+            color="white"
+            //기능
             type="submit"
             onClick={handleGoogleSignIn}
-            leftIcon={<FaGoogle />}
           >
             Sign in with Google
           </Button>
