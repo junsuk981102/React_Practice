@@ -15,7 +15,14 @@ const Logout = () => {
       });
   };
   return (
-    <Button onClick={handleLogout} variant="outline" mt={4}>
+    <Button
+      //여백
+      mt={4}
+      //배경
+      variant="outline"
+      //기능
+      onClick={handleLogout}
+    >
       Logout
     </Button>
   );
