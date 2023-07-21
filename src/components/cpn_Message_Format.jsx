@@ -33,14 +33,20 @@ const MessageFormat = ({ message }) => {
 
   return (
     <article className={newStyles}>
-      <Box maxW="80%">
+      <Box
+        //크기
+        maxW="80%"
+      >
         <Text className="user">{message.userName}</Text>
         <Box className="text-message">
           <Text className="text">{message.text}</Text>
         </Box>
         <Box className="user">{`${newDate} . ${time}`}</Box>
       </Box>
-      <Image src={message.photo || defaultProfileImage} alt="user profile" />
+      <Image
+        //사진 위치
+        src={message.photo || defaultProfileImage}
+      />
     </article>
   );
 };
