@@ -8,6 +8,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import {
   Box,
+  Flex,
   Heading,
   Image,
   useBreakpointValue,
@@ -22,9 +23,7 @@ import {
 } from "@chakra-ui/react";
 
 const ScreenMain = () => {
-  //양쬭 여백
-  const boxPaddingLeft = useBreakpointValue({ base: "20px", xl: "200px" });
-  const boxPaddingRight = useBreakpointValue({ base: "20px", xl: "200px" });
+  const boxPadding = useBreakpointValue({ base: "20px", xl: "200px" }); // 양쪽 여백
 
   //렌더링 관련 코드
   const [communities, setCommunities] = useState([]);
@@ -80,23 +79,9 @@ const ScreenMain = () => {
   const renderCommunities = () => {
     return communities.map((community) => (
       //커뮤니티 카드
-      <Box key={community.id}>
-        <Box
-          //정렬
-          position="relative"
-          //크기 및 여백
-          w="300px"
-          h="400px"
-          m="20px"
-          //배경
-          bg="white"
-          borderRadius="md"
-          boxShadow="0 0 15px #00A29D"
-          overflow="hidden"
-        >
-          {/* 커뮤니티 카드 정보 */}
-          <Community communityObj={community} />
-        </Box>
+      <Box key={community.id} m="20px">
+        {/* 커뮤니티 카드 정보 */}
+        <Community communityObj={community} />
       </Box>
     ));
   };
@@ -105,22 +90,9 @@ const ScreenMain = () => {
   const renderStartups = () => {
     return startups.map((startup) => (
       //스타트업 카드
-      <Box key={startup.id}>
-        <Box
-          //정렬
-          position="relative"
-          //크기 및 여백
-          w="500px"
-          h="360px"
-          m="20px"
-          //배경
-          borderRadius="10px"
-          boxShadow="0 0 15px #00A29D"
-          overflow="hidden"
-        >
-          {/* 스타트업 카드 정보 */}
-          <Startup startupObj={startup} />
-        </Box>
+      <Box key={startup.id} m="20px">
+        {/* 스타트업 카드 정보 */}
+        <Startup startupObj={startup} />
       </Box>
     ));
   };
@@ -129,86 +101,56 @@ const ScreenMain = () => {
   const renderVCs = () => {
     return vcs.map((vc) => (
       //VC 카드
-      <Box key={vc.id}>
-        <Box
-          //정렬
-          position="relative"
-          //크기 및 여백
-          w="500px"
-          h="360px"
-          m="20px"
-          //배경
-          borderRadius="10px"
-          boxShadow="0 0 15px #00A29D"
-          overflow="hidden"
-        >
-          {/* VC 카드 정보 */}
-          <VC vcObj={vc} />
-        </Box>
+      <Box key={vc.id} m="20px">
+        {/* VC 카드 정보 */}
+        <VC vcObj={vc} />
       </Box>
     ));
   };
 
+  //커뮤니티 슬라이드 설정
+  const com_slide_settings = {
+    dots: true, // 페이지 표시 여부
+    infinite: true, // 무한 루프 여부
+    speed: 500, // 슬라이드 전환 속도
+    slidesToShow: 3, // 보여질 슬라이드 개수
+    slidesToScroll: 2, // 슬라이드 이동시 이동하는 슬라이드 개수
+    autoplay: true, // 자동 전환 설정
+    autoplaySpeed: 3000, // 자동전환 속도
+  };
+
   //커뮤니티 슬라이드 리스트
   const SlideListCom = () => {
-    //슬라이드 설정
-    const settings = {
-      dots: true, // 페이지 표시 여부
-      infinite: true, // 무한 루프 여부
-      speed: 500, // 슬라이드 전환 속도
-      slidesToShow: 3, // 보여질 슬라이드 개수
-      slidesToScroll: 2, // 슬라이드 이동시 이동하는 슬라이드 개수
-      autoplay: true, // 자동 전환 설정
-      autoplaySpeed: 3000, // 자동전환 속도
-    };
-
     return (
       //슬라이드 카드
-      <Box>
-        <Slider {...settings}>{renderCommunities()}</Slider>
-      </Box>
+      <Slider {...com_slide_settings}>{renderCommunities()}</Slider>
     );
+  };
+
+  //스타트업&VC 슬라이드 설정
+  const supvc_slide_settings = {
+    dots: true, // 페이지 표시 여부
+    infinite: true, // 무한 루프 여부
+    speed: 500, // 슬라이드 전환 속도
+    slidesToShow: 2, // 보여질 슬라이드 개수
+    slidesToScroll: 1, // 슬라이드 이동시 이동하는 슬라이드 개수
+    autoplay: true, // 자동 전환 설정
+    autoplaySpeed: 3000, // 자동전환 속도
   };
 
   //스타트업 슬라이드 리스트
   const SlideListSup = () => {
-    //슬라이드 설정
-    const settings = {
-      dots: true, // 페이지 표시 여부
-      infinite: true, // 무한 루프 여부
-      speed: 500, // 슬라이드 전환 속도
-      slidesToShow: 2, // 보여질 슬라이드 개수
-      slidesToScroll: 1, // 슬라이드 이동시 이동하는 슬라이드 개수
-      autoplay: true, // 자동 전환 설정
-      autoplaySpeed: 3000, // 자동전환 속도
-    };
-
     return (
       //슬라이드 카드
-      <Box>
-        <Slider {...settings}>{renderStartups()}</Slider>
-      </Box>
+      <Slider {...supvc_slide_settings}>{renderStartups()}</Slider>
     );
   };
 
   //VC 슬라이드 리스트
   const SlideListVC = () => {
-    //슬라이드 설정
-    const settings = {
-      dots: true, // 페이지 표시 여부
-      infinite: true, // 무한 루프 여부
-      speed: 500, // 슬라이드 전환 속도
-      slidesToShow: 2, // 보여질 슬라이드 개수
-      slidesToScroll: 1, // 슬라이드 이동시 이동하는 슬라이드 개수
-      autoplay: true, // 자동 전환 설정
-      autoplaySpeed: 3000, // 자동전환 속도
-    };
-
     return (
       //슬라이드 카드
-      <Box>
-        <Slider {...settings}>{renderVCs()}</Slider>
-      </Box>
+      <Slider {...supvc_slide_settings}>{renderVCs()}</Slider>
     );
   };
 
@@ -217,14 +159,19 @@ const ScreenMain = () => {
       {/* Main 전체 화면 */}
 
       {/* 메인 배너 사진 */}
-      <Image src="image/stot_main.png" alt="main logo" w="100%" h="auto" />
+      <Image
+        //사진 위치
+        src="image/stot_main.png"
+        //크기
+        w="100%"
+        h="auto"
+      />
 
       {/* 메인 정보 섹션 */}
       <Box
         //여백
-        pb="100px"
-        pl={boxPaddingLeft}
-        pr={boxPaddingRight}
+        px={boxPadding}
+        pb="200px"
       >
         {/* 커뮤니티 섹션 */}
         <Heading
@@ -232,7 +179,6 @@ const ScreenMain = () => {
           mt="50px"
           mb="5px"
           //글자
-          as="h2"
           size="md"
         >
           새로운 커뮤니티 찾기
@@ -241,7 +187,6 @@ const ScreenMain = () => {
           //여백
           mb="20px"
           //글자
-          as="h1"
           size="lg"
         >
           투자 중인 커뮤니티
@@ -254,7 +199,6 @@ const ScreenMain = () => {
           mt="50px"
           mb="5px"
           //글자
-          as="h2"
           size="md"
         >
           새로운 스타트업 찾기
@@ -263,7 +207,6 @@ const ScreenMain = () => {
           //여백
           mb="20px"
           //글자
-          as="h1"
           size="lg"
         >
           투자 중인 스타트업
@@ -276,7 +219,6 @@ const ScreenMain = () => {
           mt="50px"
           mb="5px"
           //글자
-          as="h2"
           size="md"
         >
           새로운 VC 찾기
@@ -285,7 +227,6 @@ const ScreenMain = () => {
           //여백
           mb="20px"
           //글자
-          as="h1"
           size="lg"
         >
           투자 중인 VC
@@ -323,10 +264,8 @@ const ScreenMain = () => {
           {/* Modal Header */}
           <ModalHeader
             //여백
-            mt="20px"
-            mb="20px"
+            marginY="20px"
             //글자
-            fontSize="2xl"
             fontWeight="bold"
           >
             STOT이 처음이신가요?
@@ -336,14 +275,10 @@ const ScreenMain = () => {
           <ModalCloseButton />
 
           {/* Modal 본문 */}
-          <ModalBody>
+          <ModalBody color="#00A29D">
             <Text
               //여백
               mb="10px"
-              //글자
-              fontSize="xl"
-              fontWeight="bold"
-              color="#00A29D"
             >
               STOT에 등록된 스타트업의 정보를 볼 수 있습니다.
             </Text>
@@ -352,7 +287,6 @@ const ScreenMain = () => {
               src="image/modal1.png"
               //크기 및 여백
               w="100%"
-              h="auto"
               p="5px"
               mb="40px"
               //배경
@@ -362,10 +296,6 @@ const ScreenMain = () => {
             <Text
               //여백
               mb="10px"
-              //글자
-              fontSize="xl"
-              fontWeight="bold"
-              color="#00A29D"
             >
               추가적으로 VC의 정보도 볼 수 있습니다.
             </Text>
@@ -374,7 +304,6 @@ const ScreenMain = () => {
               src="image/modal2.png"
               //크기 및 여백
               w="100%"
-              h="auto"
               p="5px"
               mb="40px"
               //배경
@@ -384,10 +313,6 @@ const ScreenMain = () => {
             <Text
               //여백
               mb="10px"
-              //글자
-              fontSize="xl"
-              fontWeight="bold"
-              color="#00A29D"
             >
               스타트업과 VC에 대한 정보를 얻은 후 관심있는 커뮤니티에
               참여해보세요!
@@ -397,7 +322,6 @@ const ScreenMain = () => {
               src="image/modal3.png"
               //크기 및 여백
               w="100%"
-              h="auto"
               p="5px"
               mb="40px"
               //배경
@@ -406,12 +330,11 @@ const ScreenMain = () => {
             />
 
             {/* Modal 다시 보지 않기 버튼 */}
-            <Box
+            <Flex
               //정렬
-              display="flex"
               justifyContent="right"
               //여백
-              m="20px"
+              m="10px"
             >
               <Button
                 //배경
@@ -421,7 +344,7 @@ const ScreenMain = () => {
               >
                 다시 보지 않기
               </Button>
-            </Box>
+            </Flex>
           </ModalBody>
         </ModalContent>
       </Modal>
@@ -430,3 +353,5 @@ const ScreenMain = () => {
 };
 
 export default ScreenMain;
+
+//23.07.21 1차 코드 수정 완료
