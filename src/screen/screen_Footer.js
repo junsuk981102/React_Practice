@@ -1,36 +1,29 @@
 import React from "react";
-import { Box, Image, Button, useBreakpointValue, Text } from "@chakra-ui/react";
+import { Flex, Text, Image, useBreakpointValue } from "@chakra-ui/react";
 
 function Footer() {
-  // 양쪽 여백
-  const boxPaddingLeft = useBreakpointValue({ base: "20px", xl: "200px" });
-  const boxPaddingRight = useBreakpointValue({ base: "20px", xl: "200px" });
+  const boxPadding = useBreakpointValue({ base: "20px", xl: "200px" }); // 양쪽 여백
 
   return (
     <>
       {/* Footer 전체 화면 */}
 
       {/* Footer 전체 화면 배경 */}
-      <Box
+      <Flex
         //정렬
-        display="flex"
         flexDirection="row"
         justifyContent="space-between"
         //여백
-        pt="25px"
-        pb="25px"
-        pl={boxPaddingLeft}
-        pr={boxPaddingRight}
+        px={boxPadding}
+        py="30px"
         //배경
         bg="white"
         borderTop="1px solid #00A29D"
       >
         {/* Footer 왼쪽 섹션 */}
-        <Box
+        <Flex
           //정렬
-          display="flex"
           flexDirection="column"
-          alignContent="start"
         >
           {/* 로고 사진 */}
           <Image
@@ -42,75 +35,59 @@ function Footer() {
             mb="10px"
           />
           {/* 기타 정보 */}
-          <Text
-            //여백
-            mb="10px"
-          >
-            STOT - Security to Token
-          </Text>
           <Text>
-            서울 강남구 도산대로 15길 22 {"("}브루클린버거 지하{"("}
+            STOT - Security to Token <br />
+            서울 강남구 도산대로 15길 22 {"("}브루클린버거 지하{")"}
           </Text>
-        </Box>
+        </Flex>
 
         {/* Footer 오른쪽 섹션 */}
-        <Box
-          // 위치 및 정렬
-          display="flex"
+        <Flex
+          //정렬
           flexDirection="row"
           alignItems="center"
         >
           {/* 연락처 정보 */}
-          <Button
-            //여백
-            mr="32px"
-            //글자
-            fontSize="md"
-            fontWeight="bold"
-            //배경
-            variant="none"
-          >
-            Twitter
-          </Button>
-          <Button
-            //여백
-            mr="32px"
-            //글자
-            fontSize="md"
-            fontWeight="bold"
-            //배경
-            variant="none"
-          >
-            Instagram
-          </Button>
           <Text
             //여백
-            mr="32px"
-            //글자
-            as="b"
-            fontSize="md"
+            mr="30px"
+            //기능
+            as="button"
+          >
+            Twitter
+          </Text>
+          <Text
+            //여백
+            mr="30px"
+            //기능
+            as="button"
+          >
+            Instagram
+          </Text>
+          <Text
+            //여백
+            mr="30px"
           >
             Email.
           </Text>
           <Text
             //여백
-            mr="32px"
-            //글자
-            as="b"
-            fontSize="md"
+            mr="30px"
           >
             Tel.
           </Text>
-          <Button
-            //배경
-            variant="link"
+          <Text
+            //기능
+            as="button"
           >
             이용약관
-          </Button>
-        </Box>
-      </Box>
+          </Text>
+        </Flex>
+      </Flex>
     </>
   );
 }
 
 export default Footer;
+
+//23.07.21 1차 코드 수정 완료
