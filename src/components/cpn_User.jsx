@@ -1,17 +1,10 @@
 import { useState, useEffect } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { getAuth, onAuthStateChanged } from "firebase/auth";
-import {
-  doc,
-  getDoc,
-  collection,
-  query,
-  where,
-  getDocs,
-} from "firebase/firestore";
+import { getAuth } from "firebase/auth";
+import { doc, getDoc } from "firebase/firestore";
 import { dbService } from "../firebase-config";
-import { Box, Image, Text, Grid } from "@chakra-ui/react";
 import Logout from "./cpn_Logout";
+import { Box, Image, Text, Grid } from "@chakra-ui/react";
 
 const User = () => {
   const auth = getAuth();
@@ -106,24 +99,32 @@ const User = () => {
     return startups.map((startup) => (
       <Box
         key={startup.id}
-        p="10px"
-        m="10px"
-        w="150px" // 카드의 너비를 조절합니다.
-        h="150px" // 카드의 높이를 조절합니다.
-        borderWidth="1px"
-        borderRadius="lg"
-        borderColor="black"
+        //정렬
         display="flex"
         flexDirection="column"
         alignItems="center"
+        //크기 및 여백
+        w="150px"
+        h="150px"
+        p="10px"
+        m="10px"
+        //배경
+        border="1px solid black"
+        borderRadius="lg"
       >
         <Image
+          //사진 위치
           src={startup.sup_logo}
-          alt="Startup Logo"
+          //크기
           w="100px"
+          //배경
           borderRadius="lg"
         />
-        <Text fontSize="md" fontWeight="bold">
+        <Text
+          //글자
+          fontSize="md"
+          fontWeight="bold"
+        >
           {startup.sup_name}
         </Text>
       </Box>
@@ -137,27 +138,42 @@ const User = () => {
 
   return (
     <Box
+      //정렬
       display="flex"
-      alignItems="center"
       flexDirection="column"
+      alignItems="center"
+      //여백
+      p="35px"
+      //배경
       bg="white"
       borderRadius="lg"
-      p="35px"
     >
-      <Box width="100%">
+      <Box
+        //크기
+        w="100%"
+      >
         <Image
+          //사진 위치
           src={photo}
-          alt="User Profile"
-          w="100px"
-          borderRadius="50%"
-          mb="15px"
           fallbackSrc={defaultProfileImage}
+          //크기 및 여백
+          w="100px"
+          mb="15px"
+          //배경
+          borderRadius="50%"
         />
-        <Text w="100px" fontSize="lg" fontWeight="bold">
+        <Text
+          //크기
+          w="100px"
+          //글자
+          fontSize="lg"
+          fontWeight="bold"
+        >
           {userId || "익명의 투자자"}
         </Text>
       </Box>
       <Grid
+        //형식
         gridTemplateColumns="repeat(auto-fit, minmax(500px, 1fr))"
         gap="20px"
       >
