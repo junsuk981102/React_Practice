@@ -82,6 +82,7 @@ function Header() {
               //글자
               fontSize="xl"
               fontWeight="bold"
+              color={activeButton === "/screen_Login" ? "#00A29D" : "black"}
               //기능
               onClick={() => handleClick("/screen_Login")}
             >
@@ -94,6 +95,7 @@ function Header() {
               //글자
               fontSize="xl"
               fontWeight="bold"
+              color={activeButton === "/screen_register" ? "#00A29D" : "black"}
               //기능
               onClick={() => handleClick("/screen_register")}
             >
