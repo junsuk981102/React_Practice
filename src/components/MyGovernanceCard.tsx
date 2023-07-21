@@ -1,5 +1,4 @@
 import React, { FC, useState, ChangeEvent } from "react";
-
 import { saleGovernanceTokenContract, web3 } from "../web3Config";
 import GovernanceCard from "./GovernanceCard";
 import {
@@ -59,37 +58,37 @@ const MyGovernanceCard: FC<MyGovernanceCardProps> = ({
 
   return (
     <Box
-      //크기
+      //크기 및 여백
       w="300px"
       h="250px"
       pt="5px"
       m="10px"
       //배경
-      borderRadius="md"
       bg="white"
       border="3px solid #00A29D"
+      borderRadius="md"
     >
       {/* 티켓 아이콘 */}
       <Image
+        //사진 위치
+        src="../image/ticketicon.png"
         //위치
         position="absolute"
-        ml="100px"
-        //배경
-        src="../image/ticketicon.png"
-        alt="ticket icon"
-        //크기
+        //크기 및 여백
         w="100px"
         h="100px"
+        ml="100px"
       />
       {/* 하단 */}
       <Box
         //위치
         position="absolute"
+        //여백
         mt="120px"
         ml="10px"
         //글자
-        fontSize="sm"
         as="b"
+        fontSize="sm"
       >
         <Text>
           NFT 이름 : <GovernanceCard GNT_name={GNT_name} />
@@ -101,17 +100,29 @@ const MyGovernanceCard: FC<MyGovernanceCardProps> = ({
             <>
               <Text>NFT ID : {GNT_Id}</Text>
               <Text>초기가격 : {GNT_Initial_Price} ETH</Text>
-              <InputGroup size="sm" mt="10px">
+              <InputGroup
+                //크기 및 여백
+                size="sm"
+                mt="10px"
+              >
                 <Input
+                  //크기
                   w="110px"
+                  //글자
                   fontSize="sm"
+                  //기능
                   type="number"
                   placeholder="판매가격 입력"
                   value={sellPrice}
                   onChange={onChangeSellPrice}
                 ></Input>
                 <InputRightAddon children="ETH" />
-                <Button onClick={onClickSell}>판매 등록</Button>
+                <Button
+                  //기능
+                  onClick={onClickSell}
+                >
+                  판매 등록
+                </Button>
               </InputGroup>
             </>
           ) : (
@@ -120,8 +131,15 @@ const MyGovernanceCard: FC<MyGovernanceCardProps> = ({
               <Text>NFT ID: {GNT_Id}</Text>
               <Text>초기가격: {GNT_Initial_Price} ETH</Text>
               <Text>판매가격: {myGovernanceSalePrice} ETH</Text>
-              <Box textAlign="center">
-                <Text as="b" color="blue">
+              <Box
+                //정렬
+                textAlign="center"
+              >
+                <Text
+                  //글자
+                  as="b"
+                  color="blue"
+                >
                   {"<"}판매 등록 완료{">"}
                 </Text>
               </Box>
@@ -139,8 +157,15 @@ const MyGovernanceCard: FC<MyGovernanceCardProps> = ({
             <Text>NFT ID: {GNT_Id}</Text>
             <Text>초기가격: {GNT_Initial_Price} ETH</Text>
             <Text>판매가격: {myGovernanceSalePrice} ETH</Text>
-            <Box textAlign="center">
-              <Text as="b" color="blue">
+            <Box
+              //정렬
+              textAlign="center"
+            >
+              <Text
+                //글자
+                as="b"
+                color="blue"
+              >
                 {"<"}판매 등록 완료{">"}
               </Text>
             </Box>
