@@ -1,7 +1,7 @@
 import React from "react";
 import User from "../components/cpn_User";
-import { Box, Heading, useBreakpointValue } from "@chakra-ui/react";
 import ScreenMyGovernance from "./screen_My_Governance";
+import { Box, Heading, useBreakpointValue } from "@chakra-ui/react";
 
 const ScreenProfile = () => {
   const boxPaddingLeft = useBreakpointValue({ base: "20px", xl: "200px" });
@@ -9,29 +9,40 @@ const ScreenProfile = () => {
   return (
     <>
       <Box
+        //정렬
         display="flex"
         flexDirection="column"
         justifyContent="center"
+        //크기
         h="auto"
+        //배경
         bg="#E5F2F2"
         borderTop="1px solid #00A29D"
       >
-        <Box flexDirection="column" pr={boxPaddingRight} pl={boxPaddingLeft}>
+        <Box
+          //정렬
+          flexDirection="column"
+          //여백
+          pr={boxPaddingRight}
+          pl={boxPaddingLeft}
+        >
           <Heading
-            //위치
+            //여백
             mt="30px"
             mb="30px"
-            //크기
+            //글자
             as="h1"
             size="lg"
           >
             마이페이지
           </Heading>
           <Box
+            //정렬
             display="flex"
-            textAlign="center"
-            justifyContent="space-between"
             flexDirection="column"
+            justifyContent="space-between"
+            textAlign="center"
+            //크기
             w="700px"
           >
             <User />
