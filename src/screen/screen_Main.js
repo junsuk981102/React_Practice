@@ -177,8 +177,8 @@ const ScreenMain = () => {
       dots: true, // 페이지 표시 여부
       infinite: true, // 무한 루프 여부
       speed: 500, // 슬라이드 전환 속도
-      slidesToShow: 3, // 보여질 슬라이드 개수
-      slidesToScroll: 2, // 슬라이드 이동시 이동하는 슬라이드 개수
+      slidesToShow: 2, // 보여질 슬라이드 개수
+      slidesToScroll: 1, // 슬라이드 이동시 이동하는 슬라이드 개수
       autoplay: true, // 자동 전환 설정
       autoplaySpeed: 3000, // 자동전환 속도
     };
@@ -198,8 +198,8 @@ const ScreenMain = () => {
       dots: true, // 페이지 표시 여부
       infinite: true, // 무한 루프 여부
       speed: 500, // 슬라이드 전환 속도
-      slidesToShow: 3, // 보여질 슬라이드 개수
-      slidesToScroll: 2, // 슬라이드 이동시 이동하는 슬라이드 개수
+      slidesToShow: 2, // 보여질 슬라이드 개수
+      slidesToScroll: 1, // 슬라이드 이동시 이동하는 슬라이드 개수
       autoplay: true, // 자동 전환 설정
       autoplaySpeed: 3000, // 자동전환 속도
     };
