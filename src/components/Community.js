@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { Heading, Box, Image, Text, Button } from "@chakra-ui/react";
+import { Box, Image, Button, Heading, Text, Flex } from "@chakra-ui/react";
 
 const Community = ({ communityObj }) => {
   const navi = useNavigate();
@@ -27,15 +27,22 @@ const Community = ({ communityObj }) => {
   }
 
   return (
-    <Box>
+    <Flex
+      //정렬
+      position="relative"
+      //크기 및 여백
+      w="300px"
+      h="400px"
+      //배경
+      borderRadius="xl"
+      boxShadow="0 0 10px #00A29D"
+      overflow="hidden"
+    >
       {/* 상단 */}
-      <Box
-        //위치
-        position="absolute"
-        //크기 맟 여백
+      <Flex
+        //크기 및 여백
         w="100%"
         h="50%"
-        mt="0px"
         //기능
         as="button"
         onClick={handleClick}
@@ -46,18 +53,16 @@ const Community = ({ communityObj }) => {
           //크기
           w="100%"
           h="100%"
-          //배경
-          objectFit="cover"
           //효과
           _hover={{
             transform: "scale(1.1)",
             transition: "transform 0.3s ease",
           }}
         />
-      </Box>
+      </Flex>
 
       {/* 하단 */}
-      <Box
+      <Flex
         //위치
         position="absolute"
         //크기 및 여백
@@ -70,10 +75,9 @@ const Community = ({ communityObj }) => {
           //위치
           position="absolute"
           //여백
-          mt="10px"
-          ml="5px"
+          mt="5px"
+          ml="10px"
           //글자
-          as="h1"
           size="lg"
         >
           {communityObj.com_name}
@@ -84,10 +88,9 @@ const Community = ({ communityObj }) => {
           //위치
           position="absolute"
           //여백
-          mt="45px"
-          ml="7px"
+          mt="40px"
+          ml="12px"
           //글자
-          as="b"
           fontSize="xs"
           color="#00A29D"
         >
@@ -101,7 +104,7 @@ const Community = ({ communityObj }) => {
           //위치
           position="absolute"
           //여백
-          mt="155px"
+          mt="160px"
           ml="15px"
           //글자
           as="b"
@@ -111,20 +114,18 @@ const Community = ({ communityObj }) => {
           현재 : {communityObj.com_member}명
         </Text>
 
-        {/* 자세희 보기 버튼 */}
+        {/* 자세히 보기 버튼 */}
         <Button
           //위치
           position="absolute"
           //여백
-          px="6px"
+          p="5px 10px"
           mt="150px"
-          ml="205px"
+          ml="190px"
           //배경
           bg="#00A29D"
-          borderRadius="lg"
-          variant="none"
+          borderRadius="xl"
           //글자
-          as="b"
           fontSize="sm"
           color="white"
           //기능
@@ -132,8 +133,10 @@ const Community = ({ communityObj }) => {
         >
           자세히 보기 {">"}
         </Button>
-      </Box>
-    </Box>
+      </Flex>
+    </Flex>
   );
 };
 export default Community;
+
+//23.07.21 1차 코드 수정 완료
