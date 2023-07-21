@@ -7,19 +7,18 @@ import {
 } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import {
-  Box,
+  Flex,
+  Heading,
+  Text,
   Button,
   Divider,
   FormControl,
   FormLabel,
   Input,
-  Text,
-  Flex,
-  Heading,
 } from "@chakra-ui/react";
 import { FaGoogle } from "react-icons/fa6";
 
-const Login = () => {
+function Login() {
   const navigate = useNavigate(); // 페이지 이동을 처리하기 위해 navigate 변수를 선언
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -65,48 +64,42 @@ const Login = () => {
   };
 
   return (
-    <Box
-      //정렬
-      display="flex"
-      flexDirection="column"
-      alignItems="center"
-      //배경
-      bg="#E5F2F2"
-    >
-      <Heading
-        //정렬
-        textAlign="center"
-        //여백
-        mt="30px"
-        mb="30px"
-        //글자
-        as="h1"
-        size="xl"
-      >
-        로그인
-      </Heading>
+    <>
+      {/* 로그인 화면 컴포넌트 */}
 
-      <Divider
-        //크기 및 여백
-        h="1px"
-        mb="30px"
-        //배경
-        backgroundColor="#00A29D"
-      />
-
-      <FormControl
+      {/* 로그인 화면 전체 배경 */}
+      <Flex
         //정렬
-        display="flex"
         flexDirection="column"
-        //기능
-        as="form"
+        alignItems="center"
+        //크기
+        w="700px"
         //배경
         bg="#E5F2F2"
       >
+        {/* 제목 */}
+        <Heading
+          //여백
+          marginY="30px"
+        >
+          로그인
+        </Heading>
+
+        {/* 로그인 폼 */}
+        <Divider
+          //크기 및 여백
+          h="1px"
+          mb="30px"
+          //배경
+          bg="#00A29D"
+        />
+        {/* 이메일 입력 폼 */}
         <FormControl
           //정렬
           display="flex"
           justifyContent="space-between"
+          //여백
+          mb="30px"
         >
           <FormLabel
             //글자
@@ -117,7 +110,7 @@ const Login = () => {
           </FormLabel>
           <Input
             //크기
-            w="450px"
+            w="400px"
             //배경
             border="solid 1px #00A29D"
             borderRadius="xl"
@@ -129,10 +122,12 @@ const Login = () => {
             required
           />
         </FormControl>
+        {/* 비밀번호 입력 폼 */}
         <FormControl
           //정렬
           display="flex"
           justifyContent="space-between"
+          mb="30px"
         >
           <FormLabel
             //글자
@@ -143,7 +138,7 @@ const Login = () => {
           </FormLabel>
           <Input
             //크기
-            w="450px"
+            w="400px"
             //배경
             border="solid 1px #00A29D"
             borderRadius="xl"
@@ -155,79 +150,71 @@ const Login = () => {
             required
           />
         </FormControl>
+        {/* 에러메시지 */}
         <Text
           //글자
           color="red"
-          textAlign="center"
         >
           {error}
         </Text>
-
         <Divider
           //크기 및 여백
           h="1px"
-          mt="30px"
-          mb="30px"
+          marginY="30px"
           //배경
-          backgroundColor="#00A29D"
+          bg="#00A29D"
         />
 
-        <Flex
-          //정렬
-          justifyContent="center"
-        >
-          <Button
-            //크기
-            w="300px"
-            h="75px"
-            //배경
-            bg="#00A29D"
-            borderRadius="lg"
-            //글자
-            as="b"
-            fontSize="xl"
-            color="white"
-            //기능
-            type="submit"
-            onClick={handleEmailLogin}
-          >
-            Sign in with Email
-          </Button>
-        </Flex>
-        <Text
-          //정렬
-          textAlign="center"
+        {/* 이메일 로그인 버튼 */}
+        <Button
+          //크기
+          w="300px"
+          h="75px"
+          //배경
+          bg="#00A29D"
+          borderRadius="lg"
           //글자
           fontSize="xl"
+          color="white"
+          //기능
+          type="submit"
+          onClick={handleEmailLogin}
+        >
+          Sign in with Email
+        </Button>
+
+        <Text
+          //글자
+          fontSize="xl"
+          //여백
+          marginY="10px"
         >
           or
         </Text>
-        <Flex
-          //정렬
-          justifyContent="center"
+
+        {/* 구글 로그인 버튼 */}
+        <Button
+          //크기
+          w="300px"
+          h="75px"
+          //배경
+          bg="#00A29D"
+          borderRadius="lg"
+          leftIcon={<FaGoogle />}
+          //글자
+          fontSize="xl"
+          color="white"
+          //기능
+          type="submit"
+          onClick={handleGoogleSignIn}
         >
-          <Button
-            //크기
-            w="300px"
-            h="75px"
-            //배경
-            bg="#00A29D"
-            borderRadius="lg"
-            leftIcon={<FaGoogle />}
-            //글자
-            as="b"
-            fontSize="xl"
-            color="white"
-            //기능
-            type="submit"
-            onClick={handleGoogleSignIn}
-          >
-            Sign in with Google
-          </Button>
-        </Flex>
-      </FormControl>
-    </Box>
+          Sign in with Google
+        </Button>
+      </Flex>
+    </>
   );
-};
+}
 
 export default Login;
+
+//23.07.21 1차 코드 수정 완료
