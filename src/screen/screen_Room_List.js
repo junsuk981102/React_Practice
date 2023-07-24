@@ -27,7 +27,7 @@ const ScreenRoomList = () => {
   const [selectedValue, setSelectedValue] = useState("카테고리");
   //카테고리 리스트 설정값 변경
   const handleMenuItemClick = (value) => {
-    setSelectedValue(value); // Update the selected value when a MenuItem is clicked
+    setSelectedValue(value);
   };
 
   //커뮤니티 만들기 페이지 이동
@@ -55,15 +55,15 @@ const ScreenRoomList = () => {
           <Box
             //위치 및 정렬
             position="relative"
-            overflow="hidden"
             //크기
             w="300px"
             h="400px"
-            mb="40px"
+            m="20px"
             //배경
             bg="white"
-            borderRadius="md"
-            boxShadow="0 0 15px #00A29D"
+            borderRadius="xl"
+            boxShadow="0 0 10px #00A29D"
+            overflow="hidden"
           >
             {/* 커뮤니티 정보 */}
             <Community communityObj={community} />
@@ -99,15 +99,15 @@ const ScreenRoomList = () => {
         <Box
           //위치 및 정렬
           position="relative"
-          overflow="hidden"
           //크기 및 여백
           w="300px"
           h="400px"
-          mb="20px"
+          m="20px"
           //배경
           bg="white"
-          borderRadius="md"
-          boxShadow="0 0 15px #00A29D"
+          borderRadius="xl"
+          boxShadow="0 0 10px #00A29D"
+          overflow="hidden"
         >
           {/* 커뮤니티 정보 */}
           <Community communityObj={community} />
@@ -132,7 +132,6 @@ const ScreenRoomList = () => {
       {/* 커뮤니티 제목 & 카테고리 버튼 */}
       <Flex
         //정렬
-        flexDirection="row"
         justifyContent="space-between"
         //여백
         marginY="30px"
@@ -306,13 +305,10 @@ const ScreenRoomList = () => {
           </MenuList>
         </Menu>
       </Flex>
-
       {/* 커뮤니티 리스트 섹션 */}
-
       <Grid
         //형식
         gridTemplateColumns="repeat(auto-fit, minmax(300px, 1fr))"
-        gap="5px"
       >
         {/* 커뮤니티 생성 버튼 */}
         <Button
@@ -323,7 +319,7 @@ const ScreenRoomList = () => {
           h="400px"
           //배경
           bg="white"
-          borderRadius="md"
+          borderRadius="xl"
           boxShadow="0 0 10px #00A29D"
           //기능
           onClick={handleClick}

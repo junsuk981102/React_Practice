@@ -5,25 +5,25 @@ import {
   Heading,
   Grid,
   Box,
-  useBreakpointValue,
   Menu,
   MenuButton,
+  useBreakpointValue,
   MenuList,
   MenuItem,
+  Flex,
 } from "@chakra-ui/react";
 
 const ScreenStartupList = () => {
+  const boxPadding = useBreakpointValue({ base: "20px", xl: "200px" }); // 양쪽 여백
   //스타트업 설정
   const [startups, setStartups] = useState([]);
-  //양쪽 여백
-  const boxPaddingLeft = useBreakpointValue({ base: "20px", xl: "200px" });
-  const boxPaddingRight = useBreakpointValue({ base: "20px", xl: "200px" });
   //카테고리 리스트 초기값 설정
   const [selectedValue, setSelectedValue] = useState("카테고리");
   //카테고리 리스트 설정값 변경
   const handleMenuItemClick = (value) => {
     setSelectedValue(value);
   };
+
   //스타트업 정보 가져오기
   useEffect(() => {
     dbService.collection("startup_list").onSnapshot((snapshot) => {
@@ -51,8 +51,8 @@ const ScreenStartupList = () => {
             m="20px"
             //배경
             bg="white"
-            borderRadius="10px"
-            boxShadow="0 0 15px #00A29D"
+            borderRadius="xl"
+            boxShadow="0 0 10px #00A29D"
             overflow="hidden"
           >
             {/* 스타트업 정보 */}
@@ -75,7 +75,7 @@ const ScreenStartupList = () => {
           textAlign="center"
           //여백
           mt="50px"
-          mb="150px"
+          mb="200px"
           //글자
           fontSize="2xl"
           fontWeight="bold"
@@ -96,8 +96,8 @@ const ScreenStartupList = () => {
           m="20px"
           //배경
           bg="white"
-          borderRadius="10px"
-          boxShadow="0 0 15px #00A29D"
+          borderRadius="xl"
+          boxShadow="0 0 10px #00A29D"
           overflow="hidden"
         >
           <Startup startupObj={startup} />
@@ -113,215 +113,206 @@ const ScreenStartupList = () => {
     <Box
       //크기 및 여백
       h="auto"
-      pb="100px"
+      px={boxPadding}
+      pb="200px"
       //배경
       bg="#E5F2F2"
       borderTop="1px solid #00A29D"
     >
-      <Box
+      <Heading
         //여백
-        pl={boxPaddingLeft}
-        pr={boxPaddingRight}
-        pb="50px"
+        mt="30px"
+        mb="5px"
+        //글자
+        size="md"
+      >
+        새로운 스타트업 찾기
+      </Heading>
+      <Flex
+        //정렬
+        justifyContent="space-between"
+        //여백
+        mb="30px"
       >
         <Heading
-          //여백
-          mt="30px"
-          mb="5px"
           //글자
-          as="h2"
-          size="md"
+          size="lg"
         >
-          새로운 스타트업 찾기
+          투자 중인 스타트업
         </Heading>
-        <Box
-          //정렬
-          display="flex"
-          flexDirection="row"
-          justifyContent="space-between"
-        >
-          <Heading
-            //여백
-            mb="20px"
-            //글자
-            as="h1"
-            size="lg"
-          >
-            투자 중인 스타트업
-          </Heading>
 
-          {/* 스타트업 카테고리 버튼 */}
-          <Menu>
-            <MenuButton
-              //크기
-              w="100px"
-              h="40px"
+        {/* 스타트업 카테고리 버튼 */}
+        <Menu>
+          <MenuButton
+            //크기
+            w="100px"
+            h="40px"
+            //배경
+            bg="#00A29D"
+            borderRadius="3xl"
+            //글자
+            fontSize="md"
+            fontWeight="bold"
+            color="white"
+          >
+            {selectedValue}
+          </MenuButton>
+          <MenuList
+            //배경
+            bg="#00A29D"
+            //글자
+            color="white"
+          >
+            <MenuItem
               //배경
-              bg="#00A29D"
-              borderRadius="20px"
-              //글자
-              fontSize="md"
-              fontWeight="bold"
-              color="white"
+              bg="none"
+              borderTop="1px solid white"
+              //기능
+              onClick={() => handleMenuItemClick("카테고리")}
             >
-              {selectedValue}
-            </MenuButton>
-            <MenuList
+              전체
+            </MenuItem>
+            <MenuItem
               //배경
-              bg="#00A29D"
-              //글자
-              color="white"
+              bg="none"
+              borderTop="1px solid white"
+              //기능
+              onClick={() => handleMenuItemClick("핀테크")}
             >
-              <MenuItem
-                //배경
-                bg="none"
-                borderTop="1px solid white"
-                //기능
-                onClick={() => handleMenuItemClick("카테고리")}
-              >
-                전체
-              </MenuItem>
-              <MenuItem
-                //배경
-                bg="none"
-                borderTop="1px solid white"
-                //기능
-                onClick={() => handleMenuItemClick("핀테크")}
-              >
-                핀테크
-              </MenuItem>
-              <MenuItem
-                //배경
-                bg="none"
-                borderTop="1px solid white"
-                //기능
-                onClick={() => handleMenuItemClick("금융")}
-              >
-                금융
-              </MenuItem>
-              <MenuItem
-                //배경
-                bg="none"
-                borderTop="1px solid white"
-                //기능
-                onClick={() => handleMenuItemClick("반려동물")}
-              >
-                반려동물
-              </MenuItem>
-              <MenuItem
-                //배경
-                bg="none"
-                borderTop="1px solid white"
-                //기능
-                onClick={() => handleMenuItemClick("VR")}
-              >
-                VR
-              </MenuItem>
-              <MenuItem
-                //배경
-                bg="none"
-                borderTop="1px solid white"
-                //기능
-                onClick={() => handleMenuItemClick("AR")}
-              >
-                AR
-              </MenuItem>
-              <MenuItem
-                //배경
-                bg="none"
-                borderTop="1px solid white"
-                //기능
-                onClick={() => handleMenuItemClick("ESG")}
-              >
-                ESG
-              </MenuItem>
-              <MenuItem
-                //배경
-                bg="none"
-                borderTop="1px solid white"
-                //기능
-                onClick={() => handleMenuItemClick("전기차")}
-              >
-                전기차
-              </MenuItem>
-              <MenuItem
-                //배경
-                bg="none"
-                borderTop="1px solid white"
-                //기능
-                onClick={() => handleMenuItemClick("블록체인")}
-              >
-                블록체인
-              </MenuItem>
-              <MenuItem
-                //배경
-                bg="none"
-                borderTop="1px solid white"
-                //기능
-                onClick={() => handleMenuItemClick("음악")}
-              >
-                음악
-              </MenuItem>
-              <MenuItem
-                //배경
-                bg="none"
-                borderTop="1px solid white"
-                //기능
-                onClick={() => handleMenuItemClick("미술")}
-              >
-                미술
-              </MenuItem>
-              <MenuItem
-                //배경
-                bg="none"
-                borderTop="1px solid white"
-                //기능
-                onClick={() => handleMenuItemClick("자동차")}
-              >
-                자동차
-              </MenuItem>
-              <MenuItem
-                //배경
-                bg="none"
-                borderTop="1px solid white"
-                //기능
-                onClick={() => handleMenuItemClick("신기술")}
-              >
-                신기술
-              </MenuItem>
-              <MenuItem
-                //배경
-                bg="none"
-                borderTop="1px solid white"
-                //기능
-                onClick={() => handleMenuItemClick("F&B")}
-              >
-                F&B
-              </MenuItem>
-              <MenuItem
-                //배경
-                bg="none"
-                borderTop="1px solid white"
-                borderBottom="1px solid white"
-                //기능
-                onClick={() => handleMenuItemClick("헬스케어")}
-              >
-                헬스케어
-              </MenuItem>
-            </MenuList>
-          </Menu>
-        </Box>
-        {/* 스타트업 리스트 섹션 */}
-        <Grid
-          //형식
-          gridTemplateColumns="repeat(auto-fit, minmax(500px, 1fr))"
-          gap="20px"
-        >
-          {renderStartups()}
-        </Grid>
-      </Box>
+              핀테크
+            </MenuItem>
+            <MenuItem
+              //배경
+              bg="none"
+              borderTop="1px solid white"
+              //기능
+              onClick={() => handleMenuItemClick("금융")}
+            >
+              금융
+            </MenuItem>
+            <MenuItem
+              //배경
+              bg="none"
+              borderTop="1px solid white"
+              //기능
+              onClick={() => handleMenuItemClick("반려동물")}
+            >
+              반려동물
+            </MenuItem>
+            <MenuItem
+              //배경
+              bg="none"
+              borderTop="1px solid white"
+              //기능
+              onClick={() => handleMenuItemClick("VR")}
+            >
+              VR
+            </MenuItem>
+            <MenuItem
+              //배경
+              bg="none"
+              borderTop="1px solid white"
+              //기능
+              onClick={() => handleMenuItemClick("AR")}
+            >
+              AR
+            </MenuItem>
+            <MenuItem
+              //배경
+              bg="none"
+              borderTop="1px solid white"
+              //기능
+              onClick={() => handleMenuItemClick("ESG")}
+            >
+              ESG
+            </MenuItem>
+            <MenuItem
+              //배경
+              bg="none"
+              borderTop="1px solid white"
+              //기능
+              onClick={() => handleMenuItemClick("전기차")}
+            >
+              전기차
+            </MenuItem>
+            <MenuItem
+              //배경
+              bg="none"
+              borderTop="1px solid white"
+              //기능
+              onClick={() => handleMenuItemClick("블록체인")}
+            >
+              블록체인
+            </MenuItem>
+            <MenuItem
+              //배경
+              bg="none"
+              borderTop="1px solid white"
+              //기능
+              onClick={() => handleMenuItemClick("음악")}
+            >
+              음악
+            </MenuItem>
+            <MenuItem
+              //배경
+              bg="none"
+              borderTop="1px solid white"
+              //기능
+              onClick={() => handleMenuItemClick("미술")}
+            >
+              미술
+            </MenuItem>
+            <MenuItem
+              //배경
+              bg="none"
+              borderTop="1px solid white"
+              //기능
+              onClick={() => handleMenuItemClick("자동차")}
+            >
+              자동차
+            </MenuItem>
+            <MenuItem
+              //배경
+              bg="none"
+              borderTop="1px solid white"
+              //기능
+              onClick={() => handleMenuItemClick("신기술")}
+            >
+              신기술
+            </MenuItem>
+            <MenuItem
+              //배경
+              bg="none"
+              borderTop="1px solid white"
+              //기능
+              onClick={() => handleMenuItemClick("F&B")}
+            >
+              F&B
+            </MenuItem>
+            <MenuItem
+              //배경
+              bg="none"
+              borderTop="1px solid white"
+              borderBottom="1px solid white"
+              //기능
+              onClick={() => handleMenuItemClick("헬스케어")}
+            >
+              헬스케어
+            </MenuItem>
+          </MenuList>
+        </Menu>
+      </Flex>
+      {/* 스타트업 리스트 섹션 */}
+      <Grid
+        //형식
+        gridTemplateColumns="repeat(auto-fit, minmax(500px, 1fr))"
+      >
+        {renderStartups()}
+      </Grid>
     </Box>
   );
 };
 
 export default ScreenStartupList;
+
+//23.07.24 1차 코드 수정 완료
