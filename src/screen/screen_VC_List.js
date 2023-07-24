@@ -5,19 +5,18 @@ import {
   Heading,
   Grid,
   Box,
-  useBreakpointValue,
   Menu,
   MenuButton,
+  useBreakpointValue,
   MenuList,
   MenuItem,
+  Flex,
 } from "@chakra-ui/react";
 
 const ScreenVCList = () => {
+  const boxPadding = useBreakpointValue({ base: "20px", xl: "200px" }); // 양쪽 여백
   //VC 설정
   const [vcs, setVCs] = useState([]);
-  //양쪽 여백
-  const boxPaddingLeft = useBreakpointValue({ base: "20px", xl: "200px" });
-  const boxPaddingRight = useBreakpointValue({ base: "20px", xl: "200px" });
   //카테고리 리스트 초기값 설정
   const [selectedValue, setSelectedValue] = useState("카테고리");
   //카테고리 리스트 설정값 변경
@@ -52,8 +51,8 @@ const ScreenVCList = () => {
             m="20px"
             //배경
             bg="white"
-            borderRadius="10px"
-            boxShadow="0 0 15px #00A29D"
+            borderRadius="xl"
+            boxShadow="0 0 10px #00A29D"
             overflow="hidden"
           >
             {/* VC 정보 */}
@@ -74,7 +73,7 @@ const ScreenVCList = () => {
           textAlign="center"
           //여백
           mt="50px"
-          mb="150px"
+          mb="200px"
           //글자
           fontSize="2xl"
           fontWeight="bold"
@@ -95,8 +94,8 @@ const ScreenVCList = () => {
           m="20px"
           //배경
           bg="white"
-          borderRadius="10px"
-          boxShadow="0 0 15px #00A29D"
+          borderRadius="xl"
+          boxShadow="0 0 10px #00A29D"
           overflow="hidden"
         >
           <VC vcObj={vc} />
@@ -112,116 +111,107 @@ const ScreenVCList = () => {
     <Box
       //크기 및 여백
       h="auto"
-      pb="100px"
+      px={boxPadding}
+      pb="200px"
       //배경
       bg="#E5F2F2"
       borderTop="1px solid #00A29D"
     >
-      <Box
+      <Heading
         //여백
-        pl={boxPaddingLeft}
-        pr={boxPaddingRight}
-        pb="50px"
+        mt="30px"
+        mb="5px"
+        //글자
+        size="md"
+      >
+        새로운 VC 찾기
+      </Heading>
+      <Flex
+        //정렬
+        justifyContent="space-between"
+        //여백
+        mb="30px"
       >
         <Heading
-          //여백
-          mt="30px"
-          mb="5px"
           //글자
-          as="h2"
-          size="md"
+          size="lg"
         >
-          새로운 VC 찾기
+          투자 중인 VC
         </Heading>
-        <Box
-          //정렬
-          display="flex"
-          flexDirection="row"
-          justifyContent="space-between"
-        >
-          <Heading
-            //여백
-            mb="20px"
-            //글자
-            as="h1"
-            size="lg"
-          >
-            투자 중인 VC
-          </Heading>
 
-          {/* VC 카테고리 버튼 */}
-          <Menu>
-            <MenuButton
-              //크기
-              w="100px"
-              h="40px"
+        {/* VC 카테고리 버튼 */}
+        <Menu>
+          <MenuButton
+            //크기
+            w="100px"
+            h="40px"
+            //배경
+            bg="#00A29D"
+            borderRadius="3xl"
+            //글자
+            fontSize="md"
+            fontWeight="bold"
+            color="white"
+          >
+            {selectedValue}
+          </MenuButton>
+          <MenuList
+            //배경
+            bg="#00A29D"
+            //글자
+            color="white"
+          >
+            <MenuItem
               //배경
-              bg="#00A29D"
-              borderRadius="20px"
-              //글자
-              fontSize="md"
-              fontWeight="bold"
-              color="white"
+              bg="none"
+              borderTop="1px solid white"
+              //기능
+              onClick={() => handleMenuItemClick("카테고리")}
             >
-              {selectedValue}
-            </MenuButton>
-            <MenuList
+              전체
+            </MenuItem>
+            <MenuItem
               //배경
-              bg="#00A29D"
-              //글자
-              color="white"
+              bg="none"
+              borderTop="1px solid white"
+              //기능
+              onClick={() => handleMenuItemClick("VC")}
             >
-              <MenuItem
-                //배경
-                bg="none"
-                borderTop="1px solid white"
-                //기능
-                onClick={() => handleMenuItemClick("카테고리")}
-              >
-                전체
-              </MenuItem>
-              <MenuItem
-                //배경
-                bg="none"
-                borderTop="1px solid white"
-                //기능
-                onClick={() => handleMenuItemClick("VC")}
-              >
-                VC
-              </MenuItem>
-              <MenuItem
-                //배경
-                bg="none"
-                borderTop="1px solid white"
-                //기능
-                onClick={() => handleMenuItemClick("CVC")}
-              >
-                CVC
-              </MenuItem>
-              <MenuItem
-                //배경
-                bg="none"
-                borderTop="1px solid white"
-                borderBottom="1px solid white"
-                //기능
-                onClick={() => handleMenuItemClick("ABC")}
-              >
-                ABC
-              </MenuItem>
-            </MenuList>
-          </Menu>
-        </Box>
-        {/* VC 리스트 섹션 */}
-        <Grid
-          //형식
-          gridTemplateColumns="repeat(auto-fit, minmax(500px, 1fr))"
-          gap="20px"
-        >
-          {renderVCs()}
-        </Grid>
-      </Box>
+              VC
+            </MenuItem>
+            <MenuItem
+              //배경
+              bg="none"
+              borderTop="1px solid white"
+              //기능
+              onClick={() => handleMenuItemClick("CVC")}
+            >
+              CVC
+            </MenuItem>
+            <MenuItem
+              //배경
+              bg="none"
+              borderTop="1px solid white"
+              borderBottom="1px solid white"
+              //기능
+              onClick={() => handleMenuItemClick("ABC")}
+            >
+              ABC
+            </MenuItem>
+          </MenuList>
+        </Menu>
+      </Flex>
+      {/* VC 리스트 섹션 */}
+      <Grid
+        //형식
+        gridTemplateColumns="repeat(auto-fit, minmax(500px, 1fr))"
+      >
+        {renderVCs()}
+      </Grid>
     </Box>
   );
 };
 
 export default ScreenVCList;
+
+//23.07.24 1차 코드 수정 완료
