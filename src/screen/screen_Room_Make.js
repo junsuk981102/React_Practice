@@ -8,7 +8,6 @@ import {
   Flex,
   Button,
   Heading,
-  Divider,
   Text,
 } from "@chakra-ui/react";
 
@@ -167,7 +166,7 @@ const ScreenRoomMake = () => {
           //여백
           p="15px"
           //배경
-          border="1px solid #00A29D"
+          border="3px solid #00A29D"
           borderRadius="2xl"
           //기능
           as="form"

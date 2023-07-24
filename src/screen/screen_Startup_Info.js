@@ -8,7 +8,6 @@ import {
   Text,
   Heading,
   Image,
-  useBreakpointValue,
   Divider,
   IconButton,
   Flex,
@@ -17,9 +16,6 @@ import {
 const ScreenStartupInfo = () => {
   // 사용자 UID를 저장하는 상태 변수
   const [userUid, setUserUid] = useState("");
-  //양쪽 여백
-  const boxPaddingLeft = useBreakpointValue({ base: "20px", xl: "200px" });
-  const boxPaddingRight = useBreakpointValue({ base: "20px", xl: "200px" });
   const { state } = useLocation();
   //스타트업 정보 초기값 설정
   const [activeButton, setActiveButton] = useState("");
@@ -124,29 +120,30 @@ const ScreenStartupInfo = () => {
       {/* 스타트업 정보 전체 화면 */}
 
       {/* 스타트업 정보 전체 배경 화면 */}
-      <Box
+      <Flex
+        //정렬
+        flexDirection="column"
+        alignItems="center"
         //크기 및 여백
         h="auto"
-        pb="50px"
-        pl={boxPaddingLeft}
-        pr={boxPaddingRight}
+        pb="200px"
         //배경
         bg="#E5F2F2"
         borderTop="1px solid #00A29D"
       >
         <Heading
           //여백
-          mt="30px"
-          mb="30px"
+          marginY="30px"
           //글자
-          as="h1"
           size="lg"
         >
           스타트업 소개
         </Heading>
 
         {/* 스타트업 기본 정보 섹션 */}
-        <Box
+        <Flex
+          //정렬
+          flexDirection="column"
           //크기 및 여백
           w="800px"
           h="auto"
@@ -154,12 +151,10 @@ const ScreenStartupInfo = () => {
           //배경
           bg="white"
           border="3px solid #00A29D"
-          borderRadius="lg"
+          borderRadius="xl"
         >
-          <Box
-            //위치 및 정렬
-            position="relative"
-            display="flex"
+          <Flex
+            //정렬
             alignItems="center"
             //크기
             h="auto"
@@ -172,22 +167,19 @@ const ScreenStartupInfo = () => {
               w="200px"
               h="200px"
               //배경
-              borderRadius="lg"
+              borderRadius="xl"
               objectFit="cover"
             />
             {/* 스타트업 기본 정보 */}
-            <Box
+            <Flex
+              flexDirection="column"
               //여백
               ml="25px"
             >
-              <Flex
-                //정렬
-                align="center"
-              >
+              <Flex alignItems="center">
                 {/* 스타트업 이름 */}
                 <Heading
                   //글자
-                  as="h1"
                   size="lg"
                 >
                   {state.sup_name}
@@ -196,7 +188,6 @@ const ScreenStartupInfo = () => {
                 <IconButton
                   aria-label="Like"
                   backgroundColor="white"
-                  ml="10px"
                   color={activeButton === "yellow" ? "yellow" : "black"}
                   onClick={handleClick}
                   icon={
@@ -213,119 +204,101 @@ const ScreenStartupInfo = () => {
                 //정렬
                 textAlign="center"
                 //크기 및 여백
-                w="150px"
-                h="auto"
+                w="100px"
                 p="5px"
-                mt="10px"
-                mb="10px"
+                marginY="10px"
                 //배경
                 bg="#00A29D"
                 borderRadius="xl"
+                //글자
+                fontWeight="bold"
+                fontSize="md"
+                color="white"
               >
-                <Text
-                  //글자
-                  as="b"
-                  fontSize="md"
-                  color="white"
-                >
-                  {state.sup_category}
-                </Text>
+                {state.sup_category}
               </Box>
               {/* 스타트업 정보 */}
-              <Box>
-                <Text
-                  //글자
-                  as="b"
-                  fontSize="md"
-                >
-                  {state.sup_info}
-                </Text>
-              </Box>
-            </Box>
-          </Box>
+              <Text
+                //글자
+                fontSize="md"
+              >
+                {state.sup_info}
+              </Text>
+            </Flex>
+          </Flex>
+
           {/* 스타트업 기업 정보 섹션 */}
           <Box
             //여백
-            mt="30px"
-            ml="20px"
+            m="20px"
           >
             <Text
               //글자
-              as="b"
+              fontWeight="bold"
               fontSize="lg"
             >
               기업정보
             </Text>
-            <Box
-              //정렬
-              display="flex"
-              flexDirection="row"
-              //여백
-              mt="25px"
-              ml="10px"
-            >
-              <Box
-                //정렬
-                display="flex"
-                flexDirection="row"
-                //여백
-                mr="120px"
-              >
-                <Box
-                  //정렬
-                  display="flex"
-                  flexDirection="column"
-                  //여백
-                  mr="50px"
-                  //글자
-                  color="grey"
-                >
-                  <Text
-                    //여백
-                    mb="10px"
-                  >
-                    대표자
-                  </Text>
-                  <Text
-                    //여백
-                    mb="10px"
-                  >
-                    국적
-                  </Text>
-                  <Text>회사구분</Text>
-                </Box>
-                <Box
-                  //정렬
-                  display="flex"
-                  flexDirection="column"
-                >
-                  <Text
-                    //여백
-                    mb="10px"
-                  >
-                    {sup_ceo}
-                  </Text>
-                  <Text
-                    //여백
-                    mb="10px"
-                  >
-                    {sup_nationality}
-                  </Text>
-                  <Text>{sup_size}</Text>
-                </Box>
-              </Box>
 
-              <Box
+            {/* 왼쪽 섹션 */}
+            <Flex
+              //여백
+              m="15px"
+            >
+              {/* 고정값 */}
+              <Flex
                 //정렬
-                display="flex"
+                flexDirection="column"
+                //글자
+                color="grey"
+              >
+                <Text
+                  //여백
+                  mb="10px"
+                >
+                  대표자
+                </Text>
+                <Text
+                  //여백
+                  mb="10px"
+                >
+                  국적
+                </Text>
+                <Text>회사구분</Text>
+              </Flex>
+              {/* 변동값 */}
+              <Flex
+                //정렬
+                flexDirection="column"
+                //여백
+                ml="50px"
+              >
+                <Text
+                  //여백
+                  mb="10px"
+                >
+                  {sup_ceo}
+                </Text>
+                <Text
+                  //여백
+                  mb="10px"
+                >
+                  {sup_nationality}
+                </Text>
+                <Text>{sup_size}</Text>
+              </Flex>
+
+              {/* 오른쪽 섹션 */}
+              <Flex
+                //정렬
                 flexDirection="row"
               >
-                <Box
+                {/* 고정값 */}
+                <Flex
                   //정렬
-                  display="flex"
                   flexDirection="column"
                   //여백
-                  mr="50px"
+                  ml="100px"
                   //글자
                   color="grey"
                 >
@@ -342,11 +315,13 @@ const ScreenStartupInfo = () => {
                     업종
                   </Text>
                   <Text>홈페이지</Text>
-                </Box>
-                <Box
+                </Flex>
+                {/* 변동값 */}
+                <Flex
                   //정렬
-                  display="flex"
                   flexDirection="column"
+                  //여백
+                  ml="50px"
                 >
                   <Text
                     //여백
@@ -361,9 +336,9 @@ const ScreenStartupInfo = () => {
                     데이터베이스 및 온라인 정보 제공업
                   </Text>
                   <Text>{sup_homepage}</Text>
-                </Box>
-              </Box>
-            </Box>
+                </Flex>
+              </Flex>
+            </Flex>
           </Box>
           <Divider
             //여백
@@ -371,40 +346,28 @@ const ScreenStartupInfo = () => {
           />
 
           {/* 스타트업 투자 정보 섹션 */}
-          <Box
-            //정렬
-            display="flex"
-            flexDirection="row"
+          <Flex
             //크기 및 여백
-            h="auto"
-            mt="20px"
-            ml="20px"
+            m="20px"
           >
             <Box
               //여백
-              mr="190px"
+              mr="150px"
             >
               <Text
                 //글자
-                as="b"
+                fontWeight="bold"
                 fontSize="lg"
               >
                 투자정보
               </Text>
-              <Box
-                //정렬
-                display="flex"
-                flexDirection="row"
+              <Flex
                 //여백
-                mt="25px"
-                ml="10px"
+                m="15px"
               >
-                <Box
+                <Flex
                   //정렬
-                  display="flex"
                   flexDirection="column"
-                  //여백
-                  mr="50px"
                   //글자
                   color="grey"
                 >
@@ -421,11 +384,11 @@ const ScreenStartupInfo = () => {
                     누적투자 금액
                   </Text>
                   <Text>투자유치 횟수</Text>
-                </Box>
-                <Box
+                </Flex>
+                <Flex
                   //정렬
-                  display="flex"
                   flexDirection="column"
+                  ml="50px"
                 >
                   <Text
                     //여백
@@ -440,14 +403,14 @@ const ScreenStartupInfo = () => {
                     {sup_amountOfInvestment}
                   </Text>
                   <Text>{sup_numOfInvestment}</Text>
-                </Box>
-              </Box>
+                </Flex>
+              </Flex>
             </Box>
 
             <Box>
               <Text
                 //글자
-                as="b"
+                fontWeight="bold"
                 fontSize="lg"
               >
                 투자자
@@ -483,32 +446,27 @@ const ScreenStartupInfo = () => {
                 />
               </Box>
             </Box>
-          </Box>
+          </Flex>
           <Divider
             //여백
             mt="20px"
           />
+
           {/* 스타트업 서비스&제품 섹션 */}
           <Box
             //크기 및 여백
-            h="auto"
-            mt="20px"
-            ml="20px"
+            m="20px"
           >
             <Text
               //글자
-              as="b"
+              fontWeight="bold"
               fontSize="lg"
             >
               서비스/제품
             </Text>
-            <Box
-              //정렬
-              display="flex"
-              flexDirection="row"
+            <Flex
               //여백
-              mt="25px"
-              ml="10px"
+              m="15px"
             >
               <Image
                 //사진 위치
@@ -517,39 +475,37 @@ const ScreenStartupInfo = () => {
                 w="60px"
                 h="60px"
                 //배경
-                borderRadius="30px"
+                borderRadius="3xl"
                 objectFit="cover"
               />
-              <Box
+              <Flex
                 //정렬
-                display="flex"
                 flexDirection="column"
                 //여백
-                mt="5px"
-                ml="10px"
+                m="7px"
               >
                 <Text
                   //글자
-                  as="b"
                   fontSize="lg"
                 >
                   페오펫
                 </Text>
                 <Text
                   //글자
-                  as="b"
                   fontSize="sm"
                   color="#00A29D"
                 >
                   간편 모바일 반려동물등록 서비스
                 </Text>
-              </Box>
-            </Box>
+              </Flex>
+            </Flex>
           </Box>
-        </Box>
-      </Box>
+        </Flex>
+      </Flex>
     </>
   );
 };
 
 export default ScreenStartupInfo;
+
+//23.07.24 1차 코드 수정 완료
