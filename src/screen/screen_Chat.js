@@ -146,7 +146,9 @@ function ScreenChat() {
         <>
           <Flex flexDirection="column" alignItems="center" mt="60px">
             <Flex flexDirection="column" w="550px" textAlign="start">
-              <Text fontWeight="bold">투표 현황</Text>
+              <Text fontWeight="bold">
+                {"<"}투표 현황{">"}
+              </Text>
               <Text fontSize="2xs" color="grey">
                 투표 종료까지 D - 2일 16시간
               </Text>
@@ -250,7 +252,9 @@ function ScreenChat() {
         <>
           <Flex flexDirection="column" alignItems="center" mt="60px">
             <Flex flexDirection="column" w="550px" textAlign="start">
-              <Text fontWeight="bold">투표 현황</Text>
+              <Text fontWeight="bold">
+                {"<"}투표 현황{">"}
+              </Text>
               <Text fontSize="2xs" color="grey">
                 투표 종료까지 D - 2일 16시간
               </Text>
@@ -716,7 +720,7 @@ function ScreenChat() {
 
                   <Flex flexDirection="column" alignItems="center">
                     <Text m="25px" fontSize="lg" fontWeight="bold">
-                      투표 결과
+                      {"<"}투표 결과{">"}
                     </Text>
                     <Flex>
                       <Flex
@@ -960,8 +964,40 @@ function ScreenChat() {
 
               {/* 2차 결과 */}
               <TabPanel>
-                <Flex flexDirection="column" p="10px">
-                  <Chat />
+                {/* 정보 */}
+                <Flex flexDirection="column" p="10px" mb="30px">
+                  {/* 제목 */}
+                  <Flex mb="15px">
+                    <Text fontSize="2xl" fontWeight="bold" mr="15px">
+                      2차 투표 종료
+                    </Text>
+                    <Image src="../image/vote_icon.png" w="30px" h="30px" />
+                  </Flex>
+                  {/* 설명 */}
+                  <Text fontSize="xl" fontWeight="bold" mb="15px">
+                    {state.com_name} 2차 투표가 모두 종료되었습니다. <br />
+                    투표 결과에 따라, 1주일 이내에 {"["}펫프렌즈{"]"}에 대한
+                    투자 계약이 시작됩니다.
+                  </Text>
+
+                  <Flex flexDirection="column" alignItems="center">
+                    <Text m="25px" fontSize="lg" fontWeight="bold">
+                      {"<"}투표 결과{">"}
+                    </Text>
+                    <Flex
+                      flexDirection="column"
+                      textAlign="center"
+                      marginX="40px"
+                    >
+                      <Image src="../image/com_1.png" w="250px" h="250px" />
+                      <Text fontSize="2xl" fontWeight="bold" marginY="5px">
+                        펫프렌즈
+                      </Text>
+                      <Text fontSize="2xl" fontWeight="bold" color="#00A29D">
+                        {((percentyes / percentyesorno) * 100).toFixed(1) + "%"}
+                      </Text>
+                    </Flex>
+                  </Flex>
                 </Flex>
               </TabPanel>
 
