@@ -172,6 +172,7 @@ const ScreenStartupInfo = () => {
             />
             {/* 스타트업 기본 정보 */}
             <Flex
+              //정렬
               flexDirection="column"
               //여백
               ml="25px"
@@ -289,10 +290,7 @@ const ScreenStartupInfo = () => {
               </Flex>
 
               {/* 오른쪽 섹션 */}
-              <Flex
-                //정렬
-                flexDirection="row"
-              >
+              <Flex>
                 {/* 고정값 */}
                 <Flex
                   //정렬
@@ -347,7 +345,7 @@ const ScreenStartupInfo = () => {
 
           {/* 스타트업 투자 정보 섹션 */}
           <Flex
-            //크기 및 여백
+            //여백
             m="20px"
           >
             <Box
