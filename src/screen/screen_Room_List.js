@@ -314,9 +314,10 @@ const ScreenRoomList = () => {
         <Button
           //위치 및 정렬
           flexDirection="column"
-          //크기
+          //크기 및 여백
           w="300px"
           h="400px"
+          m="20px"
           //배경
           bg="white"
           borderRadius="xl"
