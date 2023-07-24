@@ -137,282 +137,241 @@ const ScreenRoomMake = () => {
     //커뮤니티 만들기 전체 화면
 
     //커뮤니티 만들기 전체 배경 화면
-    <Box
+    <Flex
+      //정렬
+      justifyContent="center"
       //크기 및 여백
       h="auto"
-      pb="100px"
+      pb="200px"
       //배경
       bg="#E5F2F2"
       borderTop="1px solid #00A29D"
     >
       <Box
-        //크기 및 여백
-        maxW="50vw"
-        m="0 auto"
+        //크기
+        w="60%"
       >
         <Heading
           //크기
-          mt="30px"
-          mb="30px"
+          marginY="30px"
           //글자
-          as="h1"
           size="lg"
         >
           커뮤니티 만들기
         </Heading>
 
         {/* 커뮤니티 만들기 Form */}
-        <form onSubmit={handleSubmit}>
+        <FormControl
+          //정렬
+          flexDirection="column"
+          //여백
+          p="15px"
+          //배경
+          border="1px solid #00A29D"
+          borderRadius="2xl"
+          //기능
+          as="form"
+          onSubmit={handleSubmit}
+        >
+          {/* 기본 정보 섹션 */}
+          <Heading
+            //여백
+            mb="10px"
+            //글자
+            size="md"
+          >
+            기본 정보
+          </Heading>
           <Box
             //여백
-            p="0 15px"
+            px="20px"
           >
-            {/* 기본 정보 섹션 */}
-            <Heading
+            <FormControl
               //여백
-              mt="20px"
-              mb="20px"
-              //글자
-              as="h1"
-              size="md"
+              mb="15px"
             >
-              기본 정보
-            </Heading>
-            <Box
+              <FormLabel>커뮤니티 이름</FormLabel>
+              <Input
+                type="text"
+                name="name"
+                value={communityData.name}
+                onChange={handleChange}
+                placeholder="커뮤니티의 이름을 입력하세요."
+                required
+              />
+            </FormControl>
+
+            <FormControl
               //여백
-              p="0 20px"
+              mb="15px"
             >
-              <FormControl>
-                <FormLabel>커뮤니티 이름</FormLabel>
-                <Input
-                  type="text"
-                  name="name"
-                  value={communityData.name}
-                  onChange={handleChange}
-                  placeholder="커뮤니티의 이름을 입력하세요."
-                  required
-                />
-              </FormControl>
+              <FormLabel>커뮤니티 설명</FormLabel>
+              <Input
+                type="text"
+                name="info"
+                value={communityData.info}
+                onChange={handleChange}
+                placeholder="커뮤니티에 대한 간단한 설명을 입력하세요."
+                required
+              />
+            </FormControl>
 
-              <FormControl>
-                <FormLabel>커뮤니티 설명</FormLabel>
-                <Input
-                  type="text"
-                  name="info"
-                  value={communityData.info}
-                  onChange={handleChange}
-                  placeholder="커뮤니티에 대한 간단한 설명을 입력하세요."
-                  required
-                />
-              </FormControl>
+            <FormControl
+              //여백
+              mb="15px"
+            >
+              <FormLabel>커뮤니티 카테고리</FormLabel>
+              <Box>
+                {categories.map((category) => (
+                  //카테고리 선택 버튼
+                  <Button
+                    //여백
+                    m="2px 3px"
+                    //배경
+                    colorScheme="teal"
+                    variant={
+                      selectedCategories.includes(category)
+                        ? "solid"
+                        : "outline"
+                    }
+                    //글자
+                    size="sm"
+                    //기능
+                    key={category}
+                    onClick={() => handleCategoryToggle(category)}
+                  >
+                    {category}
+                  </Button>
+                ))}
+              </Box>
+            </FormControl>
 
-              <FormControl
-                //여백
-                mt={4}
-              >
-                <FormLabel>커뮤니티 카테고리</FormLabel>
-                <Box>
-                  {categories.map((category) => (
-                    //카테고리 선택 버튼
-                    <Button
-                      //여백
-                      m={1}
-                      //배경
-                      colorScheme="teal"
-                      variant={
-                        selectedCategories.includes(category)
-                          ? "solid"
-                          : "outline"
-                      }
-                      //글자
-                      size="sm"
-                      //기능
-                      key={category}
-                      onClick={() => handleCategoryToggle(category)}
-                    >
-                      {category}
-                    </Button>
-                  ))}
-                </Box>
-              </FormControl>
-
-              <FormControl
-                //여백
-                mt={4}
-              >
-                <FormLabel>커뮤니티 대표 이미지</FormLabel>
-                <Flex>
-                  {/* <Input
+            <FormControl
+              //여백
+              mb="15px"
+            >
+              <FormLabel>커뮤니티 대표 이미지</FormLabel>
+              <Flex>
+                {/* <Input
                     id="image-input"
                     type="file"
                     name="image"
                     onChange={handleImageChange}
                   /> */}
-                  <Input
-                    type="text"
-                    name="image"
-                    value={communityData.image}
-                    onChange={handleChange}
-                    placeholder="이미지의 URL을 넣으세요."
-                    required
-                  />
-                </Flex>
-              </FormControl>
-            </Box>
-            <Divider
-              //여백
-              mt={10}
-            />
-
-            {/* 투자 정보 섹션 */}
-            <Heading
-              //여백
-              mt="20px"
-              mb="20px"
-              //글자
-              as="h1"
-              size="md"
-            >
-              투자 정보
-            </Heading>
-            <Box
-              //여백
-              p="0 20px"
-            >
-              <FormControl
-                //여백
-                mt={4}
-              >
-                <FormLabel>관심있는 회사</FormLabel>
                 <Input
                   type="text"
-                  name="company"
-                  value={communityData.company}
+                  name="image"
+                  value={communityData.image}
                   onChange={handleChange}
+                  placeholder="이미지의 URL을 넣으세요."
                   required
                 />
-              </FormControl>
-
-              <FormControl
-                //여백
-                mt={4}
-              >
-                <FormLabel>투자 목표 금액</FormLabel>
-                <Flex
-                  //정렬
-                  align="center"
-                >
-                  <Input
-                    w="200px"
-                    type="text"
-                    name="investmentAmount"
-                    value={communityData.investmentAmount}
-                    onChange={handleChange}
-                    placeholder="커뮤니티의 최종 투자 목표 금액을 입력하세요."
-                    required
-                  />
-                  <Text
-                    //여백
-                    ml={2}
-                  >
-                    원
-                  </Text>
-                </Flex>
-                <Text
-                  //여백
-                  mt="8px"
-                >
-                  {convertCurrency(communityData.investmentAmount)}
-                </Text>
-              </FormControl>
-
-              <FormControl
-                //여백
-                mt={4}
-              >
-                {/* 티켓 정보 입력 폼 */}
-                <FormLabel>티켓 정보</FormLabel>
-                <Flex
-                  //정렬
-                  align="center"
-                >
-                  <Text
-                    //여백
-                    mr={2}
-                  >
-                    티켓 가격:
-                  </Text>
-                  <Input
-                    name="ticketPrice"
-                    value={communityData.ticketPrice}
-                    onChange={handleChange}
-                    w="400px"
-                    placeholder="티켓의 가격을 입력하세요."
-                    required
-                  ></Input>
-                  <Text
-                    //여백
-                    ml={2}
-                  >
-                    원
-                  </Text>
-                </Flex>
-                <Text
-                  //여백
-                  mt="8px"
-                >
-                  {convertCurrency(communityData.ticketPrice)}
-                </Text>
-                <Flex
-                  //정렬
-                  align="center"
-                >
-                  <Text
-                    //여백
-                    mr={2}
-                  >
-                    1인당 최대 구매 개수:{" "}
-                  </Text>
-                  <Input
-                    name="maxTicket"
-                    value={communityData.maxTicket}
-                    onChange={handleChange}
-                    w="300px"
-                    placeholder="티켓의 1인당 최대 구매 개수를 입력하세요."
-                    required
-                  ></Input>
-                  <Text
-                    //여백
-                    ml={2}
-                  >
-                    개
-                  </Text>
-                </Flex>
-              </FormControl>
-            </Box>
-            <Box
-              //정렬
-              display="flex"
-              justifyContent="center"
-            >
-              <Button
-                //크기 및 여백
-                maxW="300px"
-                h="75px"
-                mt={4}
-                //배경
-                colorScheme="teal"
-                //기능
-                type="submit"
-              >
-                커뮤니티 생성
-              </Button>
-            </Box>
+              </Flex>
+            </FormControl>
           </Box>
-        </form>
+
+          {/* 투자 정보 섹션 */}
+          <Heading
+            //여백
+            marginY="10px"
+            //글자
+            size="md"
+          >
+            투자 정보
+          </Heading>
+          <Box
+            //여백
+            px="20px"
+          >
+            <FormControl
+              //여백
+              mb="15px"
+            >
+              <FormLabel>관심있는 회사</FormLabel>
+              <Input
+                type="text"
+                name="company"
+                value={communityData.company}
+                onChange={handleChange}
+                placeholder="관심있는 회사의 이름을 입력하세요."
+                required
+              />
+            </FormControl>
+
+            <FormControl mb="15px" textAlign="end">
+              <Flex alignItems="center" justifyContent="space-between">
+                <Text>투자 목표 금액:</Text>
+                <Input
+                  maxW="700px"
+                  type="text"
+                  name="investmentAmount"
+                  value={communityData.investmentAmount}
+                  onChange={handleChange}
+                  placeholder="커뮤니티의 최종 투자 목표 금액을 입력하세요."
+                  required
+                />
+              </Flex>
+              <Text
+                //여백
+                mt="8px"
+              >
+                {convertCurrency(communityData.investmentAmount)}
+              </Text>
+            </FormControl>
+
+            <FormControl mb="15px" textAlign="end">
+              <Flex alignItems="center" justifyContent="space-between">
+                <Text>티켓 가격:</Text>
+                <Input
+                  maxW="700px"
+                  name="ticketPrice"
+                  value={communityData.ticketPrice}
+                  onChange={handleChange}
+                  placeholder="티켓의 가격을 입력하세요."
+                  required
+                ></Input>
+              </Flex>
+              <Text
+                //여백
+                mt="8px"
+              >
+                {convertCurrency(communityData.ticketPrice)}
+              </Text>
+            </FormControl>
+
+            <FormControl mb="15px" textAlign="end">
+              <Flex alignItems="center" justifyContent="space-between">
+                <Text>1인당 최대 구매 개수: </Text>
+                <Input
+                  maxW="700px"
+                  name="maxTicket"
+                  value={communityData.maxTicket}
+                  onChange={handleChange}
+                  placeholder="티켓의 1인당 최대 구매 개수를 입력하세요."
+                  required
+                ></Input>
+              </Flex>
+            </FormControl>
+          </Box>
+          <Flex justifyContent="center">
+            <Button
+              //크기 및 여백
+              maxW="250px"
+              h="50px"
+              //배경
+              colorScheme="teal"
+              //기능
+              type="submit"
+            >
+              커뮤니티 생성
+            </Button>
+          </Flex>
+        </FormControl>
       </Box>
-    </Box>
+    </Flex>
   );
 };
 
 export default ScreenRoomMake;
+
+//23.07.24 1차 코드 수정 완료
