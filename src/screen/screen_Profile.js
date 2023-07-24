@@ -1,57 +1,31 @@
 import React from "react";
 import User from "../components/cpn_User";
 import ScreenMyGovernance from "./screen_My_Governance";
-import { Box, Heading, useBreakpointValue } from "@chakra-ui/react";
+import { Flex } from "@chakra-ui/react";
 
 const ScreenProfile = () => {
-  const boxPaddingLeft = useBreakpointValue({ base: "20px", xl: "200px" });
-  const boxPaddingRight = useBreakpointValue({ base: "20px", xl: "200px" });
   return (
     <>
-      <Box
+      <Flex
         //정렬
-        display="flex"
         flexDirection="column"
-        justifyContent="center"
-        //크기
+        alignItems="center"
+        //크기 및 여백
         h="auto"
+        pb="200px"
         //배경
         bg="#E5F2F2"
         borderTop="1px solid #00A29D"
       >
-        <Box
-          //정렬
-          flexDirection="column"
-          //여백
-          pr={boxPaddingRight}
-          pl={boxPaddingLeft}
-        >
-          <Heading
-            //여백
-            mt="30px"
-            mb="30px"
-            //글자
-            as="h1"
-            size="lg"
-          >
-            마이페이지
-          </Heading>
-          <Box
-            //정렬
-            display="flex"
-            flexDirection="column"
-            justifyContent="space-between"
-            textAlign="center"
-            //크기
-            w="700px"
-          >
-            <User />
-          </Box>
-        </Box>
+        {/* 마이페이지 섹션 */}
+        <User />
+        {/* 지갑&티켓 섹션 */}
         <ScreenMyGovernance />
-      </Box>
+      </Flex>
     </>
   );
 };
 
 export default ScreenProfile;
+
+//23.07.24 1차 코드 수정 완료
