@@ -63,13 +63,44 @@ function ScreenChat() {
 
   //후보 1번 투표
   const handleClick_plus_v1 = () => {
-    if (vote1 < ownerCount) {
+    if (vote1 + vote2 + vote3 < ownerCount) {
       setVote1(vote1 + 1);
     }
   };
   const handleClick_minus_v1 = () => {
     if (vote1 > 0) {
       setVote1(vote1 - 1);
+    }
+  };
+  //후보 2번 투표
+  const handleClick_plus_v2 = () => {
+    if (vote1 + vote2 + vote3 < ownerCount) {
+      setVote2(vote2 + 1);
+    }
+  };
+  const handleClick_minus_v2 = () => {
+    if (vote2 > 0) {
+      setVote2(vote2 - 1);
+    }
+  };
+  //후보 3번 투표
+  const handleClick_plus_v3 = () => {
+    if (vote1 + vote2 + vote3 < ownerCount) {
+      setVote3(vote3 + 1);
+    }
+  };
+  const handleClick_minus_v3 = () => {
+    if (vote3 > 0) {
+      setVote3(vote3 - 1);
+    }
+  };
+
+  const voting = () => {
+    if (vote1 + vote2 + vote3 === ownerCount) {
+      setOwnerCount(0);
+      setVote1(0);
+      setVote2(0);
+      setVote3(0);
     }
   };
 
@@ -117,7 +148,7 @@ function ScreenChat() {
           border="1px solid black"
         >
           {/* 커뮤니티 사진 */}
-          <Image src="../image/com_bg.png" w="100vw" h="200px"></Image>
+          <Image src="../image/com_bg.png" w="750px" h="200px"></Image>
           {/* 커뮤니티 정보 */}
           <Flex flexDirection="column" h="150px" p="20px" bg="#00A29D">
             <Flex>
@@ -280,7 +311,7 @@ function ScreenChat() {
                         //글자
                         fontSize="25px"
                         fontWeight="bold"
-                        color={vote1 > 0 ? "#00A29D" : "grey"}
+                        color={vote1 > 0 ? "#00A29D" : "lightgrey"}
                         //기능
                         onClick={handleClick_minus_v1}
                       >
@@ -302,7 +333,11 @@ function ScreenChat() {
                         //글자
                         fontSize="25px"
                         fontWeight="bold"
-                        color={vote1 < ownerCount ? "#00A29D" : "grey"}
+                        color={
+                          vote1 + vote2 + vote3 < ownerCount
+                            ? "#00A29D"
+                            : "lightgrey"
+                        }
                         //기능
                         onClick={handleClick_plus_v1}
                       >
@@ -327,6 +362,61 @@ function ScreenChat() {
                     <Text mt="5px" fontSize="md" fontWeight="bold">
                       페오펫
                     </Text>
+                    <Flex
+                      //정렬
+                      alignItems="center"
+                      justifyContent="center"
+                      textAlign="center"
+                      //크기
+                      w="140px"
+                      h="30px"
+                      mb="10px"
+                      //배경
+                      border="1px solid #00A29D"
+                      borderRadius="xl"
+                    >
+                      {/* 마이너스 버튼 */}
+                      <Button
+                        //크기
+                        w="30px"
+                        //배경
+                        variant="none"
+                        //글자
+                        fontSize="25px"
+                        fontWeight="bold"
+                        color={vote2 > 0 ? "#00A29D" : "lightgrey"}
+                        //기능
+                        onClick={handleClick_minus_v2}
+                      >
+                        -
+                      </Button>
+                      {/* 구매 갯수 */}
+                      <Text
+                        //크기
+                        w="40px"
+                      >
+                        {vote2}
+                      </Text>
+                      {/* 플러스 버튼 */}
+                      <Button
+                        //크기
+                        w="30px"
+                        //배경
+                        variant="none"
+                        //글자
+                        fontSize="25px"
+                        fontWeight="bold"
+                        color={
+                          vote1 + vote2 + vote3 < ownerCount
+                            ? "#00A29D"
+                            : "lightgrey"
+                        }
+                        //기능
+                        onClick={handleClick_plus_v2}
+                      >
+                        +
+                      </Button>
+                    </Flex>
                   </Flex>
                   <Flex
                     flexDirection="column"
@@ -345,10 +435,82 @@ function ScreenChat() {
                     <Text mt="5px" fontSize="md" fontWeight="bold">
                       핏펫
                     </Text>
+                    <Flex
+                      //정렬
+                      alignItems="center"
+                      justifyContent="center"
+                      textAlign="center"
+                      //크기
+                      w="140px"
+                      h="30px"
+                      mb="10px"
+                      //배경
+                      border="1px solid #00A29D"
+                      borderRadius="xl"
+                    >
+                      {/* 마이너스 버튼 */}
+                      <Button
+                        //크기
+                        w="30px"
+                        //배경
+                        variant="none"
+                        //글자
+                        fontSize="25px"
+                        fontWeight="bold"
+                        color={vote3 > 0 ? "#00A29D" : "lightgrey"}
+                        //기능
+                        onClick={handleClick_minus_v3}
+                      >
+                        -
+                      </Button>
+                      {/* 구매 갯수 */}
+                      <Text
+                        //크기
+                        w="40px"
+                      >
+                        {vote3}
+                      </Text>
+                      {/* 플러스 버튼 */}
+                      <Button
+                        //크기
+                        w="30px"
+                        //배경
+                        variant="none"
+                        //글자
+                        fontSize="25px"
+                        fontWeight="bold"
+                        color={
+                          vote1 + vote2 + vote3 < ownerCount
+                            ? "#00A29D"
+                            : "lightgrey"
+                        }
+                        //기능
+                        onClick={handleClick_plus_v3}
+                      >
+                        +
+                      </Button>
+                    </Flex>
                   </Flex>
                 </Flex>
-                {/* 버튼 */}
-                <Flex></Flex>
+                {/* 투표하기 버튼 */}
+                <Flex justifyContent="center" mt="60px">
+                  <Button
+                    w="300px"
+                    h="50px"
+                    borderRadius="3xl"
+                    bg={
+                      vote1 + vote2 + vote3 === ownerCount && ownerCount > 0
+                        ? "#00A29D"
+                        : "lightgrey"
+                    }
+                    variant="none"
+                    color="white"
+                    fontSize="lg"
+                    onClick={voting}
+                  >
+                    투표하기
+                  </Button>
+                </Flex>
               </TabPanel>
 
               {/* 정보 */}
@@ -467,7 +629,7 @@ function ScreenChat() {
                       <Text
                         //글자
                         fontSize="2xs"
-                        color="grey"
+                        color="lightgrey"
                         mb="10px"
                       >
                         * 최대 {state.com_ticket_max}매까지 구매 가능
@@ -496,7 +658,7 @@ function ScreenChat() {
                           //글자
                           fontSize="25px"
                           fontWeight="bold"
-                          color={sellCount > 0 ? "#00A29D" : "grey"}
+                          color={sellCount > 0 ? "#00A29D" : "lightgrey"}
                           //기능
                           onClick={handleClick_minus}
                         >
@@ -521,7 +683,7 @@ function ScreenChat() {
                           color={
                             ownerCount + sellCount < state.com_ticket_max
                               ? "#00A29D"
-                              : "grey"
+                              : "lightgrey"
                           }
                           //기능
                           onClick={handleClick_plus}
@@ -535,7 +697,7 @@ function ScreenChat() {
                         w="140px"
                         h="40px"
                         //배경
-                        bg={sellCount > 0 ? "#00A29D" : "grey"}
+                        bg={sellCount > 0 ? "#00A29D" : "lightgrey"}
                         borderRadius="xl"
                         variant="none"
                         //글자
