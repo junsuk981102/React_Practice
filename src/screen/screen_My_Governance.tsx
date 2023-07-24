@@ -6,25 +6,13 @@ import {
 import MyGovernanceCard, {
   IMyGovernanceCard,
 } from "../components/MyGovernanceCard";
-import {
-  Box,
-  Button,
-  Text,
-  Grid,
-  Heading,
-  Image,
-  useBreakpointValue,
-} from "@chakra-ui/react";
+import { Button, Text, Grid, Heading, Image, Flex } from "@chakra-ui/react";
 
 interface MyGovernanceProps {
   account: string;
 }
 
 const ScreenMyGovernance: FC<MyGovernanceProps> = ({ account }) => {
-  //양쪽여백
-  const boxPaddingLeft = useBreakpointValue({ base: "20px", xl: "200px" });
-  const boxPaddingRight = useBreakpointValue({ base: "20px", xl: "200px" });
-
   const [saleStatus, setSaleStatus] = useState<boolean>(false);
   const [governanceCardArray, setGovernanceCardArray] =
     useState<IMyGovernanceCard[]>();
@@ -108,38 +96,30 @@ const ScreenMyGovernance: FC<MyGovernanceProps> = ({ account }) => {
       {/* 지갑 & 토큰 전체 화면 */}
 
       {/* 지갑 & 토큰 전체 배경 화면 */}
-      <Box
-        //크기 및 여백
-        h="auto"
-        pl={boxPaddingLeft}
-        pr={boxPaddingRight}
-        mb="200px"
-        //배경
-        bg="#E5F2F2"
+      <Flex
+        //정렬
+        flexDirection="column"
+        //크기
+        w="700px"
       >
         {/* 지갑 섹션 */}
         <Heading
           //여백
-          mt="30px"
-          mb="30px"
+          marginY="30px"
           //글자
-          as="h1"
           size="lg"
         >
           내 지갑
         </Heading>
-        <Box
+        <Flex
           //정렬
-          display="flex"
           alignItems="center"
           //크기 및 여백
-          w="670px"
           h="70px"
-          px="10px"
-          py="20px"
+          p="20px 10px"
           //배경
           bg="#00A29D"
-          borderRadius="lg"
+          borderRadius="xl"
         >
           <Image
             //사진 위치
@@ -151,33 +131,26 @@ const ScreenMyGovernance: FC<MyGovernanceProps> = ({ account }) => {
           />
           <Text
             //글자
-            as="b"
+            fontWeight="bold"
             fontSize="lg"
             color="white"
           >
             내 지갑 주소 : {account}
           </Text>
-        </Box>
+        </Flex>
 
         {/* 티켓 판매 가능 여부 변경 섹션 */}
         <Heading
           //여백
-          mt="30px"
-          mb="30px"
+          marginY="30px"
           //글자
-          as="h1"
           size="lg"
         >
           내 티켓
         </Heading>
-        <Box
-          //정렬
-          display="flex"
-          alignItems="center"
-        >
+        <Flex>
           <Heading
             //글자
-            as="h2"
             size="md"
           >
             티켓 판매 상태 : {saleStatus ? "판매 가능" : "판매 불가능"}
@@ -191,7 +164,6 @@ const ScreenMyGovernance: FC<MyGovernanceProps> = ({ account }) => {
             //배경
             bg={saleStatus ? "red" : "blue"}
             //글자
-            as="b"
             fontSize="sm"
             color="white"
             //기능
@@ -199,15 +171,13 @@ const ScreenMyGovernance: FC<MyGovernanceProps> = ({ account }) => {
           >
             {saleStatus ? "상태 변경" : "상태 변경"}
           </Button>
-        </Box>
+        </Flex>
 
         {/* 티켓 리스트 섹션 */}
         <Heading
           //여백
-          mt="20px"
-          mb="10px"
+          marginY="15px"
           //글자
-          as="h2"
           size="md"
         >
           티켓 리스트
@@ -229,8 +199,10 @@ const ScreenMyGovernance: FC<MyGovernanceProps> = ({ account }) => {
               );
             })}
         </Grid>
-      </Box>
+      </Flex>
     </>
   );
 };
 export default ScreenMyGovernance;
+
+//23.07.24 1차 코드 수정 완료(추가 수정 필수)
