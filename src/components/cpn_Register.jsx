@@ -6,7 +6,6 @@ import { useNavigate } from "react-router-dom";
 import { doc, setDoc } from "firebase/firestore";
 import {
   Heading,
-  Box,
   Alert,
   Button,
   FormControl,
@@ -91,25 +90,51 @@ const Register = (props) => {
   };
 
   return (
-    <Box height="100%" width="700px" backgroundColor="#E5F2F2">
-      <Heading mt="30px" mb="30px" textAlign="center" as="h1" size="xl">
+    <Flex
+      //정렬
+      flexDirection="column"
+      //크기
+      w="700px"
+    >
+      <Heading
+        //정렬
+        textAlign="center"
+        //여백
+        marginY="30px"
+        //글자
+        size="xl"
+      >
         회원가입
       </Heading>
-      <Divider backgroundColor="#00A29D" h="1px" mb="30px" />
+      <Divider
+        //크기 및 여백
+        h="1px"
+        mb="30px"
+        //배경
+        bg="#00A29D"
+      />
 
       <FormControl
+        //정렬
+        justifyContent="center"
+        //배경
+        bg="#E5F2F2"
+        //기능
         as="form"
         onSubmit={handleFormSubmit}
-        backgroundColor="#E5F2F2"
-        display="flex"
-        flexDirection="column"
       >
         <FormControl
+          //정렬
           display="flex"
           justifyContent="space-between"
-          alignItems="center"
         >
-          <FormLabel fontSize="20px" fontWeight="bold" htmlFor="id">
+          <FormLabel
+            //글자
+            fontSize="20px"
+            fontWeight="bold"
+            //기능
+            htmlFor="id"
+          >
             아이디:
           </FormLabel>
           <Input
@@ -122,19 +147,12 @@ const Register = (props) => {
             }}
             required
             border="solid 1px #00A29D"
-            padding="14px 12px"
-            borderRadius="6px"
-            outline="none"
-            flexGrow="6"
+            borderRadius="xl"
             maxW="450px"
           />
         </FormControl>
 
-        <FormControl
-          display="flex"
-          justifyContent="space-between"
-          alignItems="center"
-        >
+        <FormControl display="flex" justifyContent="space-between">
           <FormLabel fontSize="20px" fontWeight="bold" htmlFor="password">
             비밀번호:
           </FormLabel>
@@ -146,10 +164,7 @@ const Register = (props) => {
             onChange={handlePasswordChange}
             required
             border="solid 1px #00A29D"
-            padding="14px 12px"
-            borderRadius="6px"
-            outline="none"
-            flexGrow="6"
+            borderRadius="xl"
             maxW="450px"
           />
         </FormControl>
@@ -159,11 +174,7 @@ const Register = (props) => {
           </Alert>
         )}
 
-        <FormControl
-          display="flex"
-          justifyContent="space-between"
-          alignItems="center"
-        >
+        <FormControl display="flex" justifyContent="space-between">
           <FormLabel
             fontSize="20px"
             fontWeight="bold"
@@ -179,10 +190,7 @@ const Register = (props) => {
             onChange={handleConfirmPasswordChange}
             required
             border="solid 1px #00A29D"
-            padding="14px 12px"
-            borderRadius="6px"
-            outline="none"
-            flexGrow="6"
+            borderRadius="xl"
             maxW="450px"
           />
         </FormControl>
@@ -192,11 +200,7 @@ const Register = (props) => {
           </Alert>
         )}
 
-        <FormControl
-          display="flex"
-          justifyContent="space-between"
-          alignItems="center"
-        >
+        <FormControl display="flex" justifyContent="space-between">
           <FormLabel fontSize="20px" fontWeight="bold" htmlFor="email">
             이메일:
           </FormLabel>
@@ -209,19 +213,12 @@ const Register = (props) => {
               setRegisterEmail(event.target.value);
             }}
             border="solid 1px #00A29D"
-            padding="14px 12px"
-            borderRadius="6px"
-            outline="none"
-            flexGrow="6"
+            borderRadius="xl"
             maxW="450px"
           />
         </FormControl>
 
-        <FormControl
-          display="flex"
-          justifyContent="space-between"
-          alignItems="center"
-        >
+        <FormControl display="flex" justifyContent="space-between">
           <FormLabel fontSize="20px" fontWeight="bold" htmlFor="phonenumber">
             전화번호:
           </FormLabel>
@@ -234,19 +231,12 @@ const Register = (props) => {
               setRegisterPhonenumber(event.target.value);
             }}
             border="solid 1px #00A29D"
-            padding="14px 12px"
-            borderRadius="6px"
-            outline="none"
-            flexGrow="6"
+            borderRadius="xl"
             maxW="450px"
           />
         </FormControl>
 
-        <FormControl
-          display="flex"
-          justifyContent="space-between"
-          alignItems="center"
-        >
+        <FormControl display="flex" justifyContent="space-between">
           <FormLabel fontSize="20px" fontWeight="bold" htmlFor="birthDate">
             생년월일:
           </FormLabel>
@@ -258,19 +248,12 @@ const Register = (props) => {
               setRegisterBirthdate(event.target.value);
             }}
             border="solid 1px #00A29D"
-            padding="14px 12px"
-            borderRadius="6px"
-            outline="none"
-            flexGrow="6"
+            borderRadius="xl"
             maxW="450px"
           />
         </FormControl>
 
-        <FormControl
-          display="flex"
-          justifyContent="space-between"
-          alignItems="center"
-        >
+        <FormControl display="flex" justifyContent="space-between">
           <FormLabel fontSize="20px" fontWeight="bold" htmlFor="address">
             주소:
           </FormLabel>
@@ -283,34 +266,37 @@ const Register = (props) => {
               setRegisterAddress(event.target.value);
             }}
             border="solid 1px #00A29D"
-            padding="14px 12px"
-            borderRadius="6px"
-            outline="none"
-            flexGrow="6"
+            borderRadius="xl"
             maxW="450px"
           />
         </FormControl>
 
-        <Divider backgroundColor="#00A29D" h="1px" mt="30px" mb="30px" />
-        <Flex justifyContent="center">
-          <Button
-            type="submit"
-            maxWidth="300px"
-            height="75px"
-            fontSize="20px"
-            fontWeight="bold"
-            backgroundColor="#00A29D"
-            color="white"
-            border="solid 1px #00A29D"
-            padding="10px 20px"
-            borderRadius="5px"
-          >
-            가입하기
-          </Button>
-        </Flex>
+        <Divider
+          //크기 및 여백
+          h="1px"
+          marginY="30px"
+          //배경
+          bg="#00A29D"
+        />
+
+        <Button
+          type="submit"
+          maxW="300px"
+          h="75px"
+          fontSize="20px"
+          fontWeight="bold"
+          color="white"
+          bg="#00A29D"
+          border="solid 1px #00A29D"
+          borderRadius="xl"
+        >
+          가입하기
+        </Button>
       </FormControl>
-    </Box>
+    </Flex>
   );
 };
 
 export default Register;
+
+//23.07.24 1차 코드 수정 완료(추가 수정 필수)
