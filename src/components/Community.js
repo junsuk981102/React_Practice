@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { Box, Image, Button, Heading, Text, Flex } from "@chakra-ui/react";
+import { Image, Button, Heading, Text, Flex } from "@chakra-ui/react";
 
 const Community = ({ communityObj }) => {
   const navi = useNavigate();
@@ -10,6 +10,7 @@ const Community = ({ communityObj }) => {
       state: {
         id: communityObj.id,
         com_name: communityObj.com_name,
+        com_createAt: communityObj.com_createAt,
         com_category: communityObj.com_category,
         com_info: communityObj.com_info,
         com_total_investment: communityObj.com_total_investment,

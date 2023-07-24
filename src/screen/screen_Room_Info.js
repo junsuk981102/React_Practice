@@ -71,6 +71,7 @@ const ScreenRoomInfo = () => {
         state: {
           id: state.id,
           com_name: state.com_name,
+          com_createAt: state.com_createAt,
           com_category: comCategory,
           com_info: state.com_info,
           com_total_investment: state.com_total_investment,
@@ -96,7 +97,7 @@ const ScreenRoomInfo = () => {
       <Box
         //크기 및 여백
         h="auto"
-        pb="100px"
+        pb="200px"
         pl={boxPaddingLeft}
         pr={boxPaddingRight}
         //배경
@@ -464,7 +465,7 @@ const ScreenRoomInfo = () => {
                     //기능
                     onClick={handleClick_sell}
                   >
-                    구매하기
+                    {ownerCount > 0 ? "추가 구매하기" : "구매하기"}{" "}
                   </Button>
                   {/* 구매 갯수 안내 */}
                   <Text

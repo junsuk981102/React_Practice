@@ -52,8 +52,8 @@ const Chat = () => {
   return (
     <Box
       //크기 및 여백
-      width="800px"
-      h="80vh"
+      w="auto"
+      h="70vh"
       pl="30px"
       pr="30px"
       //배경
