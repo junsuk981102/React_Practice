@@ -34,9 +34,14 @@ function ScreenChat() {
 
   const [ownerCount, setOwnerCount] = useState(state.com_owner); //티켓 소유 갯수
   const [sellCount, setSellCount] = useState(0); //티켓 구매 갯수
+  const [voteBefore, setVoteBefore] = useState(0);
   const [vote1, setVote1] = useState(0); //후보 1번 투표
   const [vote2, setVote2] = useState(0); //후보 1번 투표
   const [vote3, setVote3] = useState(0); //후보 1번 투표
+  const percent1 = 531;
+  const percent2 = 135;
+  const percent3 = 223;
+  const percentA = percent1 + percent2 + percent3;
 
   //숫자 쉼표 표시 코드
   function NumberFormat({ number }) {
@@ -97,10 +102,84 @@ function ScreenChat() {
 
   const voting = () => {
     if (vote1 + vote2 + vote3 === ownerCount) {
+      setVoteBefore(1);
       setOwnerCount(0);
       setVote1(0);
       setVote2(0);
       setVote3(0);
+    }
+  };
+
+  const votingButton = () => {
+    if (voteBefore === 0) {
+      return (
+        <>
+          <Flex justifyContent="center" mt="60px">
+            <Button
+              w="300px"
+              h="50px"
+              borderRadius="3xl"
+              bg={
+                vote1 + vote2 + vote3 === ownerCount && ownerCount > 0
+                  ? "#00A29D"
+                  : "lightgrey"
+              }
+              variant="none"
+              color="white"
+              fontSize="lg"
+              onClick={voting}
+            >
+              투표하기
+            </Button>
+          </Flex>
+        </>
+      );
+    } else {
+      return (
+        <>
+          <Flex flexDirection="column" alignItems="center" mt="60px">
+            <Flex flexDirection="column" w="550px" textAlign="start">
+              <Text fontWeight="bold">투표 현황</Text>
+              <Text fontSize="2xs" color="grey">
+                투표 종료까지 D - 2일 16시간
+              </Text>
+            </Flex>
+            <Flex w="550px" border="1px solid white">
+              <Flex
+                w={(percent1 / percentA) * 100 + "%"}
+                h="60px"
+                bg="#FF4181" //핑크색
+                color="white"
+                justifyContent="center"
+                alignItems="center"
+              >
+                {((percent1 / percentA) * 100).toFixed(1) + "%"}
+              </Flex>
+              <Flex
+                w={(percent2 / percentA) * 100 + "%"}
+                h="60px"
+                bg="#00ACED" //하늘색
+                color="white"
+                justifyContent="center"
+                alignItems="center"
+              >
+                {((percent2 / percentA) * 100).toFixed(1) + "%"}
+              </Flex>
+
+              <Flex
+                w={(percent3 / percentA) * 100 + "%"}
+                h="60px"
+                bg="#0050FF" //파란색
+                color="white"
+                justifyContent="center"
+                alignItems="center"
+              >
+                {((percent3 / percentA) * 100).toFixed(1) + "%"}
+              </Flex>
+            </Flex>
+          </Flex>
+        </>
+      );
     }
   };
 
@@ -493,24 +572,7 @@ function ScreenChat() {
                   </Flex>
                 </Flex>
                 {/* 투표하기 버튼 */}
-                <Flex justifyContent="center" mt="60px">
-                  <Button
-                    w="300px"
-                    h="50px"
-                    borderRadius="3xl"
-                    bg={
-                      vote1 + vote2 + vote3 === ownerCount && ownerCount > 0
-                        ? "#00A29D"
-                        : "lightgrey"
-                    }
-                    variant="none"
-                    color="white"
-                    fontSize="lg"
-                    onClick={voting}
-                  >
-                    투표하기
-                  </Button>
-                </Flex>
+                {votingButton()}
               </TabPanel>
 
               {/* 정보 */}
