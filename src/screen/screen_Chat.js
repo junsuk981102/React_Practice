@@ -222,6 +222,7 @@ function ScreenChat() {
           flexDirection="column"
           w="750px"
           h="auto"
+          maxH="1500px"
           pb="50px"
           bg="white"
           border="1px solid black"
@@ -297,19 +298,40 @@ function ScreenChat() {
                 fontWeight="bold"
                 color={selectedTab === 1 ? "#00A29D" : "black"}
               >
-                투표
+                1차 투표
               </Tab>
               <Tab
                 fontSize="sm"
                 fontWeight="bold"
                 color={selectedTab === 2 ? "#00A29D" : "black"}
               >
+                1차 결과
+              </Tab>
+              <Tab
+                fontSize="sm"
+                fontWeight="bold"
+                color={selectedTab === 3 ? "#00A29D" : "black"}
+              >
+                2차 투표
+              </Tab>
+              <Tab
+                fontSize="sm"
+                fontWeight="bold"
+                color={selectedTab === 4 ? "#00A29D" : "black"}
+              >
+                2차 결과
+              </Tab>
+              <Tab
+                fontSize="sm"
+                fontWeight="bold"
+                color={selectedTab === 5 ? "#00A29D" : "black"}
+              >
                 정보
               </Tab>
             </TabList>
             <TabIndicator
               mt="-1.5px"
-              ml="100px"
+              ml="40px"
               maxWidth="50px"
               h="2px"
               bg="#00A29D"
@@ -326,7 +348,7 @@ function ScreenChat() {
                 </Flex>
               </TabPanel>
 
-              {/* 투표 */}
+              {/* 1차 투표 */}
               <TabPanel>
                 {/* 정보 */}
                 <Flex flexDirection="column" p="10px" mb="30px">
@@ -349,7 +371,7 @@ function ScreenChat() {
                     현재 보유한 티켓 수 : {ownerCount}매
                   </Text>
                 </Flex>
-                {/* 투표 */}
+                {/* 1차 투표 */}
                 <Flex justifyContent="center">
                   <Flex
                     flexDirection="column"
@@ -575,9 +597,90 @@ function ScreenChat() {
                 {votingButton()}
               </TabPanel>
 
+              {/* 1차 결과 */}
+              <TabPanel>
+                {/* 정보 */}
+                <Flex flexDirection="column" p="10px" mb="30px">
+                  {/* 제목 */}
+                  <Flex mb="15px">
+                    <Text fontSize="2xl" fontWeight="bold" mr="15px">
+                      1차 투표 종료
+                    </Text>
+                    <Image src="../image/vote_icon.png" w="30px" h="30px" />
+                  </Flex>
+                  {/* 설명 */}
+                  <Text fontSize="xl" fontWeight="bold" mb="15px">
+                    {state.com_name} 1차 투표가 종료되었습니다. <br />
+                    3일 뒤{"("}23.07.26{")"}에 2차 투표가 시작됩니다.
+                  </Text>
+
+                  <Flex flexDirection="column" alignItems="center">
+                    <Text m="25px" fontSize="lg" fontWeight="bold">
+                      투표 결과
+                    </Text>
+                    <Flex>
+                      <Flex
+                        flexDirection="column"
+                        alignSelf="flex-end"
+                        textAlign="center"
+                      >
+                        <Image src="../image/com_2.png" w="150px" h="150px" />
+                        <Text fontSize="sm" marginY="5px">
+                          페오펫
+                        </Text>
+                        <Text fontSize="sm">
+                          {((percent2 / percentA) * 100).toFixed(1) + "%"}
+                        </Text>
+                      </Flex>
+                      <Flex
+                        flexDirection="column"
+                        alignSelf="flex-end"
+                        textAlign="center"
+                        marginX="40px"
+                      >
+                        <Image src="../image/com_1.png" w="250px" h="250px" />
+                        <Text fontSize="2xl" fontWeight="bold" marginY="5px">
+                          펫프렌즈
+                        </Text>
+                        <Text fontSize="2xl" fontWeight="bold" color="#00A29D">
+                          {((percent1 / percentA) * 100).toFixed(1) + "%"}
+                        </Text>
+                      </Flex>
+                      <Flex
+                        flexDirection="column"
+                        alignSelf="flex-end"
+                        textAlign="center"
+                      >
+                        <Image src="../image/com_3.png" w="150px" h="150px" />
+                        <Text fontSize="sm" marginY="5px">
+                          핏펫
+                        </Text>
+                        <Text fontSize="sm">
+                          {((percent3 / percentA) * 100).toFixed(1) + "%"}
+                        </Text>
+                      </Flex>
+                    </Flex>
+                  </Flex>
+                </Flex>
+              </TabPanel>
+
+              {/* 2차 투표 */}
+              <TabPanel>
+                <Flex flexDirection="column" p="10px">
+                  <Chat />
+                </Flex>
+              </TabPanel>
+
+              {/* 2차 결과 */}
+              <TabPanel>
+                <Flex flexDirection="column" p="10px">
+                  <Chat />
+                </Flex>
+              </TabPanel>
+
               {/* 정보 */}
               <TabPanel>
-                <Flex flexDirection="column">
+                <Flex flexDirection="column" p="10px">
                   {/* 커뮤니티 생성일 */}
                   <Text mb="30px">커뮤니티 생성일 : {formattedDate}</Text>
                   {/* 커뮤니티 참여인원 */}
