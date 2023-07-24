@@ -4,7 +4,7 @@ import { getAuth } from "firebase/auth";
 import { doc, getDoc } from "firebase/firestore";
 import { dbService } from "../firebase-config";
 import Logout from "./cpn_Logout";
-import { Box, Image, Text, Grid } from "@chakra-ui/react";
+import { Box, Image, Text, Grid, Heading, Flex } from "@chakra-ui/react";
 
 const User = () => {
   const auth = getAuth();
@@ -97,10 +97,9 @@ const User = () => {
 
   const renderStartupCards = () => {
     return startups.map((startup) => (
-      <Box
+      <Flex
         key={startup.id}
         //정렬
-        display="flex"
         flexDirection="column"
         alignItems="center"
         //크기 및 여백
@@ -127,7 +126,7 @@ const User = () => {
         >
           {startup.sup_name}
         </Text>
-      </Box>
+      </Flex>
     ));
   };
 
@@ -137,51 +136,65 @@ const User = () => {
   const id = user?.id;
 
   return (
-    <Box
+    <Flex
       //정렬
-      display="flex"
       flexDirection="column"
-      alignItems="center"
-      //여백
-      p="35px"
-      //배경
-      bg="white"
-      borderRadius="lg"
+      //크기
+      w="700px"
     >
-      <Box
-        //크기
-        w="100%"
+      <Heading
+        //여백
+        marginY="30px"
+        //글자
+        size="lg"
       >
-        <Image
-          //사진 위치
-          src={photo}
-          fallbackSrc={defaultProfileImage}
-          //크기 및 여백
-          w="100px"
-          mb="15px"
-          //배경
-          borderRadius="50%"
-        />
-        <Text
+        마이페이지
+      </Heading>
+      <Flex
+        //정렬
+        flexDirection="column"
+        alignItems="center"
+        //크기 및 여백
+        p="35px"
+        //배경
+        bg="white"
+        borderRadius="xl"
+      >
+        <Box
           //크기
-          w="100px"
-          //글자
-          fontSize="lg"
-          fontWeight="bold"
+          w="100%"
         >
-          {userId || "익명의 투자자"}
-        </Text>
-      </Box>
-      <Grid
-        //형식
-        gridTemplateColumns="repeat(auto-fit, minmax(500px, 1fr))"
-        gap="20px"
-      >
-        {renderStartupCards()}
-      </Grid>
-      <Logout />
-    </Box>
+          <Image
+            //사진 위치
+            src={photo}
+            fallbackSrc={defaultProfileImage}
+            //크기 및 여백
+            w="100px"
+            mb="15px"
+            //배경
+            borderRadius="50%"
+          />
+          <Text
+            //글자
+            fontSize="lg"
+            fontWeight="bold"
+          >
+            {userId || "익명의 투자자"}
+          </Text>
+        </Box>
+        <Grid
+          //형식
+          gridTemplateColumns="repeat(auto-fit, minmax(500px, 1fr))"
+          gap="20px"
+        >
+          {renderStartupCards()}
+        </Grid>
+        <Logout />
+      </Flex>
+    </Flex>
   );
 };
 
 export default User;
+
+//23.07.24 1차 코드 수정 완료(추가 수정 필수)
