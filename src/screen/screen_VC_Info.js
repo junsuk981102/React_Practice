@@ -1,19 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
-import {
-  Box,
-  Text,
-  Heading,
-  Image,
-  useBreakpointValue,
-  Divider,
-} from "@chakra-ui/react";
+import { Box, Text, Heading, Image, Divider, Flex } from "@chakra-ui/react";
 import { dbService } from "../firebase-config";
 
 const ScreenVCInfo = () => {
-  //양쪽 여백
-  const boxPaddingLeft = useBreakpointValue({ base: "20px", xl: "200px" });
-  const boxPaddingRight = useBreakpointValue({ base: "20px", xl: "200px" });
   const { state } = useLocation();
   //VC 정보 초기값 설정
   const [vc_nationality, setVcNationality] = useState("");
@@ -80,29 +70,30 @@ const ScreenVCInfo = () => {
       {/* VC 정보 전체 화면 */}
 
       {/* VC 정보 전체 배경 화면 */}
-      <Box
+      <Flex
+        //정렬
+        flexDirection="column"
+        alignItems="center"
         //크기 및 여백
         h="auto"
-        pb="50px"
-        pl={boxPaddingLeft}
-        pr={boxPaddingRight}
+        pb="200px"
         //배경
         bg="#E5F2F2"
         borderTop="1px solid #00A29D"
       >
         <Heading
           //여백
-          mt="30px"
-          mb="30px"
+          marginY="30px"
           //글자
-          as="h1"
           size="lg"
         >
           VC 소개
         </Heading>
 
         {/* VC 기본 정보 섹션 */}
-        <Box
+        <Flex
+          //정렬
+          flexDirection="column"
           //크기 및 여백
           w="800px"
           h="auto"
@@ -112,10 +103,8 @@ const ScreenVCInfo = () => {
           border="3px solid #00A29D"
           borderRadius="lg"
         >
-          <Box
+          <Flex
             //위치 및 정렬
-            position="relative"
-            display="flex"
             alignItems="center"
             //크기
             h="auto"
@@ -128,17 +117,18 @@ const ScreenVCInfo = () => {
               w="200px"
               h="200px"
               //배경
-              borderRadius="lg"
+              borderRadius="xl"
               objectFit="cover"
             />
-            <Box
+            <Flex
+              //정렬
+              flexDirection="column"
               //여백
               ml="25px"
             >
               {/* VC 이름 */}
               <Heading
                 //글자
-                as="h1"
                 size="lg"
               >
                 {state.vc_name}
@@ -148,121 +138,98 @@ const ScreenVCInfo = () => {
                 //정렬
                 textAlign="center"
                 //크기 및 여백
-                w="150px"
-                h="auto"
+                w="100px"
                 p="5px"
-                mt="10px"
-                mb="10px"
+                marginY="10px"
                 //배경
                 bg="#00A29D"
                 borderRadius="xl"
+                //글자
+                fontWeight="bold"
+                fontSize="md"
+                color="white"
               >
-                <Text
-                  //글자
-                  as="b"
-                  fontSize="md"
-                  color="white"
-                >
-                  {state.vc_category}
-                </Text>
+                {state.vc_category}{" "}
               </Box>
               {/* VC 정보 */}
-
-              <Box>
-                <Text
-                  //글자
-                  as="b"
-                  fontSize="md"
-                >
-                  {state.vc_info}
-                </Text>
-              </Box>
-            </Box>
-          </Box>
+              <Text
+                //글자
+                fontSize="md"
+              >
+                {state.vc_info}
+              </Text>
+            </Flex>
+          </Flex>
 
           {/* VC 기업 정보 섹션 */}
           <Box
             //여백
-            mt="30px"
-            ml="20px"
+            m="20px"
           >
             <Text
               //글자
-              as="b"
+              fontWeight="bold"
               fontSize="lg"
             >
               기업정보
             </Text>
-            <Box
-              //정렬
-              display="flex"
-              flexDirection="row"
-              //여백
-              mt="25px"
-              ml="10px"
-            >
-              <Box
-                //정렬
-                display="flex"
-                flexDirection="row"
-                //여백
-                mr="120px"
-              >
-                <Box
-                  //정렬
-                  display="flex"
-                  flexDirection="column"
-                  //여백
-                  mr="50px"
-                  //글자
-                  color="grey"
-                >
-                  <Text
-                    //여백
-                    mb="10px"
-                  >
-                    대표자
-                  </Text>
-                  <Text
-                    //여백
-                    mb="10px"
-                  >
-                    국적
-                  </Text>
-                  <Text>회사구분</Text>
-                </Box>
-                <Box
-                  //정렬
-                  display="flex"
-                  flexDirection="column"
-                >
-                  <Text
-                    //여백
-                    mb="10px"
-                  >
-                    {vc_ceo}
-                  </Text>
-                  <Text
-                    //여백
-                    mb="10px"
-                  >
-                    {vc_nationality}
-                  </Text>
-                  <Text>벤처캐피탈</Text>
-                </Box>
-              </Box>
 
-              <Box
+            {/* 왼쪽 섹션 */}
+            <Flex
+              //여백
+              m="15px"
+            >
+              {/* 고정값 */}
+              <Flex
                 //정렬
-                display="flex"
-                flexDirection="row"
+                flexDirection="column"
+                //글자
+                color="grey"
               >
-                <Box
+                <Text
+                  //여백
+                  mb="10px"
+                >
+                  대표자
+                </Text>
+                <Text
+                  //여백
+                  mb="10px"
+                >
+                  국적
+                </Text>
+                <Text>회사구분</Text>
+              </Flex>
+              {/* 변동값 */}
+              <Flex
+                //정렬
+                flexDirection="column"
+                //여백
+                ml="50px"
+              >
+                <Text
+                  //여백
+                  mb="10px"
+                >
+                  {vc_ceo}
+                </Text>
+                <Text
+                  //여백
+                  mb="10px"
+                >
+                  {vc_nationality}
+                </Text>
+                <Text>벤처캐피탈</Text>
+              </Flex>
+
+              {/* 오른쪽 섹션 */}
+              <Flex>
+                {/* 고정값 */}
+                <Flex
                   //정렬
-                  display="flex"
                   flexDirection="column"
                   //여백
-                  mr="50px"
+                  ml="100px"
                   //글자
                   color="grey"
                 >
@@ -273,17 +240,14 @@ const ScreenVCInfo = () => {
                     법인분류
                   </Text>
                   <Text mb="10px">업력</Text>
-                  <Text
-                    //여백
-                    mb="10px"
-                  >
-                    홈페이지
-                  </Text>
-                </Box>
-                <Box
+                  <Text>홈페이지</Text>
+                </Flex>
+                {/* 변동값 */}
+                <Flex
                   //정렬
-                  display="flex"
                   flexDirection="column"
+                  //여백
+                  ml="50px"
                 >
                   <Text
                     //여백
@@ -298,50 +262,39 @@ const ScreenVCInfo = () => {
                     27.5년차
                   </Text>
                   <Text>{vc_homepage}</Text>
-                </Box>
-              </Box>
-            </Box>
+                </Flex>
+              </Flex>
+            </Flex>
           </Box>
+
           <Divider
             //여백
             mt="20px"
           />
 
           {/* VC 투자 정보 섹션 */}
-          <Box
-            //정렬
-            display="flex"
-            flexDirection="row"
-            //크기 및 여백
-            h="auto"
-            mt="20px"
-            ml="20px"
+          <Flex
+            //여백
+            m="20px"
           >
             <Box
               //여백
-              mr="190px"
+              mr="150px"
             >
               <Text
                 //글자
-                as="b"
+                fontWeight="bold"
                 fontSize="lg"
               >
                 투자정보(2015년 이후)
               </Text>
-              <Box
-                //정렬
-                display="flex"
-                flexDirection="row"
+              <Flex
                 //여백
-                mt="25px"
-                ml="10px"
+                m="15px"
               >
-                <Box
+                <Flex
                   //정렬
-                  display="flex"
                   flexDirection="column"
-                  //여백
-                  mr="50px"
                   //글자
                   color="grey"
                 >
@@ -349,20 +302,20 @@ const ScreenVCInfo = () => {
                     //여백
                     mb="10px"
                   >
-                    총 선탠 건수
+                    총 선택 건수
                   </Text>
                   <Text
                     //여백
                     mb="10px"
                   >
-                    총 집핸 금액
+                    총 집행 금액
                   </Text>
                   <Text>운용 펀드</Text>
-                </Box>
-                <Box
+                </Flex>
+                <Flex
                   //정렬
-                  display="flex"
                   flexDirection="column"
+                  ml="50px"
                 >
                   <Text
                     //여백
@@ -377,14 +330,14 @@ const ScreenVCInfo = () => {
                     {vc_amountOfInvestment}
                   </Text>
                   <Text>4개</Text>
-                </Box>
-              </Box>
+                </Flex>
+              </Flex>
             </Box>
 
             <Box>
               <Text
                 //글자
-                as="b"
+                fontWeight="bold"
                 fontSize="lg"
               >
                 주요 투자 대상
@@ -420,11 +373,13 @@ const ScreenVCInfo = () => {
                 />
               </Box>
             </Box>
-          </Box>
-        </Box>
-      </Box>
+          </Flex>
+        </Flex>
+      </Flex>
     </>
   );
 };
 
 export default ScreenVCInfo;
+
+//23.07.24 1차 코드 수정 완료
