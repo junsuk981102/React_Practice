@@ -7,6 +7,7 @@ import {
   Image,
   Text,
   useBreakpointValue,
+  Flex,
   Modal,
   ModalOverlay,
   ModalContent,
@@ -16,9 +17,7 @@ import {
 } from "@chakra-ui/react";
 
 const ScreenRoomInfo = () => {
-  //양쪽 여백
-  const boxPaddingLeft = useBreakpointValue({ base: "20px", xl: "200px" });
-  const boxPaddingRight = useBreakpointValue({ base: "20px", xl: "200px" });
+  const boxPadding = useBreakpointValue({ base: "20px", xl: "200px" }); // 양쪽 여백
 
   const navi = useNavigate();
   const { state } = useLocation();
@@ -98,8 +97,7 @@ const ScreenRoomInfo = () => {
         //크기 및 여백
         h="auto"
         pb="200px"
-        pl={boxPaddingLeft}
-        pr={boxPaddingRight}
+        px={boxPadding}
         //배경
         bg="#E5F2F2"
         borderTop="1px solid #00A29D"
@@ -107,10 +105,8 @@ const ScreenRoomInfo = () => {
         {/* 제목 섹션 */}
         <Heading
           //여백
-          mt="30px"
-          mb="30px"
+          marginY="30px"
           //글자
-          as="h1"
           size="lg"
         >
           커뮤니티 소개
@@ -125,16 +121,13 @@ const ScreenRoomInfo = () => {
           //배경
           bg="white"
           border="3px solid #00A29D"
-          borderRadius="lg"
+          borderRadius="xl"
         >
           {/* 커뮤니티 기본 정보 섹션 */}
-          <Box
+          <Flex
             //정렬
             position="relative"
-            display="flex"
             alignItems="center"
-            //크기
-            h="auto"
           >
             {/* 커뮤니티 프로필 사진 */}
             <Image
@@ -155,15 +148,13 @@ const ScreenRoomInfo = () => {
               {/* 커뮤니티 이름 */}
               <Heading
                 //글자
-                as="h1"
                 size="lg"
               >
                 {state.com_name}
               </Heading>
               {/* 커뮤니티 카테고리 */}
-              <Box
+              <Flex
                 //정렬
-                display="flex"
                 flexDirection="row"
               >
                 {comCategory.map((category, index) => (
@@ -175,8 +166,7 @@ const ScreenRoomInfo = () => {
                     w="100px"
                     h="auto"
                     p="5px"
-                    mt="10px"
-                    mb="10px"
+                    marginY="10px"
                     mr="5px"
                     //배경
                     bg="#00A29D"
@@ -184,7 +174,7 @@ const ScreenRoomInfo = () => {
                   >
                     <Text
                       //글자
-                      as="b"
+                      fontWeight="bold"
                       fontSize="md"
                       color="white"
                     >
@@ -192,24 +182,23 @@ const ScreenRoomInfo = () => {
                     </Text>
                   </Box>
                 ))}
-              </Box>
+              </Flex>
               {/* 커뮤니티 설명 */}
               <Box>
                 <Text
                   //글자
-                  as="b"
+                  fontWeight="bold"
                   fontSize="md"
                 >
                   {state.com_info}
                 </Text>
               </Box>
             </Box>
-          </Box>
+          </Flex>
 
           {/* 커뮤니티 투자 금액 섹션 */}
           <Box
             //크기 및 여백
-            h="auto"
             mt="30px"
             ml="20px"
           >
@@ -218,14 +207,14 @@ const ScreenRoomInfo = () => {
               //여백
               mr="20px"
               //글자
-              as="b"
+              fontWeight="bold"
               fontSize="lg"
             >
               투자 목표 금액
             </Text>
             <Text
               //글자
-              as="b"
+              fontWeight="bold"
               fontSize="lg"
               color="#00A29D"
             >
@@ -246,7 +235,7 @@ const ScreenRoomInfo = () => {
                 //배경
                 bg="white"
                 border="1px solid #00A29D"
-                borderRadius="22.5px"
+                borderRadius="3xl"
               />
               {/* 현재 금액 그래프 */}
               <Box
@@ -263,7 +252,7 @@ const ScreenRoomInfo = () => {
                 //배경
                 bg={"linear-gradient(to right, #00A29D, #FFFFFF)"}
                 border="1px solid #00A29D"
-                borderRadius="22.5px"
+                borderRadius="3xl"
               />
             </Box>
             {/* 커뮤니티 투자 목표 금액 텍스트 */}
@@ -299,7 +288,7 @@ const ScreenRoomInfo = () => {
               >
                 <Text
                   //글자
-                  as="b"
+                  fontWeight="bold"
                 >
                   <NumberFormat number={state.com_now_investment} />원
                 </Text>
@@ -308,9 +297,8 @@ const ScreenRoomInfo = () => {
           </Box>
 
           {/* 커뮤니티 티켓 구매 & 관심회사 섹션 */}
-          <Box
+          <Flex
             //정렬
-            display="flex"
             justifyItems="center"
             //여백
             mt="120px"
@@ -323,15 +311,13 @@ const ScreenRoomInfo = () => {
             >
               <Text
                 //글자
-                as="b"
+                fontWeight="bold"
                 fontSize="lg"
               >
                 티켓 구매하기
               </Text>
 
-              <Box
-                //정렬
-                display="flex"
+              <Flex
                 //여백
                 mt="20px"
               >
@@ -361,7 +347,7 @@ const ScreenRoomInfo = () => {
                     //배경
                     bg="#E5F2F2"
                     border="1px solid black"
-                    borderRadius="22.5px"
+                    borderRadius="3xl"
                     //글자
                     fontSize="xs"
                     color="#00A29D"
@@ -389,9 +375,8 @@ const ScreenRoomInfo = () => {
                     <NumberFormat number={state.com_ticket_price} />원
                   </Text>
                   {/* 티켓 구매 버튼 */}
-                  <Box
+                  <Flex
                     //정렬
-                    display="flex"
                     flexDirection="row"
                     alignItems="center"
                     justifyContent="center"
@@ -447,7 +432,7 @@ const ScreenRoomInfo = () => {
                     >
                       +
                     </Button>
-                  </Box>
+                  </Flex>
                   {/* 티켓 구매 버튼 */}
                   <Button
                     //크기 및 여백
@@ -457,7 +442,7 @@ const ScreenRoomInfo = () => {
                     mt="15px"
                     //배경
                     bg={sellCount > 0 ? "#00A29D" : "grey"}
-                    borderRadius="17.5px"
+                    borderRadius="3xl"
                     variant="none"
                     //글자
                     fontSize="sm"
@@ -465,7 +450,7 @@ const ScreenRoomInfo = () => {
                     //기능
                     onClick={handleClick_sell}
                   >
-                    {ownerCount > 0 ? "추가 구매하기" : "구매하기"}{" "}
+                    {ownerCount > 0 ? "추가 구매하기" : "구매하기"}
                   </Button>
                   {/* 구매 갯수 안내 */}
                   <Text
@@ -478,36 +463,40 @@ const ScreenRoomInfo = () => {
                     * 최대 {state.com_ticket_max}매까지 구매 가능
                   </Text>
                 </Box>
-              </Box>
+              </Flex>
             </Box>
 
             {/* 관심회사 섹션 */}
             <Box>
-              <Text fontSize="lg" as="b" mb="15px">
+              <Text
+                //여백
+                mb="15px"
+                //글자
+                fontSize="lg"
+                fontWeight="bold"
+              >
                 관심있는 회사
               </Text>
               {/* 관심회사 이미지 */}
-              <Box display="flex">
+              <Flex>
                 <Image w="154px" h="185px" src="../image/startup1.png" />
                 <Image w="154px" h="185px" src="../image/startup2.png" />
                 <Image w="154px" h="185px" src="../image/startup3.png" />
-              </Box>
+              </Flex>
             </Box>
-          </Box>
+          </Flex>
 
           {/* 커뮤니티 현황 섹션 */}
-          <Box
+          <Flex
             //정렬
-            display="flex"
             textAlign="center"
             justifyContent="center"
             //여백
             mt="100px"
           >
             {/* 현재 참여 중인 인원수 */}
-            <Box
+            <Flex
               //정렬
-              display="flex"
               alignItems="center"
               justifyContent="center"
               //크기
@@ -522,13 +511,12 @@ const ScreenRoomInfo = () => {
               fontWeight="bold"
             >
               <Text>{state.com_member}명 참여중</Text>
-            </Box>
-          </Box>
+            </Flex>
+          </Flex>
 
           {/* 커뮤니티 참여 섹션 */}
-          <Box
+          <Flex
             //정렬
-            display="flex"
             justifyContent="center"
             //여백
             p="20px"
@@ -551,7 +539,7 @@ const ScreenRoomInfo = () => {
             >
               커뮤니티 참여하기
             </Button>
-          </Box>
+          </Flex>
         </Box>
       </Box>
 
@@ -592,3 +580,5 @@ const ScreenRoomInfo = () => {
 };
 
 export default ScreenRoomInfo;
+
+//23.07.25 1차 코드 수정 완료
