@@ -5,7 +5,7 @@ import theme from "./theme";
 import "./App.css";
 
 // Community Screen
-import ScreenChat from "./screens/community/screen_Chat";
+import ScreenChat from "./screens/community/screen_Community_Room.js";
 import ScreenRoomInfo from "./screens/community/screen_Community_Info";
 import ScreenRoomList from "./screens/community/screen_Community_List";
 import ScreenRoomMake from "./screens/community/screen_Community_Make";
