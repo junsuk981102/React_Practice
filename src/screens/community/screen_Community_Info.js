@@ -1,29 +1,28 @@
 import React, { useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import {
-  Box,
-  Button,
-  Heading,
-  Image,
-  Text,
-  useBreakpointValue,
-  Flex,
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalFooter,
-  ModalBody,
-  useDisclosure,
-} from "@chakra-ui/react";
+import ErrorModal from "../../components/community/cpn_Error_Modal";
+import ComInfoBasic from "../../components/community/cpn_Com_Info_Basic";
+import ComInfoCurrent from "../../components/community/cpn_Com_Info_Current";
+import ComInfoEnter from "../../components/community/cpn_Com_Info_Enter";
+import ComInfoFavor from "../../components/community/cpn_Com_Info_Favor";
+import ComInfoInvest from "../../components/community/cpn_Com_Info_Invest";
+import ComInfoTicket from "../../components/community/cpn_Com_Info_Ticket";
+
+import { Box, Heading, useBreakpointValue, Flex } from "@chakra-ui/react";
 
 const ScreenRoomInfo = () => {
+  const { state } = useLocation();
+  const navi = useNavigate();
+
   const boxPadding = useBreakpointValue({ base: "20px", xl: "200px" }); // 양쪽 여백
 
-  const navi = useNavigate();
-  const { state } = useLocation();
-
   const [ownerCount, setOwnerCount] = useState(state.com_owner); //티켓 소유 갯수
-  const [sellCount, setSellCount] = useState(0); //티켓 구매 갯수
+
+  const handleClick_sell = (sellCount) => {
+    setOwnerCount(ownerCount + sellCount); // ownerCount를 증가시킴
+  };
+
+  const [isOpen, setIsOpen] = useState(false);
 
   let comCategory = [];
   if (typeof state.com_category === "string") {
@@ -34,36 +33,10 @@ const ScreenRoomInfo = () => {
     console.error("Invalid category format");
   }
 
-  //티켓 구매 갯수 증가
-  const handleClick_plus = () => {
-    if (ownerCount + sellCount < state.com_ticket_max) {
-      setSellCount(sellCount + 1);
-    }
-  };
-  //티켓 구매 갯수 감소
-  const handleClick_minus = () => {
-    if (sellCount > 0) {
-      setSellCount(sellCount - 1);
-    }
-  };
-  //티켓 구매
-  const handleClick_sell = () => {
-    setOwnerCount(ownerCount + sellCount);
-    setSellCount(0);
-  };
-
-  //경고 메시지 Modal 관련 코드
-  const { isOpen, onOpen, onClose } = useDisclosure();
-
-  //숫자 쉼표 표시 코드
-  function NumberFormat({ number }) {
-    return <span>{number.toLocaleString()}</span>;
-  }
-
   const handleClick_chat = () => {
     if (ownerCount === 0) {
       //티켓 X => Modal 팝업
-      onOpen();
+      setIsOpen(true);
     } else {
       //티켓 O => 채팅방 이동
       navi(`/screen_chat`, {
@@ -123,178 +96,10 @@ const ScreenRoomInfo = () => {
           border="3px solid #00A29D"
           borderRadius="xl"
         >
-          {/* 커뮤니티 기본 정보 섹션 */}
-          <Flex
-            //정렬
-            position="relative"
-            alignItems="center"
-          >
-            {/* 커뮤니티 프로필 사진 */}
-            <Image
-              //사진 위치
-              src={state.com_profileImg}
-              //크기
-              w="200px"
-              h="200px"
-              //배경
-              borderRadius="50%"
-              objectFit="cover"
-            />
-            {/* 커뮤니티 기본 정보 */}
-            <Box
-              //여백
-              ml="25px"
-            >
-              {/* 커뮤니티 이름 */}
-              <Heading
-                //글자
-                size="lg"
-              >
-                {state.com_name}
-              </Heading>
-              {/* 커뮤니티 카테고리 */}
-              <Flex
-                //정렬
-                flexDirection="row"
-              >
-                {comCategory.map((category, index) => (
-                  <Box
-                    key={index}
-                    //정렬
-                    textAlign="center"
-                    //크기 및 여백
-                    w="100px"
-                    h="auto"
-                    p="5px"
-                    marginY="10px"
-                    mr="5px"
-                    //배경
-                    bg="#00A29D"
-                    borderRadius="xl"
-                  >
-                    <Text
-                      //글자
-                      fontWeight="bold"
-                      fontSize="md"
-                      color="white"
-                    >
-                      {category}
-                    </Text>
-                  </Box>
-                ))}
-              </Flex>
-              {/* 커뮤니티 설명 */}
-              <Box>
-                <Text
-                  //글자
-                  fontWeight="bold"
-                  fontSize="md"
-                >
-                  {state.com_info}
-                </Text>
-              </Box>
-            </Box>
-          </Flex>
+          <ComInfoBasic state={state} />
 
           {/* 커뮤니티 투자 금액 섹션 */}
-          <Box
-            //크기 및 여백
-            mt="30px"
-            ml="20px"
-          >
-            {/* 커뮤니티 투자 목표 금액 제목 */}
-            <Text
-              //여백
-              mr="20px"
-              //글자
-              fontWeight="bold"
-              fontSize="lg"
-            >
-              투자 목표 금액
-            </Text>
-            <Text
-              //글자
-              fontWeight="bold"
-              fontSize="lg"
-              color="#00A29D"
-            >
-              {(state.com_now_investment / state.com_total_investment) * 100}%
-              달성
-            </Text>
-            {/* 커뮤니티 투자 목표 금액 그래프 */}
-            <Box position="relative" mt="20px">
-              {/* 목표 금액 그래프 */}
-              <Box
-                //위치 및 정렬
-                position="absolute"
-                top="0"
-                left="0"
-                //크기
-                w="90%"
-                h="45px"
-                //배경
-                bg="white"
-                border="1px solid #00A29D"
-                borderRadius="3xl"
-              />
-              {/* 현재 금액 그래프 */}
-              <Box
-                //위치 및 정렬
-                position="absolute"
-                top="0"
-                left="0"
-                //크기
-                w={
-                  (state.com_now_investment / state.com_total_investment) * 90 +
-                  "%"
-                }
-                h="45px"
-                //배경
-                bg={"linear-gradient(to right, #00A29D, #FFFFFF)"}
-                border="1px solid #00A29D"
-                borderRadius="3xl"
-              />
-            </Box>
-            {/* 커뮤니티 투자 목표 금액 텍스트 */}
-            <Box
-              //위치 및 정렬
-              position="relative"
-              //글자
-              color="#00A29D"
-            >
-              {/* 목표 금액 텍스트 */}
-              <Box
-                //위치 및 정렬
-                position="absolute"
-                top="55"
-                left="85%"
-              >
-                <Text
-                  //글자
-                  as="b"
-                >
-                  <NumberFormat number={state.com_total_investment} />원
-                </Text>
-              </Box>
-              {/* 현재 금액 텍스트 */}
-              <Box
-                //위치 및 정렬
-                position="absolute"
-                top="55"
-                left={
-                  (state.com_now_investment / state.com_total_investment) * 80 +
-                  "%"
-                }
-              >
-                <Text
-                  //글자
-                  fontWeight="bold"
-                >
-                  <NumberFormat number={state.com_now_investment} />원
-                </Text>
-              </Box>
-            </Box>
-          </Box>
+          <ComInfoInvest state={state} />
 
           {/* 커뮤니티 티켓 구매 & 관심회사 섹션 */}
           <Flex
@@ -304,328 +109,28 @@ const ScreenRoomInfo = () => {
             mt="120px"
             ml="20px"
           >
-            {/* 티켓 구매 섹션 */}
-            <Box
-              //여백
-              mr="50px"
-            >
-              <Text
-                //글자
-                fontWeight="bold"
-                fontSize="lg"
-              >
-                티켓 구매하기
-              </Text>
-
-              <Flex
-                //여백
-                mt="20px"
-              >
-                {/* 왼쪽 섹션 */}
-                <Box>
-                  {/* 티켓 이미지 */}
-                  <Image
-                    //사진 위치
-                    src={
-                      ownerCount > 0
-                        ? "../image/ticket/icon_color_ticket.png"
-                        : "../image/ticket/icon_grey_ticket.png"
-                    }
-                    //크기 및 여백
-                    w="150px"
-                    h="150px"
-                    mb="15px"
-                  />
-                  {/* 현재 보유 티켓 갯수 */}
-                  <Box
-                    //정렬
-                    textAlign="center"
-                    //크기 및 여백
-                    w="150px"
-                    h="25px"
-                    p="5px"
-                    //배경
-                    bg="#E5F2F2"
-                    border="1px solid black"
-                    borderRadius="3xl"
-                    //글자
-                    fontSize="xs"
-                    color="#00A29D"
-                  >
-                    <Text>현재 보유한 티켓 수: {ownerCount}매</Text>
-                  </Box>
-                </Box>
-
-                {/* 오른쪽 섹션 */}
-                <Box
-                  //정렬
-                  textAlign="center"
-                  //여백
-                  ml="30px"
-                  //글자
-                  fontWeight="bold"
-                >
-                  {/* 티켓 판매 가격 */}
-                  <Text
-                    //여백
-                    mb="15px"
-                    //글자
-                    fontSize="xl"
-                  >
-                    <NumberFormat number={state.com_ticket_price} />원
-                  </Text>
-                  {/* 티켓 구매 버튼 */}
-                  <Flex
-                    //정렬
-                    flexDirection="row"
-                    alignItems="center"
-                    justifyContent="center"
-                    //크기
-                    w="120px"
-                    h="40px"
-                    //배경
-                    border="1px solid #00A29D"
-                    borderRadius="xl"
-                  >
-                    {/* 마이너스 버튼 */}
-                    <Button
-                      //크기
-                      w="40px"
-                      h="40px"
-                      //배경
-                      borderRadius="50%"
-                      variant="none"
-                      //글자
-                      fontSize="25px"
-                      fontWeight="bold"
-                      color={sellCount > 0 ? "#00A29D" : "grey"}
-                      //기능
-                      onClick={handleClick_minus}
-                    >
-                      -
-                    </Button>
-                    {/* 구매 갯수 */}
-                    <Text
-                      //크기
-                      w="30px"
-                    >
-                      {sellCount}
-                    </Text>
-                    {/* 플러스 버튼 */}
-                    <Button
-                      //크기
-                      w="40px"
-                      h="40px"
-                      //배경
-                      borderRadius="50%"
-                      variant="none"
-                      //글자
-                      fontSize="25px"
-                      fontWeight="bold"
-                      color={
-                        ownerCount + sellCount < state.com_ticket_max
-                          ? "#00A29D"
-                          : "grey"
-                      }
-                      //기능
-                      onClick={handleClick_plus}
-                    >
-                      +
-                    </Button>
-                  </Flex>
-                  {/* 티켓 구매 버튼 */}
-                  <Button
-                    //크기 및 여백
-                    w="120px"
-                    h="35px"
-                    p="10px"
-                    mt="15px"
-                    //배경
-                    bg={sellCount > 0 ? "#00A29D" : "grey"}
-                    borderRadius="3xl"
-                    variant="none"
-                    //글자
-                    fontSize="sm"
-                    color="white"
-                    //기능
-                    onClick={handleClick_sell}
-                  >
-                    {ownerCount > 0 ? "추가 구매하기" : "구매하기"}
-                  </Button>
-                  {/* 구매 갯수 안내 */}
-                  <Text
-                    //여백
-                    mt="5px"
-                    //글자
-                    fontSize="2xs"
-                    color="grey"
-                  >
-                    * 최대 {state.com_ticket_max}매까지 구매 가능
-                  </Text>
-                </Box>
-              </Flex>
-            </Box>
-
+            <ComInfoTicket
+              state={state}
+              ownerCount={ownerCount}
+              onClickSell={handleClick_sell}
+            />
             {/* 관심회사 섹션 */}
-            <Box>
-              <Text
-                //여백
-                mb="15px"
-                //글자
-                fontSize="lg"
-                fontWeight="bold"
-              >
-                관심있는 회사
-              </Text>
-              {/* 관심회사 이미지 */}
-              <Flex>
-                <Flex
-                  flexDirection="column"
-                  alignItems="center"
-                  marginX="10px"
-                  p="5px"
-                  borderRadius="xl"
-                  boxShadow="0 0 5px #00A29D"
-                >
-                  <Image
-                    src="../image/community/company_ex1.png"
-                    w="100px"
-                    h="100px"
-                    borderRadius="xl"
-                  />
-                  <Text mt="5px" fontSize="sm">
-                    펫프랜즈
-                  </Text>
-                </Flex>
-                <Flex
-                  flexDirection="column"
-                  alignItems="center"
-                  marginX="20px"
-                  p="5px"
-                  borderRadius="xl"
-                  boxShadow="0 0 5px #00A29D"
-                >
-                  <Image
-                    src="../image/community/company_ex2.png"
-                    w="100px"
-                    h="100px"
-                    borderRadius="xl"
-                  />
-                  <Text mt="5px" fontSize="sm">
-                    페오펫
-                  </Text>
-                </Flex>
-                <Flex
-                  flexDirection="column"
-                  alignItems="center"
-                  marginX="10px"
-                  p="5px"
-                  borderRadius="xl"
-                  boxShadow="0 0 5px #00A29D"
-                >
-                  <Image
-                    src="../image/community/company_ex3.png"
-                    w="100px"
-                    h="100px"
-                    borderRadius="xl"
-                  />
-                  <Text mt="5px" fontSize="sm">
-                    핏펫
-                  </Text>
-                </Flex>
-              </Flex>
-            </Box>
+            <ComInfoFavor />
           </Flex>
 
           {/* 커뮤니티 현황 섹션 */}
-          <Flex
-            //정렬
-            textAlign="center"
-            justifyContent="center"
-            //여백
-            mt="100px"
-          >
-            {/* 현재 참여 중인 인원수 */}
-            <Flex
-              //정렬
-              alignItems="center"
-              justifyContent="center"
-              //크기
-              w="120px"
-              h="30px"
-              //배경
-              bg="#E5F2F2"
-              border="1px solid black"
-              borderRadius="xl"
-              //글자
-              fontSize="md"
-              fontWeight="bold"
-            >
-              <Text>{state.com_member}명 참여중</Text>
-            </Flex>
-          </Flex>
+          <ComInfoCurrent state={state} />
 
           {/* 커뮤니티 참여 섹션 */}
-          <Flex
-            //정렬
-            justifyContent="center"
-            //여백
-            p="20px"
-          >
-            {/* 커뮤니티 참여 버튼 */}
-            <Button
-              //크기
-              w="600px"
-              h="60px"
-              //배경
-              bg={ownerCount > 0 ? "#00A29D" : "grey"}
-              borderRadius="xl"
-              variant="none"
-              //글자
-              fontSize="lg"
-              fontWeight="bold"
-              color="white"
-              //기능
-              onClick={handleClick_chat}
-            >
-              커뮤니티 참여하기
-            </Button>
-          </Flex>
+          <ComInfoEnter
+            ownerCount={ownerCount}
+            handleClick_chat={handleClick_chat}
+          />
         </Box>
       </Box>
 
       {/* 에러메시지 Modal */}
-      <Modal
-        //기능
-        isOpen={isOpen}
-        onClose={onClose}
-        isCentered
-      >
-        <ModalOverlay />
-        <ModalContent>
-          <ModalBody
-            //여백
-            mt="20px"
-            //글자
-            fontSize="xl"
-            fontWeight="bold"
-          >
-            커뮤니티에 입장하기 위해 티켓을 구매해주세요.
-          </ModalBody>
-          <ModalFooter>
-            <Button
-              //여백
-              mr={3}
-              //배경
-              bg="#00A29D"
-              //기능
-              onClick={onClose}
-            >
-              Close
-            </Button>
-          </ModalFooter>
-        </ModalContent>
-      </Modal>
+      <ErrorModal isOpen={isOpen} onClose={() => setIsOpen(false)} />
     </>
   );
 };
