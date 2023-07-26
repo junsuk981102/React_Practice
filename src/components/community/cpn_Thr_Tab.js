@@ -3,7 +3,7 @@ import ThrFirstVotingBef from "./cpn_Thr_First_Voting_Before";
 import ThrFirstVotingAft from "./cpn_Thr_First_Voting_After";
 import ThrSecondVotingBef from "./cpn_Thr_Second_Voting_Before";
 import ThrSecondVotingAft from "./cpn_Thr_Second_Voting_After";
-import ThrInformation from "./cpn_Thr_Information";
+import ThrTabInfo from "./cpn_Thr_Tab_Info";
 import Chat from "../../components/chat/cpn_Chat";
 import "../../chat.css";
 
@@ -124,7 +124,7 @@ function ThrTab({ state, ownerCount, setOwnerCount }) {
 
         {/* 정보 */}
         <TabPanel>
-          <ThrInformation
+          <ThrTabInfo
             state={state}
             ownerCount={ownerCount}
             setOwnerCount={setOwnerCount}
