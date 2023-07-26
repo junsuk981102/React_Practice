@@ -11,7 +11,6 @@ import StartupInfoProduct from "../../components/startup/cpn_Startup_Info_Produc
 const ScreenStartupInfo = () => {
   const [userUid, setUserUid] = useState("");
   const { state } = useLocation();
-
   const [sup_nationality, setSupNationality] = useState("");
   const [sup_ceo, setSupCeo] = useState("");
   const [sup_homepage, setSupHomepage] = useState("");
