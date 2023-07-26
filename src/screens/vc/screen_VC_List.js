@@ -16,7 +16,7 @@ const ScreenVCList = () => {
   //VC 설정
   const [vcs, setVCs] = useState([]);
   //카테고리 리스트 초기값 설정
-  const [selectedValue, setSelectedValue] = useState("카테고리");
+  const [selectedValue, setSelectedValue] = useState("전체");
   //카테고리 리스트 설정값 변경
   const handleMenuItemClick = (value) => {
     setSelectedValue(value);
