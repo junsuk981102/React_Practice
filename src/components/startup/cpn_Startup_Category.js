@@ -1,7 +1,7 @@
 import React from "react";
 import { Menu, MenuButton, MenuList, MenuItem } from "@chakra-ui/react";
 
-const Startup_Category = ({ selectedValue, handleMenuItemClick }) => {
+const StartupCategory = ({ selectedValue, handleMenuItemClick }) => {
   return (
     <Menu>
       <MenuButton
@@ -157,4 +157,4 @@ const Startup_Category = ({ selectedValue, handleMenuItemClick }) => {
   );
 };
 
-export default Startup_Category;
+export default StartupCategory;

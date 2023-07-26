@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { dbService } from "../../firebase-config";
-import Startup_Card from "../../components/startup/cpn_Startup_Card";
-import Startup_Category from "../../components/startup/cpn_Startup_Category";
-
+import StartupCard from "../../components/startup/cpn_Startup_Card";
+import StartupCategory from "../../components/startup/cpn_Startup_Category";
 import {
   Heading,
   Grid,
@@ -55,7 +54,7 @@ const ScreenStartupList = () => {
             overflow="hidden"
           >
             {/* 스타트업 정보 */}
-            <Startup_Card startupObj={startup} />
+            <StartupCard startupObj={startup} />
           </Box>
         </Box>
       ));
@@ -90,7 +89,7 @@ const ScreenStartupList = () => {
           boxShadow="0 0 10px #00A29D"
           overflow="hidden"
         >
-          <Startup_Card startupObj={startup} />
+          <StartupCard startupObj={startup} />
         </Box>
       </Box>
     ));
@@ -131,7 +130,7 @@ const ScreenStartupList = () => {
           투자 중인 스타트업
         </Heading>
         {/* 스타트업 카테고리 버튼 */}
-        <Startup_Category
+        <StartupCategory
           selectedValue={selectedValue}
           handleMenuItemClick={handleMenuItemClick}
         />
