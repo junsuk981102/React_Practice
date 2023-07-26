@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { dbService } from "../../firebase-config";
-import VC from "../../components/card/cpn_VC";
+import VC from "../../components/vc/cpn_VC_Card";
 import {
   Heading,
   Grid,

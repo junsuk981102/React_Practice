@@ -2,7 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { Box, Image, Button, Heading, Text, Flex } from "@chakra-ui/react";
 
-const Startup = ({ startupObj }) => {
+const Startup_Card = ({ startupObj }) => {
   const navi = useNavigate();
 
   function handleClick() {
@@ -140,6 +140,6 @@ const Startup = ({ startupObj }) => {
   );
 };
 
-export default Startup;
+export default Startup_Card;
 
 //23.07.21 1차 코드 수정 완료

@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { dbService } from "../firebase-config";
-import Community from "../components/card/cpn_Community";
-import Startup from "../components/card/cpn_Startup";
-import VC from "../components/card/cpn_VC";
+import Community from "../components/community/cpn_Community_Card";
+import Startup from "../components/startup/cpn_Startup_Card";
+import VC from "../components/vc/cpn_VC_Card";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";

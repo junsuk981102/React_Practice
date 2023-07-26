@@ -1,16 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { dbService } from "../../firebase-config";
-import Startup from "../../components/card/cpn_Startup";
+import Startup_Card from "../../components/startup/cpn_Startup_Card";
+import Startup_Category from "../../components/startup/cpn_Startup_Category";
+
 import {
   Heading,
   Grid,
   Box,
-  Menu,
-  MenuButton,
   useBreakpointValue,
-  MenuList,
-  MenuItem,
   Flex,
+  Center,
 } from "@chakra-ui/react";
 
 const ScreenStartupList = () => {
@@ -37,7 +36,7 @@ const ScreenStartupList = () => {
 
   //스타트업 정보 렌더링
   const renderStartups = () => {
-    if (selectedValue === "카테고리") {
+    if (selectedValue === "전체") {
       //초기값일 때 모든 리스트 렌더링
       return startups.map((startup) => (
         //스타트업 카드
@@ -56,7 +55,7 @@ const ScreenStartupList = () => {
             overflow="hidden"
           >
             {/* 스타트업 정보 */}
-            <Startup startupObj={startup} />
+            <Startup_Card startupObj={startup} />
           </Box>
         </Box>
       ));
@@ -70,18 +69,9 @@ const ScreenStartupList = () => {
     //설정한 카테고리 스타트업이 없을 경우
     if (filteredStartups.length === 0) {
       return (
-        <Box
-          //정렬
-          textAlign="center"
-          //여백
-          mt="50px"
-          mb="200px"
-          //글자
-          fontSize="2xl"
-          fontWeight="bold"
-        >
+        <Center mt="50px" mb="200px" fontSize="2xl" fontWeight="bold">
           아직 등록된 스타트업이 없습니다.
-        </Box>
+        </Center>
       );
     }
 
@@ -100,7 +90,7 @@ const ScreenStartupList = () => {
           boxShadow="0 0 10px #00A29D"
           overflow="hidden"
         >
-          <Startup startupObj={startup} />
+          <Startup_Card startupObj={startup} />
         </Box>
       </Box>
     ));
@@ -140,167 +130,11 @@ const ScreenStartupList = () => {
         >
           투자 중인 스타트업
         </Heading>
-
         {/* 스타트업 카테고리 버튼 */}
-        <Menu>
-          <MenuButton
-            //크기
-            w="100px"
-            h="40px"
-            //배경
-            bg="#00A29D"
-            borderRadius="3xl"
-            //글자
-            fontSize="md"
-            fontWeight="bold"
-            color="white"
-          >
-            {selectedValue}
-          </MenuButton>
-          <MenuList
-            //배경
-            bg="#00A29D"
-            //글자
-            color="white"
-          >
-            <MenuItem
-              //배경
-              bg="none"
-              borderTop="1px solid white"
-              //기능
-              onClick={() => handleMenuItemClick("카테고리")}
-            >
-              전체
-            </MenuItem>
-            <MenuItem
-              //배경
-              bg="none"
-              borderTop="1px solid white"
-              //기능
-              onClick={() => handleMenuItemClick("핀테크")}
-            >
-              핀테크
-            </MenuItem>
-            <MenuItem
-              //배경
-              bg="none"
-              borderTop="1px solid white"
-              //기능
-              onClick={() => handleMenuItemClick("금융")}
-            >
-              금융
-            </MenuItem>
-            <MenuItem
-              //배경
-              bg="none"
-              borderTop="1px solid white"
-              //기능
-              onClick={() => handleMenuItemClick("반려동물")}
-            >
-              반려동물
-            </MenuItem>
-            <MenuItem
-              //배경
-              bg="none"
-              borderTop="1px solid white"
-              //기능
-              onClick={() => handleMenuItemClick("VR")}
-            >
-              VR
-            </MenuItem>
-            <MenuItem
-              //배경
-              bg="none"
-              borderTop="1px solid white"
-              //기능
-              onClick={() => handleMenuItemClick("AR")}
-            >
-              AR
-            </MenuItem>
-            <MenuItem
-              //배경
-              bg="none"
-              borderTop="1px solid white"
-              //기능
-              onClick={() => handleMenuItemClick("ESG")}
-            >
-              ESG
-            </MenuItem>
-            <MenuItem
-              //배경
-              bg="none"
-              borderTop="1px solid white"
-              //기능
-              onClick={() => handleMenuItemClick("전기차")}
-            >
-              전기차
-            </MenuItem>
-            <MenuItem
-              //배경
-              bg="none"
-              borderTop="1px solid white"
-              //기능
-              onClick={() => handleMenuItemClick("블록체인")}
-            >
-              블록체인
-            </MenuItem>
-            <MenuItem
-              //배경
-              bg="none"
-              borderTop="1px solid white"
-              //기능
-              onClick={() => handleMenuItemClick("음악")}
-            >
-              음악
-            </MenuItem>
-            <MenuItem
-              //배경
-              bg="none"
-              borderTop="1px solid white"
-              //기능
-              onClick={() => handleMenuItemClick("미술")}
-            >
-              미술
-            </MenuItem>
-            <MenuItem
-              //배경
-              bg="none"
-              borderTop="1px solid white"
-              //기능
-              onClick={() => handleMenuItemClick("자동차")}
-            >
-              자동차
-            </MenuItem>
-            <MenuItem
-              //배경
-              bg="none"
-              borderTop="1px solid white"
-              //기능
-              onClick={() => handleMenuItemClick("신기술")}
-            >
-              신기술
-            </MenuItem>
-            <MenuItem
-              //배경
-              bg="none"
-              borderTop="1px solid white"
-              //기능
-              onClick={() => handleMenuItemClick("F&B")}
-            >
-              F&B
-            </MenuItem>
-            <MenuItem
-              //배경
-              bg="none"
-              borderTop="1px solid white"
-              borderBottom="1px solid white"
-              //기능
-              onClick={() => handleMenuItemClick("헬스케어")}
-            >
-              헬스케어
-            </MenuItem>
-          </MenuList>
-        </Menu>
+        <Startup_Category
+          selectedValue={selectedValue}
+          handleMenuItemClick={handleMenuItemClick}
+        />
       </Flex>
       {/* 스타트업 리스트 섹션 */}
       <Grid

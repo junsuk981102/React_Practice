@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { dbService } from "../../firebase-config";
-import Community from "../../components/card/cpn_Community";
+import Community from "../../components/community/cpn_Community_Card";
 import {
   Heading,
   Grid,
