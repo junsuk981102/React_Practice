@@ -1,7 +1,7 @@
 import React from "react";
 import Slider from "react-slick";
 import { Box } from "@chakra-ui/react";
-import Community from "../community/cpn_Community_Card";
+import CommunityCard from "../community/cpn_Community_Card";
 
 // 커뮤니티 리스트 렌더링
 export const renderCommunities = (communities) => {
@@ -9,7 +9,7 @@ export const renderCommunities = (communities) => {
     // 커뮤니티 카드
     <Box key={community.id} m="20px">
       {/* 커뮤니티 카드 정보 */}
-      <Community communityObj={community} />
+      <CommunityCard communityObj={community} />
     </Box>
   ));
 };

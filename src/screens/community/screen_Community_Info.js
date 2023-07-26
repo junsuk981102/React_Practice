@@ -105,7 +105,7 @@ const ScreenRoomInfo = () => {
           {/* 커뮤니티 투자 금액 섹션 */}
           <ComInfoInvest state={state} />
 
-          {/* 커뮤니티 티켓 구매 & 관심회사 섹션 */}
+          {/* 커뮤니티 티켓 & 관심회사 섹션 */}
           <Flex
             //정렬
             justifyItems="center"
@@ -113,6 +113,7 @@ const ScreenRoomInfo = () => {
             mt="120px"
             ml="20px"
           >
+            {/* 티켓 섹션 */}
             <ComInfoTicket
               state={state}
               ownerCount={ownerCount}

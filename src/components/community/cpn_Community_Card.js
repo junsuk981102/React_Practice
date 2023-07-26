@@ -2,7 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { Image, Button, Heading, Text, Flex } from "@chakra-ui/react";
 
-const Community = ({ communityObj }) => {
+const CommunityCard = ({ communityObj }) => {
   const navi = useNavigate();
 
   function handleClick() {
@@ -138,6 +138,6 @@ const Community = ({ communityObj }) => {
     </Flex>
   );
 };
-export default Community;
+export default CommunityCard;
 
 //23.07.21 1차 코드 수정 완료

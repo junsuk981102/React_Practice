@@ -2,15 +2,12 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { dbService } from "../../firebase-config";
 import Community from "../../components/community/cpn_Community_Card";
+import CommunityCategory from "../../components/community/cpn_Community_Category";
 import {
   Heading,
   Grid,
   Box,
   useBreakpointValue,
-  Menu,
-  MenuButton,
-  MenuList,
-  MenuItem,
   Button,
   Text,
   Flex,
@@ -24,7 +21,7 @@ const ScreenRoomList = () => {
   //양쪽 여백
   const boxPadding = useBreakpointValue({ base: "20px", xl: "200px" });
   //카테고리 리스트 초기값 설정
-  const [selectedValue, setSelectedValue] = useState("카테고리");
+  const [selectedValue, setSelectedValue] = useState("전체");
   //카테고리 리스트 설정값 변경
   const handleMenuItemClick = (value) => {
     setSelectedValue(value);
@@ -48,7 +45,7 @@ const ScreenRoomList = () => {
   //커뮤니티 정보 렌더링
   const renderCommunities = () => {
     //초기값일 때 모든 리스트 렌더링
-    if (selectedValue === "카테고리") {
+    if (selectedValue === "전체") {
       return communities.map((community) => (
         //커뮤니티 카드
         <Box key={community.id}>
@@ -144,166 +141,10 @@ const ScreenRoomList = () => {
           커뮤니티
         </Heading>
         {/* 카테고리 버튼 */}
-        <Menu>
-          <MenuButton
-            //크기
-            w="100px"
-            h="40px"
-            //배경
-            bg="#00A29D"
-            borderRadius="3xl"
-            //글자
-            fontSize="md"
-            fontWeight="bold"
-            color="white"
-          >
-            {selectedValue}
-          </MenuButton>
-          {/* 카테고리 리스트 항목 */}
-          <MenuList
-            //배경
-            bg="#00A29D"
-            //글자
-            color="white"
-          >
-            <MenuItem
-              //배경
-              bg="none"
-              borderTop="1px solid white"
-              //기능
-              onClick={() => handleMenuItemClick("카테고리")}
-            >
-              전체
-            </MenuItem>
-            <MenuItem
-              //배경
-              bg="none"
-              borderTop="1px solid white"
-              //기능
-              onClick={() => handleMenuItemClick("핀테크")}
-            >
-              핀테크
-            </MenuItem>
-            <MenuItem
-              //배경
-              bg="none"
-              borderTop="1px solid white"
-              //기능
-              onClick={() => handleMenuItemClick("금융")}
-            >
-              금융
-            </MenuItem>
-            <MenuItem
-              //배경
-              bg="none"
-              borderTop="1px solid white"
-              //기능
-              onClick={() => handleMenuItemClick("반려동물")}
-            >
-              반려동물
-            </MenuItem>
-            <MenuItem
-              //배경
-              bg="none"
-              borderTop="1px solid white"
-              //기능
-              onClick={() => handleMenuItemClick("VR")}
-            >
-              VR
-            </MenuItem>
-            <MenuItem
-              //배경
-              bg="none"
-              borderTop="1px solid white"
-              //기능
-              onClick={() => handleMenuItemClick("AR")}
-            >
-              AR
-            </MenuItem>
-            <MenuItem
-              //배경
-              bg="none"
-              borderTop="1px solid white"
-              //기능
-              onClick={() => handleMenuItemClick("ESG")}
-            >
-              ESG
-            </MenuItem>
-            <MenuItem
-              //배경
-              bg="none"
-              borderTop="1px solid white"
-              //기능
-              onClick={() => handleMenuItemClick("전기차")}
-            >
-              전기차
-            </MenuItem>
-            <MenuItem
-              //배경
-              bg="none"
-              borderTop="1px solid white"
-              //기능
-              onClick={() => handleMenuItemClick("블록체인")}
-            >
-              블록체인
-            </MenuItem>
-            <MenuItem
-              //배경
-              bg="none"
-              borderTop="1px solid white"
-              //기능
-              onClick={() => handleMenuItemClick("음악")}
-            >
-              음악
-            </MenuItem>
-            <MenuItem
-              //배경
-              bg="none"
-              borderTop="1px solid white"
-              //기능
-              onClick={() => handleMenuItemClick("미술")}
-            >
-              미술
-            </MenuItem>
-            <MenuItem
-              //배경
-              bg="none"
-              borderTop="1px solid white"
-              //기능
-              onClick={() => handleMenuItemClick("자동차")}
-            >
-              자동차
-            </MenuItem>
-            <MenuItem
-              //배경
-              bg="none"
-              borderTop="1px solid white"
-              //기능
-              onClick={() => handleMenuItemClick("신기술")}
-            >
-              신기술
-            </MenuItem>
-            <MenuItem
-              //배경
-              bg="none"
-              borderTop="1px solid white"
-              //기능
-              onClick={() => handleMenuItemClick("F&B")}
-            >
-              F&B
-            </MenuItem>
-            <MenuItem
-              //배경
-              bg="none"
-              borderTop="1px solid white"
-              borderBottom="1px solid white"
-              //기능
-              onClick={() => handleMenuItemClick("헬스케어")}
-            >
-              헬스케어
-            </MenuItem>
-          </MenuList>
-        </Menu>
+        <CommunityCategory
+          selectedValue={selectedValue}
+          handleMenuItemClick={handleMenuItemClick}
+        />
       </Flex>
       {/* 커뮤니티 리스트 섹션 */}
       <Grid
