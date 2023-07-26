@@ -2,7 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { Box, Image, Button, Heading, Text, Flex } from "@chakra-ui/react";
 
-const VC = ({ vcObj }) => {
+const VCCard = ({ vcObj }) => {
   const navi = useNavigate();
 
   function handleClick() {
@@ -140,6 +140,6 @@ const VC = ({ vcObj }) => {
   );
 };
 
-export default VC;
+export default VCCard;
 
 //23.07.21 1차 코드 수정 완료
