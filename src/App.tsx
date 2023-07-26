@@ -1,31 +1,37 @@
-import "./App.css";
 import { ChakraProvider } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
-import { Routes, Route, useLocation } from "react-router-dom";
+import { Routes, Route, useLocation, Outlet } from "react-router-dom";
 import theme from "./theme";
-import { Outlet } from "react-router-dom";
+import "./App.css";
 
-import ScreenChat from "./screen/screen_Chat";
-import ScreenExample from "./screen/screen_Example";
-import Footer from "./screen/screen_Footer";
-import Header from "./screen/screen_Header";
-import ScreenLogin from "./screen/screen_Login";
-import ScreenMain from "./screen/screen_Main";
-import ScreenMinting from "./screen/screen_Minting";
-import ScreenMyGovernance from "./screen/screen_My_Governance";
-import ScreenProfile from "./screen/screen_Profile";
-import ScreenRegister from "./screen/screen_Register";
-import ScreenRoomInfo from "./screen/screen_Room_Info";
-import ScreenRoomList from "./screen/screen_Room_List";
-import ScreenRoomMake from "./screen/screen_Room_Make";
-import ScreenStartupInfo from "./screen/screen_Startup_Info";
-import ScreenStartupList from "./screen/screen_Startup_List";
-import ScreenVCInfo from "./screen/screen_VC_Info";
-import ScreenVCList from "./screen/screen_VC_List";
-import ScreenWalletConnect from "./screen/screen_Wallet_Connect";
-
-import ScreenTest from "./screen/screen_Test";
-import ScreenNewsletter from "./screen/screen_Newsletter";
+// Community Screen
+import ScreenChat from "./screens/community/screen_Chat";
+import ScreenRoomInfo from "./screens/community/screen_Community_Info";
+import ScreenRoomList from "./screens/community/screen_Community_List";
+import ScreenRoomMake from "./screens/community/screen_Community_Make";
+// Layout Screen
+import Footer from "./screens/layout/screen_Footer";
+import Header from "./screens/layout/screen_Header";
+// Startup Screen
+import ScreenStartupInfo from "./screens/startup/screen_Startup_Info";
+import ScreenStartupList from "./screens/startup/screen_Startup_List";
+// Testing Screen
+import ScreenExample from "./screens/testing/screen_Example";
+import ScreenTest from "./screens/testing/screen_Test";
+import ScreenNewsletter from "./screens/testing/screen_Newsletter";
+// Ticket Screen
+import ScreenMinting from "./screens/ticket/screen_Minting";
+import ScreenMyGovernance from "./screens/ticket/screen_My_Governance";
+import ScreenWalletConnect from "./screens/ticket/screen_Wallet_Connect";
+// User Screen
+import ScreenLogin from "./screens/user/screen_Login";
+import ScreenProfile from "./screens/user/screen_Profile";
+import ScreenRegister from "./screens/user/screen_Register";
+// VC Screen
+import ScreenVCInfo from "./screens/vc/screen_VC_Info";
+import ScreenVCList from "./screens/vc/screen_VC_List";
+// Main Screen
+import ScreenMain from "./screens/screen_Main";
 
 export default function App() {
   const MainLayout = () => {
