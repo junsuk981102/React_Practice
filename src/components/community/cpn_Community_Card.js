@@ -1,10 +1,10 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { Image, Button, Heading, Text, Flex } from "@chakra-ui/react";
+import { Flex, Heading, Text, Button, Image } from "@chakra-ui/react";
 
 const CommunityCard = ({ communityObj }) => {
   const navi = useNavigate();
-
+  //커뮤니티 정보 페이지로 정보 전송
   function handleClick() {
     navi(`/screen_room_info`, {
       state: {
@@ -29,69 +29,36 @@ const CommunityCard = ({ communityObj }) => {
 
   return (
     <Flex
-      //정렬
-      position="relative"
-      //크기 및 여백
       w="300px"
       h="400px"
-      //배경
+      bg="white"
       borderRadius="xl"
       boxShadow="0 0 10px #00A29D"
       overflow="hidden"
     >
       {/* 상단 */}
-      <Flex
-        //크기 및 여백
-        w="100%"
-        h="50%"
-        //기능
-        as="button"
-        onClick={handleClick}
-      >
+      <Flex w="100%" h="50%" as="button" onClick={handleClick}>
+        {/* 커뮤니티 프로필 사진 */}
         <Image
-          //사진 위치
           src={communityObj.com_profileImg}
-          //크기
           w="100%"
           h="100%"
-          //효과
           _hover={{
             transform: "scale(1.1)",
             transition: "transform 0.3s ease",
           }}
         />
       </Flex>
-
       {/* 하단 */}
-      <Flex
-        //위치
-        position="absolute"
-        //크기 및 여백
-        w="100%"
-        h="50%"
-        mt="200px"
-      >
+      <Flex position="absolute" w="100%" mt="200px">
         {/* 커뮤니티 이름 */}
-        <Heading
-          //위치
-          position="absolute"
-          //여백
-          mt="5px"
-          ml="10px"
-          //글자
-          size="lg"
-        >
+        <Heading position="absolute" m="5px 0 0 10px" size="lg">
           {communityObj.com_name}
         </Heading>
-
         {/* 커뮤니티 카테고리 */}
         <Text
-          //위치
           position="absolute"
-          //여백
-          mt="40px"
-          ml="12px"
-          //글자
+          m="40px 0 0 12px"
           fontSize="xs"
           color="#00A29D"
         >
@@ -99,17 +66,12 @@ const CommunityCard = ({ communityObj }) => {
             ? communityObj.com_category.join("&")
             : communityObj.com_category}
         </Text>
-
         {/* 커뮤니티 참가인원 */}
         <Text
-          //위치
           position="absolute"
-          //여백
-          mt="160px"
-          ml="15px"
-          //글자
-          as="b"
+          m="160px 0 0 15px"
           fontSize="md"
+          fontWeight="bold"
           color="#00A29D"
         >
           현재 : {communityObj.com_member}명
@@ -117,19 +79,13 @@ const CommunityCard = ({ communityObj }) => {
 
         {/* 자세히 보기 버튼 */}
         <Button
-          //위치
           position="absolute"
-          //여백
           p="5px 10px"
-          mt="150px"
-          ml="190px"
-          //배경
+          m="150px 0 0 190px"
           bg="#00A29D"
           borderRadius="xl"
-          //글자
           fontSize="sm"
           color="white"
-          //기능
           onClick={() => handleClick()}
         >
           자세히 보기 {">"}
@@ -141,3 +97,4 @@ const CommunityCard = ({ communityObj }) => {
 export default CommunityCard;
 
 //23.07.21 1차 코드 수정 완료
+//23.07.27 2차 코드 수정 완료
