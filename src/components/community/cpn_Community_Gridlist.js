@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import CommunityCard from "../../components/community/cpn_Community_Card";
-import { Text, Box, Grid, Center, Button } from "@chakra-ui/react";
+import { Box, Text, Center, Button, Grid } from "@chakra-ui/react";
 import { AddIcon } from "@chakra-ui/icons";
 
 const CommunityGridlist = ({ communities, selectedValue }) => {
@@ -11,28 +11,16 @@ const CommunityGridlist = ({ communities, selectedValue }) => {
   function handleClick() {
     navi(`/screen_room_make`, {});
   }
+
+  // 커뮤니티 카드 리스트 출력
   const renderCommunities = () => {
-    //초기값일 때 모든 리스트 렌더링
+    //초기값일 때 모든 리스트 출력
     if (selectedValue === "전체") {
       return communities.map((community) => (
         //커뮤니티 카드
-        <Box key={community.id}>
-          <Box
-            //위치 및 정렬
-            position="relative"
-            //크기
-            w="300px"
-            h="400px"
-            m="20px"
-            //배경
-            bg="white"
-            borderRadius="xl"
-            boxShadow="0 0 10px #00A29D"
-            overflow="hidden"
-          >
-            {/* 커뮤니티 정보 */}
-            <CommunityCard communityObj={community} />
-          </Box>
+        <Box m="20px" key={community.id}>
+          {/* 커뮤니티 정보 */}
+          <CommunityCard communityObj={community} />
         </Box>
       ));
     }
@@ -41,34 +29,21 @@ const CommunityGridlist = ({ communities, selectedValue }) => {
     const filteredCommunities = communities.filter((community) =>
       community.com_category.includes(selectedValue)
     );
+
     //설정한 카테고리 스타트업이 없을 경우
     if (filteredCommunities.length === 0) {
       return (
-        <Center mt="50px" mb="200px" fontSize="2xl" fontWeight="bold">
+        <Center m="50px 0 0 0" fontSize="2xl" fontWeight="bold">
           아직 등록된 커뮤니티가 없습니다.
         </Center>
       );
     }
-
+    //설정한 카테고리 스타트업 카드 출력
     return filteredCommunities.map((community) => (
       //커뮤니티 카드
-      <Box key={community.id}>
-        <Box
-          //위치 및 정렬
-          position="relative"
-          //크기 및 여백
-          w="300px"
-          h="400px"
-          m="20px"
-          //배경
-          bg="white"
-          borderRadius="xl"
-          boxShadow="0 0 10px #00A29D"
-          overflow="hidden"
-        >
-          {/* 커뮤니티 정보 */}
-          <CommunityCard communityObj={community} />
-        </Box>
+      <Box m="20px" key={community.id}>
+        {/* 커뮤니티 정보 */}
+        <CommunityCard communityObj={community} />
       </Box>
     ));
   };
@@ -77,37 +52,24 @@ const CommunityGridlist = ({ communities, selectedValue }) => {
     <Grid gridTemplateColumns="repeat(auto-fit, minmax(300px, 1fr))">
       {/* 커뮤니티 생성 버튼 */}
       <Button
-        //위치 및 정렬
         flexDirection="column"
-        //크기 및 여백
         w="300px"
         h="400px"
         m="20px"
-        //배경
         bg="white"
         borderRadius="xl"
         boxShadow="0 0 10px #00A29D"
-        //기능
         onClick={handleClick}
       >
-        <AddIcon
-          //크기 및 여백
-          w="35px"
-          h="35px"
-          m="8px"
-          //글자
-          color="#5eccc8"
-        />
-        <Text
-          //글자
-          color="#5eccc8"
-        >
-          새로운 투자 커뮤니티 생성
-        </Text>
+        <AddIcon w="35px" h="35px" m="10px" color="#00A29D" />
+        <Text color="#00A29D">새로운 투자 커뮤니티 생성</Text>
       </Button>
+      {/* 커뮤니티 카드 리스트 */}
       {renderCommunities()}
     </Grid>
   );
 };
 
 export default CommunityGridlist;
+
+//23.07.27 1차 코드 수정
