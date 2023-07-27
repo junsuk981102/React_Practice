@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { auth, dbService } from "../../firebase-config";
 import { arrayUnion } from "firebase/firestore";
+import { Flex, Heading, Text, Image, IconButton } from "@chakra-ui/react";
 import { FaStar, FaRegStar } from "react-icons/fa6";
-import { Box, Text, Heading, Image, IconButton, Flex } from "@chakra-ui/react";
 
 const StartupInfoBasic = ({ state }) => {
   const [userUid, setUserUid] = useState("");
@@ -35,48 +35,57 @@ const StartupInfoBasic = ({ state }) => {
   }
 
   return (
-    <Flex alignItems="center" h="auto">
-      <Image
-        src={state.sup_logo}
-        w="200px"
-        h="200px"
-        borderRadius="xl"
-        objectFit="cover"
-      />
-      <Flex flexDirection="column" ml="25px">
-        <Flex alignItems="center">
-          <Heading size="lg">{state.sup_name}</Heading>
-          <IconButton
-            aria-label="Like"
-            backgroundColor="white"
-            color={activeButton === "yellow" ? "yellow" : "black"}
-            onClick={handleClick}
-            icon={
-              activeButton === "yellow" ? (
-                <FaStar style={{ fontSize: "25px" }} />
-              ) : (
-                <FaRegStar style={{ fontSize: "25px" }} />
-              )
-            }
-          />
-        </Flex>
-        <Box
-          textAlign="center"
-          w="100px"
-          p="5px"
-          marginY="10px"
-          bg="#00A29D"
+    <>
+      {/* 스타트업 기본정보 */}
+      <Flex alignItems="center" h="auto">
+        {/* 스타트업 로고 */}
+        <Image
+          src={state.sup_logo}
+          w="200px"
+          h="200px"
           borderRadius="xl"
-          fontWeight="bold"
-          fontSize="md"
-          color="white"
-        >
-          {state.sup_category}
-        </Box>
-        <Text fontSize="md">{state.sup_info}</Text>
+          objectFit="cover"
+        />
+        <Flex flexDirection="column" ml="25px">
+          <Flex alignItems="center">
+            {/* 스타트업 이름 */}
+            <Heading size="lg">{state.sup_name}</Heading>
+            {/* 즐겨찾기 버튼 */}
+            <IconButton
+              aria-label="Like"
+              backgroundColor="white"
+              color={activeButton === "yellow" ? "yellow" : "black"}
+              onClick={handleClick}
+              icon={
+                activeButton === "yellow" ? (
+                  <FaStar style={{ fontSize: "25px" }} />
+                ) : (
+                  <FaRegStar style={{ fontSize: "25px" }} />
+                )
+              }
+            />
+          </Flex>
+          {/* 스타트업 카테고리 */}
+          <Flex
+            justifyContent="center"
+            w="100px"
+            p="5px"
+            m="10px 0"
+            bg="#00A29D"
+            borderRadius="xl"
+            fontSize="sm"
+            color="white"
+          >
+            {state.sup_category}
+          </Flex>
+          {/* 스타트업 설명 */}
+          <Text fontSize="md">{state.sup_info}</Text>
+        </Flex>
       </Flex>
-    </Flex>
+    </>
   );
 };
 
 export default StartupInfoBasic;
+
+//23.07.27 1차 코드 수정
