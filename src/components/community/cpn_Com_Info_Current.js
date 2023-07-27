@@ -1,9 +1,10 @@
 import React from "react";
-import { Flex, Text } from "@chakra-ui/react";
+import { Flex } from "@chakra-ui/react";
 
 const ComInfoCurrent = ({ state }) => {
   return (
-    <Flex textAlign="center" justifyContent="center" mt="100px">
+    <Flex justifyContent="center" m="100px 0 0 0">
+      {/* 커뮤니티 참여인원 */}
       <Flex
         alignItems="center"
         justifyContent="center"
@@ -13,12 +14,13 @@ const ComInfoCurrent = ({ state }) => {
         border="1px solid black"
         borderRadius="xl"
         fontSize="md"
-        fontWeight="bold"
       >
-        <Text>{state.com_member}명 참여중</Text>
+        {state.com_member}명 참여중
       </Flex>
     </Flex>
   );
 };
 
 export default ComInfoCurrent;
+
+//23.07.27 1차 코드 수정
