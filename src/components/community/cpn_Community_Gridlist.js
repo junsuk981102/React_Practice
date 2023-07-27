@@ -30,7 +30,7 @@ const CommunityGridlist = ({ communities, selectedValue }) => {
       community.com_category.includes(selectedValue)
     );
 
-    //설정한 카테고리 스타트업이 없을 경우
+    //설정한 카테고리 커뮤니티가 없을 경우
     if (filteredCommunities.length === 0) {
       return (
         <Center m="50px 0 0 0" fontSize="2xl" fontWeight="bold">
@@ -38,7 +38,7 @@ const CommunityGridlist = ({ communities, selectedValue }) => {
         </Center>
       );
     }
-    //설정한 카테고리 스타트업 카드 출력
+    //설정한 카테고리 커뮤니티 카드 출력
     return filteredCommunities.map((community) => (
       //커뮤니티 카드
       <Box m="20px" key={community.id}>
