@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import ThrFirstVotingBef from "./cpn_Thr_First_Voting_Before";
-import ThrFirstVotingAft from "./cpn_Thr_First_Voting_After";
-import ThrSecondVotingBef from "./cpn_Thr_Second_Voting_Before";
-import ThrSecondVotingAft from "./cpn_Thr_Second_Voting_After";
-import ThrTabInfo from "./cpn_Thr_Tab_Info";
-import Chat from "../../components/chat/cpn_Chat";
+import TabVotingFirstBefore from "./cpn_Tab_Voting_First_Before";
+import TabVotingFirstAfter from "./cpn_Tab_Voting_First_After";
+import TabVotingSecondBefore from "./cpn_Tab_Voting_Second_Before";
+import TabVotingSecondAfter from "./cpn_Tab_Voting_Second_After";
+import TabCommunityInfo from "./cpn_Tab_Community_Info";
+import Chat from "../chat/cpn_Chat";
 import "../../chat.css";
 import {
   Flex,
@@ -88,7 +88,7 @@ function ThrTab({ state, ownerCount, setOwnerCount }) {
         </TabPanel>
         {/* 1차 투표 */}
         <TabPanel>
-          <ThrFirstVotingBef
+          <TabVotingFirstBefore
             state={state}
             ownerCount={ownerCount}
             setOwnerCount={setOwnerCount}
@@ -96,11 +96,11 @@ function ThrTab({ state, ownerCount, setOwnerCount }) {
         </TabPanel>
         {/* 1차 결과 */}
         <TabPanel>
-          <ThrFirstVotingAft state={state} />
+          <TabVotingFirstAfter state={state} />
         </TabPanel>
         {/* 2차 투표 */}
         <TabPanel>
-          <ThrSecondVotingBef
+          <TabVotingSecondBefore
             state={state}
             ownerCount={ownerCount}
             setOwnerCount={setOwnerCount}
@@ -108,11 +108,11 @@ function ThrTab({ state, ownerCount, setOwnerCount }) {
         </TabPanel>
         {/* 2차 결과 */}
         <TabPanel>
-          <ThrSecondVotingAft state={state} />
+          <TabVotingSecondAfter state={state} />
         </TabPanel>
         {/* 정보 */}
         <TabPanel>
-          <ThrTabInfo
+          <TabCommunityInfo
             state={state}
             ownerCount={ownerCount}
             setOwnerCount={setOwnerCount}

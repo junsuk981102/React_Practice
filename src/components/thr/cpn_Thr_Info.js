@@ -1,7 +1,7 @@
 import React from "react";
 import { Flex, Heading, Text, Image } from "@chakra-ui/react";
 
-function ThrComInfo({ state, comCategory }) {
+function ThrInfo({ state, comCategory }) {
   return (
     <Flex flexDirection="column">
       {/* 커뮤니티 사진 */}
@@ -44,6 +44,6 @@ function ThrComInfo({ state, comCategory }) {
   );
 }
 
-export default ThrComInfo;
+export default ThrInfo;
 
 //23.07.27 1차 코드 수정

@@ -2,7 +2,7 @@ import React from "react";
 import { useState } from "react";
 import { Flex, Text, Button, Image } from "@chakra-ui/react";
 
-const ThrFirstVotingBef = ({ state, ownerCount, setOwnerCount }) => {
+const TabVotingFirstBefore = ({ state, ownerCount, setOwnerCount }) => {
   const [votefirstBefore, setVoteFirstBefore] = useState(0); //1차 투표 여부
   const [vote1, setVote1] = useState(0); //후보 1번 투표
   const [vote2, setVote2] = useState(0); //후보 2번 투표
@@ -310,6 +310,6 @@ const ThrFirstVotingBef = ({ state, ownerCount, setOwnerCount }) => {
   );
 };
 
-export default ThrFirstVotingBef;
+export default TabVotingFirstBefore;
 
 //23.07.27 1차 코드 수정

@@ -3,7 +3,7 @@ import { useState } from "react";
 
 import { Button, Text, Flex, Image, Box } from "@chakra-ui/react";
 
-const ThrTabInfo = ({ state, ownerCount, setOwnerCount }) => {
+const TabCommunityInfo = ({ state, ownerCount, setOwnerCount }) => {
   // com_createAt을 YYYY-MM-DD 형식으로 출력
   const timestamp = state.com_createAt;
   const date = new Date(timestamp);
@@ -290,4 +290,4 @@ const ThrTabInfo = ({ state, ownerCount, setOwnerCount }) => {
   );
 };
 
-export default ThrTabInfo;
+export default TabCommunityInfo;

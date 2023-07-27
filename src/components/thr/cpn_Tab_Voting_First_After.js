@@ -1,7 +1,7 @@
 import React from "react";
 import { Flex, Text, Image } from "@chakra-ui/react";
 
-const ThrFirstVotingAft = ({ state }) => {
+const TabVotingFirstAfter = ({ state }) => {
   const percent1 = 531; // 1번 득표
   const percent2 = 135; // 2번 득표
   const percent3 = 223; // 3번 득표
@@ -80,6 +80,6 @@ const ThrFirstVotingAft = ({ state }) => {
   );
 };
 
-export default ThrFirstVotingAft;
+export default TabVotingFirstAfter;
 
 //23.07.27 1차 코드 수정

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useLocation } from "react-router-dom";
-import ThrComInfo from "../../components/community/cpn_Thr_Com_Info";
-import ThrTab from "../../components/community/cpn_Thr_Tab";
+import ThrInfo from "../../components/thr/cpn_Thr_Info";
+import ThrTab from "../../components/thr/cpn_Thr_Tab";
 import { Flex } from "@chakra-ui/react";
 
 function ScreenChat() {
@@ -42,7 +42,7 @@ function ScreenChat() {
           border="1px solid black"
         >
           {/* 커뮤니티 정보 섹션 */}
-          <ThrComInfo state={state} comCategory={comCategory} />
+          <ThrInfo state={state} comCategory={comCategory} />
           {/* 커뮤니티 Tab */}
           <ThrTab
             state={state}
