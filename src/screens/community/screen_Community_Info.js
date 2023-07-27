@@ -1,31 +1,29 @@
 import React, { useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import ErrorModal from "../../components/community/cpn_Error_Modal";
 import ComInfoBasic from "../../components/community/cpn_Com_Info_Basic";
 import ComInfoCurrent from "../../components/community/cpn_Com_Info_Current";
 import ComInfoFavor from "../../components/community/cpn_Com_Info_Favor";
 import ComInfoInvest from "../../components/community/cpn_Com_Info_Invest";
 import ComInfoTicket from "../../components/community/cpn_Com_Info_Ticket";
+import ErrorModal from "../../components/community/cpn_Error_Modal";
 import {
   Box,
-  Button,
-  Heading,
-  useBreakpointValue,
   Flex,
+  Heading,
+  Button,
+  useBreakpointValue,
 } from "@chakra-ui/react";
 
 const ScreenRoomInfo = () => {
   const { state } = useLocation();
   const navi = useNavigate();
-
   const boxPadding = useBreakpointValue({ base: "20px", xl: "200px" }); // 양쪽 여백
-
   const [ownerCount, setOwnerCount] = useState(state.com_owner); //티켓 소유 갯수
-
+  //티켓 구매
   const handleClick_sell = (sellCount) => {
-    setOwnerCount(ownerCount + sellCount); // ownerCount를 증가시킴
+    setOwnerCount(ownerCount + sellCount);
   };
-
+  //에러 메시지 Modal 오픈
   const [isOpen, setIsOpen] = useState(false);
 
   let comCategory = [];
@@ -70,49 +68,33 @@ const ScreenRoomInfo = () => {
       {/* 채팅방 정보 전체 화면 */}
 
       {/* 채팅방 정보 전체 배경 화면 */}
-      <Box
-        //크기 및 여백
+      <Flex
+        flexDirection="column"
         h="auto"
         pb="200px"
         px={boxPadding}
-        //배경
         bg="#E5F2F2"
         borderTop="1px solid #00A29D"
       >
         {/* 제목 섹션 */}
-        <Heading
-          //여백
-          marginY="30px"
-          //글자
-          size="lg"
-        >
+        <Heading m="30px 0" size="lg">
           커뮤니티 소개
         </Heading>
-
         {/* 정보 섹션 */}
         <Box
-          //크기 및 여백
           w="900px"
           h="auto"
           p="30px"
-          //배경
           bg="white"
-          border="3px solid #00A29D"
+          border="2px solid #00A29D"
           borderRadius="xl"
         >
+          {/* 커뮤니티 기본 정보 섹션 */}
           <ComInfoBasic state={state} />
-
           {/* 커뮤니티 투자 금액 섹션 */}
           <ComInfoInvest state={state} />
-
           {/* 커뮤니티 티켓 & 관심회사 섹션 */}
-          <Flex
-            //정렬
-            justifyItems="center"
-            //여백
-            mt="120px"
-            ml="20px"
-          >
+          <Flex m="120px 0 0 20px">
             {/* 티켓 섹션 */}
             <ComInfoTicket
               state={state}
@@ -122,20 +104,17 @@ const ScreenRoomInfo = () => {
             {/* 관심회사 섹션 */}
             <ComInfoFavor />
           </Flex>
-
           {/* 커뮤니티 현황 섹션 */}
           <ComInfoCurrent state={state} />
-
-          {/* 커뮤니티 참여 섹션 */}
+          {/* 커뮤니티 참여 버튼 */}
           <Flex justifyContent="center" p="20px">
             <Button
               w="600px"
               h="60px"
-              bg={ownerCount > 0 ? "#00A29D" : "grey"}
+              bg={ownerCount > 0 ? "#00A29D" : "lightgrey"}
               borderRadius="xl"
               variant="none"
               fontSize="lg"
-              fontWeight="bold"
               color="white"
               onClick={handleClick_chat}
             >
@@ -143,8 +122,7 @@ const ScreenRoomInfo = () => {
             </Button>
           </Flex>
         </Box>
-      </Box>
-
+      </Flex>
       {/* 에러메시지 Modal */}
       <ErrorModal isOpen={isOpen} onClose={() => setIsOpen(false)} />
     </>
@@ -154,3 +132,4 @@ const ScreenRoomInfo = () => {
 export default ScreenRoomInfo;
 
 //23.07.25 1차 코드 수정 완료
+//23.07.27 2차 코드 수정
