@@ -1,61 +1,47 @@
 import React from "react";
-import { Box, Grid, Center } from "@chakra-ui/react";
 import VCCard from "../../components/vc/cpn_VC_Card";
+import { Box, Center, Grid } from "@chakra-ui/react";
 
 const VCGridlist = ({ vcs, selectedValue }) => {
   const renderVCs = () => {
     if (selectedValue === "전체") {
+      //초기값일 때 모든 리스트 출력
       return vcs.map((vc) => (
-        <Box key={vc.id}>
-          <Box
-            position="relative"
-            w="500px"
-            h="360px"
-            m="20px"
-            bg="white"
-            borderRadius="xl"
-            boxShadow="0 0 10px #00A29D"
-            overflow="hidden"
-          >
-            <VCCard vcObj={vc} />
-          </Box>
+        //VC 카드
+        <Box key={vc.id} m="20px">
+          {/* VC 정보 */}
+          <VCCard vcObj={vc} />
         </Box>
       ));
     }
-
+    //설정한 카테고리 필터링
     const filteredVCs = vcs.filter((vc) => vc.vc_category === selectedValue);
-
+    //설정한 카테고리 스타트업이 없을 경우
     if (filteredVCs.length === 0) {
       return (
-        <Center mt="50px" mb="200px" fontSize="2xl" fontWeight="bold">
+        <Center m="50px 0 200px 0" fontSize="2xl" fontWeight="bold">
           아직 등록된 VC가 없습니다.
         </Center>
       );
     }
-
+    //설정한 카테고리 VC 카드 출력
     return filteredVCs.map((vc) => (
-      <Box key={vc.id}>
-        <Box
-          position="relative"
-          w="500px"
-          h="360px"
-          m="20px"
-          bg="white"
-          borderRadius="xl"
-          boxShadow="0 0 10px #00A29D"
-          overflow="hidden"
-        >
-          <VCCard vcObj={vc} />
-        </Box>
+      //VC 카드
+      <Box key={vc.id} m="20px">
+        {/* VC 정보 */}
+        <VCCard vcObj={vc} />
       </Box>
     ));
   };
 
   return (
     <Grid gridTemplateColumns="repeat(auto-fit, minmax(500px, 1fr))">
+      {/* VC 카드 리스트 */}
       {renderVCs()}
     </Grid>
   );
 };
 
 export default VCGridlist;
+
+//23.07.27 1차 코드 수정
