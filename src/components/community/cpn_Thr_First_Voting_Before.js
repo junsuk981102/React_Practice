@@ -1,18 +1,16 @@
 import React from "react";
 import { useState } from "react";
-
-import { Button, Text, Flex, Image } from "@chakra-ui/react";
+import { Flex, Text, Button, Image } from "@chakra-ui/react";
 
 const ThrFirstVotingBef = ({ state, ownerCount, setOwnerCount }) => {
-  const [votefirstBefore, setVoteFirstBefore] = useState(0);
+  const [votefirstBefore, setVoteFirstBefore] = useState(0); //1차 투표 여부
   const [vote1, setVote1] = useState(0); //후보 1번 투표
   const [vote2, setVote2] = useState(0); //후보 2번 투표
   const [vote3, setVote3] = useState(0); //후보 3번 투표
-  const percent1 = 531;
-  const percent2 = 135;
-  const percent3 = 223;
-  const percentA = percent1 + percent2 + percent3;
-
+  const percent1 = 531; // 1번 득표
+  const percent2 = 135; // 2번 득표
+  const percent3 = 223; // 3번 득표
+  const percentA = percent1 + percent2 + percent3; // 총 득표
   //후보 1번 투표
   const handleClick_plus_v1 = () => {
     if (vote1 + vote2 + vote3 < ownerCount) {
@@ -61,7 +59,7 @@ const ThrFirstVotingBef = ({ state, ownerCount, setOwnerCount }) => {
     if (votefirstBefore === 0) {
       return (
         <>
-          <Flex justifyContent="center" mt="60px">
+          <Flex justifyContent="center" m="60px 0 0 0">
             <Button
               w="300px"
               h="50px"
@@ -72,8 +70,8 @@ const ThrFirstVotingBef = ({ state, ownerCount, setOwnerCount }) => {
                   : "lightgrey"
               }
               variant="none"
-              color="white"
               fontSize="lg"
+              color="white"
               onClick={votingFirst}
             >
               투표하기
@@ -84,7 +82,8 @@ const ThrFirstVotingBef = ({ state, ownerCount, setOwnerCount }) => {
     } else {
       return (
         <>
-          <Flex flexDirection="column" alignItems="center" mt="60px">
+          <Flex flexDirection="column" alignItems="center" m="60px 0 0 0">
+            {/* 투표 현황 텍스트 */}
             <Flex flexDirection="column" w="550px" textAlign="start">
               <Text fontWeight="bold">
                 {"<"}투표 현황{">"}
@@ -93,6 +92,7 @@ const ThrFirstVotingBef = ({ state, ownerCount, setOwnerCount }) => {
                 투표 종료까지 D - 2일 16시간
               </Text>
             </Flex>
+            {/* 투표 현황 그래프 */}
             <Flex w="550px" border="1px solid white">
               <Flex
                 w={(percent1 / percentA) * 100 + "%"}
@@ -134,32 +134,29 @@ const ThrFirstVotingBef = ({ state, ownerCount, setOwnerCount }) => {
   return (
     <>
       {/* 정보 */}
-      <Flex flexDirection="column" p="10px" mb="30px">
+      <Flex flexDirection="column" p="10px">
         {/* 제목 */}
-        <Flex mb="15px">
-          <Text fontSize="2xl" fontWeight="bold" mr="15px">
+        <Flex m="0 0 15px 0">
+          <Text fontSize="2xl" fontWeight="bold" m="0 15px 0 0">
             1차 투표 중
           </Text>
           <Image src="../image/community/icon_voting.png" w="30px" h="30px" />
         </Flex>
         {/* 설명 */}
-        <Text fontSize="xl" fontWeight="bold" mb="15px">
+        <Text>
           {state.com_name} 1차 투표 기간입니다. {"("}
           2023.07.23~2023.07.31{")"}
           <br />
           원하는 기업에 보유한 티켓 개수만큼 투표해주세요.
         </Text>
         {/* 보유 티켓 */}
-        <Text fontSize="lg" mb="5px">
-          현재 보유한 티켓 수 : {ownerCount}매
-        </Text>
+        <Text m="15px 0">현재 보유한 티켓 수 : {ownerCount}매</Text>
       </Flex>
       {/* 1차 투표 */}
       <Flex justifyContent="center">
         <Flex
           flexDirection="column"
           alignItems="center"
-          marginX="10px"
           p="5px"
           borderRadius="xl"
           boxShadow="0 0 5px #00A29D"
@@ -170,57 +167,36 @@ const ThrFirstVotingBef = ({ state, ownerCount, setOwnerCount }) => {
             h="150px"
             borderRadius="xl"
           />
-          <Text marginY="5px" fontSize="md" fontWeight="bold">
+          <Text m="5px 0" fontWeight="bold">
             펫프랜즈
           </Text>
           <Flex
-            //정렬
             alignItems="center"
             justifyContent="center"
             textAlign="center"
-            //크기
-            w="140px"
+            w="120px"
             h="30px"
-            mb="10px"
-            //배경
             border="1px solid #00A29D"
             borderRadius="xl"
           >
             {/* 마이너스 버튼 */}
             <Button
-              //크기
-              w="30px"
-              //배경
               variant="none"
-              //글자
-              fontSize="25px"
-              fontWeight="bold"
+              fontSize="2xl"
               color={vote1 > 0 ? "#00A29D" : "lightgrey"}
-              //기능
               onClick={handleClick_minus_v1}
             >
               -
             </Button>
             {/* 구매 갯수 */}
-            <Text
-              //크기
-              w="40px"
-            >
-              {vote1}
-            </Text>
+            <Text w="30px">{vote1}</Text>
             {/* 플러스 버튼 */}
             <Button
-              //크기
-              w="30px"
-              //배경
               variant="none"
-              //글자
-              fontSize="25px"
-              fontWeight="bold"
+              fontSize="2xl"
               color={
                 vote1 + vote2 + vote3 < ownerCount ? "#00A29D" : "lightgrey"
               }
-              //기능
               onClick={handleClick_plus_v1}
             >
               +
@@ -230,8 +206,8 @@ const ThrFirstVotingBef = ({ state, ownerCount, setOwnerCount }) => {
         <Flex
           flexDirection="column"
           alignItems="center"
-          marginX="40px"
           p="5px"
+          m="0 60px"
           borderRadius="xl"
           boxShadow="0 0 5px #00A29D"
         >
@@ -241,57 +217,36 @@ const ThrFirstVotingBef = ({ state, ownerCount, setOwnerCount }) => {
             h="150px"
             borderRadius="xl"
           />
-          <Text mt="5px" fontSize="md" fontWeight="bold">
+          <Text m="5px 0" fontWeight="bold">
             페오펫
           </Text>
           <Flex
-            //정렬
             alignItems="center"
             justifyContent="center"
             textAlign="center"
-            //크기
-            w="140px"
+            w="120px"
             h="30px"
-            mb="10px"
-            //배경
             border="1px solid #00A29D"
             borderRadius="xl"
           >
             {/* 마이너스 버튼 */}
             <Button
-              //크기
-              w="30px"
-              //배경
               variant="none"
-              //글자
-              fontSize="25px"
-              fontWeight="bold"
+              fontSize="2xl"
               color={vote2 > 0 ? "#00A29D" : "lightgrey"}
-              //기능
               onClick={handleClick_minus_v2}
             >
               -
             </Button>
             {/* 구매 갯수 */}
-            <Text
-              //크기
-              w="40px"
-            >
-              {vote2}
-            </Text>
+            <Text w="40px">{vote2}</Text>
             {/* 플러스 버튼 */}
             <Button
-              //크기
-              w="30px"
-              //배경
               variant="none"
-              //글자
-              fontSize="25px"
-              fontWeight="bold"
+              fontSize="2xl"
               color={
                 vote1 + vote2 + vote3 < ownerCount ? "#00A29D" : "lightgrey"
               }
-              //기능
               onClick={handleClick_plus_v2}
             >
               +
@@ -301,7 +256,6 @@ const ThrFirstVotingBef = ({ state, ownerCount, setOwnerCount }) => {
         <Flex
           flexDirection="column"
           alignItems="center"
-          marginX="10px"
           p="5px"
           borderRadius="xl"
           boxShadow="0 0 5px #00A29D"
@@ -312,53 +266,33 @@ const ThrFirstVotingBef = ({ state, ownerCount, setOwnerCount }) => {
             h="150px"
             borderRadius="xl"
           />
-          <Text mt="5px" fontSize="md" fontWeight="bold">
+          <Text m="5px 0" fontWeight="bold">
             핏펫
           </Text>
           <Flex
-            //정렬
             alignItems="center"
             justifyContent="center"
             textAlign="center"
-            //크기
-            w="140px"
+            w="120px"
             h="30px"
-            mb="10px"
-            //배경
             border="1px solid #00A29D"
             borderRadius="xl"
           >
             {/* 마이너스 버튼 */}
             <Button
-              //크기
-              w="30px"
-              //배경
               variant="none"
-              //글자
-              fontSize="25px"
-              fontWeight="bold"
+              fontSize="2xl"
               color={vote3 > 0 ? "#00A29D" : "lightgrey"}
-              //기능
               onClick={handleClick_minus_v3}
             >
               -
             </Button>
             {/* 구매 갯수 */}
-            <Text
-              //크기
-              w="40px"
-            >
-              {vote3}
-            </Text>
+            <Text w="30px">{vote3}</Text>
             {/* 플러스 버튼 */}
             <Button
-              //크기
-              w="30px"
-              //배경
               variant="none"
-              //글자
-              fontSize="25px"
-              fontWeight="bold"
+              fontSize="2xl"
               color={
                 vote1 + vote2 + vote3 < ownerCount ? "#00A29D" : "lightgrey"
               }
@@ -377,3 +311,5 @@ const ThrFirstVotingBef = ({ state, ownerCount, setOwnerCount }) => {
 };
 
 export default ThrFirstVotingBef;
+
+//23.07.27 1차 코드 수정
