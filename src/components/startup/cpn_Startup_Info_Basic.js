@@ -79,7 +79,7 @@ const StartupInfoBasic = ({ state }) => {
             {state.sup_category}
           </Flex>
           {/* 스타트업 설명 */}
-          <Text fontSize="md">{state.sup_info}</Text>
+          <Text>{state.sup_info}</Text>
         </Flex>
       </Flex>
     </>
