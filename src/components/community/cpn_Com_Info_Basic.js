@@ -1,7 +1,8 @@
 import React from "react";
-import { Box, Flex, Heading, Text, Image } from "@chakra-ui/react";
+import { Flex, Heading, Text, Image } from "@chakra-ui/react";
 
 const ComInfoBasic = ({ state }) => {
+  //커뮤니티 카테고리 2개 이상일 때 구분
   const comCategory = Array.isArray(state.com_category)
     ? state.com_category
     : state.com_category.split(",");
@@ -17,33 +18,28 @@ const ComInfoBasic = ({ state }) => {
         objectFit="cover"
       />
       {/* 커뮤니티 기본 정보 */}
-      <Flex flexDirection="column" ml="25px">
+      <Flex flexDirection="column" p="25px">
         {/* 커뮤니티 이름 */}
         <Heading size="lg">{state.com_name}</Heading>
         {/* 커뮤니티 카테고리 */}
         <Flex flexDirection="row">
           {comCategory.map((category, index) => (
-            <Box
+            <Flex
               key={index}
-              textAlign="center"
-              w="100px"
-              p="5px"
-              marginY="10px"
-              mr="5px"
+              justifyContent="center"
+              p="5px 10px"
+              m="10px 5px 10px 0"
               bg="#00A29D"
               borderRadius="xl"
-              fontSize="md"
-              fontWeight="bold"
+              fontSize="sm"
               color="white"
             >
               {category}
-            </Box>
+            </Flex>
           ))}
         </Flex>
         {/* 커뮤니티 설명 */}
-        <Text fontWeight="bold" fontSize="md">
-          {state.com_info}
-        </Text>
+        <Text fontSize="md">{state.com_info}</Text>
       </Flex>
     </Flex>
   );
