@@ -4,17 +4,17 @@ import { Menu, MenuButton, MenuList, MenuItem } from "@chakra-ui/react";
 const VCCategory = ({ selectedValue, handleMenuItemClick }) => {
   return (
     <Menu>
+      {/* VC 카테고리 버튼 */}
       <MenuButton
-        w="100px"
-        h="40px"
+        p="5px 20px"
         bg="#00A29D"
         borderRadius="3xl"
-        fontSize="md"
         fontWeight="bold"
         color="white"
       >
         {selectedValue}
       </MenuButton>
+      {/* VC 카테고리 리스트 */}
       <MenuList bg="#00A29D" color="white">
         <MenuItem
           bg="none"
@@ -51,3 +51,5 @@ const VCCategory = ({ selectedValue, handleMenuItemClick }) => {
 };
 
 export default VCCategory;
+
+//23.07.27 1차 코드 수정 완료
