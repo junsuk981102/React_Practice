@@ -6,16 +6,15 @@ import ThrSecondVotingAft from "./cpn_Thr_Second_Voting_After";
 import ThrTabInfo from "./cpn_Thr_Tab_Info";
 import Chat from "../../components/chat/cpn_Chat";
 import "../../chat.css";
-
 import {
+  Flex,
+  Divider,
   Tabs,
   TabList,
   TabPanels,
   Tab,
   TabPanel,
   TabIndicator,
-  Divider,
-  Flex,
 } from "@chakra-ui/react";
 
 function ThrTab({ state, ownerCount, setOwnerCount }) {
@@ -23,9 +22,9 @@ function ThrTab({ state, ownerCount, setOwnerCount }) {
 
   return (
     <Tabs
-      size="lg"
       isFitted
       position="relative"
+      size="lg"
       variant="unstyled"
       index={selectedTab} // 현재 선택된 탭의 인덱스를 지정
       onChange={(index) => setSelectedTab(index)} // 탭이 변경될 때 상태를 업데이트
@@ -75,14 +74,8 @@ function ThrTab({ state, ownerCount, setOwnerCount }) {
           정보
         </Tab>
       </TabList>
-      <TabIndicator
-        mt="-1.5px"
-        ml="40px"
-        maxWidth="50px"
-        h="2px"
-        bg="#00A29D"
-        borderRadius="1px"
-      />
+      <TabIndicator m="-1.5px 0 0 40px" maxWidth="50px" h="2px" bg="#00A29D" />
+
       <Divider />
 
       {/* 정보창 */}
@@ -93,7 +86,6 @@ function ThrTab({ state, ownerCount, setOwnerCount }) {
             <Chat />
           </Flex>
         </TabPanel>
-
         {/* 1차 투표 */}
         <TabPanel>
           <ThrFirstVotingBef
@@ -102,12 +94,10 @@ function ThrTab({ state, ownerCount, setOwnerCount }) {
             setOwnerCount={setOwnerCount}
           />
         </TabPanel>
-
         {/* 1차 결과 */}
         <TabPanel>
           <ThrFirstVotingAft state={state} />
         </TabPanel>
-
         {/* 2차 투표 */}
         <TabPanel>
           <ThrSecondVotingBef
@@ -116,12 +106,10 @@ function ThrTab({ state, ownerCount, setOwnerCount }) {
             setOwnerCount={setOwnerCount}
           />
         </TabPanel>
-
         {/* 2차 결과 */}
         <TabPanel>
           <ThrSecondVotingAft state={state} />
         </TabPanel>
-
         {/* 정보 */}
         <TabPanel>
           <ThrTabInfo
@@ -136,3 +124,5 @@ function ThrTab({ state, ownerCount, setOwnerCount }) {
 }
 
 export default ThrTab;
+
+//23.07.27 1차 코드 수정
