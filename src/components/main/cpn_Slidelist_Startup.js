@@ -1,7 +1,7 @@
 import React from "react";
 import Slider from "react-slick";
-import { Box } from "@chakra-ui/react";
 import StartupCard from "../startup/cpn_Startup_Card";
+import { Box } from "@chakra-ui/react";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
@@ -10,22 +10,8 @@ export const renderStartups = (startups) => {
   return startups.map((startup) => (
     // 스타트업 카드
     <Box key={startup.id} m="20px">
-      <Box
-        //위치
-        position="relative"
-        //크기 및 여백
-        w="500px"
-        h="360px"
-        m="20px"
-        //배경
-        bg="white"
-        borderRadius="xl"
-        boxShadow="0 0 10px #00A29D"
-        overflow="hidden"
-      >
-        {/* 스타트업 카드 정보 */}
-        <StartupCard startupObj={startup} />
-      </Box>
+      {/* 스타트업 정보 */}
+      <StartupCard startupObj={startup} />
     </Box>
   ));
 };
@@ -48,3 +34,5 @@ export const SlideListSup = ({ startups }) => {
     <Slider {...sup_slide_settings}>{renderStartups(startups)}</Slider>
   );
 };
+
+//23.07.27 1차 코드 수정
