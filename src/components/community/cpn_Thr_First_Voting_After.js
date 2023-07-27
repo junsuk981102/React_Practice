@@ -1,30 +1,29 @@
 import React from "react";
-
-import { Text, Flex, Image } from "@chakra-ui/react";
+import { Flex, Text, Image } from "@chakra-ui/react";
 
 const ThrFirstVotingAft = ({ state }) => {
-  const percent1 = 531;
-  const percent2 = 135;
-  const percent3 = 223;
-  const percentA = percent1 + percent2 + percent3;
+  const percent1 = 531; // 1번 득표
+  const percent2 = 135; // 2번 득표
+  const percent3 = 223; // 3번 득표
+  const percentA = percent1 + percent2 + percent3; // 총 득표
 
   return (
     <>
       {/* 정보 */}
-      <Flex flexDirection="column" p="10px" mb="30px">
+      <Flex flexDirection="column" p="10px">
         {/* 제목 */}
-        <Flex mb="15px">
-          <Text fontSize="2xl" fontWeight="bold" mr="15px">
+        <Flex m="0 0 15px 0">
+          <Text fontSize="2xl" fontWeight="bold" m="0 15px 0 0">
             1차 투표 종료
           </Text>
           <Image src="../image/community/icon_voting.png" w="30px" h="30px" />
         </Flex>
         {/* 설명 */}
-        <Text fontSize="xl" fontWeight="bold" mb="15px">
+        <Text m="0 0 15px 0">
           {state.com_name} 1차 투표가 종료되었습니다. <br />
           3일 뒤{"("}23.07.26{")"}에 2차 투표가 시작됩니다.
         </Text>
-
+        {/* 결과 */}
         <Flex flexDirection="column" alignItems="center">
           <Text m="25px" fontSize="lg" fontWeight="bold">
             {"<"}투표 결과{">"}
@@ -40,25 +39,21 @@ const ThrFirstVotingAft = ({ state }) => {
                 w="150px"
                 h="150px"
               />
-              <Text fontSize="sm" marginY="5px">
-                페오펫
-              </Text>
-              <Text fontSize="sm">
-                {((percent2 / percentA) * 100).toFixed(1) + "%"}
-              </Text>
+              <Text m="5px 0">페오펫</Text>
+              <Text>{((percent2 / percentA) * 100).toFixed(1) + "%"}</Text>
             </Flex>
             <Flex
               flexDirection="column"
               alignSelf="flex-end"
               textAlign="center"
-              marginX="40px"
+              m="0 40px 0 40px"
             >
               <Image
                 src="../image/community/company_ex1.png"
                 w="250px"
                 h="250px"
               />
-              <Text fontSize="2xl" fontWeight="bold" marginY="5px">
+              <Text fontSize="2xl" fontWeight="bold" m="5px 0">
                 펫프렌즈
               </Text>
               <Text fontSize="2xl" fontWeight="bold" color="#00A29D">
@@ -75,12 +70,8 @@ const ThrFirstVotingAft = ({ state }) => {
                 w="150px"
                 h="150px"
               />
-              <Text fontSize="sm" marginY="5px">
-                핏펫
-              </Text>
-              <Text fontSize="sm">
-                {((percent3 / percentA) * 100).toFixed(1) + "%"}
-              </Text>
+              <Text m="5px 0">핏펫</Text>
+              <Text>{((percent3 / percentA) * 100).toFixed(1) + "%"}</Text>
             </Flex>
           </Flex>
         </Flex>
@@ -90,3 +81,5 @@ const ThrFirstVotingAft = ({ state }) => {
 };
 
 export default ThrFirstVotingAft;
+
+//23.07.27 1차 코드 수정
