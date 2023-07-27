@@ -17,7 +17,6 @@ const TutorialModal = ({ isOpen, onClose, onForeverClose }) => {
   const handleCloseModal = () => {
     onClose();
   };
-
   //Modal 쭉 닫기
   const handleForeverCloseModal = () => {
     onForeverClose();
@@ -27,7 +26,7 @@ const TutorialModal = ({ isOpen, onClose, onForeverClose }) => {
     <Modal size="3xl" isOpen={isOpen} onClose={handleCloseModal}>
       <ModalOverlay />
       <ModalContent bg="#E5F2F2">
-        <ModalHeader marginY="20px" fontWeight="bold">
+        <ModalHeader m="20px 0" fontWeight="bold">
           STOT이 처음이신가요?
         </ModalHeader>
         <ModalCloseButton />
@@ -74,3 +73,5 @@ const TutorialModal = ({ isOpen, onClose, onForeverClose }) => {
 };
 
 export default TutorialModal;
+
+//23.07.27 1차 코드 수정
