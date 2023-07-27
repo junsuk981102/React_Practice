@@ -1,7 +1,7 @@
 import React from "react";
 import Slider from "react-slick";
-import { Box } from "@chakra-ui/react";
 import VCCard from "../vc/cpn_VC_Card";
+import { Box } from "@chakra-ui/react";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
@@ -10,22 +10,8 @@ export const renderVCs = (vcs) => {
   return vcs.map((vc) => (
     // VC 카드
     <Box key={vc.id} m="20px">
-      <Box
-        //위치
-        position="relative"
-        //크기 및 여백
-        w="500px"
-        h="360px"
-        m="20px"
-        //배경
-        bg="white"
-        borderRadius="xl"
-        boxShadow="0 0 10px #00A29D"
-        overflow="hidden"
-      >
-        {/* VC 정보 */}
-        <VCCard vcObj={vc} />
-      </Box>
+      {/* VC 정보 */}
+      <VCCard vcObj={vc} />
     </Box>
   ));
 };
@@ -48,3 +34,5 @@ export const SlideListVC = ({ vcs }) => {
     <Slider {...vc_slide_settings}>{renderVCs(vcs)}</Slider>
   );
 };
+
+//23.07.27 1차 코드 수정
