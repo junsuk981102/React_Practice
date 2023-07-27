@@ -1,5 +1,5 @@
 import React from "react";
-import { Heading, Text, Flex, Box, Image } from "@chakra-ui/react";
+import { Box, Flex, Heading, Text, Image } from "@chakra-ui/react";
 
 const ComInfoBasic = ({ state }) => {
   const comCategory = Array.isArray(state.com_category)
@@ -7,7 +7,7 @@ const ComInfoBasic = ({ state }) => {
     : state.com_category.split(",");
 
   return (
-    <Flex position="relative" alignItems="center">
+    <Flex alignItems="center">
       {/* 커뮤니티 프로필 사진 */}
       <Image
         src={state.com_profileImg}
@@ -17,7 +17,7 @@ const ComInfoBasic = ({ state }) => {
         objectFit="cover"
       />
       {/* 커뮤니티 기본 정보 */}
-      <Box ml="25px">
+      <Flex flexDirection="column" ml="25px">
         {/* 커뮤니티 이름 */}
         <Heading size="lg">{state.com_name}</Heading>
         {/* 커뮤니티 카테고리 */}
@@ -27,28 +27,28 @@ const ComInfoBasic = ({ state }) => {
               key={index}
               textAlign="center"
               w="100px"
-              h="auto"
               p="5px"
               marginY="10px"
               mr="5px"
               bg="#00A29D"
               borderRadius="xl"
+              fontSize="md"
+              fontWeight="bold"
+              color="white"
             >
-              <Text fontWeight="bold" fontSize="md" color="white">
-                {category}
-              </Text>
+              {category}
             </Box>
           ))}
         </Flex>
         {/* 커뮤니티 설명 */}
-        <Box>
-          <Text fontWeight="bold" fontSize="md">
-            {state.com_info}
-          </Text>
-        </Box>
-      </Box>
+        <Text fontWeight="bold" fontSize="md">
+          {state.com_info}
+        </Text>
+      </Flex>
     </Flex>
   );
 };
 
 export default ComInfoBasic;
+
+//23.07.27 1차 코드 수정
