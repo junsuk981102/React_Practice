@@ -62,7 +62,7 @@ const ScreenMain = () => {
       {/* Main 전체 화면 */}
 
       {/* 메인 배너 사진 */}
-      <Image src="image/main/banner_stot.png" w="100%" h="auto" />
+      <Image src="image/main/banner_motion.gif" w="100%" h="auto" />
 
       {/* 메인 정보 섹션 */}
       <Box px={boxPadding} pb="200px">
