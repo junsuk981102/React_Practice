@@ -4,12 +4,19 @@ import { getAuth } from "firebase/auth";
 import { doc, getDoc } from "firebase/firestore";
 import { dbService } from "../../firebase-config";
 import Logout from "./cpn_Logout";
+import FavorCommunity from "./cpn_User_Favor_Community";
+import FavorStartup from "./cpn_User_Favor_Startup";
+import FavorVC from "./cpn_User_Favor_VC";
 import { Image, Text, Grid, Heading, Flex } from "@chakra-ui/react";
 
 const User = () => {
   const auth = getAuth();
   const [user, loading, error] = useAuthState(auth);
   const [userId, setUserId] = useState("");
+  const defaultProfileImage = "/image/user/icon_user.png"; // 기본 디폴트 이미지 경로
+  const photo = user?.photoURL || defaultProfileImage;
+  const name = user?.displayName;
+  const id = user?.id;
   const [userData, setUserData] = useState(null);
   const [startups, setStartups] = useState([]);
   const [communities, setCommunities] = useState([]);
@@ -35,16 +42,6 @@ const User = () => {
     if (userData) {
       // 한 번에 모든 데이터 가져오기
       const fetchAllData = async () => {
-        const startupDocs = await Promise.all(
-          userData.startupUids.map(async (startupUid) => {
-            const startupRef = doc(dbService, "startup_list", startupUid);
-            const startupSnapshot = await getDoc(startupRef);
-            return startupSnapshot.exists()
-              ? { id: startupUid, ...startupSnapshot.data() }
-              : null;
-          })
-        );
-
         const communityDocs = await Promise.all(
           userData.communityUids.map(async (communityUid) => {
             const communityRef = doc(dbService, "community_list", communityUid);
@@ -54,7 +51,15 @@ const User = () => {
               : null;
           })
         );
-
+        const startupDocs = await Promise.all(
+          userData.startupUids.map(async (startupUid) => {
+            const startupRef = doc(dbService, "startup_list", startupUid);
+            const startupSnapshot = await getDoc(startupRef);
+            return startupSnapshot.exists()
+              ? { id: startupUid, ...startupSnapshot.data() }
+              : null;
+          })
+        );
         const vcDocs = await Promise.all(
           userData.vcUids.map(async (vcUid) => {
             const vcRef = doc(dbService, "vc_list", vcUid);
@@ -64,101 +69,49 @@ const User = () => {
               : null;
           })
         );
-
         // null 값 제거하여 중복 데이터 방지
         const filteredStartups = startupDocs.filter((doc) => doc !== null);
         const filteredCommunities = communityDocs.filter((doc) => doc !== null);
         const filteredVCs = vcDocs.filter((doc) => doc !== null);
-
         // 상태 업데이트
         setStartups(filteredStartups);
         setCommunities(filteredCommunities);
         setVCs(filteredVCs);
       };
-
       fetchAllData();
     }
   }, [userData]);
 
-  const renderStartupCards = () => {
-    return startups.map((startup) => (
-      <Flex
-        key={startup.id}
-        flexDirection="column"
-        alignItems="center"
-        justifyContent="center"
-        w="100px"
-        h="110px"
-        border="1px solid black"
-        borderRadius="xl"
-      >
-        <Image
-          src={startup.sup_logo}
-          w="100px"
-          h="80px"
-          p="5px"
-          borderRadius="xl"
-          objectFit="cover"
-        />
-        <Text fontSize="xs"> {startup.sup_name}</Text>
-      </Flex>
-    ));
-  };
-
-  const renderVCCards = () => {
-    return vcs.map((vc) => (
-      <Flex
-        key={vc.id}
-        flexDirection="column"
-        alignItems="center"
-        justifyContent="center"
-        w="100px"
-        h="110px"
-        border="1px solid black"
-        borderRadius="xl"
-      >
-        <Image
-          src={vc.vc_logo}
-          w="100px"
-          h="80px"
-          p="5px"
-          borderRadius="xl"
-          objectFit="cover"
-        />
-        <Text fontSize="xs"> {vc.vc_name}</Text>
-      </Flex>
-    ));
-  };
-
   const renderCommunityCards = () => {
     return communities.map((community) => (
-      <Flex
+      <FavorCommunity
         key={community.id}
-        flexDirection="column"
-        alignItems="center"
-        justifyContent="center"
-        w="100px"
-        h="110px"
-        border="1px solid black"
-        borderRadius="xl"
-      >
-        <Image
-          src={community.com_profileImg}
-          w="100px"
-          h="80px"
-          p="5px"
-          borderRadius="xl"
-          objectFit="cover"
-        />
-        <Text fontSize="xs">{community.com_name}</Text>
-      </Flex>
+        id={community.id}
+        com_profileImg={community.com_profileImg}
+        com_name={community.com_name}
+      />
     ));
   };
-
-  const defaultProfileImage = "/image/user/icon_user.png"; // 기본 디폴트 이미지 경로
-  const photo = user?.photoURL || defaultProfileImage;
-  const name = user?.displayName;
-  const id = user?.id;
+  const renderStartupCards = () => {
+    return startups.map((startup) => (
+      <FavorStartup
+        key={startup.id}
+        id={startup.id}
+        sup_logo={startup.sup_logo}
+        sup_name={startup.sup_name}
+      />
+    ));
+  };
+  const renderVCCards = () => {
+    return vcs.map((vc) => (
+      <FavorVC
+        key={vc.id}
+        id={vc.id}
+        vc_logo={vc.vc_logo}
+        vc_name={vc.vc_name}
+      />
+    ));
+  };
 
   return (
     <Flex flexDirection="column" w="700px">
@@ -189,14 +142,10 @@ const User = () => {
           <Grid templateColumns="repeat(6, 1fr)" gap="20px">
             {renderCommunityCards()}
           </Grid>
-        </Flex>
-        <Flex flexDirection="column">
           <Text m="5px 0">스타트업</Text>
           <Grid templateColumns="repeat(6, 1fr)" gap="20px">
             {renderStartupCards()}
           </Grid>
-        </Flex>
-        <Flex flexDirection="column">
           <Text m="5px 0">VC</Text>
           <Grid templateColumns="repeat(6, 1fr)" gap="20px">
             {renderVCCards()}
