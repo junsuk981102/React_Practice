@@ -9,6 +9,11 @@ const VCInfoBasic = ({ state }) => {
   const [activeButton, setActiveButton] = useState("");
 
   useEffect(() => {
+    const storedActiveButton = localStorage.getItem(`activeButton_${state.id}`);
+    if (storedActiveButton) {
+      setActiveButton(JSON.parse(storedActiveButton)); // 로컬 스토리지에서 가져올 때 문자열을 JSON으로 변환
+    }
+
     const getUserUid = async () => {
       try {
         const user = auth.currentUser;
@@ -21,16 +26,36 @@ const VCInfoBasic = ({ state }) => {
     };
 
     getUserUid();
-  }, []);
+  }, [state.id]);
 
-  function handleClick() {
-    setActiveButton((prevState) => (prevState === "yellow" ? "" : "yellow"));
+  useEffect(() => {
+    // activeButton 값이 변경될 때 로컬 스토리지에 저장
+    localStorage.setItem(
+      `activeButton_${state.id}`,
+      JSON.stringify(activeButton)
+    ); // 로컬 스토리지에 저장하기 전에 JSON으로 변환
+  }, [activeButton, state.id]);
+
+  async function handleClick() {
     if (userUid) {
       const vcUid = state.id;
       const userDocRef = dbService.collection("user_list").doc(userUid);
-      userDocRef.update({
-        vcUids: arrayUnion(vcUid),
-      });
+      const userDoc = await userDocRef.get();
+      const userVCs = userDoc.data()?.vcUids || [];
+
+      if (userVCs.includes(vcUid)) {
+        // 이미 즐겨찾기에 추가된 상태이면 삭제
+        userDocRef.update({
+          vcUids: userVCs.filter((uid) => uid !== vcUid),
+        });
+        setActiveButton(false);
+      } else {
+        // 즐겨찾기에 추가
+        userDocRef.update({
+          vcUids: arrayUnion(vcUid),
+        });
+        setActiveButton(true);
+      }
     }
   }
 
@@ -54,10 +79,10 @@ const VCInfoBasic = ({ state }) => {
             <IconButton
               aria-label="Like"
               backgroundColor="white"
-              color={activeButton === "yellow" ? "yellow" : "black"}
+              color={activeButton ? "yellow" : "black"}
               onClick={handleClick}
               icon={
-                activeButton === "yellow" ? (
+                activeButton ? (
                   <FaStar style={{ fontSize: "25px" }} />
                 ) : (
                   <FaRegStar style={{ fontSize: "25px" }} />
