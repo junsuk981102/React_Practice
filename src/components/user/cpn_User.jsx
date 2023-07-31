@@ -12,6 +12,10 @@ const User = () => {
   const [userId, setUserId] = useState("");
   const [startupUids, setStartupUids] = useState([]);
   const [startups, setStartups] = useState([]);
+  const [communityUids, setCommunityUids] = useState([]);
+  const [communities, setCommunities] = useState([]);
+  const [vcUids, setVCUids] = useState([]);
+  const [vcs, setVCs] = useState([]);
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -23,46 +27,15 @@ const User = () => {
           setUserId(userData.id);
           setStartupUids(userData.startupUids || []);
           console.log("Startup Uids:", userData.startupUids || []);
+          setCommunityUids(userData.communityUids || []);
+          console.log("Community Uids:", userData.communityUids || []);
+          setVCUids(userData.vcUids || []);
+          console.log("VC Uids:", userData.vcUids || []);
         }
       }
     };
-
     fetchUserData();
   }, [user]);
-
-  // const fetchStartups = async () => {
-  //   if (startupUids.length > 0) {
-  //     console.log("startup Uid length is more than 3!!");
-  //     try {
-  //       const startupsQuery = query(
-  //         collection(dbService, "startup_list"),
-  //         where("id", "in", startupUids)
-  //       );
-
-  //       const startupsSnapshot = await getDocs(startupsQuery);
-  //       const startupArray = startupsSnapshot.docs.map((doc) => ({
-  //         id: doc.id,
-  //         ...doc.data(),
-  //       }));
-
-  //       if (startupArray.length > 0) {
-  //         console.log("Startup Array:", startupArray);
-  //         setStartups(startupArray);
-  //       } else {
-  //         console.log("No startups found for any uid.");
-  //         // 스타트업이 하나도 없을 때 처리할 로직 추가
-  //         // 예를 들어, 기본값을 설정하거나 사용자에게 알리는 메시지 표시 등
-  //       }
-  //     } catch (error) {
-  //       console.error("Error fetching startups:", error);
-  //     }
-  //   } else {
-  //     setStartups([]); // startupUids가 비어있을 때, startups를 빈 배열로 설정하여 초기화
-  //     console.log("startup Uid length is less than 3");
-  //   }
-  // };
-
-  // fetchStartups();
 
   // startupUids를 이용하여 데이터를 가져오는 함수
   const fetchStartupData = async (startupUid) => {
@@ -85,6 +58,53 @@ const User = () => {
     }
   };
 
+  // startupUids를 이용하여 데이터를 가져오는 함수
+  const fetchCommunityData = async (communityUid) => {
+    try {
+      const communityRef = doc(dbService, "community_list", communityUid);
+      const communitySnapshot = await getDoc(communityRef);
+
+      if (communitySnapshot.exists()) {
+        const communityData = communitySnapshot.data();
+        console.log(
+          "CommunitySnapshot Data for",
+          communityUid,
+          ":",
+          communityData
+        );
+        setCommunities((prevCommunities) => [
+          ...prevCommunities,
+          { id: communityUid, ...communityData },
+        ]);
+      } else {
+        console.log("No Startup Found for uid:", communityUid);
+      }
+    } catch (error) {
+      console.error(
+        "Error fetching startup data for uid:",
+        communityUid,
+        error
+      );
+    }
+  };
+  // startupUids를 이용하여 데이터를 가져오는 함수
+  const fetchVCData = async (vcUid) => {
+    try {
+      const vcRef = doc(dbService, "vc_list", vcUid);
+      const vcSnapshot = await getDoc(vcRef);
+
+      if (vcSnapshot.exists()) {
+        const vcData = vcSnapshot.data();
+        console.log("VCSnapshot Data for", vcUid, ":", vcData);
+        setVCs((prevVCs) => [...prevVCs, { id: vcUid, ...vcData }]);
+      } else {
+        console.log("No VC Found for uid:", vcUid);
+      }
+    } catch (error) {
+      console.error("Error fetching vc data for uid:", vcUid, error);
+    }
+  };
+
   // startupUids에 있는 모든 startupUid에 대해 데이터 가져오기
   useEffect(() => {
     if (startupUids.length > 0) {
@@ -94,6 +114,25 @@ const User = () => {
       console.log("startup Uid length is 0");
     }
   }, [startupUids]);
+
+  // startupUids에 있는 모든 startupUid에 대해 데이터 가져오기
+  useEffect(() => {
+    if (communityUids.length > 0) {
+      console.log("Community Uid length is more than 0!!");
+      communityUids.forEach(fetchCommunityData);
+    } else {
+      console.log("Community Uid length is 0");
+    }
+  }, [communityUids]);
+
+  useEffect(() => {
+    if (vcUids.length > 0) {
+      console.log("VC Uid length is more than 0!!");
+      vcUids.forEach(fetchVCData);
+    } else {
+      console.log("VC Uid length is 0");
+    }
+  }, [vcUids]);
 
   const renderStartupCards = () => {
     return startups.map((startup) => (
@@ -125,6 +164,76 @@ const User = () => {
           fontWeight="bold"
         >
           {startup.sup_name}
+        </Text>
+      </Flex>
+    ));
+  };
+
+  const renderVCCards = () => {
+    return vcs.map((vc) => (
+      <Flex
+        key={vc.id}
+        //정렬
+        flexDirection="column"
+        alignItems="center"
+        //크기 및 여백
+        w="150px"
+        h="150px"
+        p="10px"
+        m="10px"
+        //배경
+        border="1px solid black"
+        borderRadius="lg"
+      >
+        <Image
+          //사진 위치
+          src={vc.vc_logo}
+          //크기
+          w="100px"
+          //배경
+          borderRadius="lg"
+        />
+        <Text
+          //글자
+          fontSize="md"
+          fontWeight="bold"
+        >
+          {vc.vc_name}
+        </Text>
+      </Flex>
+    ));
+  };
+
+  const renderCommunityCards = () => {
+    return communities.map((community) => (
+      <Flex
+        key={community.id}
+        //정렬
+        flexDirection="column"
+        alignItems="center"
+        //크기 및 여백
+        w="150px"
+        h="150px"
+        p="10px"
+        m="10px"
+        //배경
+        border="1px solid black"
+        borderRadius="lg"
+      >
+        <Image
+          //사진 위치
+          src={community.com_profileImg}
+          //크기
+          w="100px"
+          //배경
+          borderRadius="lg"
+        />
+        <Text
+          //글자
+          fontSize="md"
+          fontWeight="bold"
+        >
+          {community.com_name}
         </Text>
       </Flex>
     ));
@@ -187,7 +296,9 @@ const User = () => {
           gridTemplateColumns="repeat(auto-fit, minmax(500px, 1fr))"
           gap="20px"
         >
+          {renderCommunityCards()}
           {renderStartupCards()}
+          {renderVCCards()}
         </Grid>
         <Logout />
       </Flex>
@@ -198,3 +309,37 @@ const User = () => {
 export default User;
 
 //23.07.24 1차 코드 수정 완료(추가 수정 필수)
+
+// const fetchStartups = async () => {
+//   if (startupUids.length > 0) {
+//     console.log("startup Uid length is more than 3!!");
+//     try {
+//       const startupsQuery = query(
+//         collection(dbService, "startup_list"),
+//         where("id", "in", startupUids)
+//       );
+
+//       const startupsSnapshot = await getDocs(startupsQuery);
+//       const startupArray = startupsSnapshot.docs.map((doc) => ({
+//         id: doc.id,
+//         ...doc.data(),
+//       }));
+
+//       if (startupArray.length > 0) {
+//         console.log("Startup Array:", startupArray);
+//         setStartups(startupArray);
+//       } else {
+//         console.log("No startups found for any uid.");
+//         // 스타트업이 하나도 없을 때 처리할 로직 추가
+//         // 예를 들어, 기본값을 설정하거나 사용자에게 알리는 메시지 표시 등
+//       }
+//     } catch (error) {
+//       console.error("Error fetching startups:", error);
+//     }
+//   } else {
+//     setStartups([]); // startupUids가 비어있을 때, startups를 빈 배열로 설정하여 초기화
+//     console.log("startup Uid length is less than 3");
+//   }
+// };
+
+// fetchStartups();
