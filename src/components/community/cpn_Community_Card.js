@@ -43,6 +43,7 @@ const CommunityCard = ({ communityObj }) => {
           src={communityObj.com_profileImg}
           w="100%"
           h="100%"
+          objectFit="cover"
           _hover={{
             transform: "scale(1.1)",
             transition: "transform 0.3s ease",
