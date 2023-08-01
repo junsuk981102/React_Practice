@@ -43,7 +43,11 @@ const Threads = ({ userObj }) => {
       <ThreadCreator userObj={userObj} />
       <Box>
         {threads.map((thread) => (
-          <Thread key={thread.id} threadObj={thread} />
+          <Thread
+            key={thread.id}
+            threadObj={thread}
+            isOwner={thread.creatorId === userObj.uid}
+          />
         ))}
       </Box>
     </Box>
