@@ -1,12 +1,26 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import ThrInfo from "../../components/thr/cpn_Thr_Info";
 import ThrTab from "../../components/thr/cpn_Thr_Tab";
 import { Flex } from "@chakra-ui/react";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 function ScreenChat() {
   const { state } = useLocation();
   const [ownerCount, setOwnerCount] = useState(state.com_owner); //티켓 소유 갯수
+  const [userObj, setUserObj] = useState(null);
+
+  useEffect(() => {
+    const auth = getAuth();
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        const uid = user.uid;
+        setUserObj(user);
+      } else {
+        setUserObj(null);
+      }
+    });
+  }, []);
 
   let comCategory = [];
   if (typeof state.com_category === "string") {
@@ -48,6 +62,7 @@ function ScreenChat() {
             state={state}
             ownerCount={ownerCount}
             setOwnerCount={setOwnerCount}
+            userObj={userObj}
           />
         </Flex>
       </Flex>
