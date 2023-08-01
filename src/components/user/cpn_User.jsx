@@ -84,33 +84,16 @@ const User = () => {
 
   const renderCommunityCards = () => {
     return communities.map((community) => (
-      <FavorCommunity
-        key={community.id}
-        id={community.id}
-        com_profileImg={community.com_profileImg}
-        com_name={community.com_name}
-      />
+      <FavorCommunity key={community.id} communityObj={community} />
     ));
   };
   const renderStartupCards = () => {
     return startups.map((startup) => (
-      <FavorStartup
-        key={startup.id}
-        id={startup.id}
-        sup_logo={startup.sup_logo}
-        sup_name={startup.sup_name}
-      />
+      <FavorStartup key={startup.id} startupObj={startup} />
     ));
   };
   const renderVCCards = () => {
-    return vcs.map((vc) => (
-      <FavorVC
-        key={vc.id}
-        id={vc.id}
-        vc_logo={vc.vc_logo}
-        vc_name={vc.vc_name}
-      />
-    ));
+    return vcs.map((vc) => <FavorVC key={vc.id} vcObj={vc} />);
   };
 
   return (
