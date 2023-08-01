@@ -15,9 +15,20 @@ const Threads = ({ userObj }) => {
   const [threads, setThreads] = useState([]);
 
   useEffect(() => {
-    getThreads();
+    const q = query(collection(db, "threads"), orderBy("createdAt", "desc"));
+    const unsubscribe = onSnapshot(q, (snapshot) => {
+      const threadArr = snapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
+      setThreads(threadArr);
+    });
+
+    // 컴포넌트가 언마운트될 때 구독 해제
+    return () => unsubscribe();
   }, []);
 
+  /*
   const getThreads = async () => {
     try {
       const q = query(collection(db, "threads"), orderBy("createdAt", "desc"));
@@ -37,13 +48,18 @@ const Threads = ({ userObj }) => {
       console.error("쓰레드를 불러오는 중 오류가 발생했습니다:", error);
     }
   };
+  */
 
   return (
     <Box>
       <ThreadCreator userObj={userObj} />
       <Box>
         {threads.map((thread) => (
-          <Thread key={thread.id} threadObj={thread} />
+          <Thread
+            key={thread.id}
+            threadObj={thread}
+            isOwner={thread.creatorId === userObj.uid}
+          />
         ))}
       </Box>
     </Box>

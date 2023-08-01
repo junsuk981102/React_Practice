@@ -20,6 +20,8 @@ import Threads from "./cpn_Threads";
 
 function ThrTab({ userObj, state, ownerCount, setOwnerCount }) {
   const [selectedTab, setSelectedTab] = useState(0);
+  // TabPanel의 높이를 설정
+  const tabPanelHeight = "100vh";
 
   return (
     <Tabs
@@ -83,7 +85,12 @@ function ThrTab({ userObj, state, ownerCount, setOwnerCount }) {
       <TabPanels>
         {/* 스레드 */}
         <TabPanel>
-          <Flex flexDirection="column" p="10px">
+          <Flex
+            flexDirection="column"
+            p="10px"
+            h={tabPanelHeight}
+            overflowY="auto"
+          >
             <Threads userObj={userObj} />
           </Flex>
         </TabPanel>
