@@ -16,8 +16,9 @@ import {
   TabPanel,
   TabIndicator,
 } from "@chakra-ui/react";
+import Threads from "./cpn_Threads";
 
-function ThrTab({ state, ownerCount, setOwnerCount }) {
+function ThrTab({ userObj, state, ownerCount, setOwnerCount }) {
   const [selectedTab, setSelectedTab] = useState(0);
 
   return (
@@ -83,7 +84,7 @@ function ThrTab({ state, ownerCount, setOwnerCount }) {
         {/* 스레드 */}
         <TabPanel>
           <Flex flexDirection="column" p="10px">
-            <Chat />
+            <Threads userObj={userObj} />
           </Flex>
         </TabPanel>
         {/* 1차 투표 */}
