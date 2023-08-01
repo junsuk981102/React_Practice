@@ -20,7 +20,7 @@ const ThreadCreator = ({ userObj }) => {
     } = e;
     const thrFile = files[0];
 
-    // 파일이 선택되지 않았을 경우에도 처리해야 합니다.
+    // 파일이 선택되지 않았을 경우에 처리.
     if (!thrFile) {
       return;
     }
@@ -28,7 +28,7 @@ const ThreadCreator = ({ userObj }) => {
     const reader = new FileReader();
     reader.onload = (finishedEvent) => {
       const {
-        target: { result }, // result를 가져올 수 있도록 수정되었습니다.
+        target: { result },
       } = finishedEvent;
       setAttachment(result);
     };
@@ -40,10 +40,22 @@ const ThreadCreator = ({ userObj }) => {
       return;
     }
     e.preventDefault();
+    let attachmentUrl = "";
+
+    if (attachment !== "") {
+      const attachmentRef = ref(storageService, `${userObj.uid}/${uuidv4()}`);
+      const response = await uploadString(
+        attachmentRef,
+        attachment,
+        "data_url"
+      );
+      attachmentUrl = await getDownloadURL(response.ref);
+    }
     const threadObj = {
       text: thread,
       createdAt: Date.now(),
       creatorId: userObj.uid,
+      attachmentUrl: attachmentUrl,
     };
     try {
       const docRef = await addDoc(collection(dbService, "threads"), threadObj);
@@ -51,6 +63,7 @@ const ThreadCreator = ({ userObj }) => {
       console.error("Error adding document: ", error);
     }
     setThread("");
+    setAttachment("");
   };
 
   return (
