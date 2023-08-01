@@ -8,7 +8,7 @@ import MyGovernanceCard, {
 } from "../../components/ticket/MyGovernanceCard";
 import { Button, Text, Grid, Heading, Image, Flex } from "@chakra-ui/react";
 
-interface MyGovernanceProps {
+export interface MyGovernanceProps {
   account: string;
 }
 
@@ -96,77 +96,44 @@ const ScreenMyGovernance: FC<MyGovernanceProps> = ({ account }) => {
       {/* 지갑 & 토큰 전체 화면 */}
 
       {/* 지갑 & 토큰 전체 배경 화면 */}
-      <Flex
-        //정렬
-        flexDirection="column"
-        //크기
-        w="700px"
-      >
+      <Flex flexDirection="column" w="700px">
         {/* 지갑 섹션 */}
-        <Heading
-          //여백
-          marginY="30px"
-          //글자
-          size="lg"
-        >
+        <Heading m="30px 0" size="lg">
           내 지갑
         </Heading>
         <Flex
-          //정렬
           alignItems="center"
-          //크기 및 여백
           h="70px"
           p="20px 10px"
-          //배경
           bg="#00A29D"
           borderRadius="xl"
         >
           <Image
-            //사진 위치
             src="/image/ticket/icon_metamask.png"
-            //크기 및 여백
             w="36px"
             h="45px"
             m="20px"
           />
-          <Text
-            //글자
-            fontWeight="bold"
-            fontSize="lg"
-            color="white"
-          >
+          <Text fontSize="lg" color="white">
             내 지갑 주소 : {account}
           </Text>
         </Flex>
-
         {/* 티켓 판매 가능 여부 변경 섹션 */}
-        <Heading
-          //여백
-          marginY="30px"
-          //글자
-          size="lg"
-        >
+        <Heading m="30px 0" size="lg">
           내 티켓
         </Heading>
         <Flex>
-          <Heading
-            //글자
-            size="md"
-          >
+          <Heading size="md">
             티켓 판매 상태 : {saleStatus ? "판매 가능" : "판매 불가능"}
           </Heading>
           <Button
-            //크기 및 여백
             w="auto"
             h="auto"
             p="5px"
             ml="10px"
-            //배경
             bg={saleStatus ? "red" : "blue"}
-            //글자
             fontSize="sm"
             color="white"
-            //기능
             onClick={onClickApproveToggle}
           >
             {saleStatus ? "상태 변경" : "상태 변경"}
@@ -174,15 +141,10 @@ const ScreenMyGovernance: FC<MyGovernanceProps> = ({ account }) => {
         </Flex>
 
         {/* 티켓 리스트 섹션 */}
-        <Heading
-          //여백
-          marginY="15px"
-          //글자
-          size="md"
-        >
+        <Heading m="15px 0" size="md">
           티켓 리스트
         </Heading>
-        <Grid gridTemplateColumns="repeat(auto-fit, minmax(300px, 1fr))">
+        <Grid templateColumns="repeat(3, 1fr)" gap="20px">
           {governanceCardArray &&
             governanceCardArray.map((v, i) => {
               return (
@@ -203,6 +165,5 @@ const ScreenMyGovernance: FC<MyGovernanceProps> = ({ account }) => {
     </>
   );
 };
-export default ScreenMyGovernance;
 
-//23.07.24 1차 코드 수정 완료(추가 수정 필수)
+export default ScreenMyGovernance;

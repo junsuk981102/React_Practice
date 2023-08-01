@@ -59,56 +59,33 @@ const MyGovernanceCard: FC<MyGovernanceCardProps> = ({
 
   return (
     <Flex
-      //크기 및 여백
-      w="300px"
-      h="250px"
+      w="180px"
+      h="220px"
       p="5px"
       m="10px"
-      //배경
       bg="white"
       border="3px solid #00A29D"
       borderRadius="xl"
+      flexDirection="column"
+      alignItems="center"
     >
       {/* 티켓 아이콘 */}
-      <Image
-        //사진 위치
-        src="../image/icon_ticket.png"
-        //위치
-        position="absolute"
-        //크기 및 여백
-        w="100px"
-        h="100px"
-        ml="100px"
-      />
+      <Image src="../image/ticket/icon_ticket.png" w="100px" h="100px" />
       {/* 하단 */}
-      <Flex
-        //위치
-        flexDirection="column"
-        //여백
-        mt="120px"
-        //글자
-        fontSize="sm"
-        fontWeight="bold"
-      >
+      <Flex flexDirection="column" mt="10px" fontSize="sm">
         <Text>
-          NFT 이름 : <GovernanceCard GNT_name={GNT_name} />
+          이름 : <GovernanceCard GNT_name={GNT_name} /> {" / "} ID : {GNT_Id}
         </Text>
+
         {/* 티켓 카드 */}
         {saleStatus ? (
           myGovernanceSalePrice === "0" ? (
             // 판매가능상태 & 판매등록이전
             <>
-              <Text>NFT ID : {GNT_Id}</Text>
               <Text>초기가격 : {GNT_Initial_Price} ETH</Text>
-              <InputGroup
-                //크기 및 여백
-                size="sm"
-                mt="10px"
-              >
+              <InputGroup size="sm" mt="10px">
                 <Input
-                  //크기
                   w="110px"
-                  //기능
                   type="number"
                   placeholder="판매가격 입력"
                   value={sellPrice}
@@ -126,9 +103,10 @@ const MyGovernanceCard: FC<MyGovernanceCardProps> = ({
           ) : (
             // 판매가능상태 & 판매등록이후
             <>
-              <Text>NFT ID : {GNT_Id}</Text>
               <Text>초기가격 : {GNT_Initial_Price} ETH</Text>
-              <Text>판매가격 : {myGovernanceSalePrice} ETH</Text>
+              <Text>
+                판매가격 : {web3.utils.fromWei(myGovernanceSalePrice)} ETH
+              </Text>
               <Box
                 //정렬
                 textAlign="center"
@@ -145,15 +123,15 @@ const MyGovernanceCard: FC<MyGovernanceCardProps> = ({
         ) : myGovernanceSalePrice === "0" ? (
           // 판매불가능상태 & 판매등록이전
           <>
-            <Text>NFT ID : {GNT_Id}</Text>
             <Text>초기가격 : {GNT_Initial_Price} ETH</Text>
           </>
         ) : (
           // 판매불가능상태 & 판매등록이후
           <>
-            <Text>NFT ID : {GNT_Id}</Text>
             <Text>초기가격 : {GNT_Initial_Price} ETH</Text>
-            <Text>판매가격 : {myGovernanceSalePrice} ETH</Text>
+            <Text>
+              판매가격 : {web3.utils.fromWei(myGovernanceSalePrice)} ETH
+            </Text>
             <Box
               //정렬
               textAlign="center"
