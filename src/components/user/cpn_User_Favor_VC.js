@@ -1,10 +1,25 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import { Flex, Image, Text } from "@chakra-ui/react";
 
-const FavorVC = ({ id, vc_logo, vc_name }) => {
+const FavorVC = ({ vcObj }) => {
+  const navi = useNavigate();
+  //VC 정보 페이지로 정보 전송
+  function handleClick() {
+    navi(`/screen_vc_info`, {
+      state: {
+        id: vcObj.id,
+        vc_name: vcObj.vc_name,
+        vc_category: vcObj.vc_category,
+        vc_info: vcObj.vc_info,
+        vc_backgroundImg: vcObj.vc_backgroundImg,
+        vc_logo: vcObj.vc_logo,
+      },
+    });
+  }
+
   return (
     <Flex
-      key={id}
       flexDirection="column"
       alignItems="center"
       justifyContent="center"
@@ -12,16 +27,18 @@ const FavorVC = ({ id, vc_logo, vc_name }) => {
       h="110px"
       border="1px solid black"
       borderRadius="xl"
+      as="button"
+      onClick={handleClick}
     >
       <Image
-        src={vc_logo}
+        src={vcObj.vc_logo}
         w="100px"
         h="80px"
         p="5px"
         borderRadius="xl"
         objectFit="cover"
       />
-      <Text fontSize="xs">{vc_name}</Text>
+      <Text fontSize="xs">{vcObj.vc_name}</Text>
     </Flex>
   );
 };
