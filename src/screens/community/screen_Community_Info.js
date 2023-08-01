@@ -46,7 +46,7 @@ const ScreenRoomInfo = () => {
           id: state.id,
           com_name: state.com_name,
           com_createAt: state.com_createAt,
-          com_category: comCategory,
+          com_category: state.comCategory,
           com_info: state.com_info,
           com_total_investment: state.com_total_investment,
           com_now_investment: state.com_now_investment,
