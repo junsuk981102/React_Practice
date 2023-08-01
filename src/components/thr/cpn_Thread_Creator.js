@@ -3,15 +3,20 @@ import { dbService, storageService } from "../../firebase-config";
 import { addDoc, collection } from "firebase/firestore";
 import { ref, uploadString, getDownloadURL } from "firebase/storage";
 import { v4 as uuidv4 } from "uuid";
-import { Box, FormControl, Button, Input, Image, Text } from "@chakra-ui/react";
+import {
+  Flex,
+  Box,
+  FormControl,
+  Button,
+  Input,
+  Image,
+  Text,
+} from "@chakra-ui/react";
+import { FiSend } from "react-icons/fi";
 
 const ThreadCreator = ({ userObj }) => {
   const [thread, setThread] = useState("");
   const [attachment, setAttachment] = useState("");
-
-  useEffect(() => {
-    console.log(userObj);
-  });
 
   const onChange = ({ target: { value } }) => {
     setThread(value);
@@ -73,28 +78,67 @@ const ThreadCreator = ({ userObj }) => {
     setAttachment("");
   };
 
+  const clearAttachment = () => {
+    setAttachment(null);
+  };
+
   return (
-    <>
+    <Flex
+      flexDirection="column"
+      p="20px"
+      bg="white"
+      border="1px solid #ddd"
+      borderRadius="10px"
+      mb="20px"
+    >
       <FormControl>
-        <Input
-          value={thread}
-          type="text"
-          onChange={onChange}
-          placeholder="무슨 생각을 하고 있나요?"
-          maxLength={120}
-        />
+        <Flex flexDirection="row">
+          <Input
+            value={thread}
+            type="text"
+            onChange={onChange}
+            placeholder="무슨 생각을 하고 있나요?"
+            maxLength={120}
+            borderRadius="5px"
+            border="1px solid #ccc"
+            p="10px"
+            mb="10px"
+          />
+          <Button onClick={onSubmit} leftIcon={<FiSend />}>
+            Post
+          </Button>
+        </Flex>
       </FormControl>
       <FormControl>
-        <Input type="file" accept="image/*" onChange={onFileChange} />
-        {attachment && (
-          <Box>
-            <Text>Add photos</Text>
-            <Image src={attachment} style={{ backgroundImage: attachment }} />
-          </Box>
-        )}
+        <Flex alignItems="center" mb="10px">
+          <Input
+            type="file"
+            accept="image/*"
+            onChange={onFileChange}
+            display="none"
+            id="fileInput"
+          />
+          <label htmlFor="fileInput">
+            <Button as="span" variant="outline" size="sm" colorScheme="teal">
+              이미지 추가
+            </Button>
+          </label>
+          {attachment && (
+            <Box ml="10px">
+              <Text
+                color="teal"
+                fontWeight="bold"
+                cursor="pointer"
+                onClick={clearAttachment}
+              >
+                첨부파일 삭제
+              </Text>
+              <Image src={attachment} alt="attachment" w="100px" mt="5px" />
+            </Box>
+          )}
+        </Flex>
       </FormControl>
-      <Button onClick={onSubmit}>Submit</Button>
-    </>
+    </Flex>
   );
 };
 export default ThreadCreator;
