@@ -10,11 +10,15 @@ function ScreenChat() {
   const [ownerCount, setOwnerCount] = useState(state.com_owner); //티켓 소유 갯수
   const [userObj, setUserObj] = useState(null);
 
+  const defaultProfileImage = "/image/user/icon_user.png";
+
   useEffect(() => {
     const auth = getAuth();
     onAuthStateChanged(auth, (user) => {
       if (user) {
         const uid = user.uid;
+        const email = user.email;
+        const photo = user?.photoURL || defaultProfileImage;
         setUserObj(user);
       } else {
         setUserObj(null);

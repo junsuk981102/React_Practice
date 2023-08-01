@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { dbService, storageService } from "../../firebase-config";
 import { addDoc, collection } from "firebase/firestore";
 import { ref, uploadString, getDownloadURL } from "firebase/storage";
@@ -8,6 +8,10 @@ import { Box, FormControl, Button, Input, Image, Text } from "@chakra-ui/react";
 const ThreadCreator = ({ userObj }) => {
   const [thread, setThread] = useState("");
   const [attachment, setAttachment] = useState("");
+
+  useEffect(() => {
+    console.log(userObj);
+  });
 
   const onChange = ({ target: { value } }) => {
     setThread(value);
@@ -51,10 +55,13 @@ const ThreadCreator = ({ userObj }) => {
       );
       attachmentUrl = await getDownloadURL(response.ref);
     }
+
     const threadObj = {
       text: thread,
       createdAt: Date.now(),
       creatorId: userObj.uid,
+      creatorEmail: userObj.email,
+      creatorPhotoUrl: userObj.photoURL,
       attachmentUrl: attachmentUrl,
     };
     try {
