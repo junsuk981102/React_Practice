@@ -9,15 +9,16 @@ const Thread = ({ threadObj, isOwner }) => {
   const [editing, setEditing] = useState(false);
   const [newThread, setNewThread] = useState(threadObj.text);
   const ThreadTextRef = doc(db, "threads", `${threadObj.id}`);
-  const desertRef = ref(storageService, threadObj.attachmentUrl);
+  const attachmentRef = ref(storageService, threadObj.attachmentUrl);
 
   const onDelete = async (e) => {
     const ok = window.confirm("이 스레드를 삭제 하시겠습니까?");
     if (ok) {
-      console.log(threadObj.id);
       await deleteDoc(ThreadTextRef);
       if (threadObj.attachmentUrl !== "") {
-        await deleteObject(desertRef);
+        console.log("Delete attachment!!");
+        console.log(threadObj.attachmentUrl);
+        await deleteObject(attachmentRef);
       }
     }
   };
@@ -35,9 +36,7 @@ const Thread = ({ threadObj, isOwner }) => {
   };
 
   const onChange = (e) => {
-    const {
-      target: { value },
-    } = e;
+    const { value } = e.target;
     setNewThread(value);
   };
 
