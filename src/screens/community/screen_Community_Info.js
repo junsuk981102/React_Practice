@@ -18,11 +18,7 @@ const ScreenRoomInfo = () => {
   const { state } = useLocation();
   const navi = useNavigate();
   const boxPadding = useBreakpointValue({ base: "20px", xl: "200px" }); // 양쪽 여백
-  const [ownerCount, setOwnerCount] = useState(state.com_owner); //티켓 소유 갯수
-  //티켓 구매
-  const handleClick_sell = (sellCount) => {
-    setOwnerCount(ownerCount + sellCount);
-  };
+
   //에러 메시지 Modal 오픈
   const [isOpen, setIsOpen] = useState(false);
 
@@ -36,7 +32,8 @@ const ScreenRoomInfo = () => {
   }
 
   const handleClick_chat = () => {
-    if (ownerCount === 0) {
+    if (state.com_member === 0) {
+      //수정!!
       //티켓 X => Modal 팝업
       setIsOpen(true);
     } else {
@@ -96,7 +93,7 @@ const ScreenRoomInfo = () => {
           {/* 커뮤니티 티켓 & 관심회사 섹션 */}
           <Flex m="120px 0 0 20px">
             {/* 티켓 섹션 */}
-            <ComInfoTicket state={state} onClickSell={handleClick_sell} />
+            <ComInfoTicket state={state} />
             {/* 관심회사 섹션 */}
             <ComInfoFavor />
           </Flex>
@@ -107,7 +104,7 @@ const ScreenRoomInfo = () => {
             <Button
               w="600px"
               h="60px"
-              bg={ownerCount > 0 ? "#00A29D" : "lightgrey"}
+              bg={state.com_member > 0 ? "#00A29D" : "lightgrey"}
               borderRadius="xl"
               variant="none"
               fontSize="lg"

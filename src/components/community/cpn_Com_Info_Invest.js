@@ -1,7 +1,30 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Box, Text } from "@chakra-ui/react";
+import { dbService } from "../../firebase-config";
 
 const ComInfoInvest = ({ state }) => {
+  const [currentInvestment, setCurrentInvestment] = useState(
+    state.com_now_investment
+  );
+
+  useEffect(() => {
+    const communityUid = state.id;
+    const communityDocRef = dbService
+      .collection("community_list")
+      .doc(communityUid);
+
+    const unsubscribe = communityDocRef.onSnapshot((doc) => {
+      if (doc.exists) {
+        const newData = doc.data();
+        setCurrentInvestment(newData.com_now_investment);
+      }
+    });
+
+    return () => {
+      unsubscribe(); // Unsubscribe from the real-time updates when component unmounts
+    };
+  }, [state.id]);
+
   //금액 표시 형식 변경(ex.10000->10,000)
   function NumberFormat({ number }) {
     return <span>{number.toLocaleString()}</span>;
@@ -14,7 +37,8 @@ const ComInfoInvest = ({ state }) => {
       </Text>
       {/* 커뮤니티 투자 달성 현황 */}
       <Text fontSize="lg" fontWeight="bold" color="#00A29D">
-        {(state.com_now_investment / state.com_total_investment) * 100}% 달성
+        {((currentInvestment / state.com_total_investment) * 100).toFixed(2)}%
+        달성
       </Text>
       {/* 커뮤니티 투자 목표 금액 그래프 */}
       <Box position="relative" m="20px 0 0 0">
@@ -30,7 +54,7 @@ const ComInfoInvest = ({ state }) => {
         {/* 현재 금액 그래프 */}
         <Box
           position="absolute"
-          w={(state.com_now_investment / state.com_total_investment) * 90 + "%"}
+          w={(currentInvestment / state.com_total_investment) * 90 + "%"}
           h="45px"
           bg={"linear-gradient(to right, #00A29D, #FFFFFF)"}
           border="1px solid #00A29D"
@@ -47,9 +71,7 @@ const ComInfoInvest = ({ state }) => {
         <Box
           position="absolute"
           top="55"
-          left={
-            (state.com_now_investment / state.com_total_investment) * 80 + "%"
-          }
+          left={(currentInvestment / state.com_total_investment) * 80 + "%"}
         >
           <NumberFormat number={state.com_now_investment} />원
         </Box>

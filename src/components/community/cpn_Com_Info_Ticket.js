@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Box, Flex, Text, Button, Image } from "@chakra-ui/react";
 import { auth, dbService } from "../../firebase-config";
 
-const ComInfoTicket = ({ state, onClickSell }) => {
+const ComInfoTicket = ({ state }) => {
   const [sellCount, setSellCount] = useState(0);
   const [userUid, setUserUid] = useState("");
   const [userTicket, setUserTicket] = useState(0);
@@ -64,9 +64,17 @@ const ComInfoTicket = ({ state, onClickSell }) => {
         ticket: updatedTicket,
       });
 
-      setUserTicket(updatedTicket);
+      state.com_now_investment =
+        state.com_now_investment + sellCount * state.com_ticket_price;
 
-      onClickSell(sellCount);
+      const updatedInvestment = state.com_now_investment;
+
+      // Firebase의 com_now_investment 필드 업데이트
+      await dbService.collection("community_list").doc(communityUid).update({
+        com_now_investment: updatedInvestment,
+      });
+
+      setUserTicket(updatedTicket);
 
       setSellCount(0);
     }
