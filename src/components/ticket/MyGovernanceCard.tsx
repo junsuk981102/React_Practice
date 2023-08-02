@@ -83,17 +83,19 @@ const MyGovernanceCard: FC<MyGovernanceCardProps> = ({
             // 판매가능상태 & 판매등록이전
             <>
               <Text>초기가격 : {GNT_Initial_Price} ETH</Text>
-              <InputGroup size="sm" mt="10px">
+              <InputGroup size="xs" mt="10px">
                 <Input
-                  w="110px"
+                  w="60px"
                   type="number"
-                  placeholder="판매가격 입력"
+                  placeholder="판매가격"
                   value={sellPrice}
                   onChange={onChangeSellPrice}
+                  fontSize="2xs"
                 ></Input>
-                <InputRightAddon children="ETH" />
+                <InputRightAddon fontSize="2xs" children="ETH" />
                 <Button
                   //기능
+                  fontSize="2xs"
                   onClick={onClickSell}
                 >
                   판매 등록
