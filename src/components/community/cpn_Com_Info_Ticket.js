@@ -1,26 +1,77 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Box, Flex, Text, Button, Image } from "@chakra-ui/react";
+import { auth, dbService } from "../../firebase-config";
 
-const ComInfoTicket = ({ state, ownerCount, onClickSell }) => {
-  const [sellCount, setSellCount] = useState(0); //티켓 구매 개수
-  //티켓 개수 +
+const ComInfoTicket = ({ state, onClickSell }) => {
+  const [sellCount, setSellCount] = useState(0);
+  const [userUid, setUserUid] = useState("");
+  const [userTicket, setUserTicket] = useState(0);
+
+  useEffect(() => {
+    const getUserUid = async () => {
+      try {
+        const user = auth.currentUser;
+        if (user) {
+          setUserUid(user.uid);
+        }
+      } catch (error) {
+        console.log("사용자 UID 가져오기 실패:", error);
+      }
+    };
+
+    getUserUid();
+  }, []);
+
+  useEffect(() => {
+    const fetchUserTicket = async () => {
+      if (userUid) {
+        const communityUid = state.id;
+        const userColRef = dbService
+          .collection("user_list")
+          .doc(userUid)
+          .collection("ticket_list");
+        const userDoc = await userColRef.doc(communityUid).get();
+        const fetchedUserTicket = userDoc.data()?.ticket || 0;
+        setUserTicket(fetchedUserTicket);
+      }
+    };
+
+    fetchUserTicket();
+  }, [userUid, state.id]);
+
   const handleClick_plus = () => {
-    if (ownerCount + sellCount < state.com_ticket_max) {
+    if (userTicket + sellCount < state.com_ticket_max) {
       setSellCount(sellCount + 1);
     }
   };
-  //티켓 개수 -
+
   const handleClick_minus = () => {
     if (sellCount > 0) {
       setSellCount(sellCount - 1);
     }
   };
-  // 티켓 구매
-  const handleClick_sell = () => {
-    onClickSell(sellCount);
-    setSellCount(0);
+
+  const handleClick_sell = async () => {
+    if (sellCount > 0 && userUid) {
+      const communityUid = state.id;
+      const userColRef = dbService
+        .collection("user_list")
+        .doc(userUid)
+        .collection("ticket_list");
+      const updatedTicket = userTicket + sellCount;
+
+      userColRef.doc(communityUid).set({
+        ticket: updatedTicket,
+      });
+
+      setUserTicket(updatedTicket);
+
+      onClickSell(sellCount);
+
+      setSellCount(0);
+    }
   };
-  //금액 표시 형식 변경(ex.10000->10,000)
+
   function NumberFormat({ number }) {
     return <span>{number.toLocaleString()}</span>;
   }
@@ -37,7 +88,7 @@ const ComInfoTicket = ({ state, ownerCount, onClickSell }) => {
           {/* 티켓 사진 */}
           <Image
             src={
-              ownerCount > 0
+              userTicket > 0
                 ? "../image/ticket/icon_color_ticket.png"
                 : "../image/ticket/icon_grey_ticket.png"
             }
@@ -54,7 +105,7 @@ const ComInfoTicket = ({ state, ownerCount, onClickSell }) => {
             borderRadius="3xl"
             fontSize="xs"
           >
-            현재 보유한 티켓 수: {ownerCount}매
+            현재 보유한 티켓 수: {userTicket}매
           </Box>
         </Box>
         {/* 오른쪽 섹션 */}
@@ -90,7 +141,7 @@ const ComInfoTicket = ({ state, ownerCount, onClickSell }) => {
               variant="none"
               fontSize="2xl"
               color={
-                ownerCount + sellCount < state.com_ticket_max
+                userTicket + sellCount < state.com_ticket_max
                   ? "#00A29D"
                   : "lightgrey"
               }
@@ -110,7 +161,7 @@ const ComInfoTicket = ({ state, ownerCount, onClickSell }) => {
             color="white"
             onClick={handleClick_sell}
           >
-            {ownerCount > 0 ? "추가 구매하기" : "구매하기"}
+            {userTicket > 0 ? "추가 구매하기" : "구매하기"}
           </Button>
           {/* 최대 구매 개수 */}
           <Text m="5px 0 0 0" fontSize="2xs" color="lightgrey">
@@ -123,5 +174,3 @@ const ComInfoTicket = ({ state, ownerCount, onClickSell }) => {
 };
 
 export default ComInfoTicket;
-
-//23.07.27 1차 코드 수정

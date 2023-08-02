@@ -96,11 +96,7 @@ const ScreenRoomInfo = () => {
           {/* 커뮤니티 티켓 & 관심회사 섹션 */}
           <Flex m="120px 0 0 20px">
             {/* 티켓 섹션 */}
-            <ComInfoTicket
-              state={state}
-              ownerCount={ownerCount}
-              onClickSell={handleClick_sell}
-            />
+            <ComInfoTicket state={state} onClickSell={handleClick_sell} />
             {/* 관심회사 섹션 */}
             <ComInfoFavor />
           </Flex>
