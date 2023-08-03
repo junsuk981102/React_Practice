@@ -13,6 +13,7 @@ const TabCommunityInfo = ({ state, ownerCount, setOwnerCount }) => {
         <TabCommunityInfoBasic state={state} memberCount={state.com_member} />
         {/* 커뮤니티 투자 정보 섹션 */}
         <TabCommunityInfoInvest
+          state={state}
           nowInvestment={state.com_now_investment}
           totalInvestment={state.com_total_investment}
         />

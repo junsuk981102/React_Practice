@@ -1,7 +1,30 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Flex, Box, Text } from "@chakra-ui/react";
+import { dbService } from "../../../firebase-config";
 
-const TabCommunityInfoInvest = ({ nowInvestment, totalInvestment }) => {
+const TabCommunityInfoInvest = ({ state, nowInvestment, totalInvestment }) => {
+  const [currentInvestment, setCurrentInvestment] = useState(
+    state.com_now_investment
+  );
+
+  useEffect(() => {
+    const communityUid = state.id;
+    const communityDocRef = dbService
+      .collection("community_list")
+      .doc(communityUid);
+
+    const unsubscribe = communityDocRef.onSnapshot((doc) => {
+      if (doc.exists) {
+        const newData = doc.data();
+        setCurrentInvestment(newData.com_now_investment);
+      }
+    });
+
+    return () => {
+      unsubscribe(); // Unsubscribe from the real-time updates when component unmounts
+    };
+  }, [state.id]);
+
   return (
     <>
       {/* 커뮤니티 투자 정보 섹션 */}
@@ -9,7 +32,7 @@ const TabCommunityInfoInvest = ({ nowInvestment, totalInvestment }) => {
       <Flex mb="20px">
         <Text>투자금 현황 : </Text>
         <Text fontWeight="bold" color="#00A29D">
-          &nbsp;{(nowInvestment / totalInvestment) * 100}% 달성
+          &nbsp;{(currentInvestment / totalInvestment) * 100}% 달성
         </Text>
       </Flex>
       {/* 커뮤니티 투자 목표 금액 그래프 */}
@@ -26,7 +49,7 @@ const TabCommunityInfoInvest = ({ nowInvestment, totalInvestment }) => {
         {/* 현재 금액 그래프 */}
         <Box
           position="absolute"
-          w={(nowInvestment / totalInvestment) * 100 + "%"}
+          w={(currentInvestment / totalInvestment) * 100 + "%"}
           h="45px"
           bg={"linear-gradient(to right, #00A29D, #FFFFFF)"}
           border="1px solid #00A29D"
@@ -54,9 +77,9 @@ const TabCommunityInfoInvest = ({ nowInvestment, totalInvestment }) => {
           //위치 및 정렬
           position="absolute"
           top="55"
-          left={(nowInvestment / totalInvestment) * 80 + "%"}
+          left={(currentInvestment / totalInvestment) * 80 + "%"}
         >
-          <Text>{nowInvestment.toLocaleString()}원</Text>
+          <Text>{currentInvestment.toLocaleString()}원</Text>
         </Box>
       </Box>
     </>

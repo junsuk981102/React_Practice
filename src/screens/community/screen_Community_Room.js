@@ -4,13 +4,46 @@ import ThrInfo from "../../components/thr/cpn_Thr_Info";
 import ThrTab from "../../components/thr/cpn_Thr_Tab";
 import { Flex } from "@chakra-ui/react";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { dbService, auth } from "../../firebase-config";
 
 function ScreenChat() {
   const { state } = useLocation();
-  const [ownerCount, setOwnerCount] = useState(state.com_owner); //티켓 소유 갯수
   const [userObj, setUserObj] = useState(null);
 
   const defaultProfileImage = "/image/user/icon_user.png";
+  const [userTicket, setUserTicket] = useState(0);
+  const [userUid, setUserUid] = useState("");
+
+  useEffect(() => {
+    const getUserUid = async () => {
+      try {
+        const user = auth.currentUser;
+        if (user) {
+          setUserUid(user.uid);
+        }
+      } catch (error) {
+        console.log("사용자 UID 가져오기 실패:", error);
+      }
+    };
+
+    getUserUid();
+  }, []);
+
+  useEffect(() => {
+    const fetchUserTicket = async () => {
+      if (userUid) {
+        const communityUid = state.id;
+        const userColRef = dbService
+          .collection("user_list")
+          .doc(userUid)
+          .collection("ticket_list");
+        const userDoc = await userColRef.doc(communityUid).get();
+        const fetchedUserTicket = userDoc.data()?.ticket || 0;
+        setUserTicket(fetchedUserTicket);
+      }
+    };
+    fetchUserTicket();
+  }, [userUid, state.id]);
 
   useEffect(() => {
     const auth = getAuth();
@@ -64,8 +97,8 @@ function ScreenChat() {
           {/* 커뮤니티 Tab */}
           <ThrTab
             state={state}
-            ownerCount={ownerCount}
-            setOwnerCount={setOwnerCount}
+            ownerCount={userTicket}
+            setOwnerCount={setUserTicket}
             userObj={userObj}
           />
         </Flex>
