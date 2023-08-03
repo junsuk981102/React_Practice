@@ -10,7 +10,7 @@ const TabVotingFirstBefore = ({ state, userId, ownerCount }) => {
   const percent1 = state.com_fone; // 1번 득표
   const percent2 = state.com_ftwo; // 2번 득표
   const percent3 = state.com_fthree; // 3번 득표
-  const percentA = percent1 + percent2 + percent3; // 총 득표
+  const percentA = state.com_fall; // 총 득표
   const [userTicket, setUserTicket] = useState(ownerCount);
 
   //후보 1번 투표
@@ -107,6 +107,13 @@ const TabVotingFirstBefore = ({ state, userId, ownerCount }) => {
       await dbService.collection("community_list").doc(communityUid).update({
         com_fthree: updatedfthree,
       });
+
+      state.com_fall = state.com_fall + vote1 + vote2 + vote3;
+      const updatedfall = state.com_fall;
+      await dbService.collection("community_list").doc(communityUid).update({
+        com_fall: updatedfall,
+      });
+
       setVoteFirstBefore(1);
       setVote1(0);
       setVote2(0);
