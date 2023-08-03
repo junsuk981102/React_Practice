@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Flex, Box, Text } from "@chakra-ui/react";
 import { dbService } from "../../../firebase-config";
 
-const TabCommunityInfoInvest = ({ state, nowInvestment, totalInvestment }) => {
+const TabCommunityInfoInvest = ({ state }) => {
   const [currentInvestment, setCurrentInvestment] = useState(
     state.com_now_investment
   );
@@ -32,7 +32,9 @@ const TabCommunityInfoInvest = ({ state, nowInvestment, totalInvestment }) => {
       <Flex mb="20px">
         <Text>투자금 현황 : </Text>
         <Text fontWeight="bold" color="#00A29D">
-          &nbsp;{(currentInvestment / totalInvestment) * 100}% 달성
+          &nbsp;
+          {((currentInvestment / state.com_total_investment) * 100).toFixed(1)}%
+          달성
         </Text>
       </Flex>
       {/* 커뮤니티 투자 목표 금액 그래프 */}
@@ -49,7 +51,7 @@ const TabCommunityInfoInvest = ({ state, nowInvestment, totalInvestment }) => {
         {/* 현재 금액 그래프 */}
         <Box
           position="absolute"
-          w={(currentInvestment / totalInvestment) * 100 + "%"}
+          w={(currentInvestment / state.com_total_investment) * 100 + "%"}
           h="45px"
           bg={"linear-gradient(to right, #00A29D, #FFFFFF)"}
           border="1px solid #00A29D"
@@ -70,14 +72,14 @@ const TabCommunityInfoInvest = ({ state, nowInvestment, totalInvestment }) => {
           top="55"
           left="85%"
         >
-          <Text>{totalInvestment.toLocaleString()}원</Text>
+          <Text>{state.com_total_investment.toLocaleString()}원</Text>
         </Box>
         {/* 현재 금액 텍스트 */}
         <Box
           //위치 및 정렬
           position="absolute"
           top="55"
-          left={(currentInvestment / totalInvestment) * 80 + "%"}
+          left={(currentInvestment / state.com_total_investment) * 80 + "%"}
         >
           <Text>{currentInvestment.toLocaleString()}원</Text>
         </Box>

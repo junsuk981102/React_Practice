@@ -37,7 +37,7 @@ const ComInfoInvest = ({ state }) => {
       </Text>
       {/* 커뮤니티 투자 달성 현황 */}
       <Text fontSize="lg" fontWeight="bold" color="#00A29D">
-        {((currentInvestment / state.com_total_investment) * 100).toFixed(2)}%
+        {((currentInvestment / state.com_total_investment) * 100).toFixed(1)}%
         달성
       </Text>
       {/* 커뮤니티 투자 목표 금액 그래프 */}
