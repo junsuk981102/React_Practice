@@ -9,8 +9,6 @@ import { dbService, auth } from "../../firebase-config";
 function ScreenChat() {
   const { state } = useLocation();
   const [userObj, setUserObj] = useState(null);
-
-  const defaultProfileImage = "/image/user/icon_user.png";
   const [userTicket, setUserTicket] = useState(0);
   const [userUid, setUserUid] = useState("");
 
@@ -49,9 +47,6 @@ function ScreenChat() {
     const auth = getAuth();
     onAuthStateChanged(auth, (user) => {
       if (user) {
-        const uid = user.uid;
-        const email = user.email;
-        const photo = user?.photoURL || defaultProfileImage;
         setUserObj(user);
       } else {
         setUserObj(null);
@@ -100,6 +95,7 @@ function ScreenChat() {
             ownerCount={userTicket}
             setOwnerCount={setUserTicket}
             userObj={userObj}
+            userId={userUid}
           />
         </Flex>
       </Flex>
