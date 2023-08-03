@@ -68,6 +68,7 @@ const ThreadCreator = ({ userObj }) => {
       creatorEmail: userObj.email,
       creatorPhotoUrl: userObj.photoURL,
       attachmentUrl: attachmentUrl,
+      likes: 0, // Initialize likes to 0
     };
     try {
       const docRef = await addDoc(collection(dbService, "threads"), threadObj);
