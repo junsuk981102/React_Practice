@@ -1,7 +1,7 @@
 import React from "react";
 import { Text } from "@chakra-ui/react";
 
-const TabCommunityInfoBasic = ({ state, memberCount }) => {
+const TabCommunityInfoBasic = ({ state }) => {
   // com_createAt을 YYYY-MM-DD 형식으로 출력
   const timestamp = state.com_createAt;
   const date = new Date(timestamp);
@@ -16,7 +16,7 @@ const TabCommunityInfoBasic = ({ state, memberCount }) => {
       {/* 커뮤니티 생성일 */}
       <Text mb="30px">커뮤니티 생성일 : {formattedDate}</Text>
       {/* 커뮤니티 참여인원 */}
-      <Text mb="30px">커뮤니티 참여인원 : {memberCount}명</Text>
+      <Text mb="30px">커뮤니티 참여인원 : {state.com_member}명</Text>
     </>
   );
 };

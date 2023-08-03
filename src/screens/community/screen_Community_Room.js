@@ -92,10 +92,9 @@ function ScreenChat() {
           {/* 커뮤니티 Tab */}
           <ThrTab
             state={state}
-            ownerCount={userTicket}
-            setOwnerCount={setUserTicket}
-            userObj={userObj}
             userId={userUid}
+            ownerCount={userTicket}
+            userObj={userObj}
           />
         </Flex>
       </Flex>

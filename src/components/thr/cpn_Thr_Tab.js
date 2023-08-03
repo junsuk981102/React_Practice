@@ -4,8 +4,6 @@ import TabVotingFirstAfter from "./cpn_Tab_Voting_First_After";
 import TabVotingSecondBefore from "./cpn_Tab_Voting_Second_Before";
 import TabVotingSecondAfter from "./cpn_Tab_Voting_Second_After";
 import TabCommunityInfo from "./cpn_Tab_Community_Info";
-import Chat from "../chat/cpn_Chat";
-import "../../chat.css";
 import {
   Flex,
   Divider,
@@ -18,7 +16,7 @@ import {
 } from "@chakra-ui/react";
 import Threads from "./cpn_Threads";
 
-function ThrTab({ userObj, state, ownerCount, setOwnerCount }) {
+function ThrTab({ state, userId, ownerCount, userObj }) {
   const [selectedTab, setSelectedTab] = useState(0);
   // TabPanel의 높이를 설정
   const tabPanelHeight = "100vh";
@@ -98,8 +96,8 @@ function ThrTab({ userObj, state, ownerCount, setOwnerCount }) {
         <TabPanel>
           <TabVotingFirstBefore
             state={state}
+            userId={userId}
             ownerCount={ownerCount}
-            setOwnerCount={setOwnerCount}
           />
         </TabPanel>
         {/* 1차 결과 */}
@@ -110,8 +108,8 @@ function ThrTab({ userObj, state, ownerCount, setOwnerCount }) {
         <TabPanel>
           <TabVotingSecondBefore
             state={state}
+            userId={userId}
             ownerCount={ownerCount}
-            setOwnerCount={setOwnerCount}
           />
         </TabPanel>
         {/* 2차 결과 */}
@@ -122,8 +120,8 @@ function ThrTab({ userObj, state, ownerCount, setOwnerCount }) {
         <TabPanel>
           <TabCommunityInfo
             state={state}
+            userId={userId}
             ownerCount={ownerCount}
-            setOwnerCount={setOwnerCount}
           />
         </TabPanel>
       </TabPanels>

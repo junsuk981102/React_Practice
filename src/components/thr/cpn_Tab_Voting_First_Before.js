@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Flex, Text, Button, Image } from "@chakra-ui/react";
-import { dbService, auth } from "../../firebase-config";
+import { dbService } from "../../firebase-config";
 
-const TabVotingFirstBefore = ({ state, ownerCount, setOwnerCount }) => {
+const TabVotingFirstBefore = ({ state, userId, ownerCount }) => {
   const [votefirstBefore, setVoteFirstBefore] = useState(0); //1차 투표 여부
   const [vote1, setVote1] = useState(0); //후보 1번 투표
   const [vote2, setVote2] = useState(0); //후보 2번 투표
@@ -11,41 +11,9 @@ const TabVotingFirstBefore = ({ state, ownerCount, setOwnerCount }) => {
   const percent2 = 135; // 2번 득표
   const percent3 = 223; // 3번 득표
   const percentA = percent1 + percent2 + percent3; // 총 득표
+  const [userTicket, setUserTicket] = useState(ownerCount);
+
   //후보 1번 투표
-  const [userTicket, setUserTicket] = useState(0);
-  const [userUid, setUserUid] = useState("");
-
-  useEffect(() => {
-    const getUserUid = async () => {
-      try {
-        const user = auth.currentUser;
-        if (user) {
-          setUserUid(user.uid);
-        }
-      } catch (error) {
-        console.log("사용자 UID 가져오기 실패:", error);
-      }
-    };
-
-    getUserUid();
-  }, []);
-
-  useEffect(() => {
-    const fetchUserTicket = async () => {
-      if (userUid) {
-        const communityUid = state.id;
-        const userColRef = dbService
-          .collection("user_list")
-          .doc(userUid)
-          .collection("ticket_list");
-        const userDoc = await userColRef.doc(communityUid).get();
-        const fetchedUserTicket = userDoc.data()?.ticket || 0;
-        setUserTicket(fetchedUserTicket);
-      }
-    };
-    fetchUserTicket();
-  }, [userUid, state.id]);
-
   const handleClick_plus_v1 = () => {
     if (vote1 + vote2 + vote3 < userTicket) {
       setVote1(vote1 + 1);
@@ -78,6 +46,45 @@ const TabVotingFirstBefore = ({ state, ownerCount, setOwnerCount }) => {
       setVote3(vote3 - 1);
     }
   };
+
+  useEffect(() => {
+    const fetchUserTicket = async () => {
+      if (userId) {
+        const communityUid = state.id;
+        const userColRef = dbService
+          .collection("user_list")
+          .doc(userId)
+          .collection("ticket_list");
+        const userDoc = await userColRef.doc(communityUid).get();
+        const fetchedUserTicket = userDoc.data()?.ticket || 0;
+        setUserTicket(fetchedUserTicket);
+      }
+    };
+    fetchUserTicket();
+  }, [userId, state.id]);
+
+  useEffect(() => {
+    if (userId) {
+      const communityUid = state.id;
+      const userColRef = dbService
+        .collection("user_list")
+        .doc(userId)
+        .collection("ticket_list")
+        .doc(communityUid);
+
+      const unsubscribe = userColRef.onSnapshot((doc) => {
+        if (doc.exists) {
+          const newData = doc.data();
+          setUserTicket(newData.ticket);
+        }
+      });
+
+      return () => {
+        unsubscribe(); // Unsubscribe from the real-time updates when component unmounts
+      };
+    }
+  }, [userId, state.id]);
+
   //1차 투표
   const votingFirst = () => {
     if (vote1 + vote2 + vote3 === userTicket) {
@@ -85,17 +92,17 @@ const TabVotingFirstBefore = ({ state, ownerCount, setOwnerCount }) => {
       setVote1(0);
       setVote2(0);
       setVote3(0);
-      setOwnerCount(0);
       const communityUid = state.id;
       const userColRef = dbService
         .collection("user_list")
-        .doc(userUid)
+        .doc(userId)
         .collection("ticket_list");
-      const updatedTicket = 0;
 
+      const updatedTicket = 0;
       userColRef.doc(communityUid).set({
         ticket: updatedTicket,
       });
+
       setUserTicket(updatedTicket);
     }
   };

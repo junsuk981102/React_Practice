@@ -1,35 +1,18 @@
 import React, { useState, useEffect } from "react";
 import { Button, Text, Flex, Image } from "@chakra-ui/react";
-import { dbService, auth } from "../../../firebase-config";
+import { dbService } from "../../../firebase-config";
 
-const TabCommunityInfoTicket = ({ ownerCount, setOwnerCount, state }) => {
+const TabCommunityInfoTicket = ({ state, userId, ownerCount }) => {
   const [sellCount, setSellCount] = useState(0); //티켓 구매 갯수
-
-  const [userTicket, setUserTicket] = useState(0);
-  const [userUid, setUserUid] = useState("");
-
-  useEffect(() => {
-    const getUserUid = async () => {
-      try {
-        const user = auth.currentUser;
-        if (user) {
-          setUserUid(user.uid);
-        }
-      } catch (error) {
-        console.log("사용자 UID 가져오기 실패:", error);
-      }
-    };
-
-    getUserUid();
-  }, []);
+  const [userTicket, setUserTicket] = useState(ownerCount);
 
   useEffect(() => {
     const fetchUserTicket = async () => {
-      if (userUid) {
+      if (userId) {
         const communityUid = state.id;
         const userColRef = dbService
           .collection("user_list")
-          .doc(userUid)
+          .doc(userId)
           .collection("ticket_list");
         const userDoc = await userColRef.doc(communityUid).get();
         const fetchedUserTicket = userDoc.data()?.ticket || 0;
@@ -37,8 +20,29 @@ const TabCommunityInfoTicket = ({ ownerCount, setOwnerCount, state }) => {
       }
     };
     fetchUserTicket();
-  }, [userUid, state.id]);
+  }, [userId, state.id]);
 
+  useEffect(() => {
+    if (userId) {
+      const communityUid = state.id;
+      const userColRef = dbService
+        .collection("user_list")
+        .doc(userId)
+        .collection("ticket_list")
+        .doc(communityUid);
+
+      const unsubscribe = userColRef.onSnapshot((doc) => {
+        if (doc.exists) {
+          const newData = doc.data();
+          setUserTicket(newData.ticket);
+        }
+      });
+
+      return () => {
+        unsubscribe(); // Unsubscribe from the real-time updates when component unmounts
+      };
+    }
+  }, [userId, state.id]);
   //티켓 구매 갯수 증가
   const handleClick_plus = () => {
     if (userTicket + sellCount < state.com_ticket_max) {
@@ -55,30 +59,25 @@ const TabCommunityInfoTicket = ({ ownerCount, setOwnerCount, state }) => {
 
   //티켓 구매
   const handleClick_sell = async () => {
-    if (sellCount > 0 && userUid) {
+    if (sellCount > 0 && userId) {
       const communityUid = state.id;
       const userColRef = dbService
         .collection("user_list")
-        .doc(userUid)
+        .doc(userId)
         .collection("ticket_list");
-      const updatedTicket = userTicket + sellCount;
 
+      const updatedTicket = userTicket + sellCount;
       userColRef.doc(communityUid).set({
         ticket: updatedTicket,
       });
 
-      state.com_now_investment =
+      const updatedInvestment =
         state.com_now_investment + sellCount * state.com_ticket_price;
-
-      const updatedInvestment = state.com_now_investment;
-
-      // Firebase의 com_now_investment 필드 업데이트
       await dbService.collection("community_list").doc(communityUid).update({
         com_now_investment: updatedInvestment,
       });
 
       setUserTicket(updatedTicket);
-
       setSellCount(0);
     }
   };
