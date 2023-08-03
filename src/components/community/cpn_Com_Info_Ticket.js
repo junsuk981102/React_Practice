@@ -58,18 +58,23 @@ const ComInfoTicket = ({ state }) => {
         .collection("user_list")
         .doc(userUid)
         .collection("ticket_list");
-      const updatedTicket = userTicket + sellCount;
 
+      if (userTicket === 0) {
+        state.com_member = state.com_member + 1;
+        const updatedMember = state.com_member;
+        await dbService.collection("community_list").doc(communityUid).update({
+          com_member: updatedMember,
+        });
+      }
+
+      const updatedTicket = userTicket + sellCount;
       userColRef.doc(communityUid).set({
         ticket: updatedTicket,
       });
 
       state.com_now_investment =
         state.com_now_investment + sellCount * state.com_ticket_price;
-
       const updatedInvestment = state.com_now_investment;
-
-      // Firebase의 com_now_investment 필드 업데이트
       await dbService.collection("community_list").doc(communityUid).update({
         com_now_investment: updatedInvestment,
       });
