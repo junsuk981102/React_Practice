@@ -57,6 +57,7 @@ const Threads = ({ userObj }) => {
         {threads.map((thread) => (
           <Thread
             key={thread.id}
+            userObj={userObj}
             threadObj={thread}
             isOwner={thread.creatorId === userObj.uid}
           />

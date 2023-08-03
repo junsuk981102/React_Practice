@@ -89,7 +89,7 @@ function ThrTab({ userObj, state, ownerCount, setOwnerCount }) {
             flexDirection="column"
             p="10px"
             h={tabPanelHeight}
-            overflowY="auto"
+            overflowY={selectedTab === 0 ? "auto" : "hidden"}
           >
             <Threads userObj={userObj} />
           </Flex>
