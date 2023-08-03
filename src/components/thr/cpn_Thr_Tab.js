@@ -51,26 +51,19 @@ function ThrTab({ state, userId, ownerCount, userObj }) {
           fontWeight="bold"
           color={selectedTab === 2 ? "#00A29D" : "black"}
         >
-          1차 결과
+          2차 투표
         </Tab>
         <Tab
           fontSize="sm"
           fontWeight="bold"
           color={selectedTab === 3 ? "#00A29D" : "black"}
         >
-          2차 투표
-        </Tab>
-        <Tab
-          fontSize="sm"
-          fontWeight="bold"
-          color={selectedTab === 4 ? "#00A29D" : "black"}
-        >
           2차 결과
         </Tab>
         <Tab
           fontSize="sm"
           fontWeight="bold"
-          color={selectedTab === 5 ? "#00A29D" : "black"}
+          color={selectedTab === 4 ? "#00A29D" : "black"}
         >
           정보
         </Tab>
@@ -94,15 +87,15 @@ function ThrTab({ state, userId, ownerCount, userObj }) {
         </TabPanel>
         {/* 1차 투표 */}
         <TabPanel>
-          <TabVotingFirstBefore
-            state={state}
-            userId={userId}
-            ownerCount={ownerCount}
-          />
-        </TabPanel>
-        {/* 1차 결과 */}
-        <TabPanel>
-          <TabVotingFirstAfter state={state} />
+          {state.com_fall === state.com_ticket_max ? (
+            <TabVotingFirstAfter state={state} />
+          ) : (
+            <TabVotingFirstBefore
+              state={state}
+              userId={userId}
+              ownerCount={ownerCount}
+            />
+          )}
         </TabPanel>
         {/* 2차 투표 */}
         <TabPanel>
