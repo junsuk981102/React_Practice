@@ -73,10 +73,12 @@ const MyGovernanceCard: FC<MyGovernanceCardProps> = ({
       <Image src="../image/ticket/icon_ticket.png" w="100px" h="100px" />
       {/* 하단 */}
       <Flex flexDirection="column" mt="10px" fontSize="sm">
-        <Text>
-          이름 : <GovernanceCard GNT_name={GNT_name} /> {" / "} ID : {GNT_Id}
-        </Text>
-
+        <Flex>
+          <GovernanceCard GNT_name={GNT_name} />
+          <Text>
+            &nbsp;{" / "} ID : {GNT_Id}
+          </Text>
+        </Flex>
         {/* 티켓 카드 */}
         {saleStatus ? (
           myGovernanceSalePrice === "0" ? (
