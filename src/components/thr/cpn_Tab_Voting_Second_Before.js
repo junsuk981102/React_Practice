@@ -13,7 +13,7 @@ const TabVotingSecondBefore = ({ state, userId, ownerCount }) => {
 
   //찬성 투표
   const handleClick_plus_vyes = () => {
-    if (voteyes + voteno < userTicket) {
+    if (voteyes + voteno < userTicket && votesecondBefore === 0) {
       setVoteYes(voteyes + 1);
     }
   };
@@ -24,7 +24,7 @@ const TabVotingSecondBefore = ({ state, userId, ownerCount }) => {
   };
   //반대 투표
   const handleClick_plus_vno = () => {
-    if (voteyes + voteno < userTicket) {
+    if (voteyes + voteno < userTicket && votesecondBefore === 0) {
       setVoteNo(voteno + 1);
     }
   };
@@ -73,22 +73,10 @@ const TabVotingSecondBefore = ({ state, userId, ownerCount }) => {
   }, [userId, state.id]);
   //2차 투표
   const votingSecond = () => {
-    if (voteyes + voteno === userTicket) {
+    if (voteyes + voteno === userTicket && votesecondBefore === 0) {
       setVoteSecondBefore(1);
       setVoteYes(0);
       setVoteNo(0);
-      const communityUid = state.id;
-      const userColRef = dbService
-        .collection("user_list")
-        .doc(userId)
-        .collection("ticket_list");
-
-      const updatedTicket = 0;
-      userColRef.doc(communityUid).set({
-        ticket: updatedTicket,
-      });
-
-      setUserTicket(updatedTicket);
     }
   };
 
@@ -224,7 +212,11 @@ const TabVotingSecondBefore = ({ state, userId, ownerCount }) => {
             <Button
               variant="none"
               fontSize="2xl"
-              color={voteyes + voteno < userTicket ? "#00A29D" : "lightgrey"}
+              color={
+                voteyes + voteno < userTicket && votesecondBefore === 0
+                  ? "#00A29D"
+                  : "lightgrey"
+              }
               //기능
               onClick={handleClick_plus_vyes}
             >
@@ -278,7 +270,11 @@ const TabVotingSecondBefore = ({ state, userId, ownerCount }) => {
             <Button
               variant="none"
               fontSize="2xl"
-              color={voteyes + voteno < userTicket ? "#00A29D" : "lightgrey"}
+              color={
+                voteyes + voteno < userTicket && votesecondBefore === 0
+                  ? "#00A29D"
+                  : "lightgrey"
+              }
               //기능
               onClick={handleClick_plus_vno}
             >

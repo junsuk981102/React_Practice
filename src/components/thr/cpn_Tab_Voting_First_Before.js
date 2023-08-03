@@ -15,7 +15,7 @@ const TabVotingFirstBefore = ({ state, userId, ownerCount }) => {
 
   //후보 1번 투표
   const handleClick_plus_v1 = () => {
-    if (vote1 + vote2 + vote3 < userTicket) {
+    if (vote1 + vote2 + vote3 < userTicket && votefirstBefore === 0) {
       setVote1(vote1 + 1);
     }
   };
@@ -26,7 +26,7 @@ const TabVotingFirstBefore = ({ state, userId, ownerCount }) => {
   };
   //후보 2번 투표
   const handleClick_plus_v2 = () => {
-    if (vote1 + vote2 + vote3 < userTicket) {
+    if (vote1 + vote2 + vote3 < userTicket && votefirstBefore === 0) {
       setVote2(vote2 + 1);
     }
   };
@@ -37,7 +37,7 @@ const TabVotingFirstBefore = ({ state, userId, ownerCount }) => {
   };
   //후보 3번 투표
   const handleClick_plus_v3 = () => {
-    if (vote1 + vote2 + vote3 < userTicket) {
+    if (vote1 + vote2 + vote3 < userTicket && votefirstBefore === 0) {
       setVote3(vote3 + 1);
     }
   };
@@ -87,23 +87,11 @@ const TabVotingFirstBefore = ({ state, userId, ownerCount }) => {
 
   //1차 투표
   const votingFirst = () => {
-    if (vote1 + vote2 + vote3 === userTicket) {
+    if (vote1 + vote2 + vote3 === userTicket && votefirstBefore === 0) {
       setVoteFirstBefore(1);
       setVote1(0);
       setVote2(0);
       setVote3(0);
-      const communityUid = state.id;
-      const userColRef = dbService
-        .collection("user_list")
-        .doc(userId)
-        .collection("ticket_list");
-
-      const updatedTicket = 0;
-      userColRef.doc(communityUid).set({
-        ticket: updatedTicket,
-      });
-
-      setUserTicket(updatedTicket);
     }
   };
 
@@ -247,7 +235,9 @@ const TabVotingFirstBefore = ({ state, userId, ownerCount }) => {
               variant="none"
               fontSize="2xl"
               color={
-                vote1 + vote2 + vote3 < userTicket ? "#00A29D" : "lightgrey"
+                vote1 + vote2 + vote3 < userTicket && votefirstBefore === 0
+                  ? "#00A29D"
+                  : "lightgrey"
               }
               onClick={handleClick_plus_v1}
             >
@@ -297,7 +287,9 @@ const TabVotingFirstBefore = ({ state, userId, ownerCount }) => {
               variant="none"
               fontSize="2xl"
               color={
-                vote1 + vote2 + vote3 < userTicket ? "#00A29D" : "lightgrey"
+                vote1 + vote2 + vote3 < userTicket && votefirstBefore === 0
+                  ? "#00A29D"
+                  : "lightgrey"
               }
               onClick={handleClick_plus_v2}
             >
@@ -346,7 +338,9 @@ const TabVotingFirstBefore = ({ state, userId, ownerCount }) => {
               variant="none"
               fontSize="2xl"
               color={
-                vote1 + vote2 + vote3 < userTicket ? "#00A29D" : "lightgrey"
+                vote1 + vote2 + vote3 < userTicket && votefirstBefore === 0
+                  ? "#00A29D"
+                  : "lightgrey"
               }
               //기능
               onClick={handleClick_plus_v3}
