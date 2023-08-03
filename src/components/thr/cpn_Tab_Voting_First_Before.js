@@ -1,6 +1,6 @@
-import React from "react";
-import { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Flex, Text, Button, Image } from "@chakra-ui/react";
+import { dbService, auth } from "../../firebase-config";
 
 const TabVotingFirstBefore = ({ state, ownerCount, setOwnerCount }) => {
   const [votefirstBefore, setVoteFirstBefore] = useState(0); //1차 투표 여부
@@ -12,8 +12,42 @@ const TabVotingFirstBefore = ({ state, ownerCount, setOwnerCount }) => {
   const percent3 = 223; // 3번 득표
   const percentA = percent1 + percent2 + percent3; // 총 득표
   //후보 1번 투표
+  const [userTicket, setUserTicket] = useState(0);
+  const [userUid, setUserUid] = useState("");
+
+  useEffect(() => {
+    const getUserUid = async () => {
+      try {
+        const user = auth.currentUser;
+        if (user) {
+          setUserUid(user.uid);
+        }
+      } catch (error) {
+        console.log("사용자 UID 가져오기 실패:", error);
+      }
+    };
+
+    getUserUid();
+  }, []);
+
+  useEffect(() => {
+    const fetchUserTicket = async () => {
+      if (userUid) {
+        const communityUid = state.id;
+        const userColRef = dbService
+          .collection("user_list")
+          .doc(userUid)
+          .collection("ticket_list");
+        const userDoc = await userColRef.doc(communityUid).get();
+        const fetchedUserTicket = userDoc.data()?.ticket || 0;
+        setUserTicket(fetchedUserTicket);
+      }
+    };
+    fetchUserTicket();
+  }, [userUid, state.id]);
+
   const handleClick_plus_v1 = () => {
-    if (vote1 + vote2 + vote3 < ownerCount) {
+    if (vote1 + vote2 + vote3 < userTicket) {
       setVote1(vote1 + 1);
     }
   };
@@ -24,7 +58,7 @@ const TabVotingFirstBefore = ({ state, ownerCount, setOwnerCount }) => {
   };
   //후보 2번 투표
   const handleClick_plus_v2 = () => {
-    if (vote1 + vote2 + vote3 < ownerCount) {
+    if (vote1 + vote2 + vote3 < userTicket) {
       setVote2(vote2 + 1);
     }
   };
@@ -35,7 +69,7 @@ const TabVotingFirstBefore = ({ state, ownerCount, setOwnerCount }) => {
   };
   //후보 3번 투표
   const handleClick_plus_v3 = () => {
-    if (vote1 + vote2 + vote3 < ownerCount) {
+    if (vote1 + vote2 + vote3 < userTicket) {
       setVote3(vote3 + 1);
     }
   };
@@ -46,12 +80,23 @@ const TabVotingFirstBefore = ({ state, ownerCount, setOwnerCount }) => {
   };
   //1차 투표
   const votingFirst = () => {
-    if (vote1 + vote2 + vote3 === ownerCount) {
+    if (vote1 + vote2 + vote3 === userTicket) {
       setVoteFirstBefore(1);
       setVote1(0);
       setVote2(0);
       setVote3(0);
       setOwnerCount(0);
+      const communityUid = state.id;
+      const userColRef = dbService
+        .collection("user_list")
+        .doc(userUid)
+        .collection("ticket_list");
+      const updatedTicket = 0;
+
+      userColRef.doc(communityUid).set({
+        ticket: updatedTicket,
+      });
+      setUserTicket(updatedTicket);
     }
   };
 
@@ -65,7 +110,7 @@ const TabVotingFirstBefore = ({ state, ownerCount, setOwnerCount }) => {
               h="50px"
               borderRadius="3xl"
               bg={
-                vote1 + vote2 + vote3 === ownerCount && ownerCount > 0
+                vote1 + vote2 + vote3 === userTicket && userTicket > 0
                   ? "#00A29D"
                   : "lightgrey"
               }
@@ -150,7 +195,7 @@ const TabVotingFirstBefore = ({ state, ownerCount, setOwnerCount }) => {
           원하는 기업에 보유한 티켓 개수만큼 투표해주세요.
         </Text>
         {/* 보유 티켓 */}
-        <Text m="15px 0">현재 보유한 티켓 수 : {ownerCount}매</Text>
+        <Text m="15px 0">현재 보유한 티켓 수 : {userTicket}매</Text>
       </Flex>
       {/* 1차 투표 */}
       <Flex justifyContent="center">
@@ -195,7 +240,7 @@ const TabVotingFirstBefore = ({ state, ownerCount, setOwnerCount }) => {
               variant="none"
               fontSize="2xl"
               color={
-                vote1 + vote2 + vote3 < ownerCount ? "#00A29D" : "lightgrey"
+                vote1 + vote2 + vote3 < userTicket ? "#00A29D" : "lightgrey"
               }
               onClick={handleClick_plus_v1}
             >
@@ -245,7 +290,7 @@ const TabVotingFirstBefore = ({ state, ownerCount, setOwnerCount }) => {
               variant="none"
               fontSize="2xl"
               color={
-                vote1 + vote2 + vote3 < ownerCount ? "#00A29D" : "lightgrey"
+                vote1 + vote2 + vote3 < userTicket ? "#00A29D" : "lightgrey"
               }
               onClick={handleClick_plus_v2}
             >
@@ -294,7 +339,7 @@ const TabVotingFirstBefore = ({ state, ownerCount, setOwnerCount }) => {
               variant="none"
               fontSize="2xl"
               color={
-                vote1 + vote2 + vote3 < ownerCount ? "#00A29D" : "lightgrey"
+                vote1 + vote2 + vote3 < userTicket ? "#00A29D" : "lightgrey"
               }
               //기능
               onClick={handleClick_plus_v3}

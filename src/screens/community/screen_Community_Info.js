@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import ComInfoBasic from "../../components/community/cpn_Com_Info_Basic";
 import ComInfoCurrent from "../../components/community/cpn_Com_Info_Current";
@@ -13,6 +13,7 @@ import {
   Button,
   useBreakpointValue,
 } from "@chakra-ui/react";
+import { dbService, auth } from "../../firebase-config";
 
 const ScreenRoomInfo = () => {
   const { state } = useLocation();
@@ -21,6 +22,39 @@ const ScreenRoomInfo = () => {
 
   //에러 메시지 Modal 오픈
   const [isOpen, setIsOpen] = useState(false);
+  const [userTicket, setUserTicket] = useState(0);
+  const [userUid, setUserUid] = useState("");
+
+  useEffect(() => {
+    const getUserUid = async () => {
+      try {
+        const user = auth.currentUser;
+        if (user) {
+          setUserUid(user.uid);
+        }
+      } catch (error) {
+        console.log("사용자 UID 가져오기 실패:", error);
+      }
+    };
+
+    getUserUid();
+  }, []);
+
+  useEffect(() => {
+    const fetchUserTicket = async () => {
+      if (userUid) {
+        const communityUid = state.id;
+        const userColRef = dbService
+          .collection("user_list")
+          .doc(userUid)
+          .collection("ticket_list");
+        const userDoc = await userColRef.doc(communityUid).get();
+        const fetchedUserTicket = userDoc.data()?.ticket || 0;
+        setUserTicket(fetchedUserTicket);
+      }
+    };
+    fetchUserTicket();
+  }, [userUid, state.id]);
 
   let comCategory = [];
   if (typeof state.com_category === "string") {
@@ -32,8 +66,7 @@ const ScreenRoomInfo = () => {
   }
 
   const handleClick_chat = () => {
-    if (state.com_member === 0) {
-      //수정!!
+    if (userTicket === 0) {
       //티켓 X => Modal 팝업
       setIsOpen(true);
     } else {
@@ -104,7 +137,7 @@ const ScreenRoomInfo = () => {
             <Button
               w="600px"
               h="60px"
-              bg={state.com_member > 0 ? "#00A29D" : "lightgrey"}
+              bg={userTicket > 0 ? "#00A29D" : "lightgrey"}
               borderRadius="xl"
               variant="none"
               fontSize="lg"

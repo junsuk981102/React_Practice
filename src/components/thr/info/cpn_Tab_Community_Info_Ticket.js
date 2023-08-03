@@ -1,12 +1,47 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Button, Text, Flex, Image } from "@chakra-ui/react";
+import { dbService, auth } from "../../../firebase-config";
 
 const TabCommunityInfoTicket = ({ ownerCount, setOwnerCount, state }) => {
   const [sellCount, setSellCount] = useState(0); //티켓 구매 갯수
 
+  const [userTicket, setUserTicket] = useState(0);
+  const [userUid, setUserUid] = useState("");
+
+  useEffect(() => {
+    const getUserUid = async () => {
+      try {
+        const user = auth.currentUser;
+        if (user) {
+          setUserUid(user.uid);
+        }
+      } catch (error) {
+        console.log("사용자 UID 가져오기 실패:", error);
+      }
+    };
+
+    getUserUid();
+  }, []);
+
+  useEffect(() => {
+    const fetchUserTicket = async () => {
+      if (userUid) {
+        const communityUid = state.id;
+        const userColRef = dbService
+          .collection("user_list")
+          .doc(userUid)
+          .collection("ticket_list");
+        const userDoc = await userColRef.doc(communityUid).get();
+        const fetchedUserTicket = userDoc.data()?.ticket || 0;
+        setUserTicket(fetchedUserTicket);
+      }
+    };
+    fetchUserTicket();
+  }, [userUid, state.id]);
+
   //티켓 구매 갯수 증가
   const handleClick_plus = () => {
-    if (ownerCount + sellCount < state.com_ticket_max) {
+    if (userTicket + sellCount < state.com_ticket_max) {
       setSellCount(sellCount + 1);
     }
   };
@@ -19,9 +54,33 @@ const TabCommunityInfoTicket = ({ ownerCount, setOwnerCount, state }) => {
   };
 
   //티켓 구매
-  const handleClick_sell = () => {
-    setOwnerCount(ownerCount + sellCount);
-    setSellCount(0);
+  const handleClick_sell = async () => {
+    if (sellCount > 0 && userUid) {
+      const communityUid = state.id;
+      const userColRef = dbService
+        .collection("user_list")
+        .doc(userUid)
+        .collection("ticket_list");
+      const updatedTicket = userTicket + sellCount;
+
+      userColRef.doc(communityUid).set({
+        ticket: updatedTicket,
+      });
+
+      state.com_now_investment =
+        state.com_now_investment + sellCount * state.com_ticket_price;
+
+      const updatedInvestment = state.com_now_investment;
+
+      // Firebase의 com_now_investment 필드 업데이트
+      await dbService.collection("community_list").doc(communityUid).update({
+        com_now_investment: updatedInvestment,
+      });
+
+      setUserTicket(updatedTicket);
+
+      setSellCount(0);
+    }
   };
 
   return (
@@ -43,7 +102,7 @@ const TabCommunityInfoTicket = ({ ownerCount, setOwnerCount, state }) => {
             티켓 가격 :&nbsp;{state.com_ticket_price.toLocaleString()}원
           </Text>
           <Text fontSize="sm" mb="5px">
-            현재 보유한 티켓 수 : {ownerCount}매
+            현재 보유한 티켓 수 : {userTicket}매
           </Text>
           {/* 구매 갯수 안내 */}
           <Text fontSize="2xs" color="lightgrey" mb="10px">
@@ -81,7 +140,7 @@ const TabCommunityInfoTicket = ({ ownerCount, setOwnerCount, state }) => {
               fontSize="25px"
               fontWeight="bold"
               color={
-                ownerCount + sellCount < state.com_ticket_max
+                userTicket + sellCount < state.com_ticket_max
                   ? "#00A29D"
                   : "lightgrey"
               }
