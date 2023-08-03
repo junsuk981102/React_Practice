@@ -2,9 +2,9 @@ import React from "react";
 import { Flex, Text, Image } from "@chakra-ui/react";
 
 const TabVotingFirstAfter = ({ state }) => {
-  const percent1 = 531; // 1번 득표
-  const percent2 = 135; // 2번 득표
-  const percent3 = 223; // 3번 득표
+  const percent1 = state.com_fone; // 1번 득표
+  const percent2 = state.com_ftwo; // 2번 득표
+  const percent3 = state.com_fthree; // 3번 득표
   const percentA = percent1 + percent2 + percent3; // 총 득표
 
   return (

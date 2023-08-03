@@ -6,8 +6,8 @@ const TabVotingSecondBefore = ({ state, userId, ownerCount }) => {
   const [votesecondBefore, setVoteSecondBefore] = useState(0); //2차 투표 여부
   const [voteyes, setVoteYes] = useState(0); //찬성 투표
   const [voteno, setVoteNo] = useState(0); //반대 투표
-  const percentyes = 642; // 찬성 득표
-  const percentno = 424; // 반대 득표
+  const percentyes = state.com_syes; // 찬성 득표
+  const percentno = state.com_sno; // 반대 득표
   const percentyesorno = percentyes + percentno; // 총 득표
   const [userTicket, setUserTicket] = useState(ownerCount);
 

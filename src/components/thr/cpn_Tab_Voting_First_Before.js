@@ -86,8 +86,27 @@ const TabVotingFirstBefore = ({ state, userId, ownerCount }) => {
   }, [userId, state.id]);
 
   //1차 투표
-  const votingFirst = () => {
+  const votingFirst = async () => {
     if (vote1 + vote2 + vote3 === userTicket && votefirstBefore === 0) {
+      const communityUid = state.id;
+
+      state.com_fone = state.com_fone + vote1;
+      const updatedfone = state.com_fone;
+      await dbService.collection("community_list").doc(communityUid).update({
+        com_fone: updatedfone,
+      });
+
+      state.com_ftwo = state.com_ftwo + vote2;
+      const updatedftwo = state.com_ftwo;
+      await dbService.collection("community_list").doc(communityUid).update({
+        com_ftwo: updatedftwo,
+      });
+
+      state.com_fthree = state.com_fthree + vote3;
+      const updatedfthree = state.com_fthree;
+      await dbService.collection("community_list").doc(communityUid).update({
+        com_fthree: updatedfthree,
+      });
       setVoteFirstBefore(1);
       setVote1(0);
       setVote2(0);

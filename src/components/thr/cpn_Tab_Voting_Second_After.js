@@ -2,8 +2,8 @@ import React from "react";
 import { Flex, Text, Image } from "@chakra-ui/react";
 
 const TabVotingSecondAfter = ({ state }) => {
-  const percentyes = 642; // 찬성 득표
-  const percentno = 424; // 반대 득표
+  const percentyes = state.com_syes; // 찬성 득표
+  const percentno = state.com_sno; // 반대 득표
   const percentyesorno = percentyes + percentno; // 총 득표
 
   return (
