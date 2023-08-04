@@ -61,15 +61,16 @@ const TabCommunityInfoTicket = ({ state, userId, ownerCount }) => {
   const handleClick_sell = async () => {
     if (sellCount > 0 && userId) {
       const communityUid = state.id;
-      const userColRef = dbService
-        .collection("user_list")
-        .doc(userId)
-        .collection("ticket_list");
 
       const updatedTicket = userTicket + sellCount;
-      userColRef.doc(communityUid).set({
-        ticket: updatedTicket,
-      });
+      await dbService
+        .collection("user_list")
+        .doc(userId)
+        .collection("ticket_list")
+        .doc(communityUid)
+        .update({
+          ticket: updatedTicket,
+        });
 
       const updatedInvestment =
         state.com_now_investment + sellCount * state.com_ticket_price;

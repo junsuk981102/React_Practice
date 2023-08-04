@@ -54,10 +54,6 @@ const ComInfoTicket = ({ state }) => {
   const handleClick_sell = async () => {
     if (sellCount > 0 && userUid) {
       const communityUid = state.id;
-      const userColRef = dbService
-        .collection("user_list")
-        .doc(userUid)
-        .collection("ticket_list");
 
       if (userTicket === 0) {
         state.com_member = state.com_member + 1;
@@ -68,9 +64,14 @@ const ComInfoTicket = ({ state }) => {
       }
 
       const updatedTicket = userTicket + sellCount;
-      userColRef.doc(communityUid).set({
-        ticket: updatedTicket,
-      });
+      await dbService
+        .collection("user_list")
+        .doc(userUid)
+        .collection("ticket_list")
+        .doc(communityUid)
+        .update({
+          ticket: updatedTicket,
+        });
 
       state.com_now_investment =
         state.com_now_investment + sellCount * state.com_ticket_price;
