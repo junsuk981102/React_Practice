@@ -54,6 +54,28 @@ const ScreenRoomInfo = () => {
     fetchUserTicket();
   }, [userUid, state.id]);
 
+  useEffect(() => {
+    if (userUid) {
+      const communityUid = state.id;
+      const userColRef = dbService
+        .collection("user_list")
+        .doc(userUid)
+        .collection("ticket_list")
+        .doc(communityUid);
+
+      const unsubscribe = userColRef.onSnapshot((doc) => {
+        if (doc.exists) {
+          const newData = doc.data();
+          setUserTicket(newData.ticket);
+        }
+      });
+
+      return () => {
+        unsubscribe(); // Unsubscribe from the real-time updates when component unmounts
+      };
+    }
+  }, [userUid, state.id]);
+
   let comCategory = [];
   if (typeof state.com_category === "string") {
     comCategory = state.com_category.split(",");
