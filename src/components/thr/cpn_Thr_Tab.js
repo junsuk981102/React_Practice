@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import TabVotingFirstBefore from "./cpn_Tab_Voting_First_Before";
 import TabVotingFirstAfter from "./cpn_Tab_Voting_First_After";
 import TabVotingSecondBefore from "./cpn_Tab_Voting_Second_Before";
@@ -18,8 +18,19 @@ import Threads from "./cpn_Threads";
 
 function ThrTab({ state, userId, ownerCount, userObj }) {
   const [selectedTab, setSelectedTab] = useState(0);
+  const [showAlternateComponent, setShowAlternateComponent] = useState(false);
+
   // TabPanel의 높이를 설정
   const tabPanelHeight = "100vh";
+
+  useEffect(() => {
+    // 5초 후에 showAlternateComponent 상태를 true로 변경
+    const timer = setTimeout(() => {
+      setShowAlternateComponent(true);
+    }, 10000);
+
+    return () => clearTimeout(timer);
+  }, []);
 
   return (
     <Tabs
@@ -44,24 +55,17 @@ function ThrTab({ state, userId, ownerCount, userObj }) {
           fontWeight="bold"
           color={selectedTab === 1 ? "#00A29D" : "black"}
         >
-          1차 투표
+          투표
         </Tab>
         <Tab
           fontSize="sm"
           fontWeight="bold"
           color={selectedTab === 2 ? "#00A29D" : "black"}
         >
-          2차 투표
-        </Tab>
-        <Tab
-          fontSize="sm"
-          fontWeight="bold"
-          color={selectedTab === 3 ? "#00A29D" : "black"}
-        >
           정보
         </Tab>
       </TabList>
-      <TabIndicator m="-1.5px 0 0 69px" maxWidth="50px" h="2px" bg="#00A29D" />
+      <TabIndicator m="-1.5px 0 0 100px" maxWidth="50px" h="2px" bg="#00A29D" />
 
       <Divider />
 
@@ -78,24 +82,24 @@ function ThrTab({ state, userId, ownerCount, userObj }) {
             <Threads userObj={userObj} />
           </Flex>
         </TabPanel>
-        {/* 1차 투표 */}
+        {/* 투표 */}
         <TabPanel>
           {state.com_fall === state.com_ticket_max ? (
-            <TabVotingFirstAfter state={state} />
+            showAlternateComponent ? (
+              state.com_sall === state.com_ticket_max ? (
+                <TabVotingSecondAfter state={state} />
+              ) : (
+                <TabVotingSecondBefore
+                  state={state}
+                  userId={userId}
+                  ownerCount={ownerCount}
+                />
+              )
+            ) : (
+              <TabVotingFirstAfter state={state} />
+            )
           ) : (
             <TabVotingFirstBefore
-              state={state}
-              userId={userId}
-              ownerCount={ownerCount}
-            />
-          )}
-        </TabPanel>
-        {/* 2차 투표 */}
-        <TabPanel>
-          {state.com_sall === state.com_ticket_max ? (
-            <TabVotingSecondAfter state={state} />
-          ) : (
-            <TabVotingSecondBefore
               state={state}
               userId={userId}
               ownerCount={ownerCount}
