@@ -3,36 +3,13 @@ import { Flex, Text, Button, Image } from "@chakra-ui/react";
 import { dbService } from "../../firebase-config";
 
 const TabVotingSecondBefore = ({ state, userId, ownerCount }) => {
-  const [votesecondBefore, setVoteSecondBefore] = useState(0); //2차 투표 여부
   const [voteyes, setVoteYes] = useState(0); //찬성 투표
   const [voteno, setVoteNo] = useState(0); //반대 투표
   const percentyes = state.com_syes; // 찬성 득표
   const percentno = state.com_sno; // 반대 득표
   const percentyesorno = state.com_sall; // 총 득표
   const [userTicket, setUserTicket] = useState(ownerCount);
-
-  //찬성 투표
-  const handleClick_plus_vyes = () => {
-    if (voteyes + voteno < userTicket && votesecondBefore === 0) {
-      setVoteYes(voteyes + 1);
-    }
-  };
-  const handleClick_minus_vyes = () => {
-    if (voteyes > 0) {
-      setVoteYes(voteyes - 1);
-    }
-  };
-  //반대 투표
-  const handleClick_plus_vno = () => {
-    if (voteyes + voteno < userTicket && votesecondBefore === 0) {
-      setVoteNo(voteno + 1);
-    }
-  };
-  const handleClick_minus_vno = () => {
-    if (voteno > 0) {
-      setVoteNo(voteno - 1);
-    }
-  };
+  const [secondvote, setSecondVote] = useState(0);
 
   useEffect(() => {
     const fetchUserTicket = async () => {
@@ -48,6 +25,22 @@ const TabVotingSecondBefore = ({ state, userId, ownerCount }) => {
       }
     };
     fetchUserTicket();
+  }, [userId, state.id]);
+
+  useEffect(() => {
+    const fetchUserVote = async () => {
+      if (userId) {
+        const communityUid = state.id;
+        const userColRef = dbService
+          .collection("user_list")
+          .doc(userId)
+          .collection("ticket_list");
+        const userDoc = await userColRef.doc(communityUid).get();
+        const fetchedUserVote = userDoc.data()?.secondvote || 0;
+        setSecondVote(fetchedUserVote);
+      }
+    };
+    fetchUserVote();
   }, [userId, state.id]);
 
   useEffect(() => {
@@ -71,9 +64,54 @@ const TabVotingSecondBefore = ({ state, userId, ownerCount }) => {
       };
     }
   }, [userId, state.id]);
+
+  useEffect(() => {
+    if (userId) {
+      const communityUid = state.id;
+      const userColRef = dbService
+        .collection("user_list")
+        .doc(userId)
+        .collection("ticket_list")
+        .doc(communityUid);
+
+      const unsubscribe = userColRef.onSnapshot((doc) => {
+        if (doc.exists) {
+          const newData = doc.data();
+          setSecondVote(newData.secondvote);
+        }
+      });
+
+      return () => {
+        unsubscribe(); // Unsubscribe from the real-time updates when component unmounts
+      };
+    }
+  }, [userId, state.id]);
+
+  //찬성 투표
+  const handleClick_plus_vyes = () => {
+    if (voteyes + voteno < userTicket && secondvote === 0) {
+      setVoteYes(voteyes + 1);
+    }
+  };
+  const handleClick_minus_vyes = () => {
+    if (voteyes > 0) {
+      setVoteYes(voteyes - 1);
+    }
+  };
+  //반대 투표
+  const handleClick_plus_vno = () => {
+    if (voteyes + voteno < userTicket && secondvote === 0) {
+      setVoteNo(voteno + 1);
+    }
+  };
+  const handleClick_minus_vno = () => {
+    if (voteno > 0) {
+      setVoteNo(voteno - 1);
+    }
+  };
   //2차 투표
   const votingSecond = async () => {
-    if (voteyes + voteno === userTicket && votesecondBefore === 0) {
+    if (voteyes + voteno === userTicket && secondvote === 0) {
       const communityUid = state.id;
 
       state.com_syes = state.com_syes + voteyes;
@@ -94,14 +132,22 @@ const TabVotingSecondBefore = ({ state, userId, ownerCount }) => {
         com_sall: updatedsall,
       });
 
-      setVoteSecondBefore(1);
+      await dbService
+        .collection("user_list")
+        .doc(userId)
+        .collection("ticket_list")
+        .doc(communityUid)
+        .update({
+          secondvote: 1,
+        });
+
       setVoteYes(0);
       setVoteNo(0);
     }
   };
 
   const votingSecondButton = () => {
-    if (votesecondBefore === 0) {
+    if (secondvote === 0) {
       return (
         <>
           <Flex justifyContent="center" m="60px 0 0 0">
@@ -233,7 +279,7 @@ const TabVotingSecondBefore = ({ state, userId, ownerCount }) => {
               variant="none"
               fontSize="2xl"
               color={
-                voteyes + voteno < userTicket && votesecondBefore === 0
+                voteyes + voteno < userTicket && secondvote === 0
                   ? "#00A29D"
                   : "lightgrey"
               }
@@ -291,7 +337,7 @@ const TabVotingSecondBefore = ({ state, userId, ownerCount }) => {
               variant="none"
               fontSize="2xl"
               color={
-                voteyes + voteno < userTicket && votesecondBefore === 0
+                voteyes + voteno < userTicket && secondvote === 0
                   ? "#00A29D"
                   : "lightgrey"
               }
