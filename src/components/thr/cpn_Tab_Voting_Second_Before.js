@@ -8,7 +8,7 @@ const TabVotingSecondBefore = ({ state, userId, ownerCount }) => {
   const [voteno, setVoteNo] = useState(0); //반대 투표
   const percentyes = state.com_syes; // 찬성 득표
   const percentno = state.com_sno; // 반대 득표
-  const percentyesorno = percentyes + percentno; // 총 득표
+  const percentyesorno = state.com_sall; // 총 득표
   const [userTicket, setUserTicket] = useState(ownerCount);
 
   //찬성 투표
@@ -72,8 +72,28 @@ const TabVotingSecondBefore = ({ state, userId, ownerCount }) => {
     }
   }, [userId, state.id]);
   //2차 투표
-  const votingSecond = () => {
+  const votingSecond = async () => {
     if (voteyes + voteno === userTicket && votesecondBefore === 0) {
+      const communityUid = state.id;
+
+      state.com_syes = state.com_syes + voteyes;
+      const updatedsyes = state.com_syes;
+      await dbService.collection("community_list").doc(communityUid).update({
+        com_syes: updatedsyes,
+      });
+
+      state.com_sno = state.com_sno + voteno;
+      const updatedsno = state.com_sno;
+      await dbService.collection("community_list").doc(communityUid).update({
+        com_sno: updatedsno,
+      });
+
+      state.com_sall = state.com_sall + voteyes + voteno;
+      const updatedsall = state.com_sall;
+      await dbService.collection("community_list").doc(communityUid).update({
+        com_sall: updatedsall,
+      });
+
       setVoteSecondBefore(1);
       setVoteYes(0);
       setVoteNo(0);

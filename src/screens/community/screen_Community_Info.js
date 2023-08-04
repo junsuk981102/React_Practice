@@ -19,9 +19,7 @@ const ScreenRoomInfo = () => {
   const { state } = useLocation();
   const navi = useNavigate();
   const boxPadding = useBreakpointValue({ base: "20px", xl: "200px" }); // 양쪽 여백
-
-  //에러 메시지 Modal 오픈
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false); //에러 메시지 Modal 오픈
   const [userTicket, setUserTicket] = useState(0);
   const [userUid, setUserUid] = useState("");
 
