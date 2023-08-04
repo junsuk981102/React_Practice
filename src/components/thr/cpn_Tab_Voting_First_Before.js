@@ -3,7 +3,6 @@ import { Flex, Text, Button, Image } from "@chakra-ui/react";
 import { dbService } from "../../firebase-config";
 
 const TabVotingFirstBefore = ({ state, userId, ownerCount }) => {
-  const [votefirstBefore, setVoteFirstBefore] = useState(0); //1차 투표 여부
   const [vote1, setVote1] = useState(0); //후보 1번 투표
   const [vote2, setVote2] = useState(0); //후보 2번 투표
   const [vote3, setVote3] = useState(0); //후보 3번 투표
@@ -12,40 +11,7 @@ const TabVotingFirstBefore = ({ state, userId, ownerCount }) => {
   const percent3 = state.com_fthree; // 3번 득표
   const percentA = state.com_fall; // 총 득표
   const [userTicket, setUserTicket] = useState(ownerCount);
-
-  //후보 1번 투표
-  const handleClick_plus_v1 = () => {
-    if (vote1 + vote2 + vote3 < userTicket && votefirstBefore === 0) {
-      setVote1(vote1 + 1);
-    }
-  };
-  const handleClick_minus_v1 = () => {
-    if (vote1 > 0) {
-      setVote1(vote1 - 1);
-    }
-  };
-  //후보 2번 투표
-  const handleClick_plus_v2 = () => {
-    if (vote1 + vote2 + vote3 < userTicket && votefirstBefore === 0) {
-      setVote2(vote2 + 1);
-    }
-  };
-  const handleClick_minus_v2 = () => {
-    if (vote2 > 0) {
-      setVote2(vote2 - 1);
-    }
-  };
-  //후보 3번 투표
-  const handleClick_plus_v3 = () => {
-    if (vote1 + vote2 + vote3 < userTicket && votefirstBefore === 0) {
-      setVote3(vote3 + 1);
-    }
-  };
-  const handleClick_minus_v3 = () => {
-    if (vote3 > 0) {
-      setVote3(vote3 - 1);
-    }
-  };
+  const [firstvote, setFirstVote] = useState(0);
 
   useEffect(() => {
     const fetchUserTicket = async () => {
@@ -61,6 +27,22 @@ const TabVotingFirstBefore = ({ state, userId, ownerCount }) => {
       }
     };
     fetchUserTicket();
+  }, [userId, state.id]);
+
+  useEffect(() => {
+    const fetchUserVote = async () => {
+      if (userId) {
+        const communityUid = state.id;
+        const userColRef = dbService
+          .collection("user_list")
+          .doc(userId)
+          .collection("ticket_list");
+        const userDoc = await userColRef.doc(communityUid).get();
+        const fetchedUserVote = userDoc.data()?.firstvote || 0;
+        setFirstVote(fetchedUserVote);
+      }
+    };
+    fetchUserVote();
   }, [userId, state.id]);
 
   useEffect(() => {
@@ -85,9 +67,65 @@ const TabVotingFirstBefore = ({ state, userId, ownerCount }) => {
     }
   }, [userId, state.id]);
 
+  useEffect(() => {
+    if (userId) {
+      const communityUid = state.id;
+      const userColRef = dbService
+        .collection("user_list")
+        .doc(userId)
+        .collection("ticket_list")
+        .doc(communityUid);
+
+      const unsubscribe = userColRef.onSnapshot((doc) => {
+        if (doc.exists) {
+          const newData = doc.data();
+          setFirstVote(newData.firstvote);
+        }
+      });
+
+      return () => {
+        unsubscribe(); // Unsubscribe from the real-time updates when component unmounts
+      };
+    }
+  }, [userId, state.id]);
+
+  //후보 1번 투표
+  const handleClick_plus_v1 = () => {
+    if (vote1 + vote2 + vote3 < userTicket && firstvote === 0) {
+      setVote1(vote1 + 1);
+    }
+  };
+  const handleClick_minus_v1 = () => {
+    if (vote1 > 0) {
+      setVote1(vote1 - 1);
+    }
+  };
+  //후보 2번 투표
+  const handleClick_plus_v2 = () => {
+    if (vote1 + vote2 + vote3 < userTicket && firstvote === 0) {
+      setVote2(vote2 + 1);
+    }
+  };
+  const handleClick_minus_v2 = () => {
+    if (vote2 > 0) {
+      setVote2(vote2 - 1);
+    }
+  };
+  //후보 3번 투표
+  const handleClick_plus_v3 = () => {
+    if (vote1 + vote2 + vote3 < userTicket && firstvote === 0) {
+      setVote3(vote3 + 1);
+    }
+  };
+  const handleClick_minus_v3 = () => {
+    if (vote3 > 0) {
+      setVote3(vote3 - 1);
+    }
+  };
+
   //1차 투표
   const votingFirst = async () => {
-    if (vote1 + vote2 + vote3 === userTicket && votefirstBefore === 0) {
+    if (vote1 + vote2 + vote3 === userTicket && firstvote === 0) {
       const communityUid = state.id;
 
       state.com_fone = state.com_fone + vote1;
@@ -114,7 +152,15 @@ const TabVotingFirstBefore = ({ state, userId, ownerCount }) => {
         com_fall: updatedfall,
       });
 
-      setVoteFirstBefore(1);
+      await dbService
+        .collection("user_list")
+        .doc(userId)
+        .collection("ticket_list")
+        .doc(communityUid)
+        .update({
+          firstvote: 1,
+        });
+
       setVote1(0);
       setVote2(0);
       setVote3(0);
@@ -122,7 +168,7 @@ const TabVotingFirstBefore = ({ state, userId, ownerCount }) => {
   };
 
   const votingFirstButton = () => {
-    if (votefirstBefore === 0) {
+    if (firstvote === 0) {
       return (
         <>
           <Flex justifyContent="center" m="60px 0 0 0">
@@ -261,7 +307,7 @@ const TabVotingFirstBefore = ({ state, userId, ownerCount }) => {
               variant="none"
               fontSize="2xl"
               color={
-                vote1 + vote2 + vote3 < userTicket && votefirstBefore === 0
+                vote1 + vote2 + vote3 < userTicket && firstvote === 0
                   ? "#00A29D"
                   : "lightgrey"
               }
@@ -313,7 +359,7 @@ const TabVotingFirstBefore = ({ state, userId, ownerCount }) => {
               variant="none"
               fontSize="2xl"
               color={
-                vote1 + vote2 + vote3 < userTicket && votefirstBefore === 0
+                vote1 + vote2 + vote3 < userTicket && firstvote === 0
                   ? "#00A29D"
                   : "lightgrey"
               }
@@ -364,7 +410,7 @@ const TabVotingFirstBefore = ({ state, userId, ownerCount }) => {
               variant="none"
               fontSize="2xl"
               color={
-                vote1 + vote2 + vote3 < userTicket && votefirstBefore === 0
+                vote1 + vote2 + vote3 < userTicket && firstvote === 0
                   ? "#00A29D"
                   : "lightgrey"
               }
