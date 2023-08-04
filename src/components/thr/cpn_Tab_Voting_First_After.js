@@ -5,7 +5,7 @@ const TabVotingFirstAfter = ({ state }) => {
   const percent1 = state.com_fone; // 1번 득표
   const percent2 = state.com_ftwo; // 2번 득표
   const percent3 = state.com_fthree; // 3번 득표
-  const percentA = percent1 + percent2 + percent3; // 총 득표
+  const percentA = state.com_fall; // 총 득표
 
   return (
     <>
