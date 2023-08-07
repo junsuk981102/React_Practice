@@ -1,162 +1,99 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { Box, Text, Button, Flex, Input, FormControl } from "@chakra-ui/react";
 import {
   addDoc,
+  query,
   collection,
-  serverTimestamp,
   doc,
-  updateDoc,
-  increment,
+  serverTimestamp,
+  onSnapshot,
+  orderBy,
 } from "firebase/firestore";
 import { db } from "../../firebase-config";
-import { Box, Button, Flex, FormControl, Input, Text } from "@chakra-ui/react";
+import Depth2Reply from "./cpn_Depth2_Replies";
 
-const Reply = ({ threadId, userObj, addReply, reply }) => {
-  const [newReply, setNewReply] = useState(""); //1-depth reply
-  const [new2DepthReply, setNew2DepthReply] = useState(""); // 2-depth reply를 추가하는 입력 폼 상태
+const Reply = ({ threadId, userObj, addReply }) => {
+  const [showReplies, setShowReplies] = useState(false);
+  const [replyText, setReplyText] = useState("");
+  const [replies, setReplies] = useState([]);
 
-  const onReplySubmit = async (e) => {
+  useEffect(() => {
+    const unsubscribe = onSnapshot(
+      query(
+        collection(db, "threads", threadId, "replies"),
+        orderBy("createdAt", "asc")
+      ),
+      (snapshot) => {
+        const replyData = [];
+        snapshot.forEach((doc) => {
+          replyData.push({ id: doc.id, ...doc.data() });
+        });
+        setReplies(replyData);
+      }
+    );
+
+    return () => unsubscribe();
+  }, [threadId]);
+
+  const onToggleReplies = () => {
+    setShowReplies((prev) => !prev);
+  };
+
+  const handleAddReply = async (e) => {
     e.preventDefault();
 
-    if (!userObj) {
-      // If the user is not logged in, do nothing
+    if (!userObj || !replyText.trim()) {
       return;
     }
 
-    const threadRef = doc(db, "threads", threadId);
-    const repliesRef = collection(threadRef, "replies");
-
-    // Create a new reply document with the text and timestamp
-    const newReplyDoc = {
-      text: newReply,
-      createdAt: serverTimestamp(),
+    const createdAt = serverTimestamp();
+    const newReply = {
+      createdAt,
+      creatorEmail: userObj.email,
       creatorId: userObj.uid,
       creatorName: userObj.displayName,
-      creatorEmail: userObj.email,
+      text: replyText,
     };
 
     try {
-      // Add the new reply to the repliesRef collection
-      const docRef = await addDoc(
-        collection(threadRef, "replies"),
-        newReplyDoc
-      );
-      // Add the reply to the local state
-      addReply({ id: docRef.id, ...newReplyDoc });
-
-      // Update the parent thread's repliesCount field
-      await updateDoc(threadRef, {
-        repliesCount: increment(1),
-      });
-
-      // Clear the reply input field
-      setNewReply("");
+      await addDoc(collection(db, "threads", threadId, "replies"), newReply);
+      setReplyText("");
     } catch (error) {
-      console.error("Error adding reply: ", error);
+      console.error("Error adding reply:", error);
     }
-  };
-
-  const add2DepthReply = async (replyId, reply) => {
-    const threadRef = doc(db, "threads", threadId);
-    const replyRef = doc(db, "threads", threadId, "replies", replyId);
-    const depth2RepliesRef = collection(replyRef, "replies");
-
-    // Create a new 2-depth reply document with the text and timestamp
-    const new2DepthReplyDoc = {
-      text: reply,
-      createdAt: serverTimestamp(),
-      creatorId: userObj.uid,
-      creatorName: userObj.displayName,
-      creatorEmail: userObj.email,
-    };
-
-    try {
-      // Add the new 2-depth reply to the depth2RepliesRef collection
-      await addDoc(depth2RepliesRef, new2DepthReplyDoc);
-    } catch (error) {
-      console.error("Error adding 2-depth reply: ", error);
-    }
-  };
-
-  const onReplyChange = (e) => {
-    const { value } = e.target;
-    setNewReply(value);
-  };
-
-  const on2DepthReplyChange = (e) => {
-    const { value } = e.target;
-    setNew2DepthReply(value);
   };
 
   return (
-    <>
-      <form onSubmit={onReplySubmit}>
-        <FormControl>
-          <Input
-            type="text"
-            placeholder="Reply to this thread"
-            value={newReply}
-            required
-            onChange={onReplyChange}
-          />
-          <Button type="submit" mt="2">
-            Reply
-          </Button>
-        </FormControl>
-      </form>
-      {reply && (
-        <>
-          <form
-            onSubmit={(e) => {
-              e.preventDefault();
-              add2DepthReply(reply.id, new2DepthReply);
-              setNew2DepthReply("");
-            }}
-          >
-            <FormControl mt="4">
+    <Box>
+      {userObj && (
+        <Box>
+          <FormControl as="form" onSubmit={handleAddReply}>
+            <Flex align="center">
               <Input
                 type="text"
-                placeholder="Reply to this reply (2-depth reply)"
-                value={new2DepthReply}
-                required
-                onChange={on2DepthReplyChange}
+                placeholder="Write a reply"
+                value={replyText}
+                onChange={(e) => setReplyText(e.target.value)}
+                w="500px"
               />
-              <Button type="submit" mt="2">
+              <Button type="submit" colorScheme="teal" ml="2">
                 Reply
               </Button>
-            </FormControl>
-          </form>
-        </>
-      )}
-      {/* Render 1-depth replies here */}
-      {reply &&
-        reply.replies &&
-        reply.replies.map((reply) => (
-          <Box
-            key={reply.id}
-            borderWidth="1px"
-            borderRadius="md"
-            p="4"
-            mt="4"
-            ml="4"
-          >
-            <Flex align="center">
-              <Text fontWeight="bold">{reply.creatorName}</Text>
-              <Text ml="2" color="gray.500">
-                {reply.creatorEmail}
-              </Text>
             </Flex>
-            <Text ml="2">{reply.text}</Text>
-            {/* Additional rendering for reply content */}
-            {/* 2-depth 댓글을 표시하는 Reply 컴포넌트 */}
-            <Reply
-              threadId={threadId}
-              userObj={userObj}
-              addReply={addReply}
-              reply={reply}
-            />
-          </Box>
-        ))}
-    </>
+          </FormControl>
+        </Box>
+      )}
+      {replies.map((reply) => (
+        <Box key={reply.id}>
+          <Depth2Reply
+            threadId={threadId}
+            userObj={userObj}
+            reply={reply}
+            depth2Replies={reply.replies}
+          />
+        </Box>
+      ))}
+    </Box>
   );
 };
 
