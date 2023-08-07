@@ -42,7 +42,8 @@ const ComInfoTicket = ({ state }) => {
   const handleClick_plus = () => {
     if (
       userTicket + sellCount < state.com_ticket_max &&
-      state.com_now_investment < state.com_total_investment
+      state.com_ticket_price * sellCount <
+        state.com_total_investment - state.com_now_investment
     ) {
       setSellCount(sellCount + 1);
     }
@@ -64,6 +65,22 @@ const ComInfoTicket = ({ state }) => {
         await dbService.collection("community_list").doc(communityUid).update({
           com_member: updatedMember,
         });
+        await dbService
+          .collection("user_list")
+          .doc(userUid)
+          .collection("ticket_list")
+          .doc(communityUid)
+          .update({
+            firstvote: 0,
+          });
+        await dbService
+          .collection("user_list")
+          .doc(userUid)
+          .collection("ticket_list")
+          .doc(communityUid)
+          .update({
+            secondvote: 0,
+          });
       }
 
       const updatedTicket = userTicket + sellCount;
@@ -158,7 +175,9 @@ const ComInfoTicket = ({ state }) => {
               variant="none"
               fontSize="2xl"
               color={
-                userTicket + sellCount < state.com_ticket_max
+                userTicket + sellCount < state.com_ticket_max &&
+                state.com_ticket_price * sellCount <
+                  state.com_total_investment - state.com_now_investment
                   ? "#00A29D"
                   : "lightgrey"
               }
