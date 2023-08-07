@@ -1,7 +1,7 @@
 import React from "react";
 import Slider from "react-slick";
 import StartupCard from "../startup/cpn_Startup_Card";
-import { Box } from "@chakra-ui/react";
+import { Flex } from "@chakra-ui/react";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
@@ -9,13 +9,12 @@ import "slick-carousel/slick/slick-theme.css";
 export const renderStartups = (startups) => {
   return startups.map((startup) => (
     // 스타트업 카드
-    <Box key={startup.id} m="20px">
+    <Flex key={startup.id} m="20px">
       {/* 스타트업 정보 */}
       <StartupCard startupObj={startup} />
-    </Box>
+    </Flex>
   ));
 };
-
 // 스타트업 슬라이드 설정
 const sup_slide_settings = {
   dots: true, // 페이지 표시 여부
@@ -26,7 +25,6 @@ const sup_slide_settings = {
   autoplay: true, // 자동 전환 설정
   autoplaySpeed: 3000, // 자동전환 속도
 };
-
 // 스타트업 슬라이드 리스트
 export const SlideListSup = ({ startups }) => {
   return (
@@ -36,3 +34,4 @@ export const SlideListSup = ({ startups }) => {
 };
 
 //23.07.27 1차 코드 수정
+//23.08.87 2차 코드 수정
