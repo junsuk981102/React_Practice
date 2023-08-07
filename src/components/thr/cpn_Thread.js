@@ -17,6 +17,7 @@ import {
 } from "firebase/storage";
 import { storageService } from "../../firebase-config";
 import { db } from "../../firebase-config";
+import { v4 as uuidv4 } from "uuid";
 import { FaHeart, FaRegHeart } from "react-icons/fa";
 import {
   Flex,
@@ -37,6 +38,7 @@ const Thread = ({ threadObj, isOwner, userObj }) => {
   const [likesCount, setLikesCount] = useState(threadObj.likes);
 
   const ThreadTextRef = doc(db, "threads", `${threadObj.id}`);
+  const ThreadAttachmentRef = doc(db, "threads", `${threadObj.id}`);
   const attachmentRef = ref(storageService, threadObj.attachmentUrl);
 
   const defaultProfileImage = "/image/user/icon_user.png";
