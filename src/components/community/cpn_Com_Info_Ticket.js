@@ -40,7 +40,10 @@ const ComInfoTicket = ({ state }) => {
   }, [userUid, state.id]);
 
   const handleClick_plus = () => {
-    if (userTicket + sellCount < state.com_ticket_max) {
+    if (
+      userTicket + sellCount < state.com_ticket_max &&
+      state.com_now_investment < state.com_total_investment
+    ) {
       setSellCount(sellCount + 1);
     }
   };
