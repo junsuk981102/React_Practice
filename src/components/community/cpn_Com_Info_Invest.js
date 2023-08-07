@@ -79,4 +79,4 @@ const ComInfoInvest = ({ state }) => {
 export default ComInfoInvest;
 
 //23.07.27 1차 코드 수정
-//23.08.07 1차 코드 수정
+//23.08.07 2차 코드 수정
