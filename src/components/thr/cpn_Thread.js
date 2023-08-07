@@ -2,16 +2,19 @@ import React, { useState, useEffect } from "react";
 import {
   deleteDoc,
   onSnapshot,
-  getFirestore,
   doc,
   updateDoc,
   increment,
   collection,
   query,
   orderBy,
-  getDocs,
 } from "firebase/firestore";
-import { deleteObject, ref } from "firebase/storage";
+import {
+  deleteObject,
+  ref,
+  uploadString,
+  getDownloadURL,
+} from "firebase/storage";
 import { storageService } from "../../firebase-config";
 import { db } from "../../firebase-config";
 import { FaHeart, FaRegHeart } from "react-icons/fa";
@@ -29,6 +32,7 @@ import Reply from "./cpn_Replies";
 const Thread = ({ threadObj, isOwner, userObj }) => {
   const [editing, setEditing] = useState(false);
   const [newThread, setNewThread] = useState(threadObj.text);
+  const [newAttachment, setNewAttachment] = useState(threadObj.attachmentUrl);
   const [liked, setLiked] = useState(false);
   const [likesCount, setLikesCount] = useState(threadObj.likes);
 
@@ -65,6 +69,7 @@ const Thread = ({ threadObj, isOwner, userObj }) => {
     e.preventDefault();
     await updateDoc(ThreadTextRef, {
       text: newThread,
+      attachmentUrl: newAttachment,
     });
     setEditing(false);
   };
@@ -72,6 +77,27 @@ const Thread = ({ threadObj, isOwner, userObj }) => {
   const onChange = (e) => {
     const { value } = e.target;
     setNewThread(value);
+  };
+
+  const onFileChange = (e) => {
+    const {
+      target: { files },
+    } = e;
+    const thrFile = files[0];
+
+    // 파일이 선택되지 않았을 경우에 처리.
+    if (!thrFile) {
+      return;
+    }
+
+    const reader = new FileReader();
+    reader.onload = (finishedEvent) => {
+      const {
+        target: { result },
+      } = finishedEvent;
+      setNewAttachment(result);
+    };
+    reader.readAsDataURL(thrFile);
   };
 
   const addReply = (reply) => {
@@ -132,6 +158,20 @@ const Thread = ({ threadObj, isOwner, userObj }) => {
       >
         {editing ? (
           <>
+            <Flex align="center" mb="2">
+              <Image
+                src={threadObj.creatorPhotoUrl || defaultProfileImage}
+                w="32px"
+                h="32px"
+                rounded="full"
+                mr="2"
+                alt="Profile"
+              />
+              <Text fontWeight="bold">{threadObj.creatorName}</Text>
+              <Text ml="2" color="gray.500">
+                {threadObj.creatorEmail}
+              </Text>
+            </Flex>
             <FormControl>
               <Input
                 type="text"
@@ -140,6 +180,11 @@ const Thread = ({ threadObj, isOwner, userObj }) => {
                 required
                 autoFocus
                 onChange={onChange}
+              />
+              <Input
+                type="file"
+                accept="image/*" // Modify the accepted file types if needed
+                onChange={onFileChange}
               />
               <Button onClick={onSubmit} mt="2">
                 Update thread
