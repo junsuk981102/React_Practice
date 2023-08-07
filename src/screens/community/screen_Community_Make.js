@@ -143,8 +143,8 @@ const ScreenRoomMake = () => {
       h="auto"
       pb="200px"
       //배경
-      bg="#E5F2F2"
       borderTop="1px solid #00A29D"
+      bg="#E5F2F2"
     >
       <Box
         //크기
@@ -168,6 +168,7 @@ const ScreenRoomMake = () => {
           //배경
           border="3px solid #00A29D"
           borderRadius="2xl"
+          bg="white"
           //기능
           as="form"
           onSubmit={handleSubmit}
