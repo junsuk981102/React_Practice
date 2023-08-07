@@ -1,16 +1,18 @@
 import React from "react";
 import Slider from "react-slick";
 import CommunityCard from "../community/cpn_Community_Card";
-import { Box } from "@chakra-ui/react";
+import { Flex } from "@chakra-ui/react";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 // 커뮤니티 리스트 렌더링
 export const renderCommunities = (communities) => {
   return communities.map((community) => (
     // 커뮤니티 카드
-    <Box key={community.id} m="20px">
+    <Flex key={community.id} m="20px">
       {/* 커뮤니티 카드 정보 */}
       <CommunityCard communityObj={community} />
-    </Box>
+    </Flex>
   ));
 };
 // 커뮤니티 슬라이드 설정
@@ -32,3 +34,4 @@ export const SlideListCom = ({ communities }) => {
 };
 
 //23.07.27 1차 코드 수정
+//23.08.07 2차 코드 수정
