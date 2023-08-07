@@ -6,25 +6,21 @@ const ComInfoInvest = ({ state }) => {
   const [currentInvestment, setCurrentInvestment] = useState(
     state.com_now_investment
   );
-
+  //state.com_now_investment의 값이 바뀔 때마다 업데이트
   useEffect(() => {
-    const communityUid = state.id;
     const communityDocRef = dbService
       .collection("community_list")
-      .doc(communityUid);
-
+      .doc(state.id);
     const unsubscribe = communityDocRef.onSnapshot((doc) => {
       if (doc.exists) {
         const newData = doc.data();
         setCurrentInvestment(newData.com_now_investment);
       }
     });
-
     return () => {
       unsubscribe(); // Unsubscribe from the real-time updates when component unmounts
     };
   }, [state.id]);
-
   //금액 표시 형식 변경(ex.10000->10,000)
   function NumberFormat({ number }) {
     return <span>{number.toLocaleString()}</span>;
@@ -32,7 +28,7 @@ const ComInfoInvest = ({ state }) => {
 
   return (
     <Box m="30px 0 0 20px">
-      <Text m="0 20px 0 0" fontSize="lg" fontWeight="bold">
+      <Text mr="20px" fontSize="lg" fontWeight="bold">
         투자 목표 금액
       </Text>
       {/* 커뮤니티 투자 달성 현황 */}
@@ -41,7 +37,7 @@ const ComInfoInvest = ({ state }) => {
         달성
       </Text>
       {/* 커뮤니티 투자 목표 금액 그래프 */}
-      <Box position="relative" m="20px 0 0 0">
+      <Box position="relative" mt="20px">
         {/* 목표 금액 그래프 */}
         <Box
           position="absolute"
@@ -83,3 +79,4 @@ const ComInfoInvest = ({ state }) => {
 export default ComInfoInvest;
 
 //23.07.27 1차 코드 수정
+//23.08.07 1차 코드 수정
