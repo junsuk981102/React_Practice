@@ -16,6 +16,7 @@ import {
   onSnapshot,
   orderBy,
   query,
+  deleteDoc,
 } from "firebase/firestore";
 import { db } from "../../firebase-config";
 
@@ -61,6 +62,7 @@ const Depth2Reply = ({ threadId, userObj, reply }) => {
       creatorEmail: userObj.email,
       creatorId: userObj.uid,
       creatorName: userObj.displayName,
+      creatorPhotoUrl: userObj.photoURL,
       text: replyText,
     };
 
@@ -72,6 +74,42 @@ const Depth2Reply = ({ threadId, userObj, reply }) => {
       setReplyText("");
     } catch (error) {
       console.error("Error adding depth 2 reply:", error);
+    }
+  };
+
+  const onDeleteReply = async (replyId) => {
+    if (!userObj) {
+      return;
+    }
+
+    const replyRef = doc(db, "threads", threadId, "replies", replyId);
+
+    try {
+      await deleteDoc(replyRef);
+    } catch (error) {
+      console.error("Error deleting reply:", error);
+    }
+  };
+
+  const onDeleteDepth2Reply = async (depth2ReplyId) => {
+    if (!userObj) {
+      return;
+    }
+
+    const depth2ReplyRef = doc(
+      db,
+      "threads",
+      threadId,
+      "replies",
+      reply.id,
+      "replies",
+      depth2ReplyId
+    );
+
+    try {
+      await deleteDoc(depth2ReplyRef);
+    } catch (error) {
+      console.error("Error deleting depth 2 reply:", error);
     }
   };
 
@@ -103,6 +141,11 @@ const Depth2Reply = ({ threadId, userObj, reply }) => {
           <Text fontSize="l" fontWeight="regular" mb="2">
             {reply.text}
           </Text>
+          {userObj && userObj.uid === reply.creatorId && (
+            <Button ml="auto" size="sm" onClick={() => onDeleteReply(reply.id)}>
+              Delete
+            </Button>
+          )}
         </Box>
         {depth2Replies && depth2Replies.length >= 0 && (
           <>
@@ -138,7 +181,7 @@ const Depth2Reply = ({ threadId, userObj, reply }) => {
                 >
                   <Flex align="center" mb="2">
                     <Image
-                      src={reply.creatorPhotoUrl || defaultProfileImage}
+                      src={depth2Reply.creatorPhotoUrl || defaultProfileImage}
                       w="32px"
                       h="32px"
                       rounded="full"
@@ -153,6 +196,15 @@ const Depth2Reply = ({ threadId, userObj, reply }) => {
                   <Text fontSize="l" fontWeight="regular" mb="2">
                     {depth2Reply.text}
                   </Text>
+                  {userObj && userObj.uid === depth2Reply.creatorId && (
+                    <Button
+                      ml="auto"
+                      size="sm"
+                      onClick={() => onDeleteDepth2Reply(depth2Reply.id)}
+                    >
+                      Delete
+                    </Button>
+                  )}
                 </Box>
               ))}
           </>

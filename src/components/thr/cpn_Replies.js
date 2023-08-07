@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { Box, Text, Button, Flex, Input, FormControl } from "@chakra-ui/react";
+import { Box, Button, Flex, Input, FormControl } from "@chakra-ui/react";
 import {
   addDoc,
   query,
   collection,
-  doc,
   serverTimestamp,
   onSnapshot,
   orderBy,
@@ -31,7 +30,6 @@ const Reply = ({ threadId, userObj, addReply }) => {
         setReplies(replyData);
       }
     );
-
     return () => unsubscribe();
   }, [threadId]);
 
@@ -52,9 +50,9 @@ const Reply = ({ threadId, userObj, addReply }) => {
       creatorEmail: userObj.email,
       creatorId: userObj.uid,
       creatorName: userObj.displayName,
+      creatorPhotoUrl: userObj.photoURL,
       text: replyText,
     };
-
     try {
       await addDoc(collection(db, "threads", threadId, "replies"), newReply);
       setReplyText("");
