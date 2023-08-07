@@ -45,7 +45,10 @@ const TabCommunityInfoTicket = ({ state, userId, ownerCount }) => {
   }, [userId, state.id]);
   //티켓 구매 갯수 증가
   const handleClick_plus = () => {
-    if (userTicket + sellCount < state.com_ticket_max) {
+    if (
+      userTicket + sellCount < state.com_ticket_max &&
+      state.com_now_investment < state.com_total_investment
+    ) {
       setSellCount(sellCount + 1);
     }
   };
