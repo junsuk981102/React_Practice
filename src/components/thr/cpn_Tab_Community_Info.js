@@ -5,23 +5,19 @@ import TabCommunityInfoTicket from "./info/cpn_Tab_Community_Info_Ticket";
 import TabCommunityInfoFavor from "./info/cpn_Tab_Community_Info_Favor";
 import { Flex } from "@chakra-ui/react";
 
-const TabCommunityInfo = ({ state, ownerCount, setOwnerCount }) => {
+const TabCommunityInfo = ({ state, userId, ownerCount }) => {
   return (
     <>
       <Flex flexDirection="column" p="10px">
         {/* 커뮤니티 기본 정보 섹션 */}
-        <TabCommunityInfoBasic state={state} memberCount={state.com_member} />
+        <TabCommunityInfoBasic state={state} />
         {/* 커뮤니티 투자 정보 섹션 */}
-        <TabCommunityInfoInvest
-          state={state}
-          nowInvestment={state.com_now_investment}
-          totalInvestment={state.com_total_investment}
-        />
+        <TabCommunityInfoInvest state={state} />
         {/* 커뮤니티 티켓 섹션 */}
         <TabCommunityInfoTicket
-          ownerCount={ownerCount}
-          setOwnerCount={setOwnerCount}
           state={state}
+          userId={userId}
+          ownerCount={ownerCount}
         />
         {/* 커뮤니티 관심회사 섹션 */}
         <TabCommunityInfoFavor />

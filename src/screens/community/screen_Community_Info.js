@@ -19,9 +19,7 @@ const ScreenRoomInfo = () => {
   const { state } = useLocation();
   const navi = useNavigate();
   const boxPadding = useBreakpointValue({ base: "20px", xl: "200px" }); // 양쪽 여백
-
-  //에러 메시지 Modal 오픈
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false); //에러 메시지 Modal 오픈
   const [userTicket, setUserTicket] = useState(0);
   const [userUid, setUserUid] = useState("");
 
@@ -56,6 +54,28 @@ const ScreenRoomInfo = () => {
     fetchUserTicket();
   }, [userUid, state.id]);
 
+  useEffect(() => {
+    if (userUid) {
+      const communityUid = state.id;
+      const userColRef = dbService
+        .collection("user_list")
+        .doc(userUid)
+        .collection("ticket_list")
+        .doc(communityUid);
+
+      const unsubscribe = userColRef.onSnapshot((doc) => {
+        if (doc.exists) {
+          const newData = doc.data();
+          setUserTicket(newData.ticket);
+        }
+      });
+
+      return () => {
+        unsubscribe(); // Unsubscribe from the real-time updates when component unmounts
+      };
+    }
+  }, [userUid, state.id]);
+
   let comCategory = [];
   if (typeof state.com_category === "string") {
     comCategory = state.com_category.split(",");
@@ -74,20 +94,26 @@ const ScreenRoomInfo = () => {
       navi(`/screen_chat`, {
         state: {
           id: state.id,
-          com_name: state.com_name,
-          com_createAt: state.com_createAt,
           com_category: comCategory,
+          com_createAt: state.com_createAt,
           com_info: state.com_info,
-          com_total_investment: state.com_total_investment,
-          com_now_investment: state.com_now_investment,
-          com_ticket_price: state.com_ticket_price,
-          com_ticket_max: state.com_ticket_max,
           com_member: state.com_member,
+          com_name: state.com_name,
+          com_now_investment: state.com_now_investment,
           com_profileImg: state.com_profileImg,
-          com_owner: state.com_owner,
-          com_favorite1: state.com_favorite1,
-          com_favorite2: state.com_favorite2,
-          com_favorite3: state.com_favorite3,
+          com_ticket_max: state.com_ticket_max,
+          com_ticket_price: state.com_ticket_price,
+          com_total_investment: state.com_total_investment,
+          com_total_ticket: state.com_total_ticket,
+          com_fvote: state.com_fvote,
+          com_fall: state.com_fall,
+          com_fone: state.com_fone,
+          com_ftwo: state.com_ftwo,
+          com_fthree: state.com_fthree,
+          com_svote: state.com_svote,
+          com_sall: state.com_sall,
+          com_syes: state.com_syes,
+          com_sno: state.com_sno,
         },
       });
     }

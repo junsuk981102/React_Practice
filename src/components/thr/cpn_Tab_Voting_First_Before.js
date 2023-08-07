@@ -1,42 +1,25 @@
 import React, { useState, useEffect } from "react";
 import { Flex, Text, Button, Image } from "@chakra-ui/react";
-import { dbService, auth } from "../../firebase-config";
+import { dbService } from "../../firebase-config";
 
-const TabVotingFirstBefore = ({ state, ownerCount, setOwnerCount }) => {
-  const [votefirstBefore, setVoteFirstBefore] = useState(0); //1차 투표 여부
+const TabVotingFirstBefore = ({ state, userId, ownerCount }) => {
   const [vote1, setVote1] = useState(0); //후보 1번 투표
   const [vote2, setVote2] = useState(0); //후보 2번 투표
   const [vote3, setVote3] = useState(0); //후보 3번 투표
-  const percent1 = 531; // 1번 득표
-  const percent2 = 135; // 2번 득표
-  const percent3 = 223; // 3번 득표
-  const percentA = percent1 + percent2 + percent3; // 총 득표
-  //후보 1번 투표
-  const [userTicket, setUserTicket] = useState(0);
-  const [userUid, setUserUid] = useState("");
-
-  useEffect(() => {
-    const getUserUid = async () => {
-      try {
-        const user = auth.currentUser;
-        if (user) {
-          setUserUid(user.uid);
-        }
-      } catch (error) {
-        console.log("사용자 UID 가져오기 실패:", error);
-      }
-    };
-
-    getUserUid();
-  }, []);
+  const percent1 = state.com_fone; // 1번 득표
+  const percent2 = state.com_ftwo; // 2번 득표
+  const percent3 = state.com_fthree; // 3번 득표
+  const percentA = state.com_fall; // 총 득표
+  const [userTicket, setUserTicket] = useState(ownerCount);
+  const [firstvote, setFirstVote] = useState(0);
 
   useEffect(() => {
     const fetchUserTicket = async () => {
-      if (userUid) {
+      if (userId) {
         const communityUid = state.id;
         const userColRef = dbService
           .collection("user_list")
-          .doc(userUid)
+          .doc(userId)
           .collection("ticket_list");
         const userDoc = await userColRef.doc(communityUid).get();
         const fetchedUserTicket = userDoc.data()?.ticket || 0;
@@ -44,10 +27,71 @@ const TabVotingFirstBefore = ({ state, ownerCount, setOwnerCount }) => {
       }
     };
     fetchUserTicket();
-  }, [userUid, state.id]);
+  }, [userId, state.id]);
 
+  useEffect(() => {
+    const fetchUserVote = async () => {
+      if (userId) {
+        const communityUid = state.id;
+        const userColRef = dbService
+          .collection("user_list")
+          .doc(userId)
+          .collection("ticket_list");
+        const userDoc = await userColRef.doc(communityUid).get();
+        const fetchedUserVote = userDoc.data()?.firstvote || 0;
+        setFirstVote(fetchedUserVote);
+      }
+    };
+    fetchUserVote();
+  }, [userId, state.id]);
+
+  useEffect(() => {
+    if (userId) {
+      const communityUid = state.id;
+      const userColRef = dbService
+        .collection("user_list")
+        .doc(userId)
+        .collection("ticket_list")
+        .doc(communityUid);
+
+      const unsubscribe = userColRef.onSnapshot((doc) => {
+        if (doc.exists) {
+          const newData = doc.data();
+          setUserTicket(newData.ticket);
+        }
+      });
+
+      return () => {
+        unsubscribe(); // Unsubscribe from the real-time updates when component unmounts
+      };
+    }
+  }, [userId, state.id]);
+
+  useEffect(() => {
+    if (userId) {
+      const communityUid = state.id;
+      const userColRef = dbService
+        .collection("user_list")
+        .doc(userId)
+        .collection("ticket_list")
+        .doc(communityUid);
+
+      const unsubscribe = userColRef.onSnapshot((doc) => {
+        if (doc.exists) {
+          const newData = doc.data();
+          setFirstVote(newData.firstvote);
+        }
+      });
+
+      return () => {
+        unsubscribe(); // Unsubscribe from the real-time updates when component unmounts
+      };
+    }
+  }, [userId, state.id]);
+
+  //후보 1번 투표
   const handleClick_plus_v1 = () => {
-    if (vote1 + vote2 + vote3 < userTicket) {
+    if (vote1 + vote2 + vote3 < userTicket && firstvote === 0) {
       setVote1(vote1 + 1);
     }
   };
@@ -58,7 +102,7 @@ const TabVotingFirstBefore = ({ state, ownerCount, setOwnerCount }) => {
   };
   //후보 2번 투표
   const handleClick_plus_v2 = () => {
-    if (vote1 + vote2 + vote3 < userTicket) {
+    if (vote1 + vote2 + vote3 < userTicket && firstvote === 0) {
       setVote2(vote2 + 1);
     }
   };
@@ -69,7 +113,7 @@ const TabVotingFirstBefore = ({ state, ownerCount, setOwnerCount }) => {
   };
   //후보 3번 투표
   const handleClick_plus_v3 = () => {
-    if (vote1 + vote2 + vote3 < userTicket) {
+    if (vote1 + vote2 + vote3 < userTicket && firstvote === 0) {
       setVote3(vote3 + 1);
     }
   };
@@ -78,30 +122,53 @@ const TabVotingFirstBefore = ({ state, ownerCount, setOwnerCount }) => {
       setVote3(vote3 - 1);
     }
   };
+
   //1차 투표
-  const votingFirst = () => {
-    if (vote1 + vote2 + vote3 === userTicket) {
-      setVoteFirstBefore(1);
+  const votingFirst = async () => {
+    if (vote1 + vote2 + vote3 === userTicket && firstvote === 0) {
+      const communityUid = state.id;
+
+      state.com_fone = state.com_fone + vote1;
+      const updatedfone = state.com_fone;
+      await dbService.collection("community_list").doc(communityUid).update({
+        com_fone: updatedfone,
+      });
+
+      state.com_ftwo = state.com_ftwo + vote2;
+      const updatedftwo = state.com_ftwo;
+      await dbService.collection("community_list").doc(communityUid).update({
+        com_ftwo: updatedftwo,
+      });
+
+      state.com_fthree = state.com_fthree + vote3;
+      const updatedfthree = state.com_fthree;
+      await dbService.collection("community_list").doc(communityUid).update({
+        com_fthree: updatedfthree,
+      });
+
+      state.com_fall = state.com_fall + vote1 + vote2 + vote3;
+      const updatedfall = state.com_fall;
+      await dbService.collection("community_list").doc(communityUid).update({
+        com_fall: updatedfall,
+      });
+
+      await dbService
+        .collection("user_list")
+        .doc(userId)
+        .collection("ticket_list")
+        .doc(communityUid)
+        .update({
+          firstvote: 1,
+        });
+
       setVote1(0);
       setVote2(0);
       setVote3(0);
-      setOwnerCount(0);
-      const communityUid = state.id;
-      const userColRef = dbService
-        .collection("user_list")
-        .doc(userUid)
-        .collection("ticket_list");
-      const updatedTicket = 0;
-
-      userColRef.doc(communityUid).set({
-        ticket: updatedTicket,
-      });
-      setUserTicket(updatedTicket);
     }
   };
 
   const votingFirstButton = () => {
-    if (votefirstBefore === 0) {
+    if (firstvote === 0) {
       return (
         <>
           <Flex justifyContent="center" m="60px 0 0 0">
@@ -240,7 +307,9 @@ const TabVotingFirstBefore = ({ state, ownerCount, setOwnerCount }) => {
               variant="none"
               fontSize="2xl"
               color={
-                vote1 + vote2 + vote3 < userTicket ? "#00A29D" : "lightgrey"
+                vote1 + vote2 + vote3 < userTicket && firstvote === 0
+                  ? "#00A29D"
+                  : "lightgrey"
               }
               onClick={handleClick_plus_v1}
             >
@@ -290,7 +359,9 @@ const TabVotingFirstBefore = ({ state, ownerCount, setOwnerCount }) => {
               variant="none"
               fontSize="2xl"
               color={
-                vote1 + vote2 + vote3 < userTicket ? "#00A29D" : "lightgrey"
+                vote1 + vote2 + vote3 < userTicket && firstvote === 0
+                  ? "#00A29D"
+                  : "lightgrey"
               }
               onClick={handleClick_plus_v2}
             >
@@ -339,7 +410,9 @@ const TabVotingFirstBefore = ({ state, ownerCount, setOwnerCount }) => {
               variant="none"
               fontSize="2xl"
               color={
-                vote1 + vote2 + vote3 < userTicket ? "#00A29D" : "lightgrey"
+                vote1 + vote2 + vote3 < userTicket && firstvote === 0
+                  ? "#00A29D"
+                  : "lightgrey"
               }
               //기능
               onClick={handleClick_plus_v3}

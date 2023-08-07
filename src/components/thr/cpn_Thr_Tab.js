@@ -1,11 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import TabVotingFirstBefore from "./cpn_Tab_Voting_First_Before";
 import TabVotingFirstAfter from "./cpn_Tab_Voting_First_After";
 import TabVotingSecondBefore from "./cpn_Tab_Voting_Second_Before";
 import TabVotingSecondAfter from "./cpn_Tab_Voting_Second_After";
 import TabCommunityInfo from "./cpn_Tab_Community_Info";
-import Chat from "../chat/cpn_Chat";
-import "../../chat.css";
 import {
   Flex,
   Divider,
@@ -18,10 +16,21 @@ import {
 } from "@chakra-ui/react";
 import Threads from "./cpn_Threads";
 
-function ThrTab({ userObj, state, ownerCount, setOwnerCount }) {
+function ThrTab({ state, userId, ownerCount, userObj }) {
   const [selectedTab, setSelectedTab] = useState(0);
+  const [showAlternateComponent, setShowAlternateComponent] = useState(false);
+
   // TabPanel의 높이를 설정
   const tabPanelHeight = "100vh";
+
+  useEffect(() => {
+    // 5초 후에 showAlternateComponent 상태를 true로 변경
+    const timer = setTimeout(() => {
+      setShowAlternateComponent(true);
+    }, 10000);
+
+    return () => clearTimeout(timer);
+  }, []);
 
   return (
     <Tabs
@@ -46,38 +55,17 @@ function ThrTab({ userObj, state, ownerCount, setOwnerCount }) {
           fontWeight="bold"
           color={selectedTab === 1 ? "#00A29D" : "black"}
         >
-          1차 투표
+          투표
         </Tab>
         <Tab
           fontSize="sm"
           fontWeight="bold"
           color={selectedTab === 2 ? "#00A29D" : "black"}
         >
-          1차 결과
-        </Tab>
-        <Tab
-          fontSize="sm"
-          fontWeight="bold"
-          color={selectedTab === 3 ? "#00A29D" : "black"}
-        >
-          2차 투표
-        </Tab>
-        <Tab
-          fontSize="sm"
-          fontWeight="bold"
-          color={selectedTab === 4 ? "#00A29D" : "black"}
-        >
-          2차 결과
-        </Tab>
-        <Tab
-          fontSize="sm"
-          fontWeight="bold"
-          color={selectedTab === 5 ? "#00A29D" : "black"}
-        >
           정보
         </Tab>
       </TabList>
-      <TabIndicator m="-1.5px 0 0 40px" maxWidth="50px" h="2px" bg="#00A29D" />
+      <TabIndicator m="-1.5px 0 0 100px" maxWidth="50px" h="2px" bg="#00A29D" />
 
       <Divider />
 
@@ -94,36 +82,36 @@ function ThrTab({ userObj, state, ownerCount, setOwnerCount }) {
             <Threads userObj={userObj} />
           </Flex>
         </TabPanel>
-        {/* 1차 투표 */}
+        {/* 투표 */}
         <TabPanel>
-          <TabVotingFirstBefore
-            state={state}
-            ownerCount={ownerCount}
-            setOwnerCount={setOwnerCount}
-          />
-        </TabPanel>
-        {/* 1차 결과 */}
-        <TabPanel>
-          <TabVotingFirstAfter state={state} />
-        </TabPanel>
-        {/* 2차 투표 */}
-        <TabPanel>
-          <TabVotingSecondBefore
-            state={state}
-            ownerCount={ownerCount}
-            setOwnerCount={setOwnerCount}
-          />
-        </TabPanel>
-        {/* 2차 결과 */}
-        <TabPanel>
-          <TabVotingSecondAfter state={state} />
+          {state.com_fall === state.com_ticket_max ? (
+            showAlternateComponent ? (
+              state.com_sall === state.com_ticket_max ? (
+                <TabVotingSecondAfter state={state} />
+              ) : (
+                <TabVotingSecondBefore
+                  state={state}
+                  userId={userId}
+                  ownerCount={ownerCount}
+                />
+              )
+            ) : (
+              <TabVotingFirstAfter state={state} />
+            )
+          ) : (
+            <TabVotingFirstBefore
+              state={state}
+              userId={userId}
+              ownerCount={ownerCount}
+            />
+          )}
         </TabPanel>
         {/* 정보 */}
         <TabPanel>
           <TabCommunityInfo
             state={state}
+            userId={userId}
             ownerCount={ownerCount}
-            setOwnerCount={setOwnerCount}
           />
         </TabPanel>
       </TabPanels>
