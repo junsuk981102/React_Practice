@@ -41,3 +41,4 @@ const ComInfoCurrent = ({ state }) => {
 export default ComInfoCurrent;
 
 //23.07.27 1차 코드 수정
+//23.08.07 2차 코드 수정
