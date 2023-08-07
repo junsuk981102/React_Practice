@@ -4,27 +4,24 @@ import { dbService } from "../../firebase-config";
 
 const ComInfoCurrent = ({ state }) => {
   const [member, setMember] = useState(state.com_member);
-
+  //state.com_member의 값이 바뀔 때마다 업데이트
   useEffect(() => {
-    const communityUid = state.id;
     const communityDocRef = dbService
       .collection("community_list")
-      .doc(communityUid);
-
+      .doc(state.id);
     const unsubscribe = communityDocRef.onSnapshot((doc) => {
       if (doc.exists) {
         const newData = doc.data();
         setMember(newData.com_member);
       }
     });
-
     return () => {
-      unsubscribe(); // Unsubscribe from the real-time updates when component unmounts
+      unsubscribe();
     };
   }, [state.id]);
 
   return (
-    <Flex justifyContent="center" m="100px 0 0 0">
+    <Flex justifyContent="center" mt="100px">
       {/* 커뮤니티 참여인원 */}
       <Flex
         alignItems="center"
@@ -34,7 +31,6 @@ const ComInfoCurrent = ({ state }) => {
         bg="#E5F2F2"
         border="1px solid black"
         borderRadius="xl"
-        fontSize="md"
       >
         {member}명 참여중
       </Flex>
