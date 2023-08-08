@@ -15,17 +15,12 @@ const Logout = () => {
       });
   };
   return (
-    <Button
-      //여백
-      mt={4}
-      //배경
-      variant="outline"
-      //기능
-      onClick={handleLogout}
-    >
+    <Button mt="10px" onClick={handleLogout}>
       Logout
     </Button>
   );
 };
 
 export default Logout;
+
+//23.08.08 1차 코드 수정 완료
