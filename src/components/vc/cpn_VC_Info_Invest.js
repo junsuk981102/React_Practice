@@ -1,7 +1,35 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { dbService } from "../../firebase-config";
 import { Flex, Text, Image } from "@chakra-ui/react";
 
-const VCInfoInvest = ({ vc_amountOfInvestment, vc_numOfInvestment }) => {
+const VCInfoInvest = ({ state }) => {
+  const [vc_amountOfInvestment, setVcAmountOfInvestment] = useState("");
+  const [vc_numOfInvestment, setVcNumOfInvestment] = useState("");
+  //invest_info 정보 가져오기
+  useEffect(() => {
+    const fetchInvestInformation = async () => {
+      try {
+        const vcInfoRef = dbService
+          .collection("vc_list")
+          .doc(state.id)
+          .collection("info")
+          .doc("invest_info");
+        const doc = await vcInfoRef.get();
+
+        if (doc.exists) {
+          const data = doc.data();
+          setVcAmountOfInvestment(data.vc_amountOfInvestment);
+          setVcNumOfInvestment(data.vc_numOfInvestment);
+        } else {
+          console.log("문서가 존재하지 않습니다.");
+        }
+      } catch (error) {
+        console.log("데이터 가져오기 실패:", error);
+      }
+    };
+    fetchInvestInformation();
+  }, [state.id]);
+
   return (
     <>
       {/* VC 투자 정보 */}
@@ -29,7 +57,7 @@ const VCInfoInvest = ({ vc_amountOfInvestment, vc_numOfInvestment }) => {
           <Text fontWeight="bold" fontSize="lg">
             주요 투자 대상
           </Text>
-          <Flex mt="15px">
+          <Flex m="15px">
             <Flex
               flexDirection="column"
               alignItems="center"
@@ -94,3 +122,4 @@ const VCInfoInvest = ({ vc_amountOfInvestment, vc_numOfInvestment }) => {
 export default VCInfoInvest;
 
 //23.07.27 1차 코드 수정
+//23.08.08 2차 코드 수정
