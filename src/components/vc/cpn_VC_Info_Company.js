@@ -1,9 +1,39 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { dbService } from "../../firebase-config";
 import { Flex, Text } from "@chakra-ui/react";
 
-const VCInfoCompany = ({ vc_ceo, vc_nationality, vc_homepage }) => {
+const VCInfoCompany = ({ state }) => {
+  const [vc_nationality, setVcNationality] = useState("");
+  const [vc_ceo, setVcCeo] = useState("");
+  const [vc_homepage, setVcHomepage] = useState("");
+  //vc_info 정보 가져오기
+  useEffect(() => {
+    const fetchVcInformation = async () => {
+      try {
+        const vcInfoRef = dbService
+          .collection("vc_list")
+          .doc(state.id)
+          .collection("info")
+          .doc("vc_info");
+        const doc = await vcInfoRef.get();
+        if (doc.exists) {
+          const data = doc.data();
+          setVcNationality(data.vc_nationality);
+          setVcCeo(data.vc_ceo);
+          setVcHomepage(data.vc_homepage);
+        } else {
+          console.log("문서가 존재하지 않습니다.");
+        }
+      } catch (error) {
+        console.log("데이터 가져오기 실패:", error);
+      }
+    };
+
+    fetchVcInformation();
+  }, [state.id]);
   return (
     <>
+      {/* VC 기업 정보 */}
       <Flex flexDirection="column" m="20px">
         <Text fontWeight="bold" fontSize="lg">
           기업정보
@@ -42,3 +72,4 @@ const VCInfoCompany = ({ vc_ceo, vc_nationality, vc_homepage }) => {
 export default VCInfoCompany;
 
 //23.07.27 1차 코드 수정
+//23.08.08 2차 코드 수정
