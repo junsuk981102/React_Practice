@@ -1,6 +1,6 @@
 import React from "react";
 import StartupCard from "../../components/startup/cpn_Startup_Card";
-import { Box, Center, Grid } from "@chakra-ui/react";
+import { Flex, Center, Grid } from "@chakra-ui/react";
 
 const StartupGridlist = ({ startups, selectedValue }) => {
   const renderStartups = () => {
@@ -8,10 +8,10 @@ const StartupGridlist = ({ startups, selectedValue }) => {
       //초기값일 때 모든 리스트 출력
       return startups.map((startup) => (
         //스타트업 카드
-        <Box key={startup.id} m="20px">
+        <Flex key={startup.id} m="20px">
           {/* 스타트업 정보 */}
           <StartupCard startupObj={startup} />
-        </Box>
+        </Flex>
       ));
     }
     //설정한 카테고리 필터링
@@ -29,15 +29,15 @@ const StartupGridlist = ({ startups, selectedValue }) => {
     //설정한 카테고리 스타트업 카드 출력
     return filteredStartups.map((startup) => (
       //스타트업 카드
-      <Box key={startup.id} m="20px">
+      <Flex key={startup.id} m="20px">
         {/* 스타트업 정보 */}
         <StartupCard startupObj={startup} />
-      </Box>
+      </Flex>
     ));
   };
 
   return (
-    <Grid gridTemplateColumns="repeat(auto-fit, minmax(500px, 1fr))">
+    <Grid templateColumns="repeat(2, 1fr)" gap="30px">
       {/* 스타트업 카드 리스트 */}
       {renderStartups()}
     </Grid>
@@ -47,3 +47,4 @@ const StartupGridlist = ({ startups, selectedValue }) => {
 export default StartupGridlist;
 
 //23.07.27 1차 코드 수정
+//23.08.08 2차 코드 수정
