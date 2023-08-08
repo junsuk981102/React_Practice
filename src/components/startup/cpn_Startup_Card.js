@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { Box, Flex, Heading, Text, Button, Image } from "@chakra-ui/react";
+import { Flex, Heading, Text, Button, Image } from "@chakra-ui/react";
 
 const StartupCard = ({ startupObj }) => {
   const navi = useNavigate();
@@ -17,10 +17,8 @@ const StartupCard = ({ startupObj }) => {
       },
     });
   }
-
   return (
     <Flex
-      position="relative"
       w="500px"
       h="360px"
       bg="white"
@@ -57,11 +55,16 @@ const StartupCard = ({ startupObj }) => {
           {startupObj.sup_name}
         </Heading>
         {/* 스타트업 정보 */}
-        <Text position="absolute" m="85px 20px 0 20px" noOfLines={[1, 2]}>
+        <Text
+          position="absolute"
+          m="85px 20px 0 20px"
+          w="450px"
+          noOfLines={[1, 2]}
+        >
           {startupObj.sup_info}
         </Text>
         {/* 스타트업 카테고리 */}
-        <Box
+        <Flex
           position="absolute"
           p="5px 10px"
           m="10px 0 0 390px"
@@ -71,7 +74,7 @@ const StartupCard = ({ startupObj }) => {
           color="white"
         >
           {startupObj.sup_category}
-        </Box>
+        </Flex>
         {/* 스타트업 INFO 이동버튼 */}
         <Button
           position="absolute"
@@ -91,3 +94,4 @@ export default StartupCard;
 
 //23.07.21 1차 코드 수정 완료
 //23.07.27 2차 코드 수정 완료
+//23.08.07 3차 코드 수정 완료
