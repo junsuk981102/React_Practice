@@ -1,14 +1,13 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { dbService } from "../../firebase-config";
 import { Flex, Text } from "@chakra-ui/react";
 
-const StartupInfoCompany = ({
-  state,
-  sup_ceo,
-  sup_nationality,
-  sup_size,
-  sup_homepage,
-}) => {
+const StartupInfoCompany = ({ state }) => {
+  const [sup_nationality, setSupNationality] = useState("");
+  const [sup_ceo, setSupCeo] = useState("");
+  const [sup_homepage, setSupHomepage] = useState("");
+  const [sup_size, setSupSize] = useState("");
+  //sup_info 정보 가져오기
   useEffect(() => {
     const fetchSupInformation = async () => {
       try {
@@ -18,10 +17,12 @@ const StartupInfoCompany = ({
           .collection("info")
           .doc("sup_info");
         const doc = await supInfoRef.get();
-
         if (doc.exists) {
           const data = doc.data();
-          // 이제 state 안에 해당 값을 이미 가지고 있으므로, set 함수들을 호출할 필요 없음
+          setSupNationality(data.sup_nationality);
+          setSupCeo(data.sup_ceo);
+          setSupHomepage(data.sup_homepage);
+          setSupSize(data.sup_size);
         } else {
           console.log("문서가 존재하지 않습니다.");
         }
@@ -29,7 +30,6 @@ const StartupInfoCompany = ({
         console.log("데이터 가져오기 실패:", error);
       }
     };
-
     fetchSupInformation();
   }, [state.id]);
 
@@ -74,3 +74,4 @@ const StartupInfoCompany = ({
 export default StartupInfoCompany;
 
 //23.07.27 1차 코드 수정
+//23.08.08 2차 코드 수정
