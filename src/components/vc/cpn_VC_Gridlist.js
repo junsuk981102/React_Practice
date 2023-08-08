@@ -1,6 +1,6 @@
 import React from "react";
 import VCCard from "../../components/vc/cpn_VC_Card";
-import { Box, Center, Grid } from "@chakra-ui/react";
+import { Flex, Center, Grid } from "@chakra-ui/react";
 
 const VCGridlist = ({ vcs, selectedValue }) => {
   const renderVCs = () => {
@@ -8,10 +8,10 @@ const VCGridlist = ({ vcs, selectedValue }) => {
       //초기값일 때 모든 리스트 출력
       return vcs.map((vc) => (
         //VC 카드
-        <Box key={vc.id} m="20px">
+        <Flex key={vc.id} m="20px">
           {/* VC 정보 */}
           <VCCard vcObj={vc} />
-        </Box>
+        </Flex>
       ));
     }
     //설정한 카테고리 필터링
@@ -27,15 +27,15 @@ const VCGridlist = ({ vcs, selectedValue }) => {
     //설정한 카테고리 VC 카드 출력
     return filteredVCs.map((vc) => (
       //VC 카드
-      <Box key={vc.id} m="20px">
+      <Flex key={vc.id} m="20px">
         {/* VC 정보 */}
         <VCCard vcObj={vc} />
-      </Box>
+      </Flex>
     ));
   };
 
   return (
-    <Grid gridTemplateColumns="repeat(auto-fit, minmax(500px, 1fr))">
+    <Grid templateColumns="repeat(2, 1fr)" gap="30px">
       {/* VC 카드 리스트 */}
       {renderVCs()}
     </Grid>
@@ -45,3 +45,4 @@ const VCGridlist = ({ vcs, selectedValue }) => {
 export default VCGridlist;
 
 //23.07.27 1차 코드 수정
+//23.08.08 2차 코드 수정
