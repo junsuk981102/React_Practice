@@ -9,12 +9,8 @@ function ScreenLogin() {
 
       {/* 로그인 전체 화면 배경 */}
       <Flex
-        //정렬
         justifyContent="center"
-        //크기 및 여백
-        h="auto"
         pb="200px"
-        //배경
         bg="#E5F2F2"
         borderTop="1px solid #00A29D"
       >
