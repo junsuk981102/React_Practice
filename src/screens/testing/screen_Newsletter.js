@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Box, Button, Text, Image, Divider } from "@chakra-ui/react";
+import { Flex, Box, Button, Text, Image, Divider } from "@chakra-ui/react";
 
 const ScreenNewsletter = () => {
   return (
@@ -8,100 +8,40 @@ const ScreenNewsletter = () => {
       {/* 뉴스레터 전체 화면 */}
 
       {/* 뉴스레터 전체 배경 화면 */}
-      <Box
-        //정렬
-        display="flex"
-        justifyContent="center"
-        //크기
-        w="100vw"
-        //배경
-        bg="#EAE7DE"
-      >
-        <Box
-          //정렬
-          display="flex"
+      <Flex justifyContent="center" w="100vw" bg="#EAE7DE">
+        <Flex
           flexDirection="column"
           alignItems="center"
-          justifyContent="center"
-          //크기 및 여백
           w="800px"
-          h="100%"
           p="50px"
-          //배경
           bg="#EAE7DE"
         >
           <Image
-            //사진 위치
             src="../image/newsletter/newsletter1.png"
-            //크기 및 여백
             w="360px"
             h="54px"
             mb="50px"
           />
-          <Divider
-            //크기 및 여백
-            w="750px"
-            h="1px"
-            mb="20px"
-            //배경
-            backgroundColor="black"
-          />
-          <Button
-            //배경
-            variant="link"
-            //글자
-            color="#FF5C00"
-          >
+          <Divider w="750px" h="1px" mb="20px" backgroundColor="black" />
+          <Button variant="link" color="#FF5C00">
             테크
           </Button>
-          <Text
-            //여백
-            mt="10px"
-            mb="10px"
-            //글자
-            fontSize="xl"
-            fontWeight="bold"
-          >
+          <Text m="10px 0" fontSize="xl" fontWeight="bold">
             투자의 새로운 길
           </Text>
-          <Text
-            //글자
-            fontSize="sm"
-            fontWeight="bold"
-          >
+          <Text fontSize="sm" fontWeight="bold">
             2023/07/14
           </Text>
-          <Divider
-            //크기 및 여백
-            w="750px"
-            h="1px"
-            mt="30px"
-            mb="30px"
-            //배경
-            backgroundColor="black"
-          />
+          <Divider w="750px" h="1px" m="30px 0" backgroundColor="black" />
           <Image
-            //사진 위치
             src="../image/newsletter/newsletter2.png"
-            //크기
             w="469px"
             h="249px"
           />
-          <Text
-            //여백
-            mt="10px"
-            mb="10px"
-            //글자
-            fontSize="lg"
-            fontWeight="bold"
-          >
+          <Text m="10px 0" fontSize="lg" fontWeight="bold">
             벤처투자 혹한기.. 시장 환경이 근본적으로 변했습니다
           </Text>
-          <Text
-            //글자
-            fontSize="sm"
-            fontWeight="bold"
-          >
+          <Text fontSize="sm" fontWeight="bold">
             &nbsp;&nbsp;기술 잠재력, 창업팀의 비전 및 시장의 기대를 조합한
             스토리만으로도 단계별로 투자가 쉽게 이루어지고 구체적인 비즈니스
             계획 없이 🤑 투자금만으로 생명 연장하는 스타트업이 양산되던 시대는
@@ -131,39 +71,16 @@ const ScreenNewsletter = () => {
             2️. 합리적인 1~2년 사업성장 계획과 비용 효율적인 예산 수립에
             집중해야 할 것입니다.
           </Text>
-          <Divider
-            //크기 및 여백
-            w="750px"
-            h="1px"
-            mt="30px"
-            mb="30px"
-            //배경
-            backgroundColor="black"
-          />
+          <Divider w="750px" h="1px" m="30px 0" backgroundColor="black" />
           <Image
-            //사진 위치
             src="../image/newsletter/newsletter3.png"
-            //크기
             w="469px"
             h="249px"
-            //배경
-            objectFit="cover"
           />
-          <Text
-            //여백
-            mt="10px"
-            mb="10px"
-            //글자
-            fontSize="lg"
-            fontWeight="bold"
-          >
+          <Text m="10px 0" fontSize="lg" fontWeight="bold">
             “STOT” 새로운 투자에 눈을 뜨다{" "}
           </Text>
-          <Text
-            //글자
-            fontSize="sm"
-            fontWeight="bold"
-          >
+          <Text fontSize="sm" fontWeight="bold">
             &nbsp;&nbsp;벤처투자 혹한기가 지속되는 와중에 새로운 방식의 투자
             플랫폼이 등장하고 있습니다. 바로 커뮤니티형 스타트업 투자 플랫폼으로
             다양한 투자자들에게 새로운 경험을 제공하면서 성장 가능성이 있는
@@ -189,26 +106,24 @@ const ScreenNewsletter = () => {
             투자하고 싶다면?
           </Text>
           <Button
-            //크기 및 여백
             w="500px"
             mt="50px"
-            //배경
             bg="#FF5C00"
             variant="solid"
-            //글자
             color="white"
             fontSize="xl"
             fontWeight="bold"
-            //기능
             as={Link}
             to={"/"}
           >
             STOT 참여하기
           </Button>
-        </Box>
-      </Box>
+        </Flex>
+      </Flex>
     </>
   );
 };
 
 export default ScreenNewsletter;
+
+//23.08.09 1차 코드 수정
