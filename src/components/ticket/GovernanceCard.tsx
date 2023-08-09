@@ -10,3 +10,5 @@ const GovernanceCard: FC<GovernanceCardProps> = ({ GNT_name }) => {
 };
 
 export default GovernanceCard;
+
+//23.08.09 1차 코드 수정
