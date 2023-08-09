@@ -43,3 +43,5 @@ const FavorStartup = ({ startupObj }) => {
 };
 
 export default FavorStartup;
+
+//23.08.09 1차 코드 수정
