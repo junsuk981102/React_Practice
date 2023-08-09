@@ -16,22 +16,17 @@ const ScreenMyGovernance: FC<MyGovernanceProps> = ({ account }) => {
   const [saleStatus, setSaleStatus] = useState<boolean>(false);
   const [governanceCardArray, setGovernanceCardArray] =
     useState<IMyGovernanceCard[]>();
-
   //토큰 정보 가져오기
   const getGovernanceTokens = async () => {
     try {
       const balanceLength = await mintGovernanceTokenContract.methods
         .balanceOf(account)
         .call();
-
       if (balanceLength === "0") return;
-
       const tempGovernanceCardArray: IMyGovernanceCard[] = [];
-
       const response = await mintGovernanceTokenContract.methods
         .getGovernanceTokens(account)
         .call();
-
       response.map((v: IMyGovernanceCard) => {
         tempGovernanceCardArray.push({
           GNT_Id: v.GNT_Id,
@@ -41,20 +36,17 @@ const ScreenMyGovernance: FC<MyGovernanceProps> = ({ account }) => {
           GNT_Address: v.GNT_Address,
         });
       });
-
       setGovernanceCardArray(tempGovernanceCardArray);
     } catch (error) {
       console.error(error);
     }
   };
-
   //토큰 판매 가능 여부 등록
   const getIsApprovedForAll = async () => {
     try {
       const response = await mintGovernanceTokenContract.methods
         .isApprovedForAll(account, saleGovernanceTokenAddress)
         .call();
-
       if (response.status) {
         setSaleStatus(response);
       }
@@ -67,11 +59,9 @@ const ScreenMyGovernance: FC<MyGovernanceProps> = ({ account }) => {
   const onClickApproveToggle = async () => {
     try {
       if (!account) return;
-
       const response = await mintGovernanceTokenContract.methods
         .setApprovalForAll(saleGovernanceTokenAddress, !saleStatus)
         .send({ from: account });
-
       if (response.status) {
         setSaleStatus(!saleStatus);
       }
@@ -82,7 +72,6 @@ const ScreenMyGovernance: FC<MyGovernanceProps> = ({ account }) => {
 
   useEffect(() => {
     if (!account) return;
-
     getIsApprovedForAll();
     getGovernanceTokens();
   }, [account]);
@@ -108,12 +97,14 @@ const ScreenMyGovernance: FC<MyGovernanceProps> = ({ account }) => {
           bg="#00A29D"
           borderRadius="xl"
         >
+          {/* 메타마스크 아이콘 */}
           <Image
             src="/image/ticket/icon_metamask.png"
             w="36px"
             h="45px"
             m="20px"
           />
+          {/* 메타마스크 지갑 주소 */}
           <Text fontSize="lg" color="white">
             내 지갑 주소 : {account}
           </Text>
@@ -139,7 +130,6 @@ const ScreenMyGovernance: FC<MyGovernanceProps> = ({ account }) => {
             {saleStatus ? "상태 변경" : "상태 변경"}
           </Button>
         </Flex>
-
         {/* 티켓 리스트 섹션 */}
         <Heading m="15px 0" size="md">
           티켓 리스트
@@ -167,3 +157,5 @@ const ScreenMyGovernance: FC<MyGovernanceProps> = ({ account }) => {
 };
 
 export default ScreenMyGovernance;
+
+//23.08.09 1차 코드 수정
