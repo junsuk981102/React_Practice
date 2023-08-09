@@ -2,7 +2,6 @@ import React, { FC, useState, ChangeEvent } from "react";
 import { saleGovernanceTokenContract, web3 } from "../../web3Config";
 import GovernanceCard from "./GovernanceCard";
 import {
-  Box,
   Button,
   Input,
   Text,
@@ -40,15 +39,13 @@ const MyGovernanceCard: FC<MyGovernanceCardProps> = ({
   const onChangeSellPrice = (e: ChangeEvent<HTMLInputElement>) => {
     setSellPrice(e.target.value);
   };
-
+  //티켓 판매 함수
   const onClickSell = async () => {
     try {
       if (!account || !saleStatus) return;
-
       const response = await saleGovernanceTokenContract.methods
         .setForSaleGovernanceToken(GNT_Id, web3.utils.toWei(sellPrice, "ether"))
         .send({ from: account });
-
       if (response.status) {
         setMyGovernanceSalePrice(web3.utils.toWei(sellPrice, "ether"));
       }
@@ -73,7 +70,8 @@ const MyGovernanceCard: FC<MyGovernanceCardProps> = ({
       <Image src="../image/ticket/icon_ticket.png" w="100px" h="100px" />
       {/* 하단 */}
       <Flex flexDirection="column" mt="10px" fontSize="sm">
-        <Flex>
+        <Flex textAlign="center">
+          {/* 티켓 이름&ID */}
           <GovernanceCard GNT_name={GNT_name} />
           <Text>
             &nbsp;{" / "} ID : {GNT_Id}
@@ -95,11 +93,7 @@ const MyGovernanceCard: FC<MyGovernanceCardProps> = ({
                   fontSize="2xs"
                 ></Input>
                 <InputRightAddon fontSize="2xs" children="ETH" />
-                <Button
-                  //기능
-                  fontSize="2xs"
-                  onClick={onClickSell}
-                >
+                <Button fontSize="2xs" onClick={onClickSell}>
                   판매 등록
                 </Button>
               </InputGroup>
@@ -111,17 +105,9 @@ const MyGovernanceCard: FC<MyGovernanceCardProps> = ({
               <Text>
                 판매가격 : {web3.utils.fromWei(myGovernanceSalePrice)} ETH
               </Text>
-              <Box
-                //정렬
-                textAlign="center"
-              >
-                <Text
-                  //글자
-                  color="blue"
-                >
-                  {"<"}판매 등록 완료{">"}
-                </Text>
-              </Box>
+              <Text color="blue">
+                {"<"}판매 등록 완료{">"}
+              </Text>
             </>
           )
         ) : myGovernanceSalePrice === "0" ? (
@@ -136,17 +122,9 @@ const MyGovernanceCard: FC<MyGovernanceCardProps> = ({
             <Text>
               판매가격 : {web3.utils.fromWei(myGovernanceSalePrice)} ETH
             </Text>
-            <Box
-              //정렬
-              textAlign="center"
-            >
-              <Text
-                //글자
-                color="blue"
-              >
-                {"<"}판매 등록 완료{">"}
-              </Text>
-            </Box>
+            <Text color="blue">
+              {"<"}판매 등록 완료{">"}
+            </Text>
           </>
         )}
       </Flex>
@@ -156,7 +134,5 @@ const MyGovernanceCard: FC<MyGovernanceCardProps> = ({
 
 export default MyGovernanceCard;
 
-// <p>초기가격 : {web3.utils.fromWei(GNT_Initial_Price)} ETH</p>
-// <p>판매가격 : {web3.utils.fromWei(myGovernanceSalePrice)} ETH</p>
-
-//23.07.24 1차 코드 수정 완료
+//23.07.24 1차 코드 수정
+//23.08.09 2차 코드 수정
