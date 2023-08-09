@@ -6,23 +6,16 @@ import ComInfoFavor from "../../components/community/cpn_Com_Info_Favor";
 import ComInfoInvest from "../../components/community/cpn_Com_Info_Invest";
 import ComInfoTicket from "../../components/community/cpn_Com_Info_Ticket";
 import ErrorModal from "../../components/community/cpn_Error_Modal";
-import {
-  Box,
-  Flex,
-  Heading,
-  Button,
-  useBreakpointValue,
-} from "@chakra-ui/react";
+import { Box, Flex, Heading, Button } from "@chakra-ui/react";
 import { dbService, auth } from "../../firebase-config";
 
 const ScreenRoomInfo = () => {
   const { state } = useLocation();
   const navi = useNavigate();
-  const boxPadding = useBreakpointValue({ base: "20px", xl: "200px" }); // 양쪽 여백
   const [isOpen, setIsOpen] = useState(false); //에러 메시지 Modal 오픈
   const [userTicket, setUserTicket] = useState(0);
   const [userUid, setUserUid] = useState("");
-
+  //유저 ID 정보 가져오기
   useEffect(() => {
     const getUserUid = async () => {
       try {
@@ -34,10 +27,9 @@ const ScreenRoomInfo = () => {
         console.log("사용자 UID 가져오기 실패:", error);
       }
     };
-
     getUserUid();
   }, []);
-
+  //유저 티켓 정보 가져오기
   useEffect(() => {
     const fetchUserTicket = async () => {
       if (userUid) {
@@ -53,7 +45,7 @@ const ScreenRoomInfo = () => {
     };
     fetchUserTicket();
   }, [userUid, state.id]);
-
+  // 유저 티켓 정보 업데이트
   useEffect(() => {
     if (userUid) {
       const communityUid = state.id;
@@ -62,20 +54,18 @@ const ScreenRoomInfo = () => {
         .doc(userUid)
         .collection("ticket_list")
         .doc(communityUid);
-
       const unsubscribe = userColRef.onSnapshot((doc) => {
         if (doc.exists) {
           const newData = doc.data();
           setUserTicket(newData.ticket);
         }
       });
-
       return () => {
-        unsubscribe(); // Unsubscribe from the real-time updates when component unmounts
+        unsubscribe();
       };
     }
   }, [userUid, state.id]);
-
+  //카테고리 정렬
   let comCategory = [];
   if (typeof state.com_category === "string") {
     comCategory = state.com_category.split(",");
@@ -124,9 +114,9 @@ const ScreenRoomInfo = () => {
       {/* 채팅방 정보 전체 배경 화면 */}
       <Flex
         flexDirection="column"
+        alignItems="center"
         h="auto"
         pb="200px"
-        px={boxPadding}
         bg="#E5F2F2"
         borderTop="1px solid #00A29D"
       >
@@ -135,12 +125,13 @@ const ScreenRoomInfo = () => {
           커뮤니티 소개
         </Heading>
         {/* 정보 섹션 */}
-        <Box
+        <Flex
+          flexDirection="column"
           w="900px"
           h="auto"
           p="30px"
           bg="white"
-          border="2px solid #00A29D"
+          border="3px solid #00A29D"
           borderRadius="xl"
         >
           {/* 커뮤니티 기본 정보 섹션 */}
@@ -150,7 +141,7 @@ const ScreenRoomInfo = () => {
           {/* 커뮤니티 티켓 & 관심회사 섹션 */}
           <Flex m="120px 0 0 20px">
             {/* 티켓 섹션 */}
-            <ComInfoTicket state={state} />
+            <ComInfoTicket state={state} userId={userUid} />
             {/* 관심회사 섹션 */}
             <ComInfoFavor />
           </Flex>
@@ -171,7 +162,7 @@ const ScreenRoomInfo = () => {
               커뮤니티 참여하기
             </Button>
           </Flex>
-        </Box>
+        </Flex>
       </Flex>
       {/* 에러메시지 Modal */}
       <ErrorModal isOpen={isOpen} onClose={() => setIsOpen(false)} />
@@ -181,5 +172,6 @@ const ScreenRoomInfo = () => {
 
 export default ScreenRoomInfo;
 
-//23.07.25 1차 코드 수정 완료
+//23.07.25 1차 코드 수정
 //23.07.27 2차 코드 수정
+//23.08.09 3차 코드 수정
