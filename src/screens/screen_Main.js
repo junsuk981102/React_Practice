@@ -14,12 +14,11 @@ import {
 
 const ScreenMain = () => {
   const boxPadding = useBreakpointValue({ base: "20px", xl: "200px" }); // 양쪽 여백
-
   // 렌더링 관련 코드
   const [communities, setCommunities] = useState([]);
   const [startups, setStartups] = useState([]);
   const [vcs, setVCs] = useState([]);
-
+  // 커뮤니티&스타트업&VC 리스트 업데이트
   useEffect(() => {
     dbService.collection("community_list").onSnapshot((snapshot) => {
       const communityArray = snapshot.docs.map((doc) => ({
@@ -43,15 +42,12 @@ const ScreenMain = () => {
       setVCs(vcArray);
     });
   }, []);
-
   // Tutorial Modal 상태 저장
   const [isTutorialModalOpen, setIsTutorialModalOpen] = useState(false);
-
   useEffect(() => {
     const shouldShowModal = !localStorage.getItem("dontShowAgain");
     setIsTutorialModalOpen(shouldShowModal);
   }, []);
-
   // Modal 열기
   const handleOpenModal = () => {
     setIsTutorialModalOpen(true);
@@ -118,3 +114,5 @@ const ScreenMain = () => {
 };
 
 export default ScreenMain;
+
+//23.08.09 1차 코드 수정
