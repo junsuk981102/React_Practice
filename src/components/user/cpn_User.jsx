@@ -11,17 +11,16 @@ import { Image, Text, Grid, Heading, Flex } from "@chakra-ui/react";
 
 const User = () => {
   const auth = getAuth();
-  const [user, loading, error] = useAuthState(auth);
+  const [user] = useAuthState(auth);
   const [userId, setUserId] = useState("");
   const defaultProfileImage = "/image/user/icon_user.png"; // 기본 디폴트 이미지 경로
   const photo = user?.photoURL || defaultProfileImage;
-  const name = user?.displayName;
-  const id = user?.id;
   const [userData, setUserData] = useState(null);
   const [startups, setStartups] = useState([]);
   const [communities, setCommunities] = useState([]);
   const [vcs, setVCs] = useState([]);
 
+  //user list에 있는 정보 자동 업데이트
   useEffect(() => {
     const fetchUserData = async () => {
       if (user) {
@@ -30,7 +29,7 @@ const User = () => {
         if (userSnapshot.exists()) {
           const userData = userSnapshot.data();
           setUserId(userData.id);
-          // userData에는 startupUids, communityUids, vcUids가 들어있습니다.
+          // userData에 startupUids, communityUids, vcUids 포함
           setUserData(userData);
         }
       }
@@ -42,32 +41,35 @@ const User = () => {
     if (userData) {
       // 한 번에 모든 데이터 가져오기
       const fetchAllData = async () => {
+        //커뮤니티
         const communityDocs = await Promise.all(
-          userData.communityUids.map(async (communityUid) => {
+          userData.communityUids?.map(async (communityUid) => {
             const communityRef = doc(dbService, "community_list", communityUid);
             const communitySnapshot = await getDoc(communityRef);
             return communitySnapshot.exists()
               ? { id: communityUid, ...communitySnapshot.data() }
               : null;
-          })
+          }) || []
         );
+        //스타트업
         const startupDocs = await Promise.all(
-          userData.startupUids.map(async (startupUid) => {
+          userData.startupUids?.map(async (startupUid) => {
             const startupRef = doc(dbService, "startup_list", startupUid);
             const startupSnapshot = await getDoc(startupRef);
             return startupSnapshot.exists()
               ? { id: startupUid, ...startupSnapshot.data() }
               : null;
-          })
+          }) || []
         );
+        //VC
         const vcDocs = await Promise.all(
-          userData.vcUids.map(async (vcUid) => {
+          userData.vcUids?.map(async (vcUid) => {
             const vcRef = doc(dbService, "vc_list", vcUid);
             const vcSnapshot = await getDoc(vcRef);
             return vcSnapshot.exists()
               ? { id: vcUid, ...vcSnapshot.data() }
               : null;
-          })
+          }) || []
         );
         // null 값 제거하여 중복 데이터 방지
         const filteredStartups = startupDocs.filter((doc) => doc !== null);
@@ -102,7 +104,9 @@ const User = () => {
         마이페이지
       </Heading>
       <Flex flexDirection="column" p="35px" bg="white" borderRadius="xl">
+        {/* 프로필 이미지&아이디&로그아웃 */}
         <Flex w="100%">
+          {/* 프로필 이미지 */}
           <Image
             src={photo}
             fallbackSrc={defaultProfileImage}
@@ -111,17 +115,20 @@ const User = () => {
             borderRadius="50%"
           />
           <Flex flexDirection="column">
+            {/* 아이디 */}
             <Text fontSize="lg" fontWeight="bold">
               {userId || "익명의 투자자"}
             </Text>
+            {/* 로그아웃 버튼 */}
             <Logout />
           </Flex>
         </Flex>
+        {/* 즐겨찾기 리스트 */}
         <Heading size="md" mb="10px">
           즐겨찾기
         </Heading>
         <Flex flexDirection="column">
-          <Text mb="5px">커뮤니티</Text>
+          <Text m="5px 0">커뮤니티</Text>
           <Grid templateColumns="repeat(6, 1fr)" gap="20px">
             {renderCommunityCards()}
           </Grid>
@@ -141,38 +148,5 @@ const User = () => {
 
 export default User;
 
-//23.07.24 1차 코드 수정 완료(추가 수정 필수)
-
-// const fetchStartups = async () => {
-//   if (startupUids.length > 0) {
-//     console.log("startup Uid length is more than 3!!");
-//     try {
-//       const startupsQuery = query(
-//         collection(dbService, "startup_list"),
-//         where("id", "in", startupUids)
-//       );
-
-//       const startupsSnapshot = await getDocs(startupsQuery);
-//       const startupArray = startupsSnapshot.docs.map((doc) => ({
-//         id: doc.id,
-//         ...doc.data(),
-//       }));
-
-//       if (startupArray.length > 0) {
-//         console.log("Startup Array:", startupArray);
-//         setStartups(startupArray);
-//       } else {
-//         console.log("No startups found for any uid.");
-//         // 스타트업이 하나도 없을 때 처리할 로직 추가
-//         // 예를 들어, 기본값을 설정하거나 사용자에게 알리는 메시지 표시 등
-//       }
-//     } catch (error) {
-//       console.error("Error fetching startups:", error);
-//     }
-//   } else {
-//     setStartups([]); // startupUids가 비어있을 때, startups를 빈 배열로 설정하여 초기화
-//     console.log("startup Uid length is less than 3");
-//   }
-// };
-
-// fetchStartups();
+//23.07.24 1차 코드 수정
+//23.08.09 2차 코드 수정
