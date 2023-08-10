@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { dbService, storageService } from "../../firebase-config";
+import { dbService, storageService } from "../../../firebase-config";
 import { addDoc, collection } from "firebase/firestore";
 import { ref, uploadString, getDownloadURL } from "firebase/storage";
 import { v4 as uuidv4 } from "uuid";
@@ -12,17 +12,19 @@ import {
   Image,
   Text,
 } from "@chakra-ui/react";
-import { FiSend } from "react-icons/fi";
+import { FiSend, FiImage } from "react-icons/fi";
 
 const ThreadCreator = ({ userObj }) => {
+  //스레드의 텍스트를 저장하는 변수
   const [thread, setThread] = useState("");
+  //스레드의 사진 Url을 저장하는 변수
   const [attachment, setAttachment] = useState("");
 
   const onChange = ({ target: { value } }) => {
     setThread(value);
   };
 
-  //사진을 추가했을 때 동작
+  //사진을 추가했을 때 동작하는 이벤트 핸들러
   const onFileChange = (e) => {
     const {
       target: { files },
@@ -44,6 +46,7 @@ const ThreadCreator = ({ userObj }) => {
     reader.readAsDataURL(thrFile);
   };
 
+  //스레드를 Post 했을때 동작하는 이벤트 핸들러
   const onSubmit = async (e) => {
     if (thread === "") {
       return;
@@ -51,6 +54,7 @@ const ThreadCreator = ({ userObj }) => {
     e.preventDefault();
     let attachmentUrl = "";
 
+    //첨부 파일이 있는 경우에만 처리
     if (attachment !== "") {
       const attachmentRef = ref(storageService, `${userObj.uid}/${uuidv4()}`);
       const response = await uploadString(
@@ -61,26 +65,31 @@ const ThreadCreator = ({ userObj }) => {
       attachmentUrl = await getDownloadURL(response.ref);
     }
 
+    //스레드 정보 객체 생성
     const threadObj = {
       text: thread,
       createdAt: Date.now(),
       creatorId: userObj.uid,
+      creatorName: userObj.displayName,
       creatorEmail: userObj.email,
       creatorPhotoUrl: userObj.photoURL,
       attachmentUrl: attachmentUrl,
       likes: 0, // Initialize likes to 0
     };
     try {
+      //스레드 정보 Firestore에 추가
       const docRef = await addDoc(collection(dbService, "threads"), threadObj);
     } catch (error) {
       console.error("Error adding document: ", error);
     }
+    //입력 내용 초기화
     setThread("");
     setAttachment("");
   };
 
+  //Post 전 사진을 삭제할떄 동작
   const clearAttachment = () => {
-    setAttachment(null);
+    setAttachment("");
   };
 
   return (
@@ -105,8 +114,8 @@ const ThreadCreator = ({ userObj }) => {
             p="10px"
             mb="10px"
           />
-          <Button onClick={onSubmit} leftIcon={<FiSend />}>
-            Post
+          <Button onClick={onSubmit} leftIcon={<FiSend />} ml="4px">
+            게시
           </Button>
         </Flex>
       </FormControl>
@@ -120,10 +129,17 @@ const ThreadCreator = ({ userObj }) => {
             id="fileInput"
           />
           <label htmlFor="fileInput">
-            <Button as="span" variant="outline" size="sm" colorScheme="teal">
+            <Button
+              as="span"
+              variant="outline"
+              size="sm"
+              colorScheme="teal"
+              leftIcon={<FiImage />}
+            >
               이미지 추가
             </Button>
           </label>
+          {/* 첨부 파일이 있는 경우 미리보기 및 삭제 버튼 표시 */}
           {attachment && (
             <Box ml="10px">
               <Text
@@ -143,3 +159,5 @@ const ThreadCreator = ({ userObj }) => {
   );
 };
 export default ThreadCreator;
+
+//23.08.09 1차 정리

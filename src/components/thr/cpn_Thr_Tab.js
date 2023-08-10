@@ -14,7 +14,7 @@ import {
   TabPanel,
   TabIndicator,
 } from "@chakra-ui/react";
-import Threads from "./cpn_Threads";
+import Threads from "./thread/cpn_Threads";
 
 function ThrTab({ state, userId, ownerCount, userObj }) {
   const [selectedTab, setSelectedTab] = useState(0);
@@ -77,6 +77,7 @@ function ThrTab({ state, userId, ownerCount, userObj }) {
             flexDirection="column"
             p="10px"
             h={tabPanelHeight}
+            pos="relative"
             overflowY={selectedTab === 0 ? "auto" : "hidden"}
           >
             <Threads userObj={userObj} />

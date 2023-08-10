@@ -72,7 +72,7 @@ function ScreenChat() {
         flexDirection="column"
         alignItems="center"
         h="auto"
-        pb="200px"
+        pb="50px"
         bg="#E5F2F2"
         borderTop="1px solid #00A29D"
       >
@@ -81,9 +81,9 @@ function ScreenChat() {
           flexDirection="column"
           w="750px"
           h="auto"
-          maxH="1500px"
-          m="60px 0 0 0"
-          p="0 0 50px 0"
+          //maxH="3000px"
+          m="30px 0 0 0"
+          p="0 0 10px 0"
           bg="white"
           border="1px solid black"
         >

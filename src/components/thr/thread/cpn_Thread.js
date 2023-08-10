@@ -15,10 +15,17 @@ import {
   uploadString,
   getDownloadURL,
 } from "firebase/storage";
-import { storageService } from "../../firebase-config";
-import { db } from "../../firebase-config";
+import { storageService } from "../../../firebase-config";
+import { db } from "../../../firebase-config";
+import {
+  FaHeart,
+  FaRegHeart,
+  FaEdit,
+  FaTrashAlt,
+  FaArrowCircleUp,
+} from "react-icons/fa";
+import { MdCancel } from "react-icons/md";
 import { v4 as uuidv4 } from "uuid";
-import { FaHeart, FaRegHeart } from "react-icons/fa";
 import {
   Flex,
   Text,
@@ -30,31 +37,44 @@ import {
 } from "@chakra-ui/react";
 import Reply from "./cpn_Replies";
 
+// Thread 컴포넌트 정의
 const Thread = ({ threadObj, isOwner, userObj }) => {
-  const [editing, setEditing] = useState(false);
-  const [newThread, setNewThread] = useState(threadObj.text);
-  const [newAttachment, setNewAttachment] = useState(threadObj.attachmentUrl);
-  const [liked, setLiked] = useState(false);
-  const [likesCount, setLikesCount] = useState(threadObj.likes);
+  // 스레드 상태 관리를 위한 변수 및 함수 설정
+  const [editing, setEditing] = useState(false); // 스레드 수정 모드
+  const [newThread, setNewThread] = useState(threadObj.text); // 수정할 스레드 텍스트
+  const [newAttachment, setNewAttachment] = useState(threadObj.attachmentUrl); // 수정할 스레드 첨부 파일
+  const [liked, setLiked] = useState(false); // 좋아요 상태
+  const [likesCount, setLikesCount] = useState(threadObj.likes); // 좋아요 수
 
-  const ThreadTextRef = doc(db, "threads", `${threadObj.id}`);
-  const ThreadAttachmentRef = doc(db, "threads", `${threadObj.id}`);
+  //스레드의 주소, 수정할때 updateDoc()에 사용
+  const ThreadRef = doc(db, "threads", `${threadObj.id}`);
   const attachmentRef = ref(storageService, threadObj.attachmentUrl);
 
+  //유저 프로필의 디폴트 이미지
   const defaultProfileImage = "/image/user/icon_user.png";
 
+  //스레드의 댓글 창이 열렸는지 상태를 저장하는 변수
   const [isOpen, setIsOpen] = useState(false);
+  //스레드의 하위 1-depth replies들을 저장하는 변수
   const [replies, setReplies] = useState([]);
+  //?
   const [allReplies, setAllReplies] = useState([]);
 
+  //스레드의 댓글창을 열고 닫는 동작
   const togglePopup = () => {
     setIsOpen((prev) => !prev);
   };
 
+  //스레드 수정창을 열고 닫는 동작
+  const toggleEditing = () => {
+    setEditing((prev) => !prev);
+  };
+
+  //스레드를 삭제하는 동작
   const onDelete = async (e) => {
     const ok = window.confirm("이 스레드를 삭제 하시겠습니까?");
     if (ok) {
-      await deleteDoc(ThreadTextRef);
+      await deleteDoc(ThreadRef);
       if (threadObj.attachmentUrl !== "") {
         console.log("Delete attachment!!");
         console.log(threadObj.attachmentUrl);
@@ -63,24 +83,47 @@ const Thread = ({ threadObj, isOwner, userObj }) => {
     }
   };
 
-  const toggleEditing = () => {
-    setEditing((prev) => !prev);
-  };
-
+  //스레드 수정 제출 동작
   const onSubmit = async (e) => {
     e.preventDefault();
-    await updateDoc(ThreadTextRef, {
+    let updatedAttachmentUrl = threadObj.attachmentUrl;
+
+    // 첨부 파일이 변경되었을 경우에만 처리
+    if (newAttachment !== threadObj.attachmentUrl) {
+      // 이전 첨부 파일 삭제 로직 추가
+      if (threadObj.attachmentUrl !== "") {
+        const attachmentRef = ref(storageService, threadObj.attachmentUrl);
+        await deleteObject(attachmentRef);
+      }
+
+      // 새로운 첨부 파일 업로드
+      if (newAttachment !== "") {
+        const attachmentRef = ref(storageService, `${userObj.uid}/${uuidv4()}`);
+        const response = await uploadString(
+          attachmentRef,
+          newAttachment,
+          "data_url"
+        );
+        updatedAttachmentUrl = await getDownloadURL(response.ref);
+      }
+    }
+
+    // 스레드 업데이트
+    await updateDoc(ThreadRef, {
       text: newThread,
-      attachmentUrl: newAttachment,
+      attachmentUrl: updatedAttachmentUrl,
     });
+
     setEditing(false);
   };
 
+  //스레드의 Text 상태 변화를 감지하고 변경하는 동작
   const onChange = (e) => {
     const { value } = e.target;
     setNewThread(value);
   };
 
+  //스레드의 파일 상태 변화를 감지하고 변경하는 동작
   const onFileChange = (e) => {
     const {
       target: { files },
@@ -102,10 +145,12 @@ const Thread = ({ threadObj, isOwner, userObj }) => {
     reader.readAsDataURL(thrFile);
   };
 
+  //스레드에 댓글을 추가하는 동작
   const addReply = (reply) => {
     setReplies((prevReplies) => [...prevReplies, reply]);
   };
 
+  //각각 스레드의 댓글을 가져오는 동작
   useEffect(() => {
     const q = query(
       collection(db, "threads", threadObj.id, "replies"),
@@ -125,6 +170,7 @@ const Thread = ({ threadObj, isOwner, userObj }) => {
     };
   }, [threadObj.id]);
 
+  //스레드의 좋아요를 누르는 동작
   const onLike = async () => {
     if (!userObj) {
       return;
@@ -137,13 +183,13 @@ const Thread = ({ threadObj, isOwner, userObj }) => {
         await updateDoc(threadRef, {
           likes: increment(-1),
         });
-        setLikesCount((prevCount) => prevCount - 1); // 수정: likesCount 감소
+        setLikesCount((prevCount) => prevCount - 1); // likesCount 감소
       }
     } else {
       await updateDoc(threadRef, {
         likes: increment(1),
       });
-      setLikesCount((prevCount) => prevCount + 1); // 수정: likesCount 증가
+      setLikesCount((prevCount) => prevCount + 1); // likesCount 증가
     }
     setLiked((prevLiked) => !prevLiked);
   };
@@ -160,6 +206,7 @@ const Thread = ({ threadObj, isOwner, userObj }) => {
       >
         {editing ? (
           <>
+            {/* 스레드 수정 화면 */}
             <Flex align="center" mb="2">
               <Image
                 src={threadObj.creatorPhotoUrl || defaultProfileImage}
@@ -177,29 +224,36 @@ const Thread = ({ threadObj, isOwner, userObj }) => {
             <FormControl>
               <Input
                 type="text"
-                placeholder="Edit your thread"
+                placeholder="게시물 수정"
                 value={newThread}
                 required
                 autoFocus
                 onChange={onChange}
               />
-              <Input
-                type="file"
-                accept="image/*" // Modify the accepted file types if needed
-                onChange={onFileChange}
-              />
-              <Button onClick={onSubmit} mt="2">
-                Update thread
+              <Input type="file" accept="image/*" onChange={onFileChange} />
+              <Button
+                onClick={onSubmit}
+                mt="2"
+                size="sm"
+                leftIcon={<FaArrowCircleUp />}
+              >
+                업데이트
               </Button>
             </FormControl>
-            <Button onClick={toggleEditing} mt="2">
-              Cancel
+            <Button
+              onClick={toggleEditing}
+              mt="2"
+              size="sm"
+              leftIcon={<MdCancel />}
+            >
+              취소
             </Button>
           </>
         ) : (
           <>
             {isOpen ? (
               <>
+                {/* 스레드 댓글창 열린 화면 */}
                 <Box onClick={togglePopup} cursor="pointer">
                   <Flex align="center" mb="2">
                     <Image
@@ -215,22 +269,36 @@ const Thread = ({ threadObj, isOwner, userObj }) => {
                       {threadObj.creatorEmail}
                     </Text>
                   </Flex>
-                  <Text fontSize="xl" fontWeight="bold" mb="2">
+                  <Text fontSize="l" fontWeight="regular" mb="2">
                     {threadObj.text}
                   </Text>
                   {threadObj.attachmentUrl && (
                     <Image src={threadObj.attachmentUrl} mb="2" />
                   )}
                 </Box>
+                {/* 스레드의 소유자만 수정,삭제 가능 */}
                 {isOwner && (
                   <Flex>
-                    <Button onClick={onDelete} mr="2">
-                      Delete
+                    <Button
+                      onClick={onDelete}
+                      mb={2}
+                      size="sm"
+                      mr="2"
+                      leftIcon={<FaTrashAlt />}
+                    >
+                      삭제
                     </Button>
-                    <Button onClick={toggleEditing}>Edit</Button>
+                    <Button
+                      onClick={toggleEditing}
+                      mb={2}
+                      size="sm"
+                      leftIcon={<FaEdit />}
+                    >
+                      수정
+                    </Button>
                   </Flex>
                 )}
-                <Flex align="center" mt={2}>
+                <Flex align="center" mt={2} mb={2}>
                   <Box
                     as="button"
                     onClick={onLike}
@@ -284,7 +352,7 @@ const Thread = ({ threadObj, isOwner, userObj }) => {
                       {threadObj.creatorEmail}
                     </Text>
                   </Flex>
-                  <Text fontSize="xl" fontWeight="bold" mb="2">
+                  <Text fontSize="l" fontWeight="regular" mb="2">
                     {threadObj.text}
                   </Text>
                   {threadObj.attachmentUrl && (
@@ -293,13 +361,26 @@ const Thread = ({ threadObj, isOwner, userObj }) => {
                 </Box>
                 {isOwner && (
                   <Flex>
-                    <Button onClick={onDelete} mr="2">
-                      Delete
+                    <Button
+                      onClick={onDelete}
+                      mb={2}
+                      size="sm"
+                      mr="2"
+                      leftIcon={<FaTrashAlt />}
+                    >
+                      삭제
                     </Button>
-                    <Button onClick={toggleEditing}>Edit</Button>
+                    <Button
+                      onClick={toggleEditing}
+                      mb={2}
+                      size="sm"
+                      leftIcon={<FaEdit />}
+                    >
+                      수정
+                    </Button>
                   </Flex>
                 )}
-                <Flex align="center" mt={2}>
+                <Flex align="center" mt={2} mb={2}>
                   <Box
                     as="button"
                     onClick={onLike}
@@ -314,11 +395,12 @@ const Thread = ({ threadObj, isOwner, userObj }) => {
                     <Text ml="2">{likesCount}</Text>
                   </Box>
                 </Flex>
+                {/* 1-depth reply 호출 */}
                 <Reply
                   threadId={threadObj.id}
                   userObj={userObj}
                   addReply={addReply}
-                  replies={allReplies} // 수정: 전체 댓글의 배열을 Reply 컴포넌트로 전달
+                  replies={allReplies} // 전체 댓글의 배열을 Reply 컴포넌트로 전달
                 />
               </>
             )}
@@ -330,3 +412,5 @@ const Thread = ({ threadObj, isOwner, userObj }) => {
 };
 
 export default Thread;
+
+//23.08.10 1차 정리

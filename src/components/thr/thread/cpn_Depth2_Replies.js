@@ -18,15 +18,21 @@ import {
   query,
   deleteDoc,
 } from "firebase/firestore";
-import { db } from "../../firebase-config";
+import { db } from "../../../firebase-config";
+import { FaTrashAlt } from "react-icons/fa";
 
 const Depth2Reply = ({ threadId, userObj, reply }) => {
+  // 2-depth replies의 댓글을 보여줄지 여부를 결정하는 상태 변수
   const [showReplies, setShowReplies] = useState(false);
+  //사용자가 입력한 댓글 내용을 저장하는 상태 변수
   const [replyText, setReplyText] = useState("");
+  //현재 댓글에 대한 2-depth replies를 저장하는 배열 상태 변수
   const [depth2Replies, setDepth2Replies] = useState([]);
 
+  //유저 프로필 디폴트 이미지
   const defaultProfileImage = "/image/user/icon_user.png";
 
+  //db에서 2-dpeth replies를 가져오는 동작
   useEffect(() => {
     const unsubscribe = onSnapshot(
       query(
@@ -45,10 +51,12 @@ const Depth2Reply = ({ threadId, userObj, reply }) => {
     return () => unsubscribe();
   }, [threadId, reply.id]);
 
+  //1-depth replies에서 2-depth replies 댓글창을 여는 동작
   const onToggleReplies = () => {
     setShowReplies((prev) => !prev);
   };
 
+  // 1-depth replies 추가 동작
   const handleAddReply = async (e) => {
     e.preventDefault();
 
@@ -71,12 +79,13 @@ const Depth2Reply = ({ threadId, userObj, reply }) => {
         collection(db, "threads", threadId, "replies", reply.id, "replies"),
         newReply
       );
-      setReplyText("");
+      setReplyText(""); //댓글 내용 초기화
     } catch (error) {
       console.error("Error adding depth 2 reply:", error);
     }
   };
 
+  //1-depth reply 삭제 동작
   const onDeleteReply = async (replyId) => {
     if (!userObj) {
       return;
@@ -91,6 +100,7 @@ const Depth2Reply = ({ threadId, userObj, reply }) => {
     }
   };
 
+  //2-depth reply 삭제 동작
   const onDeleteDepth2Reply = async (depth2ReplyId) => {
     if (!userObj) {
       return;
@@ -115,6 +125,7 @@ const Depth2Reply = ({ threadId, userObj, reply }) => {
 
   return (
     <Box ml="20px">
+      {/* 2-depth replies의 정보를 표시하는 Box 컴포넌트 */}
       <Box
         borderWidth="1px"
         borderRadius="md"
@@ -123,6 +134,7 @@ const Depth2Reply = ({ threadId, userObj, reply }) => {
         w="100%"
         maxW="700px"
       >
+        {/* 댓글 부분을 클릭하면 2-depth replies를 토글하여 보여주는 기능 */}
         <Box cursor="pointer" onClick={onToggleReplies}>
           <Flex align="center" mb="2">
             <Image
@@ -141,21 +153,30 @@ const Depth2Reply = ({ threadId, userObj, reply }) => {
           <Text fontSize="l" fontWeight="regular" mb="2">
             {reply.text}
           </Text>
+          {/* 사용자가 댓글 작성자인 경우에만 댓글 삭제 버튼 표시 */}
           {userObj && userObj.uid === reply.creatorId && (
-            <Button ml="auto" size="sm" onClick={() => onDeleteReply(reply.id)}>
+            <Button
+              ml="auto"
+              mb={2}
+              size="sm"
+              leftIcon={<FaTrashAlt />}
+              onClick={() => onDeleteReply(reply.id)}
+            >
               Delete
             </Button>
           )}
         </Box>
+        {/* 2-depth replies가 있고, 토글이 활성화된 경우에만 표시 */}
         {depth2Replies && depth2Replies.length >= 0 && (
           <>
+            {/* 새로운 2-depth reply를 작성하는 폼 */}
             {userObj && (
               <Box>
                 <FormControl as="form" onSubmit={handleAddReply}>
                   <Flex align="center">
                     <Input
                       type="text"
-                      placeholder="Write a 2-depth reply"
+                      placeholder="의견을 들려주세요!"
                       value={replyText}
                       onChange={(e) => setReplyText(e.target.value)}
                       w="500px"
@@ -167,6 +188,7 @@ const Depth2Reply = ({ threadId, userObj, reply }) => {
                 </FormControl>
               </Box>
             )}
+            {/* 2-depth replies를 맵을 통해 렌더링 */}
             {showReplies &&
               depth2Replies.map((depth2Reply) => (
                 <Box
@@ -179,6 +201,7 @@ const Depth2Reply = ({ threadId, userObj, reply }) => {
                   w="100%"
                   maxW="700px"
                 >
+                  {/* 2-depth reply의 정보 표시 */}
                   <Flex align="center" mb="2">
                     <Image
                       src={depth2Reply.creatorPhotoUrl || defaultProfileImage}
@@ -196,13 +219,15 @@ const Depth2Reply = ({ threadId, userObj, reply }) => {
                   <Text fontSize="l" fontWeight="regular" mb="2">
                     {depth2Reply.text}
                   </Text>
+                  {/* 사용자가 2-depth reply 작성자인 경우에만 삭제 버튼 표시 */}
                   {userObj && userObj.uid === depth2Reply.creatorId && (
                     <Button
                       ml="auto"
                       size="sm"
+                      leftIcon={<FaTrashAlt />}
                       onClick={() => onDeleteDepth2Reply(depth2Reply.id)}
                     >
-                      Delete
+                      삭제
                     </Button>
                   )}
                 </Box>
@@ -215,3 +240,5 @@ const Depth2Reply = ({ threadId, userObj, reply }) => {
 };
 
 export default Depth2Reply;
+
+//23.08.10 1차 정리
