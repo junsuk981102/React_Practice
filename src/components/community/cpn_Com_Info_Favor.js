@@ -1,11 +1,11 @@
 import React from "react";
-import { Box, Flex, Text, Image } from "@chakra-ui/react";
+import { Flex, Text, Image } from "@chakra-ui/react";
 
 const ComInfoFavor = () => {
   return (
-    <Box>
+    <Flex flexDirection="column">
       {/* 커뮤니티 관심있는 회사 */}
-      <Text m="0 0 15px 0" fontSize="lg" fontWeight="bold">
+      <Text mb="15px " fontSize="lg" fontWeight="bold">
         관심있는 회사
       </Text>
       {/* 커뮤니티 관심있는 회사 리스트 */}
@@ -13,7 +13,7 @@ const ComInfoFavor = () => {
         <Flex
           flexDirection="column"
           alignItems="center"
-          m="0 10px 0 10px"
+          m="0 10px"
           p="5px"
           borderRadius="xl"
           boxShadow="0 0 5px #00A29D"
@@ -24,14 +24,14 @@ const ComInfoFavor = () => {
             h="100px"
             borderRadius="xl"
           />
-          <Text m="5px 0 0 0" fontSize="sm">
+          <Text mt="5px" fontSize="sm">
             펫프랜즈
           </Text>
         </Flex>
         <Flex
           flexDirection="column"
           alignItems="center"
-          m="0 10px 0 10px"
+          m="0 10px"
           p="5px"
           borderRadius="xl"
           boxShadow="0 0 5px #00A29D"
@@ -42,14 +42,14 @@ const ComInfoFavor = () => {
             h="100px"
             borderRadius="xl"
           />
-          <Text m="5px 0 0 0" fontSize="sm">
+          <Text mt="5px" fontSize="sm">
             페오펫
           </Text>
         </Flex>
         <Flex
           flexDirection="column"
           alignItems="center"
-          m="0 10px 0 10px"
+          m="0 10px"
           p="5px"
           borderRadius="xl"
           boxShadow="0 0 5px #00A29D"
@@ -60,15 +60,16 @@ const ComInfoFavor = () => {
             h="100px"
             borderRadius="xl"
           />
-          <Text m="5px 0 0 0" fontSize="sm">
+          <Text mt="5px" fontSize="sm">
             핏펫
           </Text>
         </Flex>
       </Flex>
-    </Box>
+    </Flex>
   );
 };
 
 export default ComInfoFavor;
 
 //23.07.27 1차 코드 수정
+//23.08.07 2차 코드 수정

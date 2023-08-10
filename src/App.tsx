@@ -17,7 +17,6 @@ import ScreenStartupInfo from "./screens/startup/screen_Startup_Info";
 import ScreenStartupList from "./screens/startup/screen_Startup_List";
 // Testing Screen
 import ScreenExample from "./screens/testing/screen_Example";
-import ScreenTest from "./screens/testing/screen_Test";
 import ScreenNewsletter from "./screens/testing/screen_Newsletter";
 // Ticket Screen
 import ScreenMinting from "./screens/ticket/screen_Minting";
@@ -125,7 +124,6 @@ export default function App() {
               path="/screen_wallet_connect/*"
               element={<ScreenWalletConnect />}
             ></Route>
-            <Route path="/screen_test/*" element={<ScreenTest />}></Route>
           </Route>
 
           <Route

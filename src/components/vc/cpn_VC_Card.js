@@ -20,7 +20,6 @@ const VCCard = ({ vcObj }) => {
 
   return (
     <Flex
-      position="relative"
       w="500px"
       h="360px"
       bg="white"
@@ -57,7 +56,12 @@ const VCCard = ({ vcObj }) => {
           {vcObj.vc_name}
         </Heading>
         {/* VC 정보 */}
-        <Text position="absolute" m="85px 20px 0 20px" noOfLines={[1, 2]}>
+        <Text
+          position="absolute"
+          m="85px 20px 0 20px"
+          w="450px"
+          noOfLines={[1, 2]}
+        >
           {vcObj.vc_info}
         </Text>
         {/* VC 카테고리 */}
@@ -91,3 +95,4 @@ export default VCCard;
 
 //23.07.21 1차 코드 수정 완료
 //23.07.27 2차 코드 수정 완료
+//23.08.08 3차 코드 수정 완료

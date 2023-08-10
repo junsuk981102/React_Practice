@@ -1,90 +1,75 @@
 import React, { useState, useEffect } from "react";
-import { Box, Flex, Text, Button, Image } from "@chakra-ui/react";
-import { auth, dbService } from "../../firebase-config";
+import { Flex, Text, Button, Image } from "@chakra-ui/react";
+import { dbService } from "../../firebase-config";
 
-const ComInfoTicket = ({ state }) => {
+const ComInfoTicket = ({ state, userId }) => {
   const [sellCount, setSellCount] = useState(0);
-  const [userUid, setUserUid] = useState("");
   const [userTicket, setUserTicket] = useState(0);
-
-  useEffect(() => {
-    const getUserUid = async () => {
-      try {
-        const user = auth.currentUser;
-        if (user) {
-          setUserUid(user.uid);
-        }
-      } catch (error) {
-        console.log("사용자 UID 가져오기 실패:", error);
-      }
-    };
-
-    getUserUid();
-  }, []);
-
+  //보유 티켓 현황 가져오기
   useEffect(() => {
     const fetchUserTicket = async () => {
-      if (userUid) {
-        const communityUid = state.id;
+      if (userId) {
         const userColRef = dbService
           .collection("user_list")
-          .doc(userUid)
+          .doc(userId)
           .collection("ticket_list");
-        const userDoc = await userColRef.doc(communityUid).get();
+        const userDoc = await userColRef.doc(state.id).get();
         const fetchedUserTicket = userDoc.data()?.ticket || 0;
         setUserTicket(fetchedUserTicket);
       }
     };
-
     fetchUserTicket();
-  }, [userUid, state.id]);
-
+  }, [userId, state.id]);
+  //티켓 구매 갯수 증가
   const handleClick_plus = () => {
     if (
       userTicket + sellCount < state.com_ticket_max &&
-      state.com_now_investment < state.com_total_investment
+      state.com_ticket_price * sellCount <
+        state.com_total_investment - state.com_now_investment
     ) {
       setSellCount(sellCount + 1);
     }
   };
-
+  //티켓 구매 갯수 감소
   const handleClick_minus = () => {
     if (sellCount > 0) {
       setSellCount(sellCount - 1);
     }
   };
-
+  //티켓 구매
   const handleClick_sell = async () => {
-    if (sellCount > 0 && userUid) {
-      const communityUid = state.id;
-
+    if (sellCount > 0 && userId) {
+      //티텟 첫 구매시 com_member+1 & firstvote,secondvote 세팅
       if (userTicket === 0) {
-        state.com_member = state.com_member + 1;
-        const updatedMember = state.com_member;
-        await dbService.collection("community_list").doc(communityUid).update({
+        const updatedMember = state.com_member + 1;
+        await dbService.collection("community_list").doc(state.id).update({
           com_member: updatedMember,
         });
+        await dbService
+          .collection("user_list")
+          .doc(userId)
+          .collection("ticket_list")
+          .doc(state.id)
+          .update({
+            firstvote: 0,
+            secondvote: 0,
+          });
       }
-
       const updatedTicket = userTicket + sellCount;
       await dbService
         .collection("user_list")
-        .doc(userUid)
+        .doc(userId)
         .collection("ticket_list")
-        .doc(communityUid)
+        .doc(state.id)
         .update({
           ticket: updatedTicket,
         });
-
-      state.com_now_investment =
+      const updatedInvestment =
         state.com_now_investment + sellCount * state.com_ticket_price;
-      const updatedInvestment = state.com_now_investment;
-      await dbService.collection("community_list").doc(communityUid).update({
+      await dbService.collection("community_list").doc(state.id).update({
         com_now_investment: updatedInvestment,
       });
-
       setUserTicket(updatedTicket);
-
       setSellCount(0);
     }
   };
@@ -94,14 +79,14 @@ const ComInfoTicket = ({ state }) => {
   }
 
   return (
-    <Box m="0 50px 0 0">
+    <Flex flexDirection="column" mr="50px">
       {/* 티켓 구매하기 */}
       <Text fontWeight="bold" fontSize="lg">
         티켓 구매하기
       </Text>
-      <Flex m="20px 0 0 0">
+      <Flex mt="20px">
         {/* 왼쪽 섹션 */}
-        <Box>
+        <Flex flexDirection="column">
           {/* 티켓 사진 */}
           <Image
             src={
@@ -111,11 +96,11 @@ const ComInfoTicket = ({ state }) => {
             }
             w="150px"
             h="150px"
-            m="0 0 15px 0"
+            mb="15px"
           />
           {/* 현재 티켓 보유 현황 */}
-          <Box
-            textAlign="center"
+          <Flex
+            justifyContent="center"
             p="5px"
             bg="#E5F2F2"
             border="1px solid black"
@@ -123,10 +108,15 @@ const ComInfoTicket = ({ state }) => {
             fontSize="xs"
           >
             현재 보유한 티켓 수: {userTicket}매
-          </Box>
-        </Box>
+          </Flex>
+        </Flex>
         {/* 오른쪽 섹션 */}
-        <Box textAlign="center" m="0 0 0 30px" fontWeight="bold">
+        <Flex
+          flexDirection="column"
+          textAlign="center"
+          ml="30px"
+          fontWeight="bold"
+        >
           {/* 티켓 가격 */}
           <Text fontSize="xl">
             <NumberFormat number={state.com_ticket_price} />원
@@ -134,11 +124,11 @@ const ComInfoTicket = ({ state }) => {
           {/* 티켓 개수 조절 버튼 */}
           <Flex
             alignItems="center"
-            justifyContent="center"
+            justifyContent="space-between"
             textAlign="center"
             w="120px"
             h="40px"
-            m="15px 0 15px 0"
+            m="15px 0"
             border="1px solid #00A29D"
             borderRadius="xl"
           >
@@ -152,13 +142,15 @@ const ComInfoTicket = ({ state }) => {
               -
             </Button>
             {/* 개수 */}
-            <Text w="30px">{sellCount}</Text>
+            <Text>{sellCount}</Text>
             {/* + 버튼 */}
             <Button
               variant="none"
               fontSize="2xl"
               color={
-                userTicket + sellCount < state.com_ticket_max
+                userTicket + sellCount < state.com_ticket_max &&
+                state.com_ticket_price * sellCount <
+                  state.com_total_investment - state.com_now_investment
                   ? "#00A29D"
                   : "lightgrey"
               }
@@ -181,13 +173,15 @@ const ComInfoTicket = ({ state }) => {
             {userTicket > 0 ? "추가 구매하기" : "구매하기"}
           </Button>
           {/* 최대 구매 개수 */}
-          <Text m="5px 0 0 0" fontSize="2xs" color="lightgrey">
+          <Text mt="5px" fontSize="2xs" color="lightgrey">
             * 최대 {state.com_ticket_max}매까지 구매 가능
           </Text>
-        </Box>
+        </Flex>
       </Flex>
-    </Box>
+    </Flex>
   );
 };
 
 export default ComInfoTicket;
+
+//23.08.07 1차 코드 수정

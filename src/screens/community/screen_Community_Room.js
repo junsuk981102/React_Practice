@@ -11,7 +11,7 @@ function ScreenChat() {
   const [userObj, setUserObj] = useState(null);
   const [userTicket, setUserTicket] = useState(0);
   const [userUid, setUserUid] = useState("");
-
+  //유저 ID 정보 가져오기
   useEffect(() => {
     const getUserUid = async () => {
       try {
@@ -26,7 +26,7 @@ function ScreenChat() {
 
     getUserUid();
   }, []);
-
+  //유저 티켓 정보 가져오기
   useEffect(() => {
     const fetchUserTicket = async () => {
       if (userUid) {
@@ -53,7 +53,7 @@ function ScreenChat() {
       }
     });
   }, []);
-
+  //커뮤니티 카테고리 구분
   let comCategory = [];
   if (typeof state.com_category === "string") {
     comCategory = state.com_category.split(",");
@@ -81,9 +81,9 @@ function ScreenChat() {
           flexDirection="column"
           w="750px"
           h="auto"
-          //maxH="3000px"
-          m="30px 0 0 0"
-          p="0 0 10px 0"
+          maxH="1500px"
+          mt="60px"
+          pb="50px"
           bg="white"
           border="1px solid black"
         >
@@ -105,3 +105,4 @@ function ScreenChat() {
 export default ScreenChat;
 
 //23.07.27 1차 코드 수정
+//23.08.09 2차 코드 수정

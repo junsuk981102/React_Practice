@@ -1,13 +1,12 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { dbService } from "../../firebase-config";
 import { Flex, Text, Image } from "@chakra-ui/react";
 
-const StartupInfoInvest = ({
-  state,
-  sup_amountOfInvestment,
-  sup_numOfInvestment,
-  sup_roundOfInvestment,
-}) => {
+const StartupInfoInvest = ({ state }) => {
+  const [sup_amountOfInvestment, setSupAmountOfInvestment] = useState("");
+  const [sup_numOfInvestment, setSupNumOfInvestment] = useState("");
+  const [sup_roundOfInvestment, setSupRoundOfInvestment] = useState("");
+  //invest_info 정보 가져오기
   useEffect(() => {
     const fetchInvestInformation = async () => {
       try {
@@ -17,10 +16,11 @@ const StartupInfoInvest = ({
           .collection("info")
           .doc("invest_info");
         const doc = await supInfoRef.get();
-
         if (doc.exists) {
           const data = doc.data();
-          // 이제 state 안에 해당 값을 이미 가지고 있으므로, set 함수들을 호출할 필요 없음
+          setSupAmountOfInvestment(data.sup_amountOfInvestment);
+          setSupNumOfInvestment(data.sup_numOfInvestment);
+          setSupRoundOfInvestment(data.sup_roundOfInvestment);
         } else {
           console.log("문서가 존재하지 않습니다.");
         }
@@ -28,7 +28,6 @@ const StartupInfoInvest = ({
         console.log("데이터 가져오기 실패:", error);
       }
     };
-
     fetchInvestInformation();
   }, [state.id]);
 
@@ -59,7 +58,7 @@ const StartupInfoInvest = ({
           <Text fontWeight="bold" fontSize="lg">
             투자자
           </Text>
-          <Flex mt="15px">
+          <Flex m="15px">
             <Flex
               flexDirection="column"
               alignItems="center"
@@ -124,3 +123,4 @@ const StartupInfoInvest = ({
 export default StartupInfoInvest;
 
 //23.07.27 1차 코드 수정
+//23.08.08 2차 코드 수정

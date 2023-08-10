@@ -47,7 +47,8 @@ const TabCommunityInfoTicket = ({ state, userId, ownerCount }) => {
   const handleClick_plus = () => {
     if (
       userTicket + sellCount < state.com_ticket_max &&
-      state.com_now_investment < state.com_total_investment
+      state.com_ticket_price * sellCount <
+        state.com_total_investment - state.com_now_investment
     ) {
       setSellCount(sellCount + 1);
     }
@@ -143,7 +144,9 @@ const TabCommunityInfoTicket = ({ state, userId, ownerCount }) => {
               fontSize="25px"
               fontWeight="bold"
               color={
-                userTicket + sellCount < state.com_ticket_max
+                userTicket + sellCount < state.com_ticket_max &&
+                state.com_ticket_price * sellCount <
+                  state.com_total_investment - state.com_now_investment
                   ? "#00A29D"
                   : "lightgrey"
               }

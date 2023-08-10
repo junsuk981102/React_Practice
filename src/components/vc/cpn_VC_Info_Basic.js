@@ -13,7 +13,6 @@ const VCInfoBasic = ({ state }) => {
     if (storedActiveButton) {
       setActiveButton(JSON.parse(storedActiveButton)); // 로컬 스토리지에서 가져올 때 문자열을 JSON으로 변환
     }
-
     const getUserUid = async () => {
       try {
         const user = auth.currentUser;
@@ -24,7 +23,6 @@ const VCInfoBasic = ({ state }) => {
         console.log("사용자 UID 가져오기 실패:", error);
       }
     };
-
     getUserUid();
   }, [state.id]);
 
@@ -68,17 +66,16 @@ const VCInfoBasic = ({ state }) => {
           src={state.vc_logo}
           w="200px"
           h="200px"
-          borderRadius="xl"
+          borderRadius="50%"
           objectFit="cover"
         />
-        <Flex flexDirection="column" ml="25px">
+        <Flex flexDirection="column" p="25px">
           <Flex alignItems="center">
             {/* 스타트업 이름 */}
             <Heading size="lg">{state.vc_name}</Heading>
             {/* 즐겨찾기 버튼 */}
             <IconButton
-              aria-label="Like"
-              backgroundColor="white"
+              bg="none"
               color={activeButton ? "yellow" : "black"}
               onClick={handleClick}
               icon={
@@ -93,9 +90,9 @@ const VCInfoBasic = ({ state }) => {
           {/* 스타트업 카테고리 */}
           <Flex
             justifyContent="center"
-            w="100px"
-            p="5px"
-            m="10px 0"
+            p="5px 10px"
+            m="10px 5px 10px 0"
+            w="80px"
             bg="#00A29D"
             borderRadius="xl"
             fontSize="sm"
@@ -114,3 +111,4 @@ const VCInfoBasic = ({ state }) => {
 export default VCInfoBasic;
 
 //23.07.27 1차 코드 수정
+//23.08.08 2차 코드 수정

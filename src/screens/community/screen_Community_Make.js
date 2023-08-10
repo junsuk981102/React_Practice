@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { dbService } from "../../firebase-config";
 import {
-  Box,
   FormControl,
   FormLabel,
   Input,
@@ -13,8 +12,6 @@ import {
 
 const ScreenRoomMake = () => {
   const [selectedCategories, setSelectedCategories] = useState([]);
-  //const [selectedImage, setSelectedImage] = useState(null); // 선택한 이미지 파일 상태 변수 추가
-
   //초기값 설정
   const [communityData, setCommunityData] = useState({
     name: "",
@@ -26,7 +23,6 @@ const ScreenRoomMake = () => {
     ticketPrice: "",
     maxTicket: "",
   });
-
   //카테고리 리스트
   const categories = [
     "핀테크",
@@ -44,7 +40,6 @@ const ScreenRoomMake = () => {
     "요식업",
     "헬스케어",
   ];
-
   const handleCategoryToggle = (category) => {
     if (selectedCategories.includes(category)) {
       setSelectedCategories((prevSelected) =>
@@ -57,31 +52,11 @@ const ScreenRoomMake = () => {
       }
       setSelectedCategories((prevSelected) => [...prevSelected, category]);
     }
-
     setCommunityData((prevData) => ({
       ...prevData,
       categories: selectedCategories, // 변경된 카테고리 선택 값을 communityData에 업데이트
     }));
   };
-
-  // const handleImageChange = (e) => {
-  //   const file = e.target.files[0];
-  //   setSelectedImage(file);
-  // };
-
-  // const handleImageUpload = async () => {
-  //   if (selectedImage) {
-  //     const imageRef = storageService
-  //       .ref()
-  //       .child(`community/${selectedImage.name}`);
-  //     await imageRef.put(selectedImage);
-  //     const imageUrl = await imageRef.getDownloadURL();
-  //     setCommunityData((prevData) => ({
-  //       ...prevData,
-  //       image: imageUrl,
-  //     }));
-  //   }
-  // };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -93,7 +68,6 @@ const ScreenRoomMake = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    //await handleImageUpload(); // 이미지 업로드 함수 호출
     await dbService.collection("community_list").add({
       com_name: communityData.name,
       com_category: communityData.categories,
@@ -117,7 +91,6 @@ const ScreenRoomMake = () => {
       maxTicket: "",
     });
   };
-
   //포맷 변경
   const convertCurrency = (value) => {
     if (value >= 100000000) {
@@ -137,59 +110,30 @@ const ScreenRoomMake = () => {
 
     //커뮤니티 만들기 전체 배경 화면
     <Flex
-      //정렬
       justifyContent="center"
-      //크기 및 여백
       h="auto"
       pb="200px"
-      //배경
       borderTop="1px solid #00A29D"
       bg="#E5F2F2"
     >
-      <Box
-        //크기
-        w="60%"
-      >
-        <Heading
-          //크기
-          marginY="30px"
-          //글자
-          size="lg"
-        >
+      <Flex flexDirection="column" w="60%">
+        <Heading m="30px 0" size="lg">
           커뮤니티 만들기
         </Heading>
-
         {/* 커뮤니티 만들기 Form */}
         <FormControl
-          //정렬
-          flexDirection="column"
-          //여백
           p="15px"
-          //배경
           border="3px solid #00A29D"
           borderRadius="2xl"
           bg="white"
-          //기능
-          as="form"
           onSubmit={handleSubmit}
         >
           {/* 기본 정보 섹션 */}
-          <Heading
-            //여백
-            mb="10px"
-            //글자
-            size="md"
-          >
+          <Heading mb="10px" size="md">
             기본 정보
           </Heading>
-          <Box
-            //여백
-            px="20px"
-          >
-            <FormControl
-              //여백
-              mb="15px"
-            >
+          <Flex flexDirection="column" px="20px">
+            <FormControl mb="15px">
               <FormLabel>커뮤니티 이름</FormLabel>
               <Input
                 type="text"
@@ -201,10 +145,7 @@ const ScreenRoomMake = () => {
               />
             </FormControl>
 
-            <FormControl
-              //여백
-              mb="15px"
-            >
+            <FormControl mb="15px">
               <FormLabel>커뮤니티 설명</FormLabel>
               <Input
                 type="text"
@@ -216,48 +157,32 @@ const ScreenRoomMake = () => {
               />
             </FormControl>
 
-            <FormControl
-              //여백
-              mb="15px"
-            >
+            <FormControl mb="15px">
               <FormLabel>커뮤니티 카테고리</FormLabel>
-              <Box>
+              <Flex>
                 {categories.map((category) => (
                   //카테고리 선택 버튼
                   <Button
-                    //여백
                     m="2px 3px"
-                    //배경
                     colorScheme="teal"
                     variant={
                       selectedCategories.includes(category)
                         ? "solid"
                         : "outline"
                     }
-                    //글자
                     size="sm"
-                    //기능
                     key={category}
                     onClick={() => handleCategoryToggle(category)}
                   >
                     {category}
                   </Button>
                 ))}
-              </Box>
+              </Flex>
             </FormControl>
 
-            <FormControl
-              //여백
-              mb="15px"
-            >
+            <FormControl mb="15px">
               <FormLabel>커뮤니티 대표 이미지</FormLabel>
               <Flex>
-                {/* <Input
-                    id="image-input"
-                    type="file"
-                    name="image"
-                    onChange={handleImageChange}
-                  /> */}
                 <Input
                   type="text"
                   name="image"
@@ -268,34 +193,26 @@ const ScreenRoomMake = () => {
                 />
               </Flex>
             </FormControl>
-          </Box>
+          </Flex>
 
           {/* 투자 정보 섹션 */}
-          <Heading
-            //여백
-            marginY="10px"
-            //글자
-            size="md"
-          >
+          <Heading marginY="10px" size="md">
             투자 정보
           </Heading>
-          <Box
-            //여백
-            px="20px"
-          >
-            <FormControl
-              //여백
-              mb="15px"
-            >
-              <FormLabel>관심있는 회사</FormLabel>
-              <Input
-                type="text"
-                name="company"
-                value={communityData.company}
-                onChange={handleChange}
-                placeholder="관심있는 회사의 이름을 입력하세요."
-                required
-              />
+          <Flex flexDirection="column" px="20px">
+            <FormControl mb="15px" textAlign="end">
+              <Flex alignItems="center" justifyContent="space-between">
+                <FormLabel>관심있는 회사:</FormLabel>
+                <Input
+                  maxW="700px"
+                  type="text"
+                  name="company"
+                  value={communityData.company}
+                  onChange={handleChange}
+                  placeholder="관심있는 회사의 이름을 입력하세요."
+                  required
+                />
+              </Flex>
             </FormControl>
 
             <FormControl mb="15px" textAlign="end">
@@ -311,10 +228,7 @@ const ScreenRoomMake = () => {
                   required
                 />
               </Flex>
-              <Text
-                //여백
-                mt="8px"
-              >
+              <Text mt="8px">
                 {convertCurrency(communityData.investmentAmount)}
               </Text>
             </FormControl>
@@ -331,12 +245,7 @@ const ScreenRoomMake = () => {
                   required
                 ></Input>
               </Flex>
-              <Text
-                //여백
-                mt="8px"
-              >
-                {convertCurrency(communityData.ticketPrice)}
-              </Text>
+              <Text mt="8px">{convertCurrency(communityData.ticketPrice)}</Text>
             </FormControl>
 
             <FormControl mb="15px" textAlign="end">
@@ -352,22 +261,14 @@ const ScreenRoomMake = () => {
                 ></Input>
               </Flex>
             </FormControl>
-          </Box>
+          </Flex>
           <Flex justifyContent="center">
-            <Button
-              //크기 및 여백
-              maxW="250px"
-              h="50px"
-              //배경
-              colorScheme="teal"
-              //기능
-              type="submit"
-            >
+            <Button maxW="250px" h="50px" colorScheme="teal" type="submit">
               커뮤니티 생성
             </Button>
           </Flex>
         </FormControl>
-      </Box>
+      </Flex>
     </Flex>
   );
 };
@@ -375,3 +276,4 @@ const ScreenRoomMake = () => {
 export default ScreenRoomMake;
 
 //23.07.24 1차 코드 수정 완료
+//23.08.09 1차 코드 수정 완료

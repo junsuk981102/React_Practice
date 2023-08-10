@@ -12,7 +12,6 @@ const ScreenRoomList = () => {
   const handleMenuItemClick = (value) => {
     setSelectedValue(value);
   };
-
   //커뮤니티 정보 가져오기
   useEffect(() => {
     dbService.collection("community_list").onSnapshot((snapshot) => {
@@ -61,3 +60,4 @@ export default ScreenRoomList;
 
 //23.07.24 1차 코드 수정
 //23.07.27 2차 코드 수정
+//23.08.09 3차 코드 수정

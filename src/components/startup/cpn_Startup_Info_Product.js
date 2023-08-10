@@ -14,7 +14,7 @@ const StartupInfoProduct = ({ state }) => {
             src={state.sup_logo}
             w="60px"
             h="60px"
-            borderRadius="3xl"
+            borderRadius="50%"
             objectFit="cover"
           />
           <Flex flexDirection="column" m="7px">
@@ -32,3 +32,4 @@ const StartupInfoProduct = ({ state }) => {
 export default StartupInfoProduct;
 
 //23.07.27 1차 코드 수정
+//23.08.08 2차 코드 수정

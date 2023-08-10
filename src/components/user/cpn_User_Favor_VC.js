@@ -44,3 +44,5 @@ const FavorVC = ({ vcObj }) => {
 };
 
 export default FavorVC;
+
+//23.08.09 1차 코드 수정

@@ -15,7 +15,7 @@ import {
   Divider,
 } from "@chakra-ui/react";
 
-const Register = (props) => {
+const Register = () => {
   const [registerId, setRegisterId] = useState("");
   const [registerPassword, setRegisterPassword] = useState("");
   const [registerConfirmpassword, setRegisterConfirmpassword] = useState("");
@@ -56,10 +56,8 @@ const Register = (props) => {
         registerEmail,
         registerPassword
       );
-
       // Firebase Auth에 사용자가 성공적으로 등록되었습니다.
       const user = userCredential.user;
-
       // Firestore에 사용자 정보 추가하기
       const userRef = doc(db, "user_list", user.uid);
       const userData = {
@@ -90,51 +88,19 @@ const Register = (props) => {
   };
 
   return (
-    <Flex
-      //정렬
-      flexDirection="column"
-      //크기
-      w="700px"
-    >
-      <Heading
-        //정렬
-        textAlign="center"
-        //여백
-        marginY="30px"
-        //글자
-        size="xl"
-      >
+    <Flex flexDirection="column" w="700px">
+      <Heading textAlign="center" m="30px 0">
         회원가입
       </Heading>
-      <Divider
-        //크기 및 여백
-        h="1px"
-        mb="30px"
-        //배경
-        bg="#00A29D"
-      />
+      <Divider h="1px" mb="30px" bg="#00A29D" />
 
       <FormControl
-        //정렬
         justifyContent="center"
-        //배경
         bg="#E5F2F2"
-        //기능
-        as="form"
         onSubmit={handleFormSubmit}
       >
-        <FormControl
-          //정렬
-          display="flex"
-          justifyContent="space-between"
-        >
-          <FormLabel
-            //글자
-            fontSize="20px"
-            fontWeight="bold"
-            //기능
-            htmlFor="id"
-          >
+        <FormControl display="flex" justifyContent="space-between" m="15px 0">
+          <FormLabel fontSize="20px" fontWeight="bold" htmlFor="id">
             아이디:
           </FormLabel>
           <Input
@@ -151,8 +117,7 @@ const Register = (props) => {
             maxW="450px"
           />
         </FormControl>
-
-        <FormControl display="flex" justifyContent="space-between">
+        <FormControl display="flex" justifyContent="space-between" m="15px 0">
           <FormLabel fontSize="20px" fontWeight="bold" htmlFor="password">
             비밀번호:
           </FormLabel>
@@ -173,8 +138,7 @@ const Register = (props) => {
             {passwordError}
           </Alert>
         )}
-
-        <FormControl display="flex" justifyContent="space-between">
+        <FormControl display="flex" justifyContent="space-between" m="15px 0">
           <FormLabel
             fontSize="20px"
             fontWeight="bold"
@@ -200,7 +164,7 @@ const Register = (props) => {
           </Alert>
         )}
 
-        <FormControl display="flex" justifyContent="space-between">
+        <FormControl display="flex" justifyContent="space-between" m="15px 0">
           <FormLabel fontSize="20px" fontWeight="bold" htmlFor="email">
             이메일:
           </FormLabel>
@@ -218,7 +182,7 @@ const Register = (props) => {
           />
         </FormControl>
 
-        <FormControl display="flex" justifyContent="space-between">
+        <FormControl display="flex" justifyContent="space-between" m="15px 0">
           <FormLabel fontSize="20px" fontWeight="bold" htmlFor="phonenumber">
             전화번호:
           </FormLabel>
@@ -236,7 +200,7 @@ const Register = (props) => {
           />
         </FormControl>
 
-        <FormControl display="flex" justifyContent="space-between">
+        <FormControl display="flex" justifyContent="space-between" m="15px 0">
           <FormLabel fontSize="20px" fontWeight="bold" htmlFor="birthDate">
             생년월일:
           </FormLabel>
@@ -252,8 +216,7 @@ const Register = (props) => {
             maxW="450px"
           />
         </FormControl>
-
-        <FormControl display="flex" justifyContent="space-between">
+        <FormControl display="flex" justifyContent="space-between" m="15px 0">
           <FormLabel fontSize="20px" fontWeight="bold" htmlFor="address">
             주소:
           </FormLabel>
@@ -270,15 +233,7 @@ const Register = (props) => {
             maxW="450px"
           />
         </FormControl>
-
-        <Divider
-          //크기 및 여백
-          h="1px"
-          marginY="30px"
-          //배경
-          bg="#00A29D"
-        />
-
+        <Divider h="1px" marginY="30px" bg="#00A29D" />
         <Button
           type="submit"
           maxW="300px"
@@ -299,4 +254,5 @@ const Register = (props) => {
 
 export default Register;
 
-//23.07.24 1차 코드 수정 완료(추가 수정 필수)
+//23.07.24 1차 코드 수정
+//23.08.08 2차 코드 수정

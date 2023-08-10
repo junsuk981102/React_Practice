@@ -13,7 +13,6 @@ const ComInfoBasic = ({ state }) => {
     if (storedActiveButton) {
       setActiveButton(JSON.parse(storedActiveButton)); // 로컬 스토리지에서 가져올 때 문자열을 JSON으로 변환
     }
-
     const getUserUid = async () => {
       try {
         const user = auth.currentUser;
@@ -24,7 +23,6 @@ const ComInfoBasic = ({ state }) => {
         console.log("사용자 UID 가져오기 실패:", error);
       }
     };
-
     getUserUid();
   }, [state.id]);
 
@@ -81,8 +79,7 @@ const ComInfoBasic = ({ state }) => {
           <Heading size="lg">{state.com_name}</Heading>
           {/* 즐겨찾기 버튼 */}
           <IconButton
-            aria-label="Like"
-            backgroundColor="white"
+            bg="none"
             color={activeButton ? "yellow" : "black"}
             onClick={handleClick}
             icon={
@@ -95,7 +92,7 @@ const ComInfoBasic = ({ state }) => {
           />
         </Flex>
         {/* 커뮤니티 카테고리 */}
-        <Flex flexDirection="row">
+        <Flex>
           {comCategory.map((category, index) => (
             <Flex
               key={index}
@@ -112,7 +109,7 @@ const ComInfoBasic = ({ state }) => {
           ))}
         </Flex>
         {/* 커뮤니티 설명 */}
-        <Text fontSize="md">{state.com_info}</Text>
+        <Text>{state.com_info}</Text>
       </Flex>
     </Flex>
   );
@@ -121,3 +118,4 @@ const ComInfoBasic = ({ state }) => {
 export default ComInfoBasic;
 
 //23.07.27 1차 코드 수정
+//23.08.07 2차 코드 수정

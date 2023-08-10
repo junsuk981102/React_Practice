@@ -75,13 +75,11 @@ const CommunityCard = ({ communityObj }) => {
         <Text
           position="absolute"
           m="160px 0 0 15px"
-          fontSize="md"
           fontWeight="bold"
           color="#00A29D"
         >
           현재 : {communityObj.com_member}명
         </Text>
-
         {/* 자세히 보기 버튼 */}
         <Button
           position="absolute"
@@ -103,3 +101,4 @@ export default CommunityCard;
 
 //23.07.21 1차 코드 수정 완료
 //23.07.27 2차 코드 수정 완료
+//23.08.07 3차 코드 수정 완료

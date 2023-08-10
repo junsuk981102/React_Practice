@@ -1,71 +1,18 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { useLocation } from "react-router-dom";
-import { Flex, Heading, Divider } from "@chakra-ui/react";
-import { dbService } from "../../firebase-config";
-
 import VCInfoBasic from "../../components/vc/cpn_VC_Info_Basic";
 import VCInfoCompany from "../../components/vc/cpn_VC_Info_Company";
 import VCInfoInvest from "../../components/vc/cpn_VC_Info_Invest";
+import { Flex, Heading, Divider } from "@chakra-ui/react";
 
 const ScreenVCInfo = () => {
   const { state } = useLocation();
-  const [vc_nationality, setVcNationality] = useState("");
-  const [vc_ceo, setVcCeo] = useState("");
-  const [vc_homepage, setVcHomepage] = useState("");
-  const [vc_amountOfInvestment, setVcAmountOfInvestment] = useState("");
-  const [vc_numOfInvestment, setVcNumOfInvestment] = useState("");
-
-  useEffect(() => {
-    const fetchVcInformation = async () => {
-      try {
-        const vcInfoRef = dbService
-          .collection("vc_list")
-          .doc(state.id)
-          .collection("info")
-          .doc("vc_info");
-        const doc = await vcInfoRef.get();
-
-        if (doc.exists) {
-          const data = doc.data();
-          setVcNationality(data.vc_nationality);
-          setVcCeo(data.vc_ceo);
-          setVcHomepage(data.vc_homepage);
-        } else {
-          console.log("문서가 존재하지 않습니다.");
-        }
-      } catch (error) {
-        console.log("데이터 가져오기 실패:", error);
-      }
-    };
-
-    const fetchInvestInformation = async () => {
-      try {
-        const vcInfoRef = dbService
-          .collection("vc_list")
-          .doc(state.id)
-          .collection("info")
-          .doc("invest_info");
-        const doc = await vcInfoRef.get();
-
-        if (doc.exists) {
-          const data = doc.data();
-          setVcAmountOfInvestment(data.vc_amountOfInvestment);
-          setVcNumOfInvestment(data.vc_numOfInvestment);
-        } else {
-          console.log("문서가 존재하지 않습니다.");
-        }
-      } catch (error) {
-        console.log("데이터 가져오기 실패:", error);
-      }
-    };
-
-    fetchVcInformation();
-    fetchInvestInformation();
-  }, [state.id]);
 
   return (
     <>
       {/* VC 정보 전체 화면 */}
+
+      {/* VC 정보 전체 배경 화면 */}
       <Flex
         flexDirection="column"
         alignItems="center"
@@ -74,9 +21,11 @@ const ScreenVCInfo = () => {
         bg="#E5F2F2"
         borderTop="1px solid #00A29D"
       >
-        <Heading marginY="30px" size="lg">
+        {/* 제목 섹션 */}
+        <Heading m="30px 0" size="lg">
           VC 소개
         </Heading>
+        {/* 정보 섹션 */}
         <Flex
           flexDirection="column"
           w="800px"
@@ -88,21 +37,11 @@ const ScreenVCInfo = () => {
         >
           {/* VC 기본 정보 섹션 */}
           <VCInfoBasic state={state} />
-
           {/* VC 기업 정보 섹션 */}
-          <VCInfoCompany
-            vc_ceo={vc_ceo}
-            vc_nationality={vc_nationality}
-            vc_homepage={vc_homepage}
-          />
-
-          <Divider marginY="20px" />
-
+          <VCInfoCompany state={state} />
+          <Divider m="20px 0" />
           {/* VC 투자 정보 섹션 */}
-          <VCInfoInvest
-            vc_amountOfInvestment={vc_amountOfInvestment}
-            vc_numOfInvestment={vc_numOfInvestment}
-          />
+          <VCInfoInvest state={state} />
         </Flex>
       </Flex>
     </>
@@ -110,3 +49,5 @@ const ScreenVCInfo = () => {
 };
 
 export default ScreenVCInfo;
+
+//23.08.09 1차 코드 수정 완료
