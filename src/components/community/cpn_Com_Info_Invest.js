@@ -8,9 +8,11 @@ const ComInfoInvest = ({ state }) => {
   );
   //state.com_now_investment의 값이 바뀔 때마다 업데이트
   useEffect(() => {
+    const communityUid = state.id;
+
     const communityDocRef = dbService
       .collection("community_list")
-      .doc(state.id);
+      .doc(communityUid);
     const unsubscribe = communityDocRef.onSnapshot((doc) => {
       if (doc.exists) {
         const newData = doc.data();
@@ -69,7 +71,7 @@ const ComInfoInvest = ({ state }) => {
           top="55"
           left={(currentInvestment / state.com_total_investment) * 80 + "%"}
         >
-          <NumberFormat number={state.com_now_investment} />원
+          <NumberFormat number={currentInvestment} />원
         </Box>
       </Box>
     </Box>

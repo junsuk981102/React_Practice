@@ -7,24 +7,23 @@ const TabCommunityInfoInvest = ({ state }) => {
     state.com_now_investment
   );
 
+  //state.com_now_investment의 값이 바뀔 때마다 업데이트
   useEffect(() => {
     const communityUid = state.id;
+
     const communityDocRef = dbService
       .collection("community_list")
       .doc(communityUid);
-
     const unsubscribe = communityDocRef.onSnapshot((doc) => {
       if (doc.exists) {
         const newData = doc.data();
         setCurrentInvestment(newData.com_now_investment);
       }
     });
-
     return () => {
       unsubscribe(); // Unsubscribe from the real-time updates when component unmounts
     };
   }, [state.id]);
-
   return (
     <>
       {/* 커뮤니티 투자 정보 섹션 */}

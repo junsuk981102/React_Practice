@@ -5,7 +5,25 @@ import { dbService } from "../../../firebase-config";
 const TabCommunityInfoTicket = ({ state, userId, ownerCount }) => {
   const [sellCount, setSellCount] = useState(0); //티켓 구매 갯수
   const [userTicket, setUserTicket] = useState(ownerCount);
-
+  const [currentInvestment, setCurrentInvestment] = useState(
+    state.com_now_investment
+  );
+  //state.com_now_investment의 값이 바뀔 때마다 업데이트
+  useEffect(() => {
+    const communityUid = state.id;
+    const communityDocRef = dbService
+      .collection("community_list")
+      .doc(communityUid);
+    const unsubscribe = communityDocRef.onSnapshot((doc) => {
+      if (doc.exists) {
+        const newData = doc.data();
+        setCurrentInvestment(newData.com_now_investment);
+      }
+    });
+    return () => {
+      unsubscribe(); // Unsubscribe from the real-time updates when component unmounts
+    };
+  }, [state.id]);
   useEffect(() => {
     const fetchUserTicket = async () => {
       if (userId) {
@@ -48,7 +66,7 @@ const TabCommunityInfoTicket = ({ state, userId, ownerCount }) => {
     if (
       userTicket + sellCount < state.com_ticket_max &&
       state.com_ticket_price * sellCount <
-        state.com_total_investment - state.com_now_investment
+        state.com_total_investment - currentInvestment
     ) {
       setSellCount(sellCount + 1);
     }

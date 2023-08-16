@@ -5,15 +5,37 @@ import { dbService } from "../../firebase-config";
 const ComInfoTicket = ({ state, userId }) => {
   const [sellCount, setSellCount] = useState(0);
   const [userTicket, setUserTicket] = useState(0);
+  const [currentInvestment, setCurrentInvestment] = useState(
+    state.com_now_investment
+  );
+  //state.com_now_investment의 값이 바뀔 때마다 업데이트
+  useEffect(() => {
+    const communityUid = state.id;
+
+    const communityDocRef = dbService
+      .collection("community_list")
+      .doc(communityUid);
+    const unsubscribe = communityDocRef.onSnapshot((doc) => {
+      if (doc.exists) {
+        const newData = doc.data();
+        setCurrentInvestment(newData.com_now_investment);
+      }
+    });
+    return () => {
+      unsubscribe(); // Unsubscribe from the real-time updates when component unmounts
+    };
+  }, [state.id]);
   //보유 티켓 현황 가져오기
   useEffect(() => {
+    const communityUid = state.id;
+
     const fetchUserTicket = async () => {
       if (userId) {
         const userColRef = dbService
           .collection("user_list")
           .doc(userId)
           .collection("ticket_list");
-        const userDoc = await userColRef.doc(state.id).get();
+        const userDoc = await userColRef.doc(communityUid).get();
         const fetchedUserTicket = userDoc.data()?.ticket || 0;
         setUserTicket(fetchedUserTicket);
       }
@@ -25,7 +47,7 @@ const ComInfoTicket = ({ state, userId }) => {
     if (
       userTicket + sellCount < state.com_ticket_max &&
       state.com_ticket_price * sellCount <
-        state.com_total_investment - state.com_now_investment
+        state.com_total_investment - currentInvestment
     ) {
       setSellCount(sellCount + 1);
     }
@@ -40,17 +62,19 @@ const ComInfoTicket = ({ state, userId }) => {
   const handleClick_sell = async () => {
     if (sellCount > 0 && userId) {
       //티텟 첫 구매시 com_member+1 & firstvote,secondvote 세팅
+      const communityUid = state.id;
+
       if (userTicket === 0) {
         const updatedMember = state.com_member + 1;
-        await dbService.collection("community_list").doc(state.id).update({
+        await dbService.collection("community_list").doc(communityUid).update({
           com_member: updatedMember,
         });
         await dbService
           .collection("user_list")
           .doc(userId)
           .collection("ticket_list")
-          .doc(state.id)
-          .update({
+          .doc(communityUid)
+          .set({
             firstvote: 0,
             secondvote: 0,
           });
@@ -60,13 +84,13 @@ const ComInfoTicket = ({ state, userId }) => {
         .collection("user_list")
         .doc(userId)
         .collection("ticket_list")
-        .doc(state.id)
+        .doc(communityUid)
         .update({
           ticket: updatedTicket,
         });
       const updatedInvestment =
         state.com_now_investment + sellCount * state.com_ticket_price;
-      await dbService.collection("community_list").doc(state.id).update({
+      await dbService.collection("community_list").doc(communityUid).update({
         com_now_investment: updatedInvestment,
       });
       setUserTicket(updatedTicket);
