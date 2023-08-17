@@ -9,7 +9,7 @@ const TabCommunityInfoFavor = () => {
         <Flex
           flexDirection="column"
           alignItems="center"
-          marginX="10px"
+          m="0 10px"
           p="5px"
           borderRadius="xl"
           boxShadow="0 0 5px #00A29D"
@@ -27,7 +27,7 @@ const TabCommunityInfoFavor = () => {
         <Flex
           flexDirection="column"
           alignItems="center"
-          marginX="20px"
+          m="0 10px"
           p="5px"
           borderRadius="xl"
           boxShadow="0 0 5px #00A29D"
@@ -45,7 +45,7 @@ const TabCommunityInfoFavor = () => {
         <Flex
           flexDirection="column"
           alignItems="center"
-          marginX="10px"
+          m="0 10px"
           p="5px"
           borderRadius="xl"
           boxShadow="0 0 5px #00A29D"
@@ -66,3 +66,5 @@ const TabCommunityInfoFavor = () => {
 };
 
 export default TabCommunityInfoFavor;
+
+//23.08.16 1차 코드 수정
