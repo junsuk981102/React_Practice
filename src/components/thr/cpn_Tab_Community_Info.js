@@ -27,3 +27,5 @@ const TabCommunityInfo = ({ state, userId, ownerCount }) => {
 };
 
 export default TabCommunityInfo;
+
+//23.08.16 1차 코드 수정
