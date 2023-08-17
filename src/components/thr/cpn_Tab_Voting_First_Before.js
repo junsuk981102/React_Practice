@@ -14,22 +14,6 @@ const TabVotingFirstBefore = ({ state, userId, ownerCount }) => {
   const [firstvote, setFirstVote] = useState(0);
 
   useEffect(() => {
-    const fetchUserTicket = async () => {
-      if (userId) {
-        const communityUid = state.id;
-        const userColRef = dbService
-          .collection("user_list")
-          .doc(userId)
-          .collection("ticket_list");
-        const userDoc = await userColRef.doc(communityUid).get();
-        const fetchedUserTicket = userDoc.data()?.ticket || 0;
-        setUserTicket(fetchedUserTicket);
-      }
-    };
-    fetchUserTicket();
-  }, [userId, state.id]);
-
-  useEffect(() => {
     const fetchUserVote = async () => {
       if (userId) {
         const communityUid = state.id;
@@ -60,7 +44,6 @@ const TabVotingFirstBefore = ({ state, userId, ownerCount }) => {
           setUserTicket(newData.ticket);
         }
       });
-
       return () => {
         unsubscribe(); // Unsubscribe from the real-time updates when component unmounts
       };
