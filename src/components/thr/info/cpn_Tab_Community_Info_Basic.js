@@ -11,25 +11,22 @@ const TabCommunityInfoBasic = ({ state }) => {
   const day = String(date.getDate()).padStart(2, "0");
   const formattedDate = `${year}년 ${month}월 ${day}일`;
   const [member, setMember] = useState(state.com_member);
-
+  //com_member의 값이 바뀔 때마다 업데이트
   useEffect(() => {
     const communityUid = state.id;
     const communityDocRef = dbService
       .collection("community_list")
       .doc(communityUid);
-
     const unsubscribe = communityDocRef.onSnapshot((doc) => {
       if (doc.exists) {
         const newData = doc.data();
         setMember(newData.com_member);
       }
     });
-
     return () => {
-      unsubscribe(); // Unsubscribe from the real-time updates when component unmounts
+      unsubscribe();
     };
   }, [state.id]);
-
   return (
     <>
       {/* 커뮤니티 기본 정보 섹션 */}
@@ -42,3 +39,5 @@ const TabCommunityInfoBasic = ({ state }) => {
 };
 
 export default TabCommunityInfoBasic;
+
+//23.08.16 1차 코드 수정
