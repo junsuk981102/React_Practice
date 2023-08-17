@@ -6,7 +6,6 @@ const TabVotingFirstAfter = ({ state }) => {
   const percent2 = state.com_ftwo; // 2번 득표
   const percent3 = state.com_fthree; // 3번 득표
   const percentA = state.com_fall; // 총 득표
-
   const largestPercent = Math.max(percent1, percent2, percent3);
 
   return (
@@ -14,14 +13,14 @@ const TabVotingFirstAfter = ({ state }) => {
       {/* 정보 */}
       <Flex flexDirection="column" p="10px">
         {/* 제목 */}
-        <Flex m="0 0 15px 0">
-          <Text fontSize="2xl" fontWeight="bold" m="0 15px 0 0">
+        <Flex mb="15px">
+          <Text fontSize="2xl" fontWeight="bold" mr="15px">
             1차 투표 종료
           </Text>
           <Image src="../image/community/icon_voting.png" w="30px" h="30px" />
         </Flex>
         {/* 설명 */}
-        <Text m="0 0 15px 0">
+        <Text mb="15px">
           {state.com_name} 1차 투표가 종료되었습니다. <br />
           3일 뒤{"("}23.07.26{")"}에 2차 투표가 시작됩니다.
         </Text>
@@ -135,3 +134,4 @@ const TabVotingFirstAfter = ({ state }) => {
 export default TabVotingFirstAfter;
 
 //23.07.27 1차 코드 수정
+//23.08.16 2차 코드 수정
