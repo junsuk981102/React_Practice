@@ -6,11 +6,9 @@ const TabCommunityInfoInvest = ({ state }) => {
   const [currentInvestment, setCurrentInvestment] = useState(
     state.com_now_investment
   );
-
   //state.com_now_investment의 값이 바뀔 때마다 업데이트
   useEffect(() => {
     const communityUid = state.id;
-
     const communityDocRef = dbService
       .collection("community_list")
       .doc(communityUid);
@@ -21,7 +19,7 @@ const TabCommunityInfoInvest = ({ state }) => {
       }
     });
     return () => {
-      unsubscribe(); // Unsubscribe from the real-time updates when component unmounts
+      unsubscribe();
     };
   }, [state.id]);
   return (
@@ -58,24 +56,13 @@ const TabCommunityInfoInvest = ({ state }) => {
         />
       </Box>
       {/* 커뮤니티 투자 목표 금액 텍스트 */}
-      <Box
-        //위치 및 정렬
-        position="relative"
-        //글자
-        color="#00A29D"
-      >
+      <Box position="relative" color="#00A29D">
         {/* 목표 금액 텍스트 */}
-        <Box
-          //위치 및 정렬
-          position="absolute"
-          top="55"
-          left="85%"
-        >
+        <Box position="absolute" top="55" left="85%">
           <Text>{state.com_total_investment.toLocaleString()}원</Text>
         </Box>
         {/* 현재 금액 텍스트 */}
         <Box
-          //위치 및 정렬
           position="absolute"
           top="55"
           left={(currentInvestment / state.com_total_investment) * 80 + "%"}
@@ -88,3 +75,5 @@ const TabCommunityInfoInvest = ({ state }) => {
 };
 
 export default TabCommunityInfoInvest;
+
+//23.08.16 1차 코드 수정
