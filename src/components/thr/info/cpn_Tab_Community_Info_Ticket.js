@@ -8,6 +8,26 @@ const TabCommunityInfoTicket = ({ state, userId, ownerCount }) => {
   const [currentInvestment, setCurrentInvestment] = useState(
     state.com_now_investment
   );
+  //티켓의 값이 바뀔 때마다 업데이트
+  useEffect(() => {
+    if (userId) {
+      const communityUid = state.id;
+      const userColRef = dbService
+        .collection("user_list")
+        .doc(userId)
+        .collection("ticket_list")
+        .doc(communityUid);
+      const unsubscribe = userColRef.onSnapshot((doc) => {
+        if (doc.exists) {
+          const newData = doc.data();
+          setUserTicket(newData.ticket);
+        }
+      });
+      return () => {
+        unsubscribe(); // Unsubscribe from the real-time updates when component unmounts
+      };
+    }
+  }, [userId, state.id]);
   //state.com_now_investment의 값이 바뀔 때마다 업데이트
   useEffect(() => {
     const communityUid = state.id;
@@ -21,46 +41,9 @@ const TabCommunityInfoTicket = ({ state, userId, ownerCount }) => {
       }
     });
     return () => {
-      unsubscribe(); // Unsubscribe from the real-time updates when component unmounts
+      unsubscribe();
     };
   }, [state.id]);
-  useEffect(() => {
-    const fetchUserTicket = async () => {
-      if (userId) {
-        const communityUid = state.id;
-        const userColRef = dbService
-          .collection("user_list")
-          .doc(userId)
-          .collection("ticket_list");
-        const userDoc = await userColRef.doc(communityUid).get();
-        const fetchedUserTicket = userDoc.data()?.ticket || 0;
-        setUserTicket(fetchedUserTicket);
-      }
-    };
-    fetchUserTicket();
-  }, [userId, state.id]);
-
-  useEffect(() => {
-    if (userId) {
-      const communityUid = state.id;
-      const userColRef = dbService
-        .collection("user_list")
-        .doc(userId)
-        .collection("ticket_list")
-        .doc(communityUid);
-
-      const unsubscribe = userColRef.onSnapshot((doc) => {
-        if (doc.exists) {
-          const newData = doc.data();
-          setUserTicket(newData.ticket);
-        }
-      });
-
-      return () => {
-        unsubscribe(); // Unsubscribe from the real-time updates when component unmounts
-      };
-    }
-  }, [userId, state.id]);
   //티켓 구매 갯수 증가
   const handleClick_plus = () => {
     if (
@@ -71,19 +54,16 @@ const TabCommunityInfoTicket = ({ state, userId, ownerCount }) => {
       setSellCount(sellCount + 1);
     }
   };
-
   //티켓 구매 갯수 감소
   const handleClick_minus = () => {
     if (sellCount > 0) {
       setSellCount(sellCount - 1);
     }
   };
-
   //티켓 구매
   const handleClick_sell = async () => {
     if (sellCount > 0 && userId) {
       const communityUid = state.id;
-
       const updatedTicket = userTicket + sellCount;
       await dbService
         .collection("user_list")
@@ -93,13 +73,11 @@ const TabCommunityInfoTicket = ({ state, userId, ownerCount }) => {
         .update({
           ticket: updatedTicket,
         });
-
       const updatedInvestment =
         state.com_now_investment + sellCount * state.com_ticket_price;
       await dbService.collection("community_list").doc(communityUid).update({
         com_now_investment: updatedInvestment,
       });
-
       setUserTicket(updatedTicket);
       setSellCount(0);
     }
@@ -116,9 +94,8 @@ const TabCommunityInfoTicket = ({ state, userId, ownerCount }) => {
           src="../image/ticket/icon_color_ticket.png"
           w="150px"
           h="150px"
-          marginX="10px"
+          m="0 10px"
         />
-
         <Flex flexDirection="column">
           <Text fontSize="sm" mb="5px">
             티켓 가격 :&nbsp;{state.com_ticket_price.toLocaleString()}원
@@ -134,7 +111,7 @@ const TabCommunityInfoTicket = ({ state, userId, ownerCount }) => {
           {/* 티켓 구매 버튼 */}
           <Flex
             alignItems="center"
-            justifyContent="center"
+            justifyContent="space-between"
             textAlign="center"
             w="140px"
             h="30px"
@@ -144,23 +121,19 @@ const TabCommunityInfoTicket = ({ state, userId, ownerCount }) => {
           >
             {/* 마이너스 버튼 */}
             <Button
-              w="30px"
               variant="none"
-              fontSize="25px"
-              fontWeight="bold"
+              fontSize="2xl"
               color={sellCount > 0 ? "#00A29D" : "lightgrey"}
               onClick={handleClick_minus}
             >
               -
             </Button>
             {/* 구매 갯수 */}
-            <Text w="40px">{sellCount}</Text>
+            <Text>{sellCount}</Text>
             {/* 플러스 버튼 */}
             <Button
-              w="30px"
               variant="none"
-              fontSize="25px"
-              fontWeight="bold"
+              fontSize="2xl"
               color={
                 userTicket + sellCount < state.com_ticket_max &&
                 state.com_ticket_price * sellCount <
@@ -193,3 +166,5 @@ const TabCommunityInfoTicket = ({ state, userId, ownerCount }) => {
 };
 
 export default TabCommunityInfoTicket;
+
+//23.08.16 1차 코드 수정
