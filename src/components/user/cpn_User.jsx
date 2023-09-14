@@ -141,6 +141,13 @@ const User = () => {
             {renderVCCards()}
           </Grid>
         </Flex>
+        <Heading size="md" mb="10px">
+          내 자산
+        </Heading>
+        <Flex flexDirection="column">
+          <Text>총 자산</Text>
+          <Text></Text>
+        </Flex>
       </Flex>
     </Flex>
   );
