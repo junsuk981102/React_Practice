@@ -1,9 +1,11 @@
 import React from "react";
 import { useState } from "react";
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import { auth, db } from "../../firebase-config";
+import { auth, db, storageService } from "../../firebase-config";
 import { useNavigate } from "react-router-dom";
 import { doc, setDoc } from "firebase/firestore";
+import { ref, uploadString, getDownloadURL } from "firebase/storage";
+import { v4 as uuidv4 } from "uuid";
 import {
   Heading,
   Alert,
@@ -13,7 +15,11 @@ import {
   Input,
   Flex,
   Divider,
+  Box,
+  Text,
+  Image,
 } from "@chakra-ui/react";
+import { FiImage } from "react-icons/fi";
 
 const Register = () => {
   const [registerId, setRegisterId] = useState("");
@@ -26,6 +32,9 @@ const Register = () => {
   const [passwordError, setPasswordError] = useState("");
   const [confirmPasswordError, setConfirmPasswordError] = useState("");
 
+  //유저의 프로필 사진 Url을 저장하는 변수
+  const [attachment, setAttachment] = useState("");
+
   const navi = useNavigate();
 
   function handleClick(text) {
@@ -34,6 +43,7 @@ const Register = () => {
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
+    let attachmentUrl = "";
 
     // 비밀번호 규칙 검사
     const passwordRegex =
@@ -60,12 +70,26 @@ const Register = () => {
       const user = userCredential.user;
       // Firestore에 사용자 정보 추가하기
       const userRef = doc(db, "user_list", user.uid);
+      //첨부 파일이 있는 경우에만 처리
+      if (attachment !== "") {
+        const attachmentRef = ref(
+          storageService,
+          `user/${user.uid}/${uuidv4()}`
+        );
+        const response = await uploadString(
+          attachmentRef,
+          attachment,
+          "data_url"
+        );
+        attachmentUrl = await getDownloadURL(response.ref);
+      }
       const userData = {
         id: registerId,
         email: registerEmail,
         phone: registerPhonenumber,
         birth: registerBirthdate,
         address: registerAddress,
+        photo: attachmentUrl,
         funds: 1000000,
       };
       await setDoc(userRef, userData);
@@ -86,6 +110,34 @@ const Register = () => {
   const handleConfirmPasswordChange = (e) => {
     setRegisterConfirmpassword(e.target.value);
     setConfirmPasswordError("");
+  };
+
+  //사진을 추가했을 때 동작하는 이벤트 핸들러
+  const onFileChange = (e) => {
+    const {
+      target: { files },
+    } = e;
+    const commFile = files[0];
+
+    // 파일이 선택되지 않았을 경우에 처리.
+    if (!commFile) {
+      setAttachment("");
+      return;
+    }
+
+    const reader = new FileReader();
+    reader.onload = (finishedEvent) => {
+      const {
+        target: { result },
+      } = finishedEvent;
+      setAttachment(result || "");
+    };
+    reader.readAsDataURL(commFile);
+  };
+
+  //Post 전 사진을 삭제할떄 동작
+  const clearAttachment = () => {
+    setAttachment("");
   };
 
   return (
@@ -167,6 +219,50 @@ const Register = () => {
           )}
 
           <FormControl display="flex" justifyContent="space-between" m="15px 0">
+            <FormLabel fontSize="20px" fontWeight="bold" htmlFor="image">
+              프로필 사진:
+            </FormLabel>
+            <Flex>
+              <Input
+                type="file"
+                accept="image/*"
+                display="none"
+                name="image"
+                // value={communityData.image}
+                onChange={onFileChange}
+                placeholder="이미지의 URL을 넣으세요."
+                id="fileInput"
+                required
+              />
+              <label htmlFor="fileInput">
+                <Button
+                  as="span"
+                  variant="outline"
+                  size="md"
+                  colorScheme="teal"
+                  leftIcon={<FiImage />}
+                >
+                  이미지 추가
+                </Button>
+              </label>
+              {/* 첨부 파일이 있는 경우 미리보기 및 삭제 버튼 표시 */}
+              {attachment && (
+                <Box ml="10px">
+                  <Text
+                    color="teal"
+                    fontWeight="bold"
+                    cursor="pointer"
+                    onClick={clearAttachment}
+                  >
+                    첨부파일 삭제
+                  </Text>
+                  <Image src={attachment} alt="attachment" w="100px" mt="5px" />
+                </Box>
+              )}
+            </Flex>
+          </FormControl>
+
+          <FormControl display="flex" justifyContent="space-between" m="15px 0">
             <FormLabel fontSize="20px" fontWeight="bold" htmlFor="email">
               이메일:
             </FormLabel>
@@ -236,19 +332,21 @@ const Register = () => {
             />
           </FormControl>
           <Divider h="1px" marginY="30px" bg="#00A29D" />
-          <Button
-            type="submit"
-            maxW="300px"
-            h="75px"
-            fontSize="20px"
-            fontWeight="bold"
-            color="white"
-            bg="#00A29D"
-            border="solid 1px #00A29D"
-            borderRadius="xl"
-          >
-            가입하기
-          </Button>
+          <Flex justifyContent="center" mt="20px">
+            <Button
+              type="submit"
+              w="200px"
+              h="75px"
+              fontSize="20px"
+              fontWeight="bold"
+              color="white"
+              bg="#00A29D"
+              border="solid 1px #00A29D"
+              borderRadius="xl"
+            >
+              가입하기
+            </Button>
+          </Flex>
         </FormControl>
       </form>
     </Flex>
