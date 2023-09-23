@@ -23,7 +23,8 @@ const StartupCard = ({ startupObj }) => {
       h="360px"
       bg="white"
       borderRadius="xl"
-      boxShadow="0 0 10px #00A29D"
+      //boxShadow="3px 3px 20px  #00A29D"
+      boxShadow="3px 3px 20px rgba(0, 162, 157, .5)"
       overflow="hidden"
     >
       {/* 상단 */}
