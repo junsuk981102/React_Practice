@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Button, Text, Flex, Image } from "@chakra-ui/react";
-import { dbService } from "../../../firebase-config";
+import { dbService, firebase } from "../../../firebase-config";
 
 const TabCommunityInfoTicket = ({ state, userId, ownerCount }) => {
   const [sellCount, setSellCount] = useState(0); //티켓 구매 갯수
@@ -78,6 +78,14 @@ const TabCommunityInfoTicket = ({ state, userId, ownerCount }) => {
       await dbService.collection("community_list").doc(communityUid).update({
         com_now_investment: updatedInvestment,
       });
+      await dbService
+        .collection("user_list")
+        .doc(userId)
+        .update({
+          funds: firebase.firestore.FieldValue.increment(
+            -sellCount * state.com_ticket_price
+          ),
+        });
       setUserTicket(updatedTicket);
       setSellCount(0);
     }

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Flex, Text, Button, Image } from "@chakra-ui/react";
-import { dbService } from "../../firebase-config";
+import { dbService, firebase } from "../../firebase-config";
 
 const ComInfoTicket = ({ state, userId }) => {
   const [sellCount, setSellCount] = useState(0);
@@ -69,15 +69,10 @@ const ComInfoTicket = ({ state, userId }) => {
         await dbService.collection("community_list").doc(communityUid).update({
           com_member: updatedMember,
         });
-        await dbService
-          .collection("user_list")
-          .doc(userId)
-          .collection("ticket_list")
-          .doc(communityUid)
-          .set({
-            firstvote: 0,
-            secondvote: 0,
-          });
+        await dbService.collection("user_list").doc(userId).update({
+          firstvote: 0,
+          secondvote: 0,
+        });
       }
       const updatedTicket = userTicket + sellCount;
       await dbService
@@ -93,6 +88,14 @@ const ComInfoTicket = ({ state, userId }) => {
       await dbService.collection("community_list").doc(communityUid).update({
         com_now_investment: updatedInvestment,
       });
+      await dbService
+        .collection("user_list")
+        .doc(userId)
+        .update({
+          funds: firebase.firestore.FieldValue.increment(
+            -sellCount * state.com_ticket_price
+          ),
+        });
       setUserTicket(updatedTicket);
       setSellCount(0);
     }
