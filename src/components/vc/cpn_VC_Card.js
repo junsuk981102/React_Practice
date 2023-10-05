@@ -49,6 +49,7 @@ const VCCard = ({ vcObj }) => {
           w="80px"
           h="80px"
           m="-40px 0 0 20px"
+          objectFit="cover"
           borderRadius="2xl"
         />
         {/* VC 이름 */}
